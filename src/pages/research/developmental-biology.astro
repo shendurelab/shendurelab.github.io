@@ -1,0 +1,129 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ResearchPubCard from '../../components/research/ResearchPubCard.astro';
+import YearNavScript from '../../components/shared/YearNavScript.astro';
+
+const publicationRows = [
+  [
+    { image: 'Yang_NatureCellBio_August2024_thumb.png', articleUrl: 'https://www.nature.com/articles/s41556-024-01487-8', authors: 'Hamazaki, Yang et al.', title: 'Retinoic acid induces human gastruloids with posterior embryo-like structures', journal: 'Nature Cell Biology', year: 2024, pmid: '39164488', pdfFile: 'Yang_NatureCellBio_2024.pdf' },
+    { image: 'Chen_Nature_July2024_thumb.png', articleUrl: 'https://www.nature.com/articles/s41586-024-07706-4', authors: 'Chen, Choi et al.', title: 'Symbolic recording of signalling and cis-regulatory element activity to DNA', journal: 'Nature', year: 2024, pmid: '39020177', pdfFile: 'Chen_Nature_July2024.pdf' },
+  ],
+  [
+    { image: 'Qiu_nature_February2024_thumb.png', articleUrl: 'https://www.nature.com/articles/s41586-024-07069-w', authors: 'Qiu, Martin, Welsh et al.', title: 'A single-cell time-lapse of mouse prenatal development from gastrula to birth', journal: 'Nature', year: 2024, pmid: '38355799', pdfFile: 'qiu_nature_february2024.pdf' },
+    { image: 'Domcke_Cell_2023_thumb.png', articleUrl: 'https://www.cell.com/cell/abstract/S0092-8674(23)00159-9', authors: 'Domcke, Shendure', title: 'A reference cell tree will serve science better than a reference cell atlas', journal: 'Cell', year: 2023, pmid: '36931241', pdfFile: 'Domcke et al._Cell Press_2023.pdf' },
+    { image: 'Huang_Nature_November2023_thumb.png', articleUrl: 'https://www.nature.com/articles/s41586-023-06548-w', authors: 'Huang, Henck, Qiu et al.', title: 'Single-cell, whole embryo phenotyping of mammalian developmental disorders', journal: 'Nature', year: 2023, pmid: '37968388', pdfFile: 'huang_nature_november2023.pdf', collaboration: 'with Spielmann and Cao Labs' },
+  ],
+  [
+    { image: 'Chiou_Science Advances_October 23_thumb.png', articleUrl: 'https://www.science.org/doi/epdf/10.1126/sciadv.adh1914', authors: 'Chiou, Huang et al.', title: 'A single-cell multi-omic atlas spanning the adult rhesus macaque brain', journal: 'Science Advances', year: 2023, pmid: '37824616', pdfFile: 'chiou_science advances_oct2023.pdf' },
+    { image: 'Calderon_Science_July2022_thumb.png', articleUrl: 'https://www.science.org/doi/10.1126/science.abn5800', authors: 'Calderon, Huang et al.', title: 'The continuum of Drosophila embryonic development at single-cell resolution', journal: 'Science', year: 2022, pmid: '35926038', pdfFile: 'calderon_science_july2022.pdf', collaboration: 'with Furlong Lab' },
+    { image: 'Choi_Nature_July22_thumb.png', articleUrl: 'https://www.nature.com/articles/s41586-022-04922-8', authors: 'Choi et al.', title: 'A time-resolved, multi-symbol molecular recorder via sequential genome editing', journal: 'Nature', year: 2022, pmid: '35794474', pdfFile: 'choi_nature_july2022.pdf' },
+  ],
+  [
+    { image: 'qiu_nature_2022_thumb.png', articleUrl: 'https://www.nature.com/articles/s41588-022-01018-x', authors: 'Qiu et al.', title: 'Systematic reconstruction of cellular trajectories across mouse embryogenesis', journal: 'Nature Genetics', year: 2022, pmid: '35288709', pdfFile: 'qiu_natureGenetics_2022.pdf' },
+    { image: 'Srivatsan_Science_2021_thumb(New).png', articleUrl: 'https://www.science.org/doi/10.1126/science.abb9536', authors: 'Srivatsan, Regier et al.', title: 'Embryo-scale, single-cell spatial transcriptomics', journal: 'Science', year: 2021, pmid: '34210887', pdfFile: 'Srivatsan_Science_2021(new).pdf', collaboration: 'with Trapnell Lab' },
+    { image: 'shendure_natureCommunications_thumb.png', articleUrl: 'https://www.nature.com/articles/s41467-021-25388-8', authors: 'Agarwal, Darwin-Lopez et al.', title: 'The landscape of alternative polyadenylation in single cells of the developing mouse embryo', journal: 'Nature Communications', year: 2021, pmid: '34429411', pdfFile: 'agarwal_nature_comms_2022.pdf' },
+  ],
+  [
+    { image: 'cao_science_2020_thumb.png', articleUrl: 'http://science.sciencemag.org/cgi/content/full/370/6518/eaba7721', authors: 'Cao et al.', title: 'A human cell atlas of fetal gene expression', journal: 'Science', year: 2020, pmid: '33184181', pdfFile: 'cao_science_2020.pdf', collaboration: 'with Trapnell Lab' },
+    { image: 'domcke_science_2020_thumb.png', articleUrl: 'https://science.sciencemag.org/content/370/6518/eaba7612.full', authors: 'Domcke, Hill, Daza et al.', title: 'A human cell atlas of fetal chromatin accessibility', journal: 'Science', year: 2020, pmid: '33184180', pdfFile: 'domcke_science_2020.pdf', collaboration: 'with Cusanovich and Trapnell Labs' },
+    { image: 'cao_naturebio_2020_thumb.jpg', articleUrl: 'https://www.nature.com/articles/s41587-020-0480-9', authors: 'Cao et al.', title: 'Sci-fate characterizes the dynamics of gene expression in single cells', journal: 'Nature Biotechnology', year: 2020, pmid: '32284584', pdfFile: 'cao_naturebio_2020.pdf' },
+  ],
+  [
+    { image: 'yin_mol_cell_2019 thumbnail.jpg', articleUrl: 'https://www.cell.com/molecular-cell/fulltext/S1097-2765(19)30618-5', authors: 'Yin et al.', title: 'High-Throughput Single-Cell Sequencing with Linear Amplification', journal: 'Molecular Cell', year: 2019, pmid: '31495564', pdfFile: 'yin_mol_cell_2019.pdf' },
+    { image: 'pliner_shendure_trapnell_nature_2019 thumbnail.jpg', articleUrl: 'https://www.nature.com/articles/s41592-019-0535-3', authors: 'Pliner et al.', title: 'Supervised classification enables rapid annotation of cell atlases', journal: 'Nature Methods', year: 2019, pmid: '31501545', pdfFile: 'pliner_shendure_trapnell_nature_2019.pdf', collaboration: 'with Trapnell Lab' },
+    { image: 'cao_nature_2019_thumb.jpg', articleUrl: 'https://www.nature.com/articles/s41586-019-0969-x', authors: 'Cao, Spielmann et al.', title: 'The single-cell transcriptional landscape of mammalian organogenesis', journal: 'Nature', year: 2019, pmid: '30787437', pdfFile: 'cao_nature_2019.pdf', collaboration: 'with Trapnell Lab' },
+  ],
+  [
+    { image: 'cao_science_2018_thumb.png', articleUrl: 'http://science.sciencemag.org/content/361/6409/1380/tab-pdf', authors: 'Cao et al.', title: 'Joint profiling of chromatin accessibility and gene expression in thousands of single cells', journal: 'Science', year: 2018, pmid: '30166440', pdfFile: 'cao_science_2018.pdf', collaboration: 'with Trapnell Lab' },
+    { image: 'cusanovich_cell_2018.png', articleUrl: 'https://www.cell.com/cell/abstract/S0092-8674(18)30855-9', authors: 'Cusanovich, Hill et al.', title: 'A Single-Cell Atlas of In Vivo Mammalian Chromatin Accessibility', journal: 'Cell', year: 2018, pmid: '30078704', pdfFile: 'cusanovich_cell_2018.pdf', collaboration: 'with Trapnell Lab' },
+    { image: 'pliner_molcell_2018.png', articleUrl: 'https://www.sciencedirect.com/science/article/pii/S1097276518305471', authors: 'Pliner et al.', title: 'Cicero Predicts cis-Regulatory DNA Interactions from Single-Cell Chromatin Accessibility Data', journal: 'Molecular Cell', year: 2018, pmid: '30078726', pdfFile: 'pliner_molcell_2018.pdf', collaboration: 'with Trapnell Lab' },
+  ],
+  [
+    { image: 'cusanovich_nature_2018.png', articleUrl: 'http://www.nature.com/articles/nature25981', authors: 'Cusanovich, Reddington, Garfield et al.', title: 'The cis-regulatory dynamics of embryonic development at single-cell resolution', journal: 'Nature', year: 2018, pmid: '29539636', pdfFile: 'cusanovich_nature_2018.pdf', collaboration: 'with Furlong Lab' },
+    { image: 'cao_science_2017_thumb.jpg', articleUrl: 'http://science.sciencemag.org/content/357/6352/661', authors: 'Cao, Packer et al.', title: 'Comprehensive single cell transcriptional profiling of a multicellular organism by combinatorial indexing', journal: 'Science', year: 2017, pmid: '28818938', pdfFile: 'cao_science_2017.pdf', collaboration: 'with Trapnell and Waterston Labs' },
+    { image: 'mckenna_science_2016_thumb.png', articleUrl: 'http://science.sciencemag.org/content/353/6298/aaf7907', authors: 'McKenna, Findlay, Gagnon et al.', title: 'Whole-organism lineage tracing by combinatorial and cumulative genome editing', journal: 'Science', year: 2016, pmid: '27229144', pdfFile: 'mckenna_science_2016.pdf', collaboration: 'with Schier Lab' },
+  ],
+];
+
+// Flatten and group by year
+const allPubs = publicationRows.flat();
+const pubsByYear = allPubs.reduce((acc, pub) => {
+  const year = pub.year || 'Unknown';
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(pub);
+  return acc;
+}, {} as Record<number | string, typeof allPubs>);
+
+// Get sorted years (most recent first)
+const years = Object.keys(pubsByYear).sort((a, b) => Number(b) - Number(a));
+---
+
+<BaseLayout title="Genomic Approaches to Developmental Biology | Shendure Lab">
+  <!-- Mobile Year Scrollbar -->
+  <nav class="lg:hidden sticky top-16 z-40 year-scrollbar border-b" aria-label="Jump to year">
+    <div class="flex overflow-x-auto scrollbar-hide px-4 py-2 gap-2" role="list">
+      {years.map(year => (
+        <a
+          href={`#year-${year}`}
+          class="year-pill flex-shrink-0 px-4 py-3 text-sm rounded-full border transition-colors"
+          role="listitem"
+          aria-label={`Jump to ${year} publications`}
+        >
+          {year}
+        </a>
+      ))}
+    </div>
+  </nav>
+
+  <div class="w-full max-w-[1000px] mx-auto px-4 py-12 pb-[60vh]">
+    <h1 class="w-full text-2xl md:text-3xl font-bold text-lab-orange mb-8 text-center">Genomic Approaches to Developmental Biology</h1>
+    <p class="w-full text-center page-subtitle mb-10">(selected publications)</p>
+
+    <div class="w-full mb-8 text-center">
+      <a href="/research" class="text-lab-blue hover:underline">&larr; Back to Research</a>
+    </div>
+
+    {years.map(year => (
+      <div id={`year-${year}`} class="mb-12 scroll-mt-32">
+        <h2 class="text-xl font-bold text-lab-orange mb-6 text-center lg:text-left">{year}</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 justify-items-center">
+          {pubsByYear[year].map((pub) => (
+            <ResearchPubCard
+              image={pub.image}
+              articleUrl={pub.articleUrl}
+              authors={pub.authors}
+              title={pub.title}
+              journal={pub.journal}
+              year={pub.year}
+              pmid={pub.pmid}
+              pdfFile={pub.pdfFile}
+              collaboration={pub.collaboration}
+            />
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <YearNavScript />
+</BaseLayout>
+
+<style>
+  .year-scrollbar {
+    background-color: var(--theme-bg);
+    border-color: var(--theme-border);
+  }
+  .year-pill {
+    background-color: var(--theme-bg);
+    border-color: var(--theme-border);
+    color: var(--theme-text-secondary);
+  }
+  .year-pill:hover, .year-pill:focus-visible {
+    background-color: var(--color-lab-orange);
+    border-color: var(--color-lab-orange);
+    color: white;
+  }
+  .page-subtitle {
+    color: var(--theme-text-secondary);
+  }
+</style>

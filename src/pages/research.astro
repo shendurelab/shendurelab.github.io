@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+// ANIMATIONS COMMENTED OUT 3/23/26 per Jay's request — uncomment import + component to re-enable
+// import DNAAnimation from '../components/special/DNAAnimation.astro';
+
+const researchAreas = [
+  { name: 'Developing New Molecular Methods', url: '/research/molecular-methods' },
+  { name: 'Genomic Approaches to Developmental Biology', url: '/research/developmental-biology' },
+  { name: 'Massively Parallel Functional Genomics', url: '/research/functional-genomics' },
+  { name: 'Translating Genomics to the Clinic', url: '/research/clinical-genomics' },
+  { name: 'Genetic Basis of Human Disease', url: '/research/human-disease' },
+  { name: 'Genome Sequencing Technologies', url: '/research/sequencing-technologies' },
+];
+---
+
+<BaseLayout title="Research | Shendure Lab">
+  <section class="relative min-h-[calc(100vh-140px)] flex items-center justify-center overflow-hidden">
+    <!-- ANIMATION COMMENTED OUT 3/23/26 — uncomment to re-enable -->
+    <!-- <div class="research-animation hidden 2xl:block">
+      <DNAAnimation height="100%" class="!absolute inset-0 w-full h-full" variant="hero" />
+    </div> -->
+
+    <div class="relative z-10 text-center px-4 max-w-3xl pt-8 md:pt-0">
+      <h1 class="text-3xl md:text-5xl font-bold text-lab-orange mb-8 md:mb-12">Research</h1>
+
+      <p class="page-text text-base md:text-lg leading-relaxed mb-8 md:mb-10 text-left max-w-2xl mx-auto">
+        The Shendure Lab is part of the <a href="https://www.hhmi.org/" target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">Howard Hughes Medical Institute<span class="sr-only"> (opens in new tab)</span></a>, <a href="https://brotmanbaty.org/" target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">Brotman Baty Institute for Precision Medicine<span class="sr-only"> (opens in new tab)</span></a>, <a href="https://alleninstitstg.wpengine.com/division/seattle-hub-for-synthetic-biology/" target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">Seattle Hub for Synthetic Biology<span class="sr-only"> (opens in new tab)</span></a> and the <a href="http://www.gs.washington.edu/" target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">Department of Genome Sciences<span class="sr-only"> (opens in new tab)</span></a> at the <a href="http://www.washington.edu/" target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">University of Washington<span class="sr-only"> (opens in new tab)</span></a> (Seattle, WA). The mission of our lab is to develop and apply new technologies and methods at the intersection of genomics, molecular biology and developmental biology. Our research group pioneered exome sequencing and its earliest applications to gene discovery for Mendelian disorders and autism; cell-free DNA diagnostics for cancer and reproductive medicine; massively parallel reporter assays, saturation genome editing; combinatorial single cell molecular technologies; and genome editing based molecular recording technologies. Our ongoing work generally falls into the following areas, which are listed below as links to representative publications in each area.
+      </p>
+
+      <ul class="space-y-4 md:space-y-8 text-lg md:text-2xl">
+        {researchAreas.map(area => (
+          <li>
+            <a href={area.url} class="text-lab-blue hover:underline">
+              {area.name}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-text {
+    color: var(--theme-text-secondary);
+  }
+
+  /* Hide animation on Nest Hub and similar wide/short displays */
+  @media (min-width: 1024px) and (max-height: 800px) and (min-aspect-ratio: 4/3) {
+    .research-animation {
+      display: none !important;
+    }
+  }
+</style>

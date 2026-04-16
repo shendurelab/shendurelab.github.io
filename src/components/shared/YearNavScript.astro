@@ -1,0 +1,122 @@
+---
+// Shared script for year pill/link navigation with lazy-image scroll correction.
+// Include this component on any page that has year-pill links and lazy-loaded images.
+// It intercepts clicks on .year-pill and .year-link elements, scrolls to the target
+// section, then re-scrolls after images load to correct for layout shifts.
+---
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const yearPills = document.querySelectorAll('.year-pill');
+    const yearLinks = document.querySelectorAll('.year-link');
+    const yearSections = document.querySelectorAll('[id^="year-"]');
+    const pillContainer = document.querySelector('.scrollbar-hide');
+
+    // Scroll to a section with correction passes for lazy-loaded images
+    function scrollToSection(sectionId: string) {
+      const section = document.getElementById(sectionId);
+      if (!section) return;
+
+      // First scroll
+      section.scrollIntoView({ behavior: 'smooth' });
+
+      // Re-scroll after delays to correct for lazy image loading shifts
+      // scroll-mt-32 = 128px from top
+      const corrections = [300, 800, 1500];
+      corrections.forEach(delay => {
+        setTimeout(() => {
+          const rect = section.getBoundingClientRect();
+          if (Math.abs(rect.top - 128) > 20) {
+            section.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, delay);
+      });
+    }
+
+    // Intercept year pill clicks (mobile scrollbar)
+    yearPills.forEach(pill => {
+      pill.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = pill.getAttribute('href');
+        if (href) {
+          const sectionId = href.replace('#', '');
+          scrollToSection(sectionId);
+          history.pushState(null, '', href);
+        }
+      });
+    });
+
+    // Intercept year link clicks (desktop sidebar)
+    yearLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = link.getAttribute('href');
+        if (href) {
+          const sectionId = href.replace('#', '');
+          scrollToSection(sectionId);
+          history.pushState(null, '', href);
+        }
+      });
+    });
+
+    // Active year tracking on scroll
+    function updateActiveYear() {
+      let activeYear: string | null = null;
+      yearSections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top <= 250 && rect.bottom > 250) {
+          activeYear = section.id.replace('year-', '');
+        }
+      });
+
+      // If scrolled past the last section, keep the last year active
+      if (!activeYear) {
+        const lastSection = yearSections[yearSections.length - 1];
+        if (lastSection) {
+          const rect = lastSection.getBoundingClientRect();
+          if (rect.bottom <= 250) {
+            activeYear = lastSection.id.replace('year-', '');
+          }
+        }
+      }
+
+      // Update desktop sidebar links
+      yearLinks.forEach(link => {
+        const linkYear = link.getAttribute('data-year');
+        if (linkYear === activeYear) {
+          link.classList.add('active');
+        } else {
+          link.classList.remove('active');
+        }
+      });
+
+      // Update mobile scrollbar pills
+      yearPills.forEach(pill => {
+        const pillHref = pill.getAttribute('href');
+        const pillYear = pillHref ? pillHref.replace('#year-', '') : '';
+        if (pillYear === activeYear) {
+          if (!pill.classList.contains('active')) {
+            pill.classList.add('active');
+            if (pillContainer) {
+              const pillEl = pill as HTMLElement;
+              const containerEl = pillContainer as HTMLElement;
+              const scrollLeft = pillEl.offsetLeft - containerEl.offsetWidth / 2 + pillEl.offsetWidth / 2;
+              containerEl.scrollTo({ left: scrollLeft, behavior: 'smooth' });
+            }
+          }
+        } else {
+          pill.classList.remove('active');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveYear);
+    updateActiveYear();
+
+    // Handle initial hash in URL
+    if (window.location.hash) {
+      const sectionId = window.location.hash.replace('#', '');
+      setTimeout(() => scrollToSection(sectionId), 100);
+    }
+  });
+</script>

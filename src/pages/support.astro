@@ -1,0 +1,89 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const supporters = [
+  {
+    name: 'Allen Family Philanthropies',
+    url: 'https://alleninstitute.org/division/seattle-hub-for-synthetic-biology/',
+    image: '/images/support/AFP-Logo-Color-RGB.png',
+  },
+  {
+    name: 'Brotman Baty Institute for Precision Medicine',
+    url: 'https://brotmanbaty.org/',
+    image: '/images/centers/bbi.png',
+  },
+  {
+    name: 'Chan Zuckerberg Initiative',
+    url: 'https://chanzuckerberg.com/',
+    image: '/images/support/CZInitiative.png',
+  },
+  {
+    name: 'Howard Hughes Medical Institute',
+    url: 'https://www.hhmi.org/',
+    image: '/images/support/hhmi.png',
+  },
+  {
+    name: 'Impact of Genomic Variation on Function',
+    url: 'https://igvf.org/',
+    image: '/images/support/IGVF_Logo_light(2).png',
+  },
+  {
+    name: 'National Institutes of Health',
+    url: 'https://www.genome.gov/about-nhgri',
+    image: '/images/support/NIH_logo.png',
+  },
+  {
+    name: 'University of Washington',
+    url: 'https://www.washington.edu/',
+    image: '/images/support/uw-wordmark.png',
+  },
+];
+---
+
+<BaseLayout title="Support | Shendure Lab">
+  <div class="max-w-[1100px] mx-auto px-4 py-8 md:py-12">
+    <h1 class="text-2xl md:text-3xl font-bold text-lab-orange mb-4 md:mb-6 text-center">Support</h1>
+
+    <p class="text-gray-600 text-center mb-6 md:mb-12 text-base md:text-lg">
+      We gratefully acknowledge the support of the following organizations
+    </p>
+
+    <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-8">
+      {supporters.map(supporter => (
+        <a
+          href={supporter.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="support-card group flex flex-col items-center p-3 md:p-8 border rounded-xl hover:border-lab-orange hover:shadow-xl transition-all duration-300"
+        >
+          <div class="h-16 md:h-32 flex items-center justify-center mb-2 md:mb-4">
+            <img
+              src={supporter.image}
+              alt={supporter.name}
+              class="max-h-14 md:max-h-28 w-auto object-contain group-hover:scale-105 transition-transform duration-300"
+              loading="lazy"
+            />
+          </div>
+          <p class="text-gray-700 text-center text-xs md:text-base font-medium group-hover:text-lab-orange transition-colors">
+            {supporter.name}
+          </p>
+          <span class="sr-only">(opens in new tab)</span>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <style>
+    .support-card {
+      background-color: white;
+      border-color: #e5e7eb;
+    }
+    :global(.dark) .support-card {
+      background-color: white;
+      border-color: #4b5563;
+    }
+    :global(.dark) .support-card p {
+      color: #111827 !important;
+    }
+  </style>
+</BaseLayout>

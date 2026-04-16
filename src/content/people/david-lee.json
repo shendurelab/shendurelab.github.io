@@ -1,0 +1,11 @@
+{
+  "name": "David Lee",
+  "slug": "david-lee",
+  "photo": "/images/lab/david_lee1.jpg",
+  "title": "Graduate Student",
+  "role": "graduate-student",
+  "email": "davidsl@uw.edu",
+  "status": "current",
+  "jointLab": "Baker Lab",
+  "jointLabUrl": "https://cole-trapnell-lab.github.io/"
+}

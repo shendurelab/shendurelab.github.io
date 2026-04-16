@@ -1,0 +1,13 @@
+{
+  "category": "research",
+  "articleUrl": "http://www.g3journal.org/content/4/7/1339.full.pdf+html",
+  "thumbnail": "/images/papers/burton_g3_2014_thumb.jpg",
+  "pdfUrl": "/documents/burton_g3_2014.pdf",
+  "citation": "Burton, Liachko et al. Species-Level Deconvolution of Metagenome Assemblies with Hi-C–Based Contact Probability Maps. G3 (2014)",
+  "year": 2014,
+  "journal": "Species-Level Deconvolution of Metagenome Assemblies with Hi-C–Based Contact Probability Maps. G3",
+  "pmid": "24855317",
+  "collaboration": "with Dunham Lab",
+  "slug": "burton-2014-species-level-deconvolution-of-metagen",
+  "sortOrder": 79
+}

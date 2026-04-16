@@ -1,0 +1,13 @@
+{
+  "category": "review",
+  "articleUrl": "https://www.nature.com/articles/s41596-020-0333-5",
+  "thumbnail": "/images/papers/gordon_nature_2020_thumb.jpg",
+  "pdfUrl": "/documents/gordon_nature_2020.pdf",
+  "citation": "Gordon, Inoue, Martin, Schubach et al. lentiMPRA and MPRAflow for high-throughput functional characterization of gene regulatory elements. Nature Protocols (2020)",
+  "year": 2020,
+  "journal": "Nature Protocols",
+  "pmid": "32641802",
+  "collaboration": "with Ahituv and Kircher Labs",
+  "slug": "gordon-2020-nature-protocols",
+  "sortOrder": 113
+}

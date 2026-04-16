@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PublicationCard from '../../components/publications/PublicationCard.astro';
+import YearNavScript from '../../components/shared/YearNavScript.astro';
+import fs from 'fs';
+import path from 'path';
+
+// Load pre-2007 publications
+const publicationsDir = path.join(process.cwd(), 'src/content/publications');
+const files = fs.readdirSync(publicationsDir).filter(f => f.endsWith('.json') && !f.startsWith('_'));
+const publications = files.map(f => {
+  const content = fs.readFileSync(path.join(publicationsDir, f), 'utf-8');
+  return JSON.parse(content);
+}).filter(p => p.category === 'pre2007')
+  .sort((a, b) => (a.sortOrder ?? 999) - (b.sortOrder ?? 999));
+
+// Group publications by year
+const publicationsByYear = publications.reduce((acc, pub) => {
+  const year = pub.year || 'Unknown';
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(pub);
+  return acc;
+}, {} as Record<string | number, typeof publications>);
+
+// Get sorted years (most recent first)
+const years = Object.keys(publicationsByYear).sort((a, b) => Number(b) - Number(a));
+---
+
+<BaseLayout title="Pre-2007 Research | Shendure Lab">
+  <!-- Mobile Year Scrollbar -->
+  <nav class="lg:hidden sticky top-16 z-40 year-scrollbar border-b" aria-label="Jump to year">
+    <div class="flex overflow-x-auto scrollbar-hide px-4 py-2 gap-2" role="list">
+      {years.map(year => (
+        <a
+          href={`#year-${year}`}
+          class="year-pill flex-shrink-0 px-4 py-3 text-sm rounded-full border transition-colors"
+          role="listitem"
+          aria-label={`Jump to ${year} publications`}
+        >
+          {year}
+        </a>
+      ))}
+    </div>
+  </nav>
+
+  <div class="w-full max-w-[1000px] mx-auto px-4 py-12 pb-[60vh]">
+    <h1 class="w-full text-2xl md:text-3xl font-bold text-lab-orange mb-8 text-center">Pre-2007 Research</h1>
+    <p class="w-full text-center pub-subtitle mb-10">(work from Jay's time in the Church and Meyerson Labs)</p>
+
+    {years.map(year => (
+      <div id={`year-${year}`} class="mb-12 scroll-mt-32">
+        <h2 class="text-xl font-bold text-lab-orange mb-6 text-center lg:text-left">{year}</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 justify-items-center">
+          {publicationsByYear[year].map(pub => (
+            <PublicationCard
+              id={pub.slug}
+              citation={pub.citation}
+              articleUrl={pub.articleUrl}
+              thumbnail={pub.thumbnail}
+              pmid={pub.pmid}
+              pdfUrl={pub.pdfUrl}
+              year={pub.year}
+              journal={pub.journal}
+              category={pub.category}
+              collaboration={pub.collaboration}
+            />
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <style>
+    :global(.publication-card.highlighted) {
+      background-color: rgba(237, 148, 60, 0.15);
+      box-shadow: 0 0 0 3px rgba(237, 148, 60, 0.4);
+    }
+    .year-scrollbar {
+      background-color: var(--theme-bg);
+      border-color: var(--theme-border);
+    }
+    .year-pill {
+      background-color: var(--theme-bg);
+      border-color: var(--theme-border);
+      color: var(--theme-text-secondary);
+    }
+    .year-pill:hover, .year-pill:focus-visible, .year-pill.active {
+      background-color: var(--color-lab-orange);
+      border-color: var(--color-lab-orange);
+      color: white;
+    }
+    .pub-subtitle {
+      color: var(--theme-text-secondary);
+    }
+  </style>
+
+  <YearNavScript />
+
+  <script>
+    function highlightCard() {
+      const hash = window.location.hash.slice(1);
+      if (!hash) return;
+
+      document.querySelectorAll('.publication-card.highlighted').forEach(el => {
+        el.classList.remove('highlighted');
+      });
+
+      const card = document.getElementById(hash);
+      if (card) {
+        setTimeout(() => {
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          card.classList.add('highlighted');
+
+          setTimeout(() => {
+            card.classList.remove('highlighted');
+          }, 5000);
+        }, 100);
+      }
+    }
+
+    highlightCard();
+    window.addEventListener('hashchange', highlightCard);
+  </script>
+</BaseLayout>

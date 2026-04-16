@@ -1,0 +1,115 @@
+---
+interface Props {
+  citation: string;
+  articleUrl?: string;
+  thumbnail?: string;
+  pmid?: string;
+  pdfUrl?: string;
+  year?: number;
+  journal?: string;
+  doi?: string;
+  postedDate?: string;
+  category: 'research' | 'review' | 'preprint' | 'pre2007';
+  collaboration?: string;
+  id?: string;
+}
+
+const { citation, articleUrl, thumbnail, pmid, pdfUrl, year, journal, doi, postedDate, category, collaboration, id } = Astro.props;
+
+// Format collaboration text
+const collaborationFormatted = collaboration || null;
+
+// Generate PubMed URL from PMID
+const pubmedUrl = pmid ? `https://pubmed.ncbi.nlm.nih.gov/${pmid}/` : null;
+
+// Parse citation to extract authors/title and journal/year
+// Format: "Authors. Title. Journal (Year)"
+const journalYearMatch = citation.match(/\.\s*([A-Za-z][A-Za-z\s&]+)\s*\((\d{4})\)\s*$/);
+let authorsTitle = citation;
+let journalName = '';
+let pubYear = year;
+
+if (journalYearMatch) {
+  // Remove the journal (year) part from the end
+  authorsTitle = citation.replace(/\.\s*[A-Za-z][A-Za-z\s&]+\s*\(\d{4}\)\s*$/, '');
+  journalName = journalYearMatch[1].trim();
+  pubYear = parseInt(journalYearMatch[2]);
+}
+---
+
+<div
+  id={id}
+  class="publication-card w-full max-w-[270px] flex flex-col p-2 rounded-lg transition-all break-words">
+  {thumbnail && articleUrl && (
+    <a href={articleUrl} target="_blank" rel="noopener noreferrer">
+      <img
+        src={thumbnail}
+        alt={citation.split('.')[0]}
+        class="w-full aspect-[3/4] object-contain p-px border pub-thumbnail"
+        loading="lazy"
+      />
+      <span class="sr-only">(opens in new tab)</span>
+    </a>
+  )}
+  {thumbnail && !articleUrl && (
+    <img
+      src={thumbnail}
+      alt={citation.split('.')[0]}
+      class="w-full aspect-[3/4] object-contain p-px border pub-thumbnail"
+      loading="lazy"
+    />
+  )}
+
+  <p class="pub-text mt-2 text-xs" style="text-align: left; line-height: 1.4;">
+    {articleUrl && !thumbnail ? (
+      <a href={articleUrl} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">
+        {authorsTitle}<span class="sr-only"> (opens in new tab)</span>
+      </a>
+    ) : (
+      authorsTitle
+    )}
+  </p>
+
+  {journalName && (
+    <p class="pub-meta text-xs mt-1" style="text-align: left;">
+      <em>{journalName}</em> ({pubYear})
+    </p>
+  )}
+
+  {(pubmedUrl || pdfUrl) && (
+    <p class="text-xs pub-meta mt-1" style="text-align: left;">
+      {pubmedUrl && (
+        <>PMID: <a href={pubmedUrl} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline py-3 inline-block">{pmid}<span class="sr-only"> (opens in new tab)</span></a></>
+      )}
+      {pubmedUrl && pdfUrl && ' | '}
+      {pdfUrl && (
+        <a href={pdfUrl} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline py-3 inline-block">PDF<span class="sr-only"> (opens in new tab)</span></a>
+      )}
+    </p>
+  )}
+
+  {category === 'preprint' && postedDate && (
+    <p class="text-xs pub-muted mt-1" style="text-align: left;">
+      Posted: {postedDate}
+    </p>
+  )}
+
+  {collaborationFormatted && (
+    <p class="text-xs pub-meta mt-1" style="text-align: left;">({collaborationFormatted})</p>
+  )}
+</div>
+
+<style>
+  .pub-thumbnail {
+    border-color: var(--theme-border);
+  }
+  .pub-text {
+    color: var(--theme-text-secondary);
+  }
+  .pub-meta {
+    color: var(--theme-text-secondary);
+  }
+  .pub-muted {
+    color: var(--theme-text-muted);
+  }
+</style>

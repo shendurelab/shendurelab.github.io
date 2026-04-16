@@ -1,0 +1,14 @@
+{
+  "name": "Molly Gasperini",
+  "slug": "molly-gasperini",
+  "photo": "/images/lab/gasperini.jpg",
+  "title": "Graduate Student (GS)",
+  "role": "graduate-student",
+  "status": "alumni",
+  "startYear": 2015,
+  "endYear": 2019,
+  "dissertation": "Efficiently searching for enhancers and their target genes in the human genome",
+  "currentPosition": "Associate Director, Seattle Hub for Synthetic Biology",
+  "sortOrder": 35,
+  "currentPositionUrl": "https://alleninstitute.org/division/seattle-hub-for-synthetic-biology/"
+}

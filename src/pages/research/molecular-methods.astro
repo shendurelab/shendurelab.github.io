@@ -1,0 +1,168 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ResearchPubCard from '../../components/research/ResearchPubCard.astro';
+import YearNavScript from '../../components/shared/YearNavScript.astro';
+
+// Publications data
+const publicationRows = [
+  [
+    // Row 1 - 2026 and 2025 papers
+    { image: 'Abadie_CellGenomics_February2026_thumb.png', articleUrl: 'https://www.cell.com/cell-genomics/fulltext/S2666-979X(26)00029-7?_returnURL=https%3A%2F%2Flinkinghub.elsevier.com%2Fretrieve%2Fpii%2FS2666979X26000297%3Fshowall%3Dtrue', authors: 'Abadie, Suiter et al.', title: 'A multiplex, prime editing framework for identifying drug resistance variants at scale', journal: 'Cell Genomics', year: 2026, pmid: '41722572', pdfFile: 'Abadie_CellGenomics_2026.pdf' },
+    { image: 'Nathans_NatureProtocols_February2026_thumb.png', articleUrl: 'https://www.nature.com/articles/s41596-025-01322-w', authors: 'Nathans, McDiarmid et al.', title: 'Multichannel genomic recording of biological information with ENGRAM', journal: 'Nature Protocols', year: 2026, pmid: '41673323', pdfFile: 'Nathans_NatureProtocols_2026.pdf' },
+    { image: 'McDiardmid_NatureBiotech_November2025_thumb.png', articleUrl: 'https://www.nature.com/articles/s41587-025-02896-2', authors: 'McDiarmid, Taylor et al.', title: 'A parts list of promoters and gRNA scaffolds for mammalian genome engineering and molecular recording', journal: 'Nature Biotechnology', year: 2025, pmid: '41219485', pdfFile: 'McDiarmid_Nature_Biotechnology_2025.pdf' },
+    { image: 'Choi_eLife_February2025_thumb.png', articleUrl: 'https://elifesciences.org/articles/98110', authors: 'Choi et al.', title: 'A molecular proximity sensor based on an engineered, dual-component guide RNA', journal: 'eLife', year: 2025, pmid: '39937081', pdfFile: 'Choi_eLife_2025.pdf' },
+  ],
+  [
+    { image: 'Chen_Nature_July2024_thumb.png', articleUrl: 'https://www.nature.com/articles/s41586-024-07706-4', authors: 'Chen, Choi et al.', title: 'Symbolic recording of signalling and cis-regulatory element activity to DNA', journal: 'Nature', year: 2024, pmid: '39020177', pdfFile: 'Chen_Nature_July2024.pdf' },
+    { image: 'Liao_Nature Protocols_June 2024_thumb.png', articleUrl: 'https://www.nature.com/articles/s41596-024-01003-0', authors: 'Liao, Choi, Shendure', title: 'Molecular recording using DNA Typewriter', journal: 'Nature Protocols', year: 2024, pmid: '38844553', pdfFile: 'Liao_NatureProtocols_2024.pdf' },
+    { image: 'Li_CellPress_April2024_thumb.png', articleUrl: 'https://www.sciencedirect.com/science/article/pii/S0092867424003118', authors: 'Li et al.', title: 'Chromatin context-dependent regulation and epigenetic manipulation of prime editing', journal: 'Cell', year: 2024, pmid: '37090511', pdfFile: 'Li_Cell Press_April2024.pdf' },
+  ],
+  [
+    { image: 'Martin_Nature_October 2022_thumb.png', articleUrl: 'https://www.nature.com/articles/s41596-022-00752-0', authors: 'Martin et al.', title: 'Optimized single-nucleus transcriptional profiling by combinatorial indexing', journal: 'Nature Protocols', year: 2022, pmid: '36261634', pdfFile: 'martin_nature_october2022.pdf' },
+    { image: 'Choi_Nature_July22_thumb.png', articleUrl: 'https://www.nature.com/articles/s41586-022-04922-8', authors: 'Choi et al.', title: 'A time-resolved, multi-symbol molecular recorder via sequential genome editing', journal: 'Nature', year: 2022, pmid: '35794474', pdfFile: 'choi_nature_july2022.pdf' },
+    { image: 'choi_nature_2022_thumb.png', articleUrl: 'https://www.nature.com/articles/s41587-021-01025-z.pdf?origin=ppub', authors: 'Choi, Chen et al.', title: 'Precise genomic deletions using paired prime editing', journal: 'Nature Biotechnology', year: 2022, pmid: '34650269', pdfFile: 'choi_natureBiotech_2022.pdf' },
+  ],
+  [
+    { image: 'Srivatsan_Science_2021_thumb(New).png', articleUrl: 'https://www.science.org/doi/10.1126/science.abb9536?cookieSet=1', authors: 'Srivatsan, Regier et al.', title: 'Embryo-scale, single-cell spatial transcriptomics', journal: 'Science', year: 2021, pmid: '34210887', pdfFile: 'Srivatsan_Science_2021(new).pdf', collaboration: 'with Trapnell and Stevens Labs' },
+    { image: 'Simeonov_cancerCell_2021_thumb(2).png', articleUrl: 'https://www.cell.com/cancer-cell/fulltext/S1535-6108(21)00271-3', authors: 'Simeonov et al.', title: 'Single-cell lineage tracing of metastatic cancer reveals selection of hybrid EMT states', journal: 'Cancer Cell', year: 2021, pmid: '34115987', pdfFile: 'Simeonov_cancerCell_2021(correctpaper).pdf', collaboration: 'with Lengner and McKenna Labs' },
+    { image: 'domcke_science_2020_thumb.png', articleUrl: 'https://science.sciencemag.org/content/370/6518/eaba7612.full?ijkey=cXtIBunS1NR.E&keytype=ref&siteid=sci', authors: 'Domcke, Hill, Cusanovich, Daza et al.', title: 'A human cell atlas of fetal chromatin accessibility', journal: 'Science', year: 2020, pmid: '33184180', pdfFile: 'domcke_science_2020.pdf', collaboration: 'with Cusanovich and Trapnell Labs' },
+  ],
+  [
+    { image: 'cao_naturebio_2020_thumb.jpg', articleUrl: 'https://www.nature.com/articles/s41587-020-0480-9', authors: 'Cao et al.', title: 'Sci-fate characterizes the dynamics of gene expression in single cells', journal: 'Nature Biotechnology', year: 2020, pmid: '32284584', pdfFile: 'cao_naturebio_2020.pdf' },
+    { image: 'srivatsan_science_2020_thumb.jpg', articleUrl: 'https://science.sciencemag.org/content/367/6473/45.long', authors: 'Srivatsan et al.', title: 'Massively multiplex chemical transcriptomics at single-cell resolution', journal: 'Science', year: 2020, pmid: '31806696', pdfFile: 'srivatsan_science_2020.pdf', collaboration: 'with Trapnell Lab' },
+    { image: 'yin_mol_cell_2019 thumbnail.jpg', articleUrl: 'https://www.cell.com/molecular-cell/fulltext/S1097-2765(19)30618-5?', authors: 'Yin et al.', title: 'High-Throughput Single-Cell Sequencing with Linear Amplification', journal: 'Molecular Cell', year: 2019, pmid: '31495564', pdfFile: 'yin_mol_cell_2019.pdf' },
+  ],
+  [
+    { image: 'alexander_BMC Biology_2019 thumbnail.jpg', articleUrl: 'https://bmcbiol.biomedcentral.com/articles/10.1186/s12915-019-0711-z', authors: 'Alexander et al.', title: 'Concurrent genome and epigenome editing by CRISPR-mediated sequence replacement', journal: 'BMC Biology', year: 2019, pmid: '31739790', pdfFile: 'alexander_BMC Biology_2019.pdf' },
+    { image: 'pliner_shendure_trapnell_nature_2019 thumbnail.jpg', articleUrl: 'https://www.nature.com/articles/s41592-019-0535-3', authors: 'Pliner et al.', title: 'Supervised classification enables rapid annotation of cell atlases', journal: 'Nature Methods', year: 2019, pmid: '31501545', pdfFile: 'pliner_shendure_trapnell_nature_2019.pdf', collaboration: 'with Trapnell Lab' },
+    { image: 'kircher_nature_communications_2019 thumbnail.jpg', articleUrl: 'https://www.nature.com/articles/s41467-019-11526-w', authors: 'Kircher, Xiong, Martin, Schubach et al.', title: 'Saturation mutagenesis of twenty disease-associated regulatory elements at single base-pair resolution', journal: 'Nature Communications', year: 2019, pmid: '31395865', pdfFile: 'kircher_nature_communications_2019.pdf', collaboration: 'with Ahituv and Kircher Labs' },
+  ],
+  [
+    { image: 'Chen_Nucleic_2019_thumb.png', articleUrl: 'https://academic.oup.com/nar/advance-article/doi/10.1093/nar/gkz487/5511473', authors: 'Chen et al.', title: 'Massively parallel profiling and predictive modeling of the outcomes of CRISPR/Cas9-mediated double-strand break repair', journal: 'Nucleic Acids Research', year: 2019, pmid: '31165867', pdfFile: 'chen_nucleic_2019.pdf' },
+    { image: 'kim_elife_2019_thumb.jpg', articleUrl: 'https://doi.org/10.7554/eLife.42499', authors: 'Kim et al.', title: 'A combination of transcription factors mediates inducible interchromosomal contacts', journal: 'eLife', year: 2019, pmid: '31081754', pdfFile: 'kim_elife_2019.pdf' },
+    { image: 'ramani_cell_2019_thumb.jpg', articleUrl: 'https://www.cell.com/cell-reports/fulltext/S2211-1247(19)30169-X', authors: 'Ramani et al.', title: 'High Sensitivity Profiling of Chromatin Structure by MNase-SSP', journal: 'Cell Reports', year: 2019, pmid: '30811994', pdfFile: 'ramani_cell_2019.pdf' },
+  ],
+  [
+    { image: 'cao_nature_2019_thumb.jpg', articleUrl: 'https://www.nature.com/articles/s41586-019-0969-x', authors: 'Cao, Spielmann et al.', title: 'The single-cell transcriptional landscape of mammalian organogenesis', journal: 'Nature', year: 2019, pmid: '30787437', pdfFile: 'cao_nature_2019.pdf' },
+    { image: 'gasperini_cell_2019.png', articleUrl: 'https://www.sciencedirect.com/science/article/pii/S009286741831554X', authors: 'Gasperini et al.', title: 'A Genome-wide Framework for Mapping Gene Regulation via Cellular Genetic Screens', journal: 'Cell', year: 2019, pmid: '30612741', pdfFile: 'gasperini_cell_2019.pdf' },
+    { image: 'cao_science_2018_thumb.png', articleUrl: 'http://science.sciencemag.org/content/361/6409/1380/tab-pdf', authors: 'Cao et al.', title: 'Joint profiling of chromatin accessibility and gene expression in thousands of single cells', journal: 'Science', year: 2018, pmid: '30166440', pdfFile: 'cao_science_2018.pdf', collaboration: 'with Trapnell Lab' },
+  ],
+  [
+    { image: 'matreyek_natgen_2018.png', articleUrl: 'https://www.nature.com/articles/s41588-018-0122-z', authors: 'Matreyek, Starita et al.', title: 'Multiplex assessment of protein variant abundance by massively parallel sequencing', journal: 'Nature Genetics', year: 2018, pmid: '29785012', pdfFile: 'matreyek_natgen_2018.pdf', collaboration: 'with Fowler Lab' },
+    { image: 'hill_nature_2019.png', articleUrl: 'http://www.nature.com/articles/nmeth.4604', authors: 'Hill, McFaline-Figueroa et al.', title: 'On the design of CRISPR-based single-cell molecular screens', journal: 'Nature Methods', year: 2018, pmid: '29457792', pdfFile: 'hill_nature_2019.pdf', collaboration: 'with Trapnell Lab' },
+    { image: 'cao_science_2017_thumb.jpg', articleUrl: 'http://science.sciencemag.org/content/357/6352/661', authors: 'Cao, Packer et al.', title: 'Comprehensive single cell transcriptional profiling of a multicellular organism by combinatorial indexing', journal: 'Science', year: 2017, pmid: '28818938', pdfFile: 'cao_science_2017.pdf', collaboration: 'with Trapnell and Waterston Labs' },
+  ],
+  [
+    { image: 'ramani_nature_methods_2017_thumb.jpg', articleUrl: 'http://www.nature.com/nmeth/journal/v14/n3/full/nmeth.4155.html', authors: 'Ramani et al.', title: 'Massively multiplex single-cell Hi-C', journal: 'Nature Methods', year: 2017, pmid: '28135255', pdfFile: 'ramani_nature_methods_2017.pdf' },
+    { image: 'gasperini_AJHG_2017_thumb.jpg', articleUrl: 'http://www.sciencedirect.com/science/article/pii/S0002929717302458', authors: 'Gasperini, Findlay et al.', title: 'CRISPR/Cas9-Mediated Scanning for Regulatory Elements Required for HPRT1 Expression via Thousands of Large, Programmed Genomic Deletions', journal: 'AJHG', year: 2017, pmid: '28712454', pdfFile: 'gasperini_ajhd_2017.pdf' },
+    { image: 'ramani_nature_protocols_2016_thumb.jpg', articleUrl: 'http://www.nature.com/nprot/journal/v11/n11/full/nprot.2016.126.html', authors: 'Ramani, Cusanovich et al.', title: 'Mapping 3D genome architecture through in situ DNase Hi-C', journal: 'Nature Protocols', year: 2016, pmid: '27685100', pdfFile: 'ramani_nature_protocols_2016.pdf' },
+  ],
+  [
+    { image: 'mckenna_science_2016_thumb.png', articleUrl: 'http://science.sciencemag.org/content/353/6298/aaf7907', authors: 'McKenna, Findlay, Gagnon et al.', title: 'Whole-organism lineage tracing by combinatorial and cumulative genome editing', journal: 'Science', year: 2016, pmid: '27229144', pdfFile: 'mckenna_science_2016.pdf', collaboration: 'with Schier Lab' },
+    { image: 'klein_nar_2015_thumb.jpg', articleUrl: 'http://nar.oxfordjournals.org/content/early/2015/11/06/nar.gkv1177.long', authors: 'Klein et al.', title: 'Multiplex pairwise assembly of array-derived DNA oligonucleotides', journal: 'Nucleic Acids Research', year: 2015, pmid: '26553805', pdfFile: 'klein_nar_2015.pdf' },
+    { image: 'ramani_nature_biotechnology_2015_thumb.jpg', articleUrl: 'http://www.nature.com/nbt/journal/v33/n9/full/nbt.3289.html', authors: 'Ramani et al.', title: 'High-throughput determination of RNA structure by proximity ligation', journal: 'Nature Biotechnology', year: 2015, pmid: '26237516', pdfFile: 'ramani_nature_biotechnology_2015.pdf' },
+  ],
+  [
+    { image: 'cusanovich_science_2015_thumb.jpg', articleUrl: 'http://www.sciencemag.org/content/348/6237/910.long', authors: 'Cusanovich et al.', title: 'Multiplex single-cell profiling of chromatin accessibility by combinatorial cellular indexing', journal: 'Science', year: 2015, pmid: '25953818', pdfFile: 'cusanovich_science_2015.pdf', collaboration: 'with Trapnell Lab' },
+    { image: 'kitzman_nature_methods_2015_thumb.jpg', articleUrl: 'http://www.nature.com/nmeth/journal/v12/n3/full/nmeth.3223.html', authors: 'Kitzman, Starita et al.', title: 'Massively parallel single-amino-acid mutagenesis', journal: 'Nature Methods', year: 2015, pmid: '25559584', pdfFile: 'kitzman_nature_methods_2015.pdf', collaboration: 'with Fields Lab' },
+    { image: 'snyder_nrg_2015_thumb.jpg', articleUrl: 'http://www.nature.com/nrg/journal/v16/n6/full/nrg3903.html', authors: 'Snyder et al.', title: 'Haplotype-resolved genome sequencing: experimental methods and applications', journal: 'Nature Reviews Genetics', year: 2015, pmid: '25948246', pdfFile: 'snyder_nrg_2015.pdf' },
+  ],
+  [
+    { image: 'boyle_bioinformatics_2014_thumb.jpg', articleUrl: 'http://bioinformatics.oxfordjournals.org/content/early/2014/06/14/bioinformatics.btu353.full.pdf', authors: 'Boyle et al.', title: 'MIPgen: optimized modeling and design of molecular inversion probes for targeted resequencing', journal: 'Bioinformatics', year: 2014, pmid: '24867941', pdfFile: 'boyle_bioinformatics_2014.pdf' },
+    { image: 'shendure_nature_biotechnology_2012_thumb.jpg', articleUrl: 'http://www.nature.com/nbt/journal/v30/n11/full/nbt.2421.html', authors: 'Shendure, Lieberman-Aiden', title: 'The expanding scope of DNA sequencing', journal: 'Nature Biotechnology', year: 2012, pmid: '23138308', pdfFile: 'shendure_nature_biotechnology_2012.pdf' },
+    { image: 'hiatt_genome_research_2013_thumb.jpg', articleUrl: 'http://genome.cshlp.org/content/early/2013/03/10/gr.147686.112.full.pdf', authors: 'Hiatt et al.', title: 'Single molecule molecular inversion probes for targeted, high-accuracy detection of low-frequency variation', journal: 'Genome Research', year: 2013, pmid: '23382536', pdfFile: 'hiatt_genome_research_2013.pdf' },
+  ],
+  [
+    { image: 'adey_genome_research_2012_thumb.jpg', articleUrl: 'http://genome.cshlp.org/content/22/6/1139.long', authors: 'Adey, Shendure', title: 'Ultra-low-input, tagmentation-based whole-genome bisulfite sequencing', journal: 'Genome Research', year: 2012, pmid: '22466172', pdfFile: 'adey_genome_research_2012.pdf' },
+    { image: 'schwartz_nature_methods_2012_thumb.jpg', articleUrl: 'http://www.nature.com/nmeth/journal/v9/n9/full/nmeth.2137.html', authors: 'Schwartz et al.', title: 'Accurate gene synthesis with tag-directed retrieval of sequence-verified DNA molecules', journal: 'Nature Methods', year: 2012, pmid: '22886093', pdfFile: 'schwartz_pnas_2012.pdf' },
+    { image: 'adey_genome_biology_2010_thumb.jpg', articleUrl: 'http://genomebiology.com/2010/11/12/R119', authors: 'Adey, Morrison, Asan, Xun et al.', title: 'Rapid, low-input, low-bias construction of shotgun fragment libraries by high-density in vitro transposition', journal: 'Genome Biology', year: 2010, pmid: '21143862', pdfFile: 'adey_genome_biology_2010.pdf', collaboration: 'with Zhang Lab' },
+  ],
+  [
+    { image: 'hiatt_nature_methods_2010_thumb.jpg', articleUrl: 'http://www.nature.com/nmeth/journal/v7/n2/full/nmeth.1416.html', authors: 'Hiatt, Patwardhan et al.', title: 'Parallel, tag-directed assembly of locally derived short sequence reads', journal: 'Nature Methods', year: 2010, pmid: '20081835', pdfFile: 'hiatt_nature_methods_2010.pdf' },
+    { image: 'turner_nature_methods_2009_thumb.jpg', articleUrl: 'http://www.nature.com/nmeth/journal/v6/n5/full/nmeth.f.248.html', authors: 'Turner et al.', title: 'Massively parallel exon capture and library-free resequencing across 16 genomes', journal: 'Nature Methods', year: 2009, pmid: '19349981', pdfFile: 'turner_nature_methods_2009.pdf' },
+    { image: 'porreca_nature_methods_2007_thumb.jpg', articleUrl: 'http://www.nature.com/nmeth/journal/v4/n11/pdf/nmeth1110.pdf', authors: 'Porreca, Zhang et al.', title: 'Multiplex Amplification of Large Sets of Human Exons', journal: 'Nature Methods', year: 2007, pmid: '17934468', pdfFile: 'porreca_nature_methods_2007.pdf', collaboration: 'in Church Lab' },
+  ],
+];
+
+// Flatten and group by year
+const allPubs = publicationRows.flat();
+const pubsByYear = allPubs.reduce((acc, pub) => {
+  const year = pub.year || 'Unknown';
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(pub);
+  return acc;
+}, {} as Record<number | string, typeof allPubs>);
+
+// Get sorted years (most recent first)
+const years = Object.keys(pubsByYear).sort((a, b) => Number(b) - Number(a));
+---
+
+<BaseLayout title="Developing New Molecular Methods | Shendure Lab">
+  <!-- Mobile Year Scrollbar -->
+  <nav class="lg:hidden sticky top-16 z-40 year-scrollbar border-b" aria-label="Jump to year">
+    <div class="flex overflow-x-auto scrollbar-hide px-4 py-2 gap-2" role="list">
+      {years.map(year => (
+        <a
+          href={`#year-${year}`}
+          class="year-pill flex-shrink-0 px-4 py-3 text-sm rounded-full border transition-colors"
+          role="listitem"
+          aria-label={`Jump to ${year} publications`}
+        >
+          {year}
+        </a>
+      ))}
+    </div>
+  </nav>
+
+  <div class="w-full max-w-[1000px] mx-auto px-4 py-12 pb-[60vh]">
+    <h1 class="w-full text-2xl md:text-3xl font-bold text-lab-orange mb-8 text-center">Developing New Molecular Methods</h1>
+    <p class="w-full text-center page-subtitle mb-10">(selected publications)</p>
+
+    <div class="w-full mb-8 text-center">
+      <a href="/research" class="text-lab-blue hover:underline">&larr; Back to Research</a>
+    </div>
+
+    {years.map(year => (
+      <div id={`year-${year}`} class="mb-12 scroll-mt-32">
+        <h2 class="text-xl font-bold text-lab-orange mb-6 text-center lg:text-left">{year}</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 justify-items-center">
+          {pubsByYear[year].map((pub) => (
+            <ResearchPubCard
+              image={pub.image}
+              articleUrl={pub.articleUrl}
+              authors={pub.authors}
+              title={pub.title}
+              journal={pub.journal}
+              year={pub.year}
+              pmid={pub.pmid}
+              pdfFile={pub.pdfFile}
+              collaboration={pub.collaboration}
+            />
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <YearNavScript />
+</BaseLayout>
+
+<style>
+  .year-scrollbar {
+    background-color: var(--theme-bg);
+    border-color: var(--theme-border);
+  }
+  .year-pill {
+    background-color: var(--theme-bg);
+    border-color: var(--theme-border);
+    color: var(--theme-text-secondary);
+  }
+  .year-pill:hover, .year-pill:focus-visible {
+    background-color: var(--color-lab-orange);
+    border-color: var(--color-lab-orange);
+    color: white;
+  }
+  .page-subtitle {
+    color: var(--theme-text-secondary);
+  }
+</style>

@@ -1,0 +1,13 @@
+{
+  "category": "research",
+  "articleUrl": "http://www.nature.com/articles/nmeth.4604",
+  "thumbnail": "/images/papers/hill_nature_2019.png",
+  "pdfUrl": "/documents/hill_nature_2018.pdf",
+  "citation": "Hill, McFaline-Figueroa et al. On the design of CRISPR-based single-cell molecular screens. Nature Methods (2018)",
+  "year": 2018,
+  "journal": "On the design of CRISPR-based single-cell molecular screens. Nature Methods",
+  "pmid": "29457792",
+  "collaboration": "with Trapnell Lab",
+  "slug": "hill-2018-on-the-design-of-crispr-based-single-cel",
+  "sortOrder": 51
+}

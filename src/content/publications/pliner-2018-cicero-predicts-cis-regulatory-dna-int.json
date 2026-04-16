@@ -1,0 +1,13 @@
+{
+  "category": "research",
+  "articleUrl": "https://www.sciencedirect.com/science/article/pii/S1097276518305471?via%3Dihub",
+  "thumbnail": "/images/papers/pliner_molcell_2018.png",
+  "pdfUrl": "/documents/pliner_molcell_2018.pdf",
+  "citation": "Pliner et al. Cicero Predicts cis-Regulatory DNA Interactions from Single-Cell Chromatin Accessibility Data. Molecular Cell (2018)",
+  "year": 2018,
+  "journal": "Cicero Predicts cis-Regulatory DNA Interactions from Single-Cell Chromatin Accessibility Data. Molecular Cell",
+  "pmid": "30078726",
+  "collaboration": "with Trapnell Lab",
+  "slug": "pliner-2018-cicero-predicts-cis-regulatory-dna-int",
+  "sortOrder": 46
+}

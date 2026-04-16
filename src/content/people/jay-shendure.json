@@ -1,0 +1,19 @@
+{
+  "name": "Jay Shendure",
+  "slug": "jay-shendure",
+  "photo": "/images/people/shendure_hhmi.jpeg",
+  "title": "Principal Investigator",
+  "role": "pi",
+  "status": "current",
+  "profileUrl": "https://www.gs.washington.edu/faculty/shendure.htm",
+  "admin": {
+    "email": "ooseth@uw.edu",
+    "name": "Olga Oseth"
+  },
+  "links": {
+    "hhmi": "http://www.hhmi.org/scientists/jay-shendure",
+    "briefBio": "/documents/Shendure Brief Bio(03-Jan-2026)current.pdf",
+    "nihBiosketch": "/documents/SHENDURE_Biosketch NIH_101725_NO links current.pdf",
+    "cv": "/documents/SHENDURE.CV(03-Jan-26)current.pdf"
+  }
+}

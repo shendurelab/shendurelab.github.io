@@ -1,0 +1,187 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PersonCard from '../../components/people/PersonCard.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Load people data
+const peopleDir = path.join(process.cwd(), 'src/content/people');
+const files = fs.readdirSync(peopleDir).filter(f => f.endsWith('.json') && !f.startsWith('_'));
+
+const allPeople = files.map(f => {
+  const content = fs.readFileSync(path.join(peopleDir, f), 'utf-8');
+  return JSON.parse(content);
+});
+
+// Filter alumni only
+const alumni = allPeople.filter(p => p.status === 'alumni');
+
+// Sort by sortOrder (if exists), then by end year, then by last name
+const sortedAlumni = [...alumni].sort((a, b) => {
+  const aOrder = a.sortOrder ?? 9999;
+  const bOrder = b.sortOrder ?? 9999;
+  if (aOrder !== bOrder) return aOrder - bOrder;
+  const aYear = a.endYear ?? 0;
+  const bYear = b.endYear ?? 0;
+  if (bYear !== aYear) return bYear - aYear;
+  const aLast = a.name.split(' ').pop() || '';
+  const bLast = b.name.split(' ').pop() || '';
+  return aLast.localeCompare(bLast);
+});
+
+// Helper to create slug from name (must match the logic in update-search.cjs)
+function slugify(name: string): string {
+  return name.toLowerCase().replace(/[()]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+---
+
+<BaseLayout title="Alumni" description="Former members of the Shendure Lab">
+  <div class="w-full max-w-[1000px] mx-auto px-4 py-12">
+    <h1 class="w-full text-2xl md:text-3xl font-bold text-lab-orange mb-4 text-center">Alumni</h1>
+
+    <div class="w-full text-center mb-8">
+      <a href="/people" class="text-lab-blue hover:underline">&larr; Current Members</a>
+    </div>
+
+    <!-- Alumni - Responsive Grid -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6 justify-items-center">
+      {sortedAlumni.map(person => (
+        <PersonCard {...person} />
+      ))}
+    </div>
+
+    <!-- Other Alumni -->
+    <div class="other-alumni-section mt-16 border-t pt-10">
+      <h2 class="text-xl font-bold text-lab-orange mb-6">Other Alumni</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
+        {[
+          { name: 'Kaimana Moraes', role: 'Undergraduate (Columbia University)', period: 'Summer 2023' },
+          { name: 'Melissa Phung', role: 'Undergraduate (CWRU)', period: 'Summer 2021–2022' },
+          { name: 'Amira Ellison', role: 'Undergraduate (Penn State University)', period: 'Summer 2021' },
+          { name: 'Kaitlin Beel', role: 'Undergraduate (UW)', period: '2020' },
+          { name: 'Taylor Real', role: 'Undergraduate (UC Santa Cruz)', period: 'Summer 2019' },
+          { name: 'Tanvi Reddy', role: 'Volunteer (Roosevelt High School)', period: 'Summer 2018' },
+          { name: 'Rajiv McCoy', role: 'Visiting Postdoctoral Fellow', period: '2017–2018' },
+          { name: 'Nikhil Patkar', role: 'Visiting Scientist', period: '2016–2017' },
+          { name: 'Elizabeth Aguilar', role: 'Undergraduate (DePauw)', period: 'Summer 2017' },
+          { name: 'Joseph Sayad', role: 'Undergraduate (Hunter)', period: 'Summer 2017' },
+          { name: 'Meara Davies', role: 'Graduate Researcher', period: '2012–2013' },
+          { name: 'Chris Lambert', role: 'Undergraduate (UW)', period: '2011' },
+          { name: 'Monica Mascarenas', role: 'Undergraduate (UNM)', period: 'Summer 2010' },
+          { name: 'Amy Olson', role: 'Undergraduate (UW)', period: '2008–2009' },
+          { name: 'Steven Cazales', role: 'Undergraduate (UW), GenOM Project', period: 'Summer 2008' },
+          { name: 'Steven Flygare', role: 'Undergraduate (BYU), Amgen Scholars', period: 'Summer 2008' },
+        ].map(person => (
+          <div id={slugify(person.name)} class="other-alumni-row flex justify-between py-1.5 border-b rounded transition-all scroll-mt-32">
+            <span>
+              <span class="font-medium other-alumni-name">{person.name}</span>
+              <span class="other-alumni-role text-sm ml-1">— {person.role}</span>
+            </span>
+            <span class="other-alumni-period text-sm flex-shrink-0 ml-4">{person.period}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Past Rotation Students -->
+    <div class="other-alumni-section mt-12 border-t pt-10">
+      <h2 class="text-xl font-bold text-lab-orange mb-6">Past Rotation Students</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
+        {[
+          { name: 'Monica (Moni) Padilla Galvez', program: 'GS', period: 'Winter 2026' },
+          { name: 'PeiXi Chen', program: 'MCB', period: 'Winter 2025' },
+          { name: 'Kristian Choate', program: 'MCB', period: 'Fall 2024' },
+          { name: 'Yufei (Nancy) Gao', program: 'Bioe', period: 'Winter 2024' },
+          { name: 'Lucas Kerr', program: 'GS', period: 'Summer 2023' },
+          { name: 'Elliott Swanson', program: 'GS', period: 'Spring 2022' },
+          { name: 'Syd Sattler', program: 'GS', period: 'Winter 2022' },
+          { name: 'Yuzhen Liu', program: 'GS', period: 'Spring 2020' },
+          { name: 'Conor Camplisson', program: 'GS', period: 'Winter 2020' },
+          { name: 'Andrew Mullen', program: 'MSTP', period: 'Summer 2019' },
+          { name: 'Shawn Fayer', program: 'GS', period: 'Spring 2019' },
+          { name: 'James Anderson', program: 'MCB', period: 'Winter 2019' },
+          { name: 'Eliza Barkan', program: 'MCB', period: 'Fall 2018' },
+          { name: 'Michael Goldberg', program: 'GS', period: 'Spring 2018' },
+          { name: 'Philip Dishuk', program: 'GS', period: 'Winter 2017' },
+          { name: 'Will DeWitt', program: 'GS', period: 'Fall 2017' },
+          { name: 'Bingjie Wang', program: 'MSTP', period: 'Summer 2017' },
+          { name: 'Joseph Janizek', program: 'MSTP', period: 'Summer 2017' },
+          { name: 'April Lo', program: 'GS', period: 'Spring 2017' },
+          { name: 'Ian Smith', program: 'GS', period: '2017' },
+          { name: 'Eliah Overbey', program: 'GS', period: 'Spring 2016' },
+          { name: 'Aakash Sur', program: 'BMI', period: 'Fall 2015' },
+          { name: 'Serena Liu', program: 'GS', period: 'Spring 2015' },
+          { name: 'Damon May', program: 'GS', period: 'Winter 2015' },
+          { name: 'Hugh Haddox', program: 'MCB', period: 'Spring 2013' },
+          { name: 'Elyse Hope', program: 'GS', period: 'Winter 2012' },
+          { name: 'Jorgen Nelson', program: 'GS', period: 'Winter 2012' },
+          { name: 'Jenny Wagner', program: 'GS', period: 'Winter 2011' },
+          { name: 'Jost Burton', program: 'GS', period: 'Winter 2011' },
+          { name: 'Meara Davies', program: 'MCB', period: 'Fall 2011' },
+          { name: 'David Young', program: 'MSTP', period: 'Summer 2009' },
+          { name: 'Keisha Carlson', program: 'GS', period: 'Winter 2009' },
+          { name: 'Jarret Egerston', program: 'GS', period: 'Winter 2009' },
+          { name: 'Matthew Maurano', program: 'GS', period: 'Fall 2008' },
+          { name: 'Sayer Herrin', program: 'GS', period: 'Winter 2008' },
+        ].map(person => (
+          <div id={slugify(person.name)} class="other-alumni-row flex justify-between py-1.5 border-b rounded transition-all scroll-mt-32">
+            <span>
+              <span class="font-medium other-alumni-name">{person.name}</span>
+              <span class="other-alumni-role text-sm ml-1">— {person.program}</span>
+            </span>
+            <span class="other-alumni-period text-sm flex-shrink-0 ml-4">{person.period}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <style>
+    :global(.person-card.highlighted),
+    :global(.other-alumni-row.highlighted) {
+      background-color: rgba(237, 148, 60, 0.15);
+      box-shadow: 0 0 0 3px rgba(237, 148, 60, 0.4);
+    }
+    .other-alumni-section {
+      border-color: var(--theme-border);
+    }
+    .other-alumni-row {
+      border-color: var(--theme-border);
+    }
+    .other-alumni-name {
+      color: var(--theme-text);
+    }
+    .other-alumni-role {
+      color: var(--theme-text-muted);
+    }
+    .other-alumni-period {
+      color: var(--theme-text-secondary);
+    }
+  </style>
+
+  <script>
+    function highlightCard() {
+      const hash = window.location.hash.slice(1);
+      if (!hash) return;
+
+      document.querySelectorAll('.person-card.highlighted').forEach(el => {
+        el.classList.remove('highlighted');
+      });
+
+      const card = document.getElementById(hash);
+      if (card) {
+        setTimeout(() => {
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          card.classList.add('highlighted');
+
+          setTimeout(() => {
+            card.classList.remove('highlighted');
+          }, 5000);
+        }, 100);
+      }
+    }
+
+    highlightCard();
+    window.addEventListener('hashchange', highlightCard);
+  </script>
+</BaseLayout>

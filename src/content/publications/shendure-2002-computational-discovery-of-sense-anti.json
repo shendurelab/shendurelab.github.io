@@ -1,0 +1,13 @@
+{
+  "category": "pre2007",
+  "articleUrl": "http://genomebiology.com/content/pdf/gb-2002-3-9-research0044.pdf",
+  "thumbnail": "/images/papers/shendure_genome_biology_2002_thumb.jpg",
+  "pdfUrl": "/documents/shendure_genome_biology_2002.pdf",
+  "citation": "Shendure & Church. Computational discovery of sense-antisense transcription in the human and mouse genomes. Genome Biology (2002)",
+  "year": 2002,
+  "journal": "Computational discovery of sense-antisense transcription in the human and mouse genomes. Genome Biology",
+  "pmid": "12225583",
+  "collaboration": "in Church Lab",
+  "slug": "shendure-2002-computational-discovery-of-sense-anti",
+  "sortOrder": 4
+}

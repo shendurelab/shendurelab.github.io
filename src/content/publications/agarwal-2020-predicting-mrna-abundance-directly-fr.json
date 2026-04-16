@@ -1,0 +1,12 @@
+{
+  "category": "research",
+  "articleUrl": "https://www.cell.com/cell-reports/pdf/S2211-1247(20)30616-1.pdf",
+  "thumbnail": "/images/papers/agarwal_cell_2020_thumb.png",
+  "pdfUrl": "https://www.cell.com/cell-reports/pdf/S2211-1247(20)30616-1.pdf",
+  "citation": "Agarwal, Shendure.  Predicting mRNA abundance directly from genomic sequence using deep convolutional neural networks. Cell Reports (2020)",
+  "year": 2020,
+  "journal": "Predicting mRNA abundance directly from genomic sequence using deep convolutional neural networks. Cell Reports",
+  "pmid": "32433972",
+  "slug": "agarwal-2020-predicting-mrna-abundance-directly-fr",
+  "sortOrder": 30
+}

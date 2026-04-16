@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+// ANIMATIONS COMMENTED OUT 3/23/26 per Jay's request — uncomment import + component to re-enable
+// import DNAAnimation from '../../components/special/DNAAnimation.astro';
+---
+
+<BaseLayout title="Publications | Shendure Lab">
+  <section class="relative min-h-[calc(100vh-140px)] flex items-center justify-center overflow-hidden">
+    <!-- ANIMATION COMMENTED OUT 3/23/26 — uncomment to re-enable -->
+    <!-- <div class="hidden md:block">
+      <DNAAnimation height="100%" class="!absolute inset-0 w-full h-full" variant="hero" />
+    </div> -->
+
+    <div class="relative z-10 text-center px-4 pt-8 md:pt-0">
+      <h1 class="text-3xl md:text-5xl font-bold text-lab-orange mb-8 md:mb-12">Publications</h1>
+
+      <ul class="space-y-4 md:space-y-8 text-lg md:text-2xl">
+        <li>
+          <a href="/publications/research" class="text-lab-blue hover:underline">
+            Featured Research Articles
+          </a>
+        </li>
+        <li>
+          <a href="/publications/reviews" class="text-lab-blue hover:underline">
+            Featured Review Articles
+          </a>
+        </li>
+        <li>
+          <a href="/publications/preprints" class="text-lab-blue hover:underline">
+            Featured Preprint Papers
+          </a>
+        </li>
+        <li>
+          <a href="/publications/pre-2007" class="text-lab-blue hover:underline">
+            Pre-2007
+          </a>
+        </li>
+        <li>
+          <a href="http://www.ncbi.nlm.nih.gov/pubmed?cmd=search&term=shendure[au]" target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">
+            All Publications (PubMed) <span class="sr-only">(opens in new tab)</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </section>
+</BaseLayout>

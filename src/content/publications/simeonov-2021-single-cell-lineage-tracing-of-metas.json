@@ -1,0 +1,13 @@
+{
+  "category": "research",
+  "articleUrl": "https://www.cell.com/cancer-cell/fulltext/S1535-6108(21)00271-3",
+  "thumbnail": "/images/papers/Simeonov_cancerCell_2021_thumb(2).png",
+  "pdfUrl": "/documents/Simeonov_cancerCell_2021(correctpaper).pdf",
+  "citation": "Simeonov et al.  Single-cell lineage tracing of metastatic cancer reveals selection of hybrid EMT states. Cancer Cell (2021)",
+  "year": 2021,
+  "journal": "Single-cell lineage tracing of metastatic cancer reveals selection of hybrid EMT states. Cancer Cell",
+  "pmid": "34115987",
+  "collaboration": "with Lengner and McKenna Labs",
+  "slug": "simeonov-2021-single-cell-lineage-tracing-of-metas",
+  "sortOrder": 23
+}

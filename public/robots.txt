@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://shendurelab.gs.washington.edu/sitemap-index.xml

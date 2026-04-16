@@ -1,0 +1,120 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ResearchPubCard from '../../components/research/ResearchPubCard.astro';
+import YearNavScript from '../../components/shared/YearNavScript.astro';
+
+const publicationRows = [
+  [
+    { image: 'Srivatsan_ClinicalChemistry_2022_thumb.png', articleUrl: 'https://academic.oup.com/clinchem/article/68/1/143/6323225', authors: 'Srivatsan et al.', title: 'SwabExpress: An end-to-end protocol for extraction-free COVID-19 testing', journal: 'Clinical Chemistry', year: 2021, pmid: '32511368', pdfFile: 'Srivatsan_ClinicalChemistry_2022.pdf', collaboration: 'with Seattle Flu Study' },
+    { image: 'yin_mol_cell_2019 thumbnail.jpg', articleUrl: 'https://www.cell.com/molecular-cell/fulltext/S1097-2765(19)30618-5', authors: 'Yin et al.', title: 'High-Throughput Single-Cell Sequencing with Linear Amplification', journal: 'Molecular Cell', year: 2019, pmid: '31495564', pdfFile: 'yin_mol_cell_2019.pdf' },
+    { image: 'shendure_nature_2018.png', articleUrl: 'https://pubs.acs.org/doi/10.1021/acschembio.7b00778', authors: 'Shendure et al.', title: 'DNA sequencing at 40: past, present and future', journal: 'Nature', year: 2017, pmid: '29019985', pdfFile: 'shendure_nature_2018.pdf' },
+  ],
+  [
+    { image: 'snyder_nrg_2015_thumb.jpg', articleUrl: 'http://www.nature.com/nrg/journal/v16/n6/full/nrg3903.html', authors: 'Snyder et al.', title: 'Haplotype-resolved genome sequencing: experimental methods and applications', journal: 'Nature Reviews Genetics', year: 2015, pmid: '25948246', pdfFile: 'snyder_nrg_2015.pdf' },
+    { image: 'adey_genome_research_2014_thumb.jpg', articleUrl: 'http://genome.cshlp.org/content/24/12/2041.long', authors: 'Adey et al.', title: 'In vitro, long-range sequence information for de novo genome assembly via transposase contiguity', journal: 'Genome Research', year: 2014, pmid: '25327137', pdfFile: 'adey_genome_research_2014.pdf' },
+    { image: 'burton_g3_2014_thumb.jpg', articleUrl: 'http://www.g3journal.org/content/4/7/1339.full.pdf+html', authors: 'Burton, Liachko et al.', title: 'Species-Level Deconvolution of Metagenome Assemblies with Hi-C-Based Contact Probability Maps', journal: 'G3', year: 2014, pmid: '24855317', pdfFile: 'burton_g3_2014.pdf', collaboration: 'with Dunham Lab' },
+  ],
+  [
+    { image: 'adey_nature_2013_thumb.png', articleUrl: 'http://www.nature.com/nature/journal/v500/n7461/full/nature12064.html', authors: 'Adey, Burton, Kitzman et al.', title: 'The haplotype-resolved genome and epigenome of the aneuploid HeLa cancer cell line', journal: 'Nature', year: 2013, pmid: '23925245', pdfFile: 'adey_nature_2013.pdf' },
+    { image: 'schwartz_pnas_2012_thumb.jpg', articleUrl: 'http://www.pnas.org/content/109/46/18749.full', authors: 'Schwartz et al.', title: 'Capturing native long-range contiguity by in situ library construction and optical sequencing', journal: 'PNAS', year: 2012, pmid: '23112150', pdfFile: 'schwartz_pnas_2012.pdf' },
+    { image: 'burton_nature_biotechnology_2013_thumb.jpg', articleUrl: 'http://www.nature.com/nbt/journal/v31/n12/full/nbt.2727.html', authors: 'Burton et al.', title: 'Chromosome-scale scaffolding of de novo genome assemblies based on chromatin interactions', journal: 'Nature Biotechnology', year: 2013, pmid: '24185095', pdfFile: 'burton_nature_biotechnology_2013.pdf' },
+  ],
+  [
+    { image: 'adey_genome_research_2012_thumb.jpg', articleUrl: 'http://genome.cshlp.org/content/22/6/1139.long', authors: 'Adey, Shendure', title: 'Ultra-low-input, tagmentation-based whole-genome bisulfite sequencing', journal: 'Genome Research', year: 2012, pmid: '22466172', pdfFile: 'adey_genome_research_2012.pdf' },
+    { image: 'kitzman_nature_biotechnology_2011_thumb.png', articleUrl: 'http://www.nature.com/nbt/journal/v29/n1/full/nbt.1740.html', authors: 'Kitzman et al.', title: 'Haplotype-resolved genome sequencing of a Gujarati Indian individual', journal: 'Nature Biotechnology', year: 2011, pmid: '21170042', pdfFile: 'kitzman_nature_biotechnology_2011.pdf' },
+    { image: 'kitzman_science_translational_medicine_2012_thumb.jpg', articleUrl: 'http://stm.sciencemag.org/content/4/137/137ra76.full.pdf', authors: 'Kitzman et al.', title: 'Noninvasive whole-genome sequencing of a human fetus', journal: 'Science Translational Medicine', year: 2012, pmid: '22674554', pdfFile: 'kitzman_science_translational_medicine_2012.pdf' },
+  ],
+  [
+    { image: 'adey_genome_biology_2010_thumb.jpg', articleUrl: 'http://genomebiology.com/2010/11/12/R119', authors: 'Adey, Morrison, Asan, Xun et al.', title: 'Rapid, low-input, low-bias construction of shotgun fragment libraries by high-density in vitro transposition', journal: 'Genome Biology', year: 2010, pmid: '21143862', pdfFile: 'adey_genome_biology_2010.pdf', collaboration: 'with Zhang Lab' },
+    { image: 'ng_nature_2009_thumb.jpg', articleUrl: 'http://www.nature.com/nature/journal/v461/n7261/full/nature08250.html', authors: 'Ng et al.', title: 'Targeted capture and massively parallel sequencing of 12 human exomes', journal: 'Nature', year: 2009, pmid: '19684571', pdfFile: 'ng_nature_2009.pdf' },
+    { image: 'hiatt_nature_methods_2010_thumb.jpg', articleUrl: 'http://www.nature.com/nmeth/journal/v7/n2/full/nmeth.1416.html', authors: 'Hiatt, Patwardhan et al.', title: 'Parallel, tag-directed assembly of locally derived short sequence reads', journal: 'Nature Methods', year: 2010, pmid: '20081835', pdfFile: 'hiatt_nature_methods_2010.pdf' },
+  ],
+  [
+    { image: 'turner_nature_methods_2009_thumb.jpg', articleUrl: 'http://www.nature.com/nmeth/journal/v6/n5/full/nmeth.f.248.html', authors: 'Turner et al.', title: 'Massively parallel exon capture and library-free resequencing across 16 genomes', journal: 'Nature Methods', year: 2009, pmid: '19349981', pdfFile: 'turner_nature_methods_2009.pdf' },
+    { image: 'shendure_science_2005_thumb.jpg', articleUrl: 'https://www.sciencemag.org/content/309/5741/1728.full.pdf', authors: 'Shendure, Porreca et al.', title: 'Accurate Multiplex Polony Sequencing of an Evolved Bacterial Genome', journal: 'Science', year: 2005, pmid: '16081699', pdfFile: 'shendure_science_2005.pdf', collaboration: 'in Church Lab' },
+    { image: 'shendure_nature_biotechnology_2008_thumb.jpg', articleUrl: 'http://www.nature.com/nbt/journal/v26/n10/pdf/nbt1486.pdf', authors: 'Shendure, Ji', title: 'Next generation DNA sequencing', journal: 'Nature Biotechnology', year: 2008, pmid: '18846087', pdfFile: 'shendure_nature_biotechnology_2008.pdf' },
+  ],
+];
+
+// Flatten and group by year
+const allPubs = publicationRows.flat();
+const pubsByYear = allPubs.reduce((acc, pub) => {
+  const year = pub.year || 'Unknown';
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(pub);
+  return acc;
+}, {} as Record<number | string, typeof allPubs>);
+
+// Get sorted years (most recent first)
+const years = Object.keys(pubsByYear).sort((a, b) => Number(b) - Number(a));
+---
+
+<BaseLayout title="Genome Sequencing Technologies | Shendure Lab">
+  <!-- Mobile Year Scrollbar -->
+  <nav class="lg:hidden sticky top-16 z-40 year-scrollbar border-b" aria-label="Jump to year">
+    <div class="flex overflow-x-auto scrollbar-hide px-4 py-2 gap-2" role="list">
+      {years.map(year => (
+        <a
+          href={`#year-${year}`}
+          class="year-pill flex-shrink-0 px-4 py-3 text-sm rounded-full border transition-colors"
+          role="listitem"
+          aria-label={`Jump to ${year} publications`}
+        >
+          {year}
+        </a>
+      ))}
+    </div>
+  </nav>
+
+  <div class="w-full max-w-[1000px] mx-auto px-4 py-12 pb-[60vh]">
+    <h1 class="w-full text-2xl md:text-3xl font-bold text-lab-orange mb-8 text-center">Genome Sequencing Technologies</h1>
+    <p class="w-full text-center page-subtitle mb-10">(selected publications)</p>
+
+    <div class="w-full mb-8 text-center">
+      <a href="/research" class="text-lab-blue hover:underline">&larr; Back to Research</a>
+    </div>
+
+    {years.map(year => (
+      <div id={`year-${year}`} class="mb-12 scroll-mt-32">
+        <h2 class="text-xl font-bold text-lab-orange mb-6 text-center lg:text-left">{year}</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 justify-items-center">
+          {pubsByYear[year].map((pub) => (
+            <ResearchPubCard
+              image={pub.image}
+              articleUrl={pub.articleUrl}
+              authors={pub.authors}
+              title={pub.title}
+              journal={pub.journal}
+              year={pub.year}
+              pmid={pub.pmid}
+              pdfFile={pub.pdfFile}
+              collaboration={pub.collaboration}
+            />
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <YearNavScript />
+</BaseLayout>
+
+<style>
+  .year-scrollbar {
+    background-color: var(--theme-bg);
+    border-color: var(--theme-border);
+  }
+  .year-pill {
+    background-color: var(--theme-bg);
+    border-color: var(--theme-border);
+    color: var(--theme-text-secondary);
+  }
+  .year-pill:hover, .year-pill:focus-visible {
+    background-color: var(--color-lab-orange);
+    border-color: var(--color-lab-orange);
+    color: white;
+  }
+  .page-subtitle {
+    color: var(--theme-text-secondary);
+  }
+</style>

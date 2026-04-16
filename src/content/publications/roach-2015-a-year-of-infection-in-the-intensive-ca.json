@@ -1,0 +1,13 @@
+{
+  "category": "research",
+  "articleUrl": "http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1005413",
+  "thumbnail": "/images/papers/roach_plos_genetics_2015_thumb.jpg",
+  "pdfUrl": "/documents/roach_plos_genetics_2015.pdf",
+  "citation": "Roach et al. A Year of Infection in the Intensive Care Unit: Prospective Whole Genome Sequencing of Bacterial Clinical Isolates Reveals Cryptic Transmissions and Novel Microbiota. PLoS Genetics (2015)",
+  "year": 2015,
+  "journal": "A Year of Infection in the Intensive Care Unit: Prospective Whole Genome Sequencing of Bacterial Clinical Isolates Reveals Cryptic Transmissions and Novel Microbiota. PLoS Genetics",
+  "pmid": "26230489",
+  "collaboration": "with Salipante Lab",
+  "slug": "roach-2015-a-year-of-infection-in-the-intensive-ca",
+  "sortOrder": 69
+}

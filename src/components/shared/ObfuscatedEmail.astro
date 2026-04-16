@@ -1,0 +1,39 @@
+---
+// Obfuscated Email Component
+// Protects email addresses from bots and search engine indexing.
+// Emails are encoded at build time and decoded by JavaScript in the browser.
+// Users without JS see a fallback "[name] at uw.edu" text.
+
+interface Props {
+  email: string;
+  class?: string;
+  style?: string;
+}
+
+const { email, class: className, style } = Astro.props;
+
+// Simple encoding: reverse the email and base64 encode it
+const encoded = Buffer.from(email.split('').reverse().join('')).toString('base64');
+
+// Generate a no-JS fallback like "ooseth at uw.edu"
+const [user, domain] = email.split('@');
+const fallback = `${user} [at] ${domain}`;
+---
+
+<span
+  class={`obfuscated-email ${className || ''}`}
+  data-e={encoded}
+  style={style}
+  data-nosnippet
+>
+  <noscript>{fallback}</noscript>
+</span>
+
+<style>
+  .obfuscated-email a {
+    text-decoration: none;
+  }
+  .obfuscated-email a:hover {
+    text-decoration: underline;
+  }
+</style>

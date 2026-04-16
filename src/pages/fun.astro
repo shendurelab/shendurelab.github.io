@@ -1,0 +1,347 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import YearNavScript from '../components/shared/YearNavScript.astro';
+
+const photos = [
+  {
+    title: 'Lab Retreat (August 2025)',
+    image: '/images/fun/lab_retreat_group_2025.jpg',
+    albumUrl: 'https://drive.google.com/drive/folders/1uYlJfc-RNxA6JAtMDrGyG0vCLyRARmbk?usp=sharing',
+    albumTitle: 'Big Bend, photos by all',
+    collageImage: '/images/fun/lab_retreat_2025_collage.jpg',
+  },
+  {
+    title: 'Lasagna Fest (May 2025)',
+    image: '/images/fun/LasagnaFest2025.jpg',
+    credit: 'Photos by Olga Oseth et al.',
+  },
+  {
+    title: 'Shendure Bowling League (February 2025)',
+    image: '/images/fun/Bowling_2025_FinalCollage.jpg',
+    credit: 'Photos by Olga Oseth et al.',
+  },
+  {
+    title: "Celebrating Jay's 50th Birthday (October 2024)",
+    image: '/images/fun/Jays50thBday.jpg',
+  },
+  {
+    title: 'Paris - French-American Scientific Symposium (September 2024)',
+    subtitle: 'Jay with graduate students: Hanna, Aidan, Chase',
+    image: '/images/fun/HannaAidanChaseJay_FrenchAmericanSymposium2024.jpg',
+  },
+  {
+    title: 'Lab Retreat (August 2024)',
+    image: '/images/fun/lab_retreat_group_2024.jpg',
+    albumUrl: 'https://drive.google.com/drive/folders/1vCRPTQEXGPzQ7ZUn9cWGwQvMB-luUBh2?usp=sharing',
+    albumTitle: 'Cle Elum, photos by all',
+    collageImage: '/images/fun/lab_retreat_2024_collage.jpg',
+  },
+  {
+    title: 'SeaHub All Hands Group (August 2024)',
+    image: '/images/fun/SeaHub All Hands Large Group Photo.JPG',
+    credit: 'Photo by Robin Prentice',
+  },
+  {
+    title: "Celebrating JB's and Sam's Paper with scQers (May 2024)",
+    image: '/images/fun/scQers party.jpg',
+    credit: 'Photos by Wei Yang',
+  },
+  {
+    title: 'Lasagna Fest (May 2024)',
+    image: '/images/fun/LasagnaFest2024.jpg',
+    credit: 'Photos by Olga Oseth',
+  },
+  {
+    title: 'Lab Retreat (August 2023)',
+    image: '/images/fun/lab_retreat_group_2023.jpg',
+    albumUrl: 'https://photos.google.com/share/AF1QipOahcp3SX8lBEc75pwrNC00VQ5In6RTA1HYbcKAiBq63qmwgNwB3vFfB0CsSaitkQ?key=Q25sTDgwV1IyeFNZU09xYzgxdF81c2ViR01TdkNB',
+    albumTitle: 'Cle Elum, photos by Will Chen et al.',
+    collageImage: '/images/fun/lab_retreat_2023_collage.jpg',
+  },
+  {
+    title: 'Lasagna Fest (May 2023)',
+    image: '/images/fun/LasagnaFest2023.jpg',
+    credit: 'Photos by Wei Yang et al.',
+  },
+  {
+    title: 'Lab Art Project (March 2023)',
+    image: '/images/fun/LabArtProject_2023.jpg',
+    albumUrl: 'https://photos.google.com/share/AF1QipMLiWzR-ASwmD0y6ga1Gm5a2SvqX8c_T8tUSzxEfQvCk8gN4NJfrwNxvQeAnjx5jQ?obfsgid=113297985209138297623&email=ooseth@uw.edu&key=dHA0UmdGR18ya3RacTVHMHp2dEl5bFNycEVid2FB',
+    albumTitle: 'Photos by Xiaoyi Li et al.',
+  },
+  {
+    title: 'Shendure Bowling League (February 2023)',
+    image: '/images/fun/Bowling02.2023_FinalCollage.jpg',
+    credit: 'Photos by Beth Martin et al.',
+  },
+  {
+    title: 'Giant Grilled Cheese (2022)',
+    subtitle: 'Made by Beth Martin and CX Qiu for Jay in honor of Inventor of the Year and election to National Academy of Sciences',
+    image: '/images/fun/Optimized Giant Grilled Cheese.jpg',
+  },
+  {
+    title: 'Lab Retreat (September 2022)',
+    image: '/images/fun/lab_retreat_group_2022.jpg',
+    albumUrl: 'https://photos.app.goo.gl/2Zjdtdd2vDkZWwHK7',
+    albumTitle: 'Seabrook, photos by Will Chen et al.',
+    collageImage: '/images/fun/lab_retreat_2022_collage.jpg',
+  },
+  {
+    title: 'Lab Retreat (September 2021)',
+    image: '/images/fun/lab_retreat_group_2021.jpg',
+    albumUrl: 'https://photos.app.goo.gl/Czo1pqDUBP5gp4HBA',
+    albumTitle: 'Leavenworth, photos by Will Chen, Charlie Lee, Riza Daza',
+    collageImage: '/images/fun/lab_retreat_2021_collage.jpeg',
+  },
+  {
+    title: 'Lab Happy Hour (May 2021)',
+    image: '/images/fun/happy_hour_2021_collage.jpeg',
+  },
+  {
+    title: 'Lab Retreat (August 2019)',
+    image: '/images/fun/lab_retreat_2019_group.jpg',
+    albumUrl: 'https://photos.app.goo.gl/gGvrJZVeqxwsTBw19',
+    albumTitle: 'Leavenworth, photos by Will Chen, Charlie Lee, Riza Daza',
+    collageImage: '/images/fun/lab_retreat_2019_grid.png',
+  },
+  {
+    title: 'Mariners Game (July 2018)',
+    image: '/images/fun/lab-baseball-game.jpg',
+  },
+  {
+    title: 'Lab Retreat (June 2018)',
+    image: '/images/fun/lab2018.JPG',
+    albumUrl: 'https://photos.app.goo.gl/dBTRgea11VhGQTkX7',
+    albumTitle: 'Cle Elum, photos by Will Chen',
+    collageImage: '/images/fun/labretreat2018.png',
+  },
+  {
+    title: 'Brotman-Baty Institute Launch (December 2017)',
+    image: '/images/fun/bbilaunch.jpg',
+    albumUrl: 'https://photos.app.goo.gl/eIZgcFkyV5Lyispv2',
+    albumTitle: 'Lab Members Dressed for the Launch',
+  },
+  {
+    title: 'Lab Retreat (August 2017)',
+    image: '/images/fun/lab_photo_lab_retreat_2017.jpg',
+    albumUrl: 'https://goo.gl/photos/ttJJHAEkMXMzXiy56',
+    albumTitle: 'Leavenworth, photos by Martin Kircher, Charlie Lee & Will Chen',
+    collageImage: '/images/fun/labretreat2017.png',
+  },
+  {
+    title: 'Lab and Alumni at Lab Retreat (August 2017)',
+    image: '/images/fun/group2017.jpg',
+  },
+  {
+    title: 'Lab Retreat (September 2016)',
+    albumUrl: 'https://goo.gl/photos/Bvh5pa3jmcptkga99',
+    albumTitle: 'Snoqualmie Pass, photos by Melissa Zhang & Martin Kircher',
+  },
+  {
+    title: 'Lab Retreat (August 2015)',
+    albumUrl: 'https://goo.gl/photos/Y6aVjbgorb1rvNQh8',
+    albumTitle: 'Lake Kachess, photos by Martin Kircher',
+  },
+  {
+    title: 'Lab Retreat (October 2014)',
+    albumUrl: 'https://goo.gl/photos/tjEQ94VUxzqofgHD8',
+    albumTitle: 'Lake Kachess, photos by Martin Kircher',
+  },
+  {
+    title: 'Lab Photo (June 2014)',
+    image: '/images/fun/labpicture_June_2014_2_reduced_size.jpg',
+    subtitle: 'Missing: Josh Burton, Darren Cusanovich, Joe Hiatt, Voni Simmons',
+  },
+  {
+    title: 'Lab Retreat (2013)',
+    albumUrl: 'https://goo.gl/photos/Yoc4QuHGTs1ckcks6',
+    albumTitle: 'Lake Kachess, photos by Martin Kircher',
+  },
+  {
+    title: 'Halloween (October 2012)',
+    image: '/images/fun/shendure_lab_halloween_2012.jpg',
+  },
+  {
+    title: 'Lab Retreat (2012)',
+    image: '/images/fun/shendure_lab_2012_retreat.jpg',
+    albumUrl: 'https://goo.gl/photos/j5DnAQ42R3NG7H7d9',
+    albumTitle: 'Lake Kachess, photos by Martin Kircher',
+  },
+  {
+    title: 'Lab Photo (May 2012)',
+    image: '/images/fun/lab_members_2012_2_full.jpg',
+  },
+  {
+    title: 'Wordle Based on Abstract Content (September 2011)',
+    image: '/images/fun/shendure_lab_wordle_sept_2011_2.jpg',
+  },
+  {
+    title: 'Lab Olympics (August 2011)',
+    image: '/images/fun/lab_olympics_aug_2011.jpg',
+  },
+  {
+    title: '500+ Balloons (April 2011)',
+    image: '/images/fun/Latex_Office_apr_2011.jpg',
+  },
+  {
+    title: 'First Photo of the Whole Lab! (May 2010)',
+    image: '/images/fun/ShendureLabPhotoMay2010.jpg',
+    year: 2010,
+  },
+];
+
+// Add year to each photo based on title
+const photosWithYears = photos.map(photo => {
+  if (photo.year) return photo;
+  const match = photo.title.match(/\b(20\d{2})\b/);
+  return { ...photo, year: match ? parseInt(match[1]) : 2020 };
+});
+
+// Group by year
+const photosByYear: Record<number, typeof photos> = {};
+photosWithYears.forEach(photo => {
+  if (!photosByYear[photo.year]) photosByYear[photo.year] = [];
+  photosByYear[photo.year].push(photo);
+});
+
+// Get years sorted descending
+const years = Object.keys(photosByYear).map(Number).sort((a, b) => b - a);
+---
+
+<BaseLayout title="Fun | Shendure Lab">
+  <!-- Mobile Year Scrollbar -->
+  <nav class="md:hidden sticky top-16 z-40 year-scrollbar border-b" aria-label="Jump to year">
+    <div class="flex overflow-x-auto scrollbar-hide px-4 py-2 gap-2" role="list">
+      {years.map(year => (
+        <a
+          href={`#year-${year}`}
+          class="year-pill flex-shrink-0 px-4 py-3 text-sm rounded-full border transition-colors"
+          role="listitem"
+          aria-label={`Jump to ${year} photos`}
+        >
+          {year}
+        </a>
+      ))}
+    </div>
+  </nav>
+
+  <div class="w-full max-w-[1200px] mx-auto px-4 py-12">
+    <h1 class="w-full text-3xl font-bold text-lab-orange mb-8 text-center">Fun</h1>
+
+    <div class="flex gap-8">
+      <!-- Main Content — pb-[60vh] ensures bottom sections can scroll to top when clicked -->
+      <div class="flex-grow space-y-16 pb-[60vh]">
+        {years.map(year => (
+          <section id={`year-${year}`} class="scroll-mt-32">
+            <h2 class="text-2xl font-bold text-uw-purple mb-6 border-b-2 border-uw-gold pb-2">{year}</h2>
+            <div class="space-y-10">
+              {photosByYear[year].map(photo => (
+                <div class="text-center">
+                  <h3 class="text-lg font-semibold photo-title mb-2">{photo.title}</h3>
+                  {photo.subtitle && (
+                    <p class="photo-subtitle mb-3">{photo.subtitle}</p>
+                  )}
+
+                  {photo.image ? (
+                    <a href={photo.albumUrl || photo.image} target="_blank" rel="noopener noreferrer" class="block">
+                      <img
+                        src={photo.image}
+                        alt={photo.title}
+                        class="max-w-full mx-auto rounded-lg shadow-md hover:shadow-xl transition-shadow"
+                        style="max-height: 600px; width: auto;"
+                        loading="lazy"
+                      />
+                      <span class="sr-only">(opens in new tab)</span>
+                    </a>
+                  ) : photo.albumUrl && (
+                    <a href={photo.albumUrl} target="_blank" rel="noopener noreferrer" class="inline-block px-6 py-3 bg-lab-blue text-white rounded-lg hover:bg-blue-700 transition-colors">
+                      View Photo Album<span class="sr-only"> (opens in new tab)</span>
+                    </a>
+                  )}
+
+                  {photo.credit && (
+                    <p class="photo-credit mt-2">{photo.credit}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          </section>
+        ))}
+      </div>
+
+      <!-- Year Navigation Sidebar -->
+      <nav class="hidden md:block w-32 flex-shrink-0" aria-label="Year navigation">
+        <div class="sticky top-24 space-y-3">
+          <p class="text-sm sidebar-label uppercase tracking-wider mb-4 pl-4 font-semibold">Years</p>
+          {years.map(year => (
+            <a
+              href={`#year-${year}`}
+              data-year={year}
+              class="year-link block px-4 py-4 text-lg font-medium sidebar-link rounded-lg transition-colors"
+              aria-label={`Jump to ${year} photos`}
+            >
+              {year}
+            </a>
+          ))}
+        </div>
+      </nav>
+    </div>
+
+    <div class="mt-16 text-center">
+      <a
+        href="https://www.tiktok.com/@chasesuiter310/video/7145303014876761386"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-lab-blue hover:underline"
+      >
+        Get to know Shendure Lab - video by Chase Suiter (2022)<span class="sr-only"> (opens in new tab)</span>
+      </a>
+    </div>
+  </div>
+
+  <style>
+    .year-link.active {
+      background-color: #ED943C;
+      color: white;
+    }
+    .year-link.active:hover {
+      background-color: #d4832f;
+      color: white;
+    }
+    .year-scrollbar {
+      background-color: var(--theme-bg);
+      border-color: var(--theme-border);
+    }
+    .year-pill {
+      background-color: var(--theme-bg);
+      border-color: var(--theme-border);
+      color: var(--theme-text-secondary);
+    }
+    .year-pill:hover, .year-pill:focus-visible, .year-pill.active {
+      background-color: var(--color-lab-orange);
+      border-color: var(--color-lab-orange);
+      color: white;
+    }
+    .photo-title {
+      color: var(--theme-text);
+    }
+    .photo-subtitle {
+      color: var(--theme-text-secondary);
+    }
+    .photo-credit {
+      color: var(--theme-text-muted);
+    }
+    .sidebar-label {
+      color: var(--theme-text-muted);
+    }
+    .sidebar-link {
+      color: var(--theme-text-secondary);
+    }
+    .sidebar-link:hover {
+      color: var(--color-lab-orange);
+      background-color: rgba(237, 148, 60, 0.1);
+    }
+  </style>
+
+  <YearNavScript />
+</BaseLayout>

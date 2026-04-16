@@ -1,0 +1,13 @@
+{
+  "category": "research",
+  "articleUrl": "https://www.nature.com/articles/s41467-019-11526-w",
+  "thumbnail": "/images/papers/kircher_nature_communications_2019 thumbnail.jpg",
+  "pdfUrl": "/documents/kircher_nature_communications_2019.pdf",
+  "citation": "Kircher, Xiong, Martin, Schubach et al. Saturation mutagenesis of twenty disease-associated regulatory elements at single base-pair resolution. Nature Communications (2019)",
+  "year": 2019,
+  "journal": "Saturation mutagenesis of twenty disease-associated regulatory elements at single base-pair resolution. Nature Communications",
+  "pmid": "31395865",
+  "collaboration": "with Ahituv and Kircher Labs",
+  "slug": "kircher-2019-saturation-mutagenesis-of-twenty-dise",
+  "sortOrder": 35
+}

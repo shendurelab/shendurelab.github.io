@@ -1,0 +1,13 @@
+{
+  "category": "research",
+  "articleUrl": "https://www.nature.com/articles/s41592-019-0535-3",
+  "thumbnail": "/images/papers/pliner_shendure_trapnell_nature_2019 thumbnail.jpg",
+  "pdfUrl": "/documents/pliner_shendure_trapnell_nature_2019.pdf",
+  "citation": "Pliner et al. Supervised classification enables rapid annotation of cell atlases. Nature Methods (2019)",
+  "year": 2019,
+  "journal": "Supervised classification enables rapid annotation of cell atlases. Nature Methods",
+  "pmid": "31501545",
+  "collaboration": "with Trapnell Lab",
+  "slug": "pliner-2019-supervised-classification-enables-rapi",
+  "sortOrder": 34
+}

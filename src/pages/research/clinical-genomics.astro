@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ResearchPubCard from '../../components/research/ResearchPubCard.astro';
+import YearNavScript from '../../components/shared/YearNavScript.astro';
+
+const publicationRows = [
+  [
+    { image: 'Abadie_CellPress_January2024_thumb.png', articleUrl: 'https://www.cell.com/immunity/abstract/S1074-7613(23)00537-X', authors: 'Abadie, Daza et al.', title: 'Reversible, tunable epigenetic silencing of TCF-1 generates flexibility in the T cell memory decision', journal: 'Cell Press', year: 2024, pmid: '38301652', pdfFile: 'Abadie_Cell Press_January2024.pdf' },
+    { image: 'choi_nature_2022_thumb.png', articleUrl: 'https://www.nature.com/articles/s41587-021-01025-z', authors: 'Choi, Chen et al.', title: 'Precise genomic deletions using paired prime editing', journal: 'Nature Biotechnology', year: 2022, pmid: '34650269', pdfFile: 'choi_natureBiotech_2022.pdf' },
+    { image: 'Srivatsan_ClinicalChemistry_2022_thumb.png', articleUrl: 'https://academic.oup.com/clinchem/article/68/1/143/6323225', authors: 'Srivatsan et al.', title: 'SwabExpress: An end-to-end protocol for extraction-free COVID-19 testing', journal: 'Clinical Chemistry', year: 2021, pmid: '32511368', pdfFile: 'Srivatsan_ClinicalChemistry_2022.pdf', collaboration: 'with Seattle Flu Study' },
+  ],
+  [
+    { image: 'bedford_science_2020_thumb.png', articleUrl: 'https://science.sciencemag.org/content/370/6516/571', authors: 'Bedford, Greninger, Roychoudhury, Starita, Famulare et al.', title: 'Cryptic transmission of SARS-CoV-2 in Washington state', journal: 'Science', year: 2020, pmid: '32913002', pdfFile: 'bedford_science_2020.pdf' },
+    { image: 'chu_nejm_2020_thumb.jpg', articleUrl: 'https://www.nejm.org/doi/10.1056/NEJMc2008646', authors: 'Chu et al.', title: 'Early Detection of Covid-19 through a Citywide Pandemic Surveillance Platform', journal: 'NEJM', year: 2020, pmid: '32356944', pdfFile: 'chu_nejm_2020.pdf' },
+    { image: 'srivatsan_science_2020_thumb.jpg', articleUrl: 'https://science.sciencemag.org/content/367/6473/45.long', authors: 'Srivatsan, McFaline-Figueroa, Ramani et al.', title: 'Massively multiplex chemical transcriptomics at single-cell resolution', journal: 'Science', year: 2020, pmid: '31806696', pdfFile: 'srivatsan_science_2020.pdf', collaboration: 'with Trapnell Lab' },
+  ],
+  [
+    { image: 'rentzsch_nucleic_2019.png', articleUrl: 'https://academic.oup.com/nar/article/47/D1/D886/5146191', authors: 'Rentzsch et al.', title: 'CADD: predicting the deleteriousness of variants throughout the human genome', journal: 'Nucleic Acids Research', year: 2019, pmid: '30371827', pdfFile: 'rentzsch_nucleic_2019.pdf', collaboration: 'with Kircher Lab' },
+    { image: 'findlay_nature_2018_thumb.png', articleUrl: 'https://www.nature.com/articles/s41586-018-0461-z', authors: 'Findlay et al.', title: 'Accurate classification of BRCA1 variants with saturation genome editing', journal: 'Nature', year: 2018, pmid: '30209399', pdfFile: 'findlay_nature_2018.pdf', collaboration: 'with Starita Lab' },
+    { image: 'starita_ajhg_2018_thumb.png', articleUrl: 'https://www.sciencedirect.com/science/article/pii/S000292971830243X', authors: 'Starita et al.', title: 'A Multiplex Homology-Directed DNA Repair Assay Reveals the Impact of More Than 1,000 BRCA1 Missense Substitution Variants on Protein Function', journal: 'AJHG', year: 2018, pmid: '30219179', pdfFile: 'starita_ajhg_2018.pdf', collaboration: 'with Parvin Lab' },
+  ],
+  [
+    { image: 'starita_ajhg_2017.png', articleUrl: 'https://www.sciencedirect.com/science/article/pii/S0002929717302926', authors: 'Starita et al.', title: 'Variant Interpretation: Functional Assays to the Rescue', journal: 'AJHG', year: 2017, pmid: '28886340', pdfFile: 'starita_ajhg_2017.pdf' },
+    { image: 'neveling_clinical_chemistry_2017_thumb.jpg', articleUrl: 'http://clinchem.aaccjnls.org/content/63/2/503.long', authors: 'Neveling, Mensenkamp et al.', title: 'BRCA Testing by Single-Molecule Molecular Inversion Probes', journal: 'Clinical Chemistry', year: 2017, pmid: '27974384', pdfFile: 'neveling_clinical_chem_2017.pdf', collaboration: 'with Nelen, Hoischen Labs' },
+    { image: 'underhill_plos_genetics_2016_thumb.png', articleUrl: 'http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1006162', authors: 'Underhill et al.', title: 'Fragment Length of Circulating Tumor DNA', journal: 'PLoS Genetics', year: 2016, pmid: '27428049', pdfFile: 'underhill_plos_genetics_2016.pdf', collaboration: 'with Underhill Lab' },
+  ],
+  [
+    { image: 'snyder_cell_2016_thumb.jpg', articleUrl: 'http://www.cell.com/cell/abstract/S0092-8674(15)01569-X', authors: 'Snyder, Kircher et al.', title: 'Cell-free DNA Comprises an In Vivo Nucleosome Footprint that Informs Its Tissues-Of-Origin', journal: 'Cell', year: 2016, pmid: '26771485', pdfFile: 'snyder_cell_2016.pdf' },
+    { image: 'fields_genetics_2016_thumb.png', articleUrl: 'http://www.genetics.org/content/203/2/617.long', authors: 'Fields, Shendure', title: 'Massively Parallel Genetics', journal: 'Genetics', year: 2016, pmid: '27270695', pdfFile: 'fields_genetics_2016.pdf' },
+    { image: 'roach_plos_genetics_2015_thumb.jpg', articleUrl: 'http://journals.plos.org/plosgenetics/article?id=10.1371/journal.pgen.1005413', authors: 'Roach et al.', title: 'A Year of Infection in the Intensive Care Unit: Prospective Whole Genome Sequencing of Bacterial Clinical Isolates Reveals Cryptic Transmissions and Novel Microbiota', journal: 'PLoS Genetics', year: 2015, pmid: '26230489', pdfFile: 'roach_plos_genetics_2015.pdf', collaboration: 'with Salipante Lab' },
+  ],
+  [
+    { image: 'starita_genetics_2015_thumb.jpg', articleUrl: 'http://genetics.org/content/200/2/413.long', authors: 'Starita et al.', title: 'Massively Parallel Functional Analysis of BRCA1 RING Domain Variants', journal: 'Genetics', year: 2015, pmid: '25823446', pdfFile: 'starita_genetics_2015.pdf', collaboration: 'with Fields Lab' },
+    { image: 'snyder_nejm_2015_thumb.png', articleUrl: 'http://www.nejm.org/doi/full/10.1056/NEJMoa1408408', authors: 'Snyder, Simmons et al.', title: 'Copy-Number Variation and False Positive Prenatal Aneuploidy Screening Results', journal: 'New England Journal of Medicine', year: 2015, pmid: '25830323', pdfFile: 'snyder_nejm_2015.pdf', collaboration: 'with Gammill Lab' },
+    { image: 'kumar_genome_medicine_2015_thumb.png', articleUrl: 'http://www.genomemedicine.com/content/7/1/35/abstract', authors: 'Kumar, Ryan et al.', title: 'Whole genome prediction for preimplantation genetic diagnosis', journal: 'Genome Medicine', year: 2015, pmid: '26019723', pdfFile: 'kumar_genome_medicine_2015.pdf' },
+  ],
+  [
+    { image: 'salipante_genome_research_2014_thumb.jpg', articleUrl: 'http://genome.cshlp.org/content/early/2014/12/01/gr.180190.114.long', authors: 'Salipante, Roach et al.', title: 'Large-scale genomic sequencing of extraintestinal pathogenic Escherichia coli strains', journal: 'Genome Research', year: 2014, pmid: '25373147', pdfFile: 'salipante_genome_research_2014.pdf' },
+    { image: 'kumar_genome_biology_2014_thumb.jpg', articleUrl: 'http://www.genomebiology.com/content/15/12/530', authors: 'Kumar et al.', title: 'Deep sequencing of multiple regions of glial tumors reveals spatial heterogeneity for mutations in clinically relevant genes', journal: 'Genome Biology', year: 2014, pmid: '25608559', pdfFile: 'kumar_genome_biology_2014.pdf', collaboration: 'with Rostomily Lab' },
+    { image: 'kumar_plos_one_2014_thumb.jpg', articleUrl: 'http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0106744', authors: 'Kumar et al.', title: 'Genome sequencing of idiopathic pulmonary fibrosis in conjunction with a medical school human anatomy course', journal: 'PLoS One', year: 2014, pmid: '25192356', pdfFile: 'kumar_plos_one_2014.pdf' },
+  ],
+  [
+    { image: 'kircher_nature_genetics_2014_thumb.jpg', articleUrl: 'http://www.nature.com/ng/journal/vaop/ncurrent/full/ng.2892.html', authors: 'Kircher, Witten et al.', title: 'A general framework for estimating the relative pathogenicity of human genetic variants', journal: 'Nature Genetics', year: 2014, pmid: '24487276', pdfFile: 'kircher_nature_genetics_2014.pdf', collaboration: 'with Cooper Lab' },
+    { image: 'snyder_prenatal_diagnosis_2013_thumb.jpg', articleUrl: 'http://onlinelibrary.wiley.com/store/10.1002/pd.4097/asset/pd4097.pdf', authors: 'Snyder et al.', title: 'Noninvasive fetal genome sequencing: a primer', journal: 'Prenatal Diagnosis', year: 2013, pmid: '23553552', pdfFile: 'snyder_prenatal_diagnosis_2013.pdf' },
+    { image: 'kitzman_science_translational_medicine_2012_thumb.jpg', articleUrl: 'http://stm.sciencemag.org/content/4/137/137ra76.full.pdf', authors: 'Kitzman et al.', title: 'Noninvasive whole-genome sequencing of a human fetus', journal: 'Science Translational Medicine', year: 2012, pmid: '22674554', pdfFile: 'kitzman_science_translational_medicine_2012.pdf' },
+  ],
+  [
+    { image: 'kohane_stm_2012_thumb.jpg', articleUrl: 'http://stm.sciencemag.org/content/4/133/133fs13.full.pdf', authors: 'Kohane, Shendure', title: "What's a Genome Worth?", journal: 'Science Translational Medicine', year: 2012, pmid: '22572879', pdfFile: 'kohane_stm_2012.pdf' },
+    { image: 'cooper_nrg_2011_thumb.jpg', articleUrl: 'http://www.nature.com/nrg/journal/v12/n9/full/nrg3046.html', authors: 'Cooper, Shendure', title: 'Needles in stacks of needles: finding disease-causal variants in a wealth of genomic data', journal: 'Nature Reviews Genetics', year: 2011, pmid: '21850043', pdfFile: 'cooper_nrg_2011.pdf' },
+    { image: 'vasta_genome_medicine_2009_thumb.jpg', articleUrl: 'http://genomemedicine.com/content/1/10/100', authors: 'Vasta V et al.', title: 'Next generation sequence analysis for mitochondrial disorders', journal: 'Genome Medicine', year: 2009, pmid: '19852779', pdfFile: 'vasta_genome_medicine_2009.pdf', collaboration: 'with Hahn Lab' },
+  ],
+];
+
+// Flatten and group by year
+const allPubs = publicationRows.flat();
+const pubsByYear = allPubs.reduce((acc, pub) => {
+  const year = pub.year || 'Unknown';
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(pub);
+  return acc;
+}, {} as Record<number | string, typeof allPubs>);
+
+// Get sorted years (most recent first)
+const years = Object.keys(pubsByYear).sort((a, b) => Number(b) - Number(a));
+---
+
+<BaseLayout title="Translating Genomics to the Clinic | Shendure Lab">
+  <!-- Mobile Year Scrollbar -->
+  <nav class="lg:hidden sticky top-16 z-40 year-scrollbar border-b" aria-label="Jump to year">
+    <div class="flex overflow-x-auto scrollbar-hide px-4 py-2 gap-2" role="list">
+      {years.map(year => (
+        <a
+          href={`#year-${year}`}
+          class="year-pill flex-shrink-0 px-4 py-3 text-sm rounded-full border transition-colors"
+          role="listitem"
+          aria-label={`Jump to ${year} publications`}
+        >
+          {year}
+        </a>
+      ))}
+    </div>
+  </nav>
+
+  <div class="w-full max-w-[1000px] mx-auto px-4 py-12 pb-[60vh]">
+    <h1 class="w-full text-2xl md:text-3xl font-bold text-lab-orange mb-8 text-center">Translating Genomics to the Clinic</h1>
+    <p class="w-full text-center page-subtitle mb-10">(selected publications)</p>
+
+    <div class="w-full mb-8 text-center">
+      <a href="/research" class="text-lab-blue hover:underline">&larr; Back to Research</a>
+    </div>
+
+    {years.map(year => (
+      <div id={`year-${year}`} class="mb-12 scroll-mt-32">
+        <h2 class="text-xl font-bold text-lab-orange mb-6 text-center lg:text-left">{year}</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 justify-items-center">
+          {pubsByYear[year].map((pub) => (
+            <ResearchPubCard
+              image={pub.image}
+              articleUrl={pub.articleUrl}
+              authors={pub.authors}
+              title={pub.title}
+              journal={pub.journal}
+              year={pub.year}
+              pmid={pub.pmid}
+              pdfFile={pub.pdfFile}
+              collaboration={pub.collaboration}
+            />
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <YearNavScript />
+</BaseLayout>
+
+<style>
+  .year-scrollbar {
+    background-color: var(--theme-bg);
+    border-color: var(--theme-border);
+  }
+  .year-pill {
+    background-color: var(--theme-bg);
+    border-color: var(--theme-border);
+    color: var(--theme-text-secondary);
+  }
+  .year-pill:hover, .year-pill:focus-visible {
+    background-color: var(--color-lab-orange);
+    border-color: var(--color-lab-orange);
+    color: white;
+  }
+  .page-subtitle {
+    color: var(--theme-text-secondary);
+  }
+</style>

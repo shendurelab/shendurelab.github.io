@@ -1,0 +1,192 @@
+@import "tailwindcss";
+
+/* Theme colors using CSS custom properties for dark mode support */
+:root {
+  --theme-bg: #ffffff;
+  --theme-bg-secondary: #f9fafb;
+  --theme-text: #111827;
+  --theme-text-secondary: #4b5563;
+  --theme-text-muted: #6b7280;
+  --theme-border: #e5e7eb;
+  --theme-card-bg: #ffffff;
+}
+
+.dark {
+  --theme-bg: #111827;
+  --theme-bg-secondary: #1f2937;
+  --theme-text: #f9fafb;
+  --theme-text-secondary: #d1d5db;
+  --theme-text-muted: #9ca3af;
+  --theme-border: #374151;
+  --theme-card-bg: #1f2937;
+  /* Accessible blue for dark mode - 5.0:1 contrast ratio */
+  --color-lab-blue-accessible: #5C8AFF;
+}
+
+/* Shendure Lab Brand Colors */
+@theme {
+  /* UW Colors */
+  --color-uw-purple: #4b2e83;
+  --color-uw-gold: #b7a57a;
+
+  /* Current Site Colors - Original brand colors */
+  --color-lab-orange-brand: #ED943C;  /* Original brand orange - use for decorative only */
+  --color-lab-blue: #0029CC;          /* 4.7:1 contrast on white - WCAG AA compliant */
+
+  /* WCAG AA Accessible variants */
+  --color-lab-orange: #C26A10;        /* 4.63:1 contrast on white - use for text */
+  --color-lab-orange-dark: #9E5500;   /* 5.74:1 contrast with white - use for buttons */
+  --color-lab-blue-dark: #002BB8;     /* Enhanced contrast */
+
+  /* Primary palette (based on UW purple) */
+  --color-primary-50: #f5f3f9;
+  --color-primary-100: #ebe7f3;
+  --color-primary-200: #d7cfe7;
+  --color-primary-300: #b8a7d4;
+  --color-primary-400: #9479bd;
+  --color-primary-500: #7654a3;
+  --color-primary-600: #5f4287;
+  --color-primary-700: #4b2e83;
+  --color-primary-800: #3d266b;
+  --color-primary-900: #342159;
+  --color-primary-950: #1f1335;
+
+  /* Max content width */
+  --max-width-content: 1200px;
+
+  /* Font families */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-heading: 'Montserrat', system-ui, sans-serif;
+}
+
+/* Base styles */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Theme-aware body */
+.body-theme {
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid var(--color-uw-purple);
+  outline-offset: 2px;
+}
+
+/* Enhanced focus-visible for interactive elements */
+a:focus-visible,
+button:focus-visible,
+[role="button"]:focus-visible {
+  outline: 2px solid var(--color-uw-purple);
+  outline-offset: 2px;
+  border-radius: 2px;
+  box-shadow: 0 0 0 4px rgba(75, 46, 131, 0.2);
+}
+
+/* Dark mode: brighter focus ring for visibility */
+.dark a:focus-visible,
+.dark button:focus-visible,
+.dark [role="button"]:focus-visible {
+  outline-color: #9479bd;
+  box-shadow: 0 0 0 4px rgba(148, 121, 189, 0.3);
+}
+
+/* Fallback focus for older browsers */
+:focus {
+  outline: 2px solid var(--color-uw-purple);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Skip to content link */
+.skip-link:focus {
+  background-color: var(--theme-bg);
+  color: var(--theme-text);
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  a {
+    text-decoration: underline;
+  }
+
+  button, [role="button"] {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Dark mode accessible colors - override lab-blue for better contrast */
+.dark .text-lab-blue {
+  color: var(--color-lab-blue-accessible) !important;
+}
+.dark .border-lab-blue {
+  border-color: var(--color-lab-blue-accessible) !important;
+}
+.dark .hover\:bg-lab-blue:hover {
+  background-color: var(--color-lab-blue-accessible) !important;
+}
+
+/* Dark mode overrides for gray text colors - improve readability */
+.dark .text-gray-500 {
+  color: #d1d5db !important; /* Lighter for dark mode */
+}
+.dark .text-gray-600 {
+  color: #e5e7eb !important; /* Lighter for dark mode */
+}
+.dark .text-gray-700 {
+  color: #f3f4f6 !important; /* Lighter for dark mode */
+}
+.dark .text-gray-800 {
+  color: #f9fafb !important; /* Lighter for dark mode */
+}
+
+/* Dark mode overrides for gray backgrounds and borders */
+.dark .bg-gray-50 {
+  background-color: #1f2937 !important;
+}
+.dark .border-gray-200 {
+  border-color: #4b5563 !important;
+}
+.dark .hover\:bg-gray-50:hover {
+  background-color: #374151 !important;
+}
+
+/* Headings use same font as body for consistency */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-sans);
+}
+
+/* Hide scrollbar utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}

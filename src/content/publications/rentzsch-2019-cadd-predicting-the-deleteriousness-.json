@@ -1,0 +1,13 @@
+{
+  "category": "research",
+  "articleUrl": "https://academic.oup.com/nar/article/47/D1/D886/5146191",
+  "thumbnail": "/images/papers/rentzsch_nucleic_2019.png",
+  "pdfUrl": "/documents/rentzsch_nucleic_2019.pdf",
+  "citation": "Rentzsch et al. CADD: predicting the deleteriousness of variants throughout the human genome. Nucleic Acids Research (2019)",
+  "year": 2019,
+  "journal": "CADD: predicting the deleteriousness of variants throughout the human genome. Nucleic Acids Research",
+  "pmid": "30371827",
+  "collaboration": "with Kircher Lab",
+  "slug": "rentzsch-2019-cadd-predicting-the-deleteriousness-",
+  "sortOrder": 42
+}

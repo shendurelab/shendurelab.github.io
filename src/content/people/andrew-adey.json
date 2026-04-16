@@ -1,0 +1,14 @@
+{
+  "name": "Andrew Adey",
+  "slug": "andrew-adey",
+  "photo": "/images/people/adey.jpg",
+  "title": "Graduate Student (MCB)",
+  "role": "graduate-student",
+  "status": "alumni",
+  "startYear": 2010,
+  "endYear": 2014,
+  "dissertation": "Comprehensive, precision genomics",
+  "currentPosition": "Professor, Dept of Molecular & Medical Genetics, OHSU",
+  "sortOrder": 64,
+  "currentPositionUrl": "https://adeylab.org/andrew-adey/"
+}

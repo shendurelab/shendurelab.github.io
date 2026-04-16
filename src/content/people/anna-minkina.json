@@ -1,0 +1,14 @@
+{
+  "name": "Anna Minkina",
+  "slug": "anna-minkina",
+  "photo": "/images/lab/minkina.jpg",
+  "title": "Graduate Student (GS)",
+  "role": "graduate-student",
+  "status": "alumni",
+  "startYear": 2017,
+  "endYear": 2022,
+  "dissertation": "Tethering distinct molecular profiles of single cells by their lineage histories to investigate sources of cell state heterogeneity",
+  "currentPosition": "Scientist, Cajal Neuroscience",
+  "sortOrder": 24,
+  "currentPositionUrl": "https://www.cajalneuro.com/"
+}

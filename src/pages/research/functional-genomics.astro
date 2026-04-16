@@ -1,0 +1,139 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ResearchPubCard from '../../components/research/ResearchPubCard.astro';
+import YearNavScript from '../../components/shared/YearNavScript.astro';
+
+const publicationRows = [
+  [
+    { image: 'Suiter_MolecularCell_January2025_thumb.png', articleUrl: 'https://www.sciencedirect.com/science/article/pii/S1097276525000516', authors: 'Suiter et al.', title: 'Combinatorial mapping of E3 ubiquitin ligases to their target substrates', journal: 'Molecular Cell', year: 2025, pmid: '39919746', pdfFile: 'Suiter_MolecularCell_2025.pdf' },
+    { image: 'Pinglay_Science_January2025_thumb.png', articleUrl: 'https://www.science.org/doi/10.1126/science.ado5978', authors: 'Pinglay et al.', title: 'Multiplex generation and single-cell analysis of structural variants in mammalian genomes', journal: 'Science', year: 2025, pmid: '38405830', pdfFile: 'Pinglay_Science_2025.pdf' },
+  ],
+  [
+    { image: 'Agarwal_Nature_January2025_thumb.png', articleUrl: 'https://www.nature.com/articles/s41586-024-08430-9', authors: 'Agarwal, Inoue et al.', title: 'Massively parallel characterization of transcriptional regulatory elements', journal: 'Nature', year: 2025, pmid: '39814889', pdfFile: 'Agarwal_Nature_2025.pdf' },
+    { image: 'Chardon_McDiarmid_NatureCom_September2024_thumb.png', articleUrl: 'https://www.nature.com/articles/s41467-024-52490-4', authors: 'Chardon, McDiarmid et al.', title: 'Multiplex, single-cell CRISPRa screening for cell type specific regulatory elements', journal: 'Nature Communications', year: 2024, pmid: '39294132', pdfFile: 'Chardon_McDiarmid_NatureCommunications_2024.pdf' },
+    { image: 'Lalanne_Nature_May2024_thumb.png', articleUrl: 'https://www.nature.com/articles/s41592-024-02260-3', authors: 'Lalanne, Regalado et al.', title: 'Multiplex profiling of developmental cis-regulatory elements with quantitative single-cell expression reporters', journal: 'Nature Methods', year: 2024, pmid: '38724692', pdfFile: 'Lalanne_Nature_May2024.pdf' },
+  ],
+  [
+    { image: 'klein_nature_2020_thumb.png', articleUrl: 'https://www.nature.com/articles/s41592-020-0965-y', authors: 'Klein, Agarwal, Inoue, Keith et al.', title: 'A systematic evaluation of the design and context dependencies of massively parallel reporter assays', journal: 'Nature Methods', year: 2020, pmid: '33046894', pdfFile: 'klein_nature_2020.pdf' },
+    { image: 'gordon_nature_2020_thumb.jpg', articleUrl: 'https://www.nature.com/articles/s41596-020-0333-5', authors: 'Gordon, Inoue, Martin, Schubach et al.', title: 'lentiMPRA and MPRAflow for high-throughput functional characterization of gene regulatory elements', journal: 'Nature Protocols', year: 2020, pmid: '32641802', pdfFile: 'gordon_nature_2020.pdf', collaboration: 'with Ahituv and Kircher Labs' },
+    { image: 'gasperini_nrg_2020_thumb.jpg', articleUrl: 'https://www.nature.com/articles/s41576-019-0209-0', authors: 'Gasperini, Tome, Shendure', title: 'Towards a comprehensive catalogue of validated and target-linked human enhancers', journal: 'Nature Reviews Genetics', year: 2020, pmid: '31988385', pdfFile: 'gasperini_nrg_2020.pdf' },
+  ],
+  [
+    { image: 'srivatsan_science_2020_thumb.jpg', articleUrl: 'https://www.nature.com/articles/s41596-020-0333-5', authors: 'Srivatsan, McFaline-Figueroa, Ramani et al.', title: 'Massively multiplex chemical transcriptomics at single-cell resolution', journal: 'Science', year: 2020, pmid: '31806696', pdfFile: 'srivatsan_science_2020.pdf', collaboration: 'with Trapnell Lab' },
+    { image: 'kircher_nature_communications_2019 thumbnail.jpg', articleUrl: 'https://www.nature.com/articles/s41467-019-11526-w', authors: 'Kircher, Xiong, Martin, Schubach et al.', title: 'Saturation mutagenesis of twenty disease-associated regulatory elements at single base-pair resolution', journal: 'Nature Communications', year: 2019, pmid: '31395865', pdfFile: 'kircher_nature_communications_2019.pdf', collaboration: 'with Ahituv and Kircher Labs' },
+    { image: 'Chen_Nucleic_2019_thumb.png', articleUrl: 'https://academic.oup.com/nar/advance-article/doi/10.1093/nar/gkz487/5511473', authors: 'Chen, McKenna, Schreiber et al.', title: 'Massively parallel profiling and predictive modeling of the outcomes of CRISPR/Cas9-mediated double-strand break repair', journal: 'Nucleic Acids Research', year: 2019, pmid: '31165867', pdfFile: 'chen_nucleic_2019.pdf' },
+  ],
+  [
+    { image: 'klein_nature_2019_thumb.jpg', articleUrl: 'http://dx.doi.org/10.1038/s41467-019-10439-y', authors: 'Klein, Keith et al.', title: 'Functional testing of thousands of osteoarthritis-associated variants for regulatory activity', journal: 'Nature Communications', year: 2019, pmid: '31164647', pdfFile: 'klein_nature_2019.pdf' },
+    { image: 'kim_elife_2019_thumb.jpg', articleUrl: 'https://elifesciences.org/articles/42499', authors: 'Kim, Dunham, Shendure', title: 'A combination of transcription factors mediates inducible interchromosomal contacts', journal: 'eLife', year: 2019, pmid: '31081754', pdfFile: 'kim_elife_2019.pdf' },
+    { image: 'gasperini_cell_2019.png', articleUrl: 'https://www.sciencedirect.com/science/article/pii/S009286741831554X', authors: 'Gasperini et al.', title: 'A Genome-wide Framework for Mapping Gene Regulation via Cellular Genetic Screens', journal: 'Cell', year: 2019, pmid: '30612741', pdfFile: 'gasperini_cell_2019.pdf' },
+  ],
+  [
+    { image: 'findlay_nature_2018_thumb.png', articleUrl: 'https://www.nature.com/articles/s41586-018-0461-z', authors: 'Findlay et al.', title: 'Accurate classification of BRCA1 variants with saturation genome editing', journal: 'Nature', year: 2018, pmid: '30209399', pdfFile: 'findlay_nature_2018.pdf', collaboration: 'with Starita Lab' },
+    { image: 'klein_genbio_2018.png', articleUrl: 'https://www.ncbi.nlm.nih.gov/pubmed/30045748', authors: 'Klein et al.', title: 'Functional characterization of enhancer evolution in the primate lineage', journal: 'Genome Biology', year: 2018, pmid: '30045748', pdfFile: 'klein_genbio_2018.pdf' },
+    { image: 'starita_ajhg_2018_thumb.png', articleUrl: 'https://www.sciencedirect.com/science/article/pii/S000292971830243X', authors: 'Starita et al.', title: 'A Multiplex Homology-Directed DNA Repair Assay Reveals the Impact of More Than 1,000 BRCA1 Missense Substitution Variants on Protein Function', journal: 'AJHG', year: 2018, pmid: '30219179', pdfFile: 'starita_ajhg_2018.pdf', collaboration: 'with Parvin Lab' },
+  ],
+  [
+    { image: 'hill_nature_2019.png', articleUrl: 'http://www.nature.com/articles/nmeth.4604', authors: 'Hill, McFaline-Figueroa et al.', title: 'On the design of CRISPR-based single-cell molecular screens', journal: 'Nature Methods', year: 2018, pmid: '29457792', pdfFile: 'hill_nature_2019.pdf', collaboration: 'with Trapnell Lab' },
+    { image: 'matreyek_natgen_2018.png', articleUrl: 'https://www.nature.com/articles/s41588-018-0122-z', authors: 'Matreyek, Starita et al.', title: 'Multiplex assessment of protein variant abundance by massively parallel sequencing', journal: 'Nature Genetics', year: 2018, pmid: '29785012', pdfFile: 'matreyek_natgen_2018.pdf', collaboration: 'with Fowler Lab' },
+    { image: 'gasperini_AJHG_2017_thumb.jpg', articleUrl: 'http://www.sciencedirect.com/science/article/pii/S0002929717302458', authors: 'Gasperini, Findlay et al.', title: 'CRISPR/Cas9-Mediated Scanning for Regulatory Elements Required for HPRT1 Expression via Thousands of Large, Programmed Genomic Deletions', journal: 'AJHG', year: 2017, pmid: '28712454', pdfFile: 'gasperini_ajhd_2017.pdf' },
+  ],
+  [
+    { image: 'inoue_genome_research_2017_thumb.jpg', articleUrl: 'https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5204343/', authors: 'Inoue, Kircher et al.', title: 'A systematic comparison reveals substantial differences in chromosomal versus episomal encoding of enhancer activity', journal: 'Genome Research', year: 2017, pmid: '27831498', pdfFile: 'inoue_nature_methods_2017.pdf', collaboration: 'with Ahituv Lab' },
+    { image: 'fields_genetics_2016_thumb.png', articleUrl: 'http://www.genetics.org/content/203/2/617.long', authors: 'Fields, Shendure', title: 'Massively Parallel Genetics', journal: 'Genetics', year: 2016, pmid: '27270695', pdfFile: 'fields_genetics_2016.pdf' },
+    { image: 'gasperini_nature_protocols_2016_thumb.jpg', articleUrl: 'http://www.nature.com/nprot/journal/v11/n10/full/nprot.2016.135.html', authors: 'Gasperini, Starita, Shendure', title: 'The power of multiplexed functional analysis of genetic variants', journal: 'Nature Protocols', year: 2016, pmid: '27583640', pdfFile: 'gasperini_nature_protocols_2016.pdf' },
+  ],
+  [
+    { image: 'starita_genetics_2015_thumb.jpg', articleUrl: 'http://genetics.org/content/200/2/413.long', authors: 'Starita, Shendure, Fields et al.', title: 'Massively Parallel Functional Analysis of BRCA1 RING Domain Variants', journal: 'Genetics', year: 2015, pmid: '25823446', pdfFile: 'starita_genetics_2015.pdf', collaboration: 'with Fields Lab' },
+    { image: 'kitzman_nature_methods_2015_thumb.jpg', articleUrl: 'http://www.nature.com/nmeth/journal/v12/n3/full/nmeth.3223.html', authors: 'Kitzman, Starita et al.', title: 'Massively parallel single-amino-acid mutagenesis', journal: 'Nature Methods', year: 2015, pmid: '25559584', pdfFile: 'kitzman_nature_methods_2015.pdf', collaboration: 'with Fields Lab' },
+    { image: 'findlay_nature_2014_thumb.png', articleUrl: 'http://www.nature.com/nature/journal/v513/n7516/full/nature13695.html', authors: 'Findlay, Boyle et al.', title: 'Saturation editing of genomic regions by multiplex homology-directed repair', journal: 'Nature', year: 2014, pmid: '25141179', pdfFile: 'findlay_nature_2014.pdf' },
+  ],
+  [
+    { image: 'smith_nature_genetics_2013_thumb.jpg', articleUrl: 'http://www.nature.com/ng/journal/v45/n9/full/ng.2713.html', authors: 'Smith, Taher L et al.', title: 'Massively parallel decoding of mammalian regulatory sequences supports a flexible organizational model', journal: 'Nature Genetics', year: 2013, pmid: '23892608', pdfFile: 'smith_nature_genetics_2013.pdf', collaboration: 'with Ahituv, Ovcharenko Labs' },
+    { image: 'patwardhan_nature_biotechnology_2012_thumb.jpg', articleUrl: 'http://www.nature.com/nbt/journal/v30/n3/full/nbt.2136.html', authors: 'Patwardhan, Hiatt et al.', title: 'Massively parallel functional dissection of mammalian enhancers in vivo', journal: 'Nature Biotechnology', year: 2012, pmid: '22371081', pdfFile: 'patwardhan_nature_biotechnology_2012.pdf', collaboration: 'with Pennacchio, Ahituv Labs' },
+    { image: 'patwardhan_nature_biotechnology_2009_thumb.jpg', articleUrl: 'http://www.nature.com/nbt/journal/v27/n12/full/nbt.1589.html', authors: 'Patwardhan et al.', title: 'High-resolution analysis of DNA regulatory elements by synthetic saturation mutagenesis', journal: 'Nature Biotechnology', year: 2009, pmid: '19915551', pdfFile: 'patwardhan_nature_biotechnology_2009.pdf' },
+  ],
+];
+
+// Flatten and group by year
+const allPubs = publicationRows.flat();
+const pubsByYear = allPubs.reduce((acc, pub) => {
+  const year = pub.year || 'Unknown';
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(pub);
+  return acc;
+}, {} as Record<number | string, typeof allPubs>);
+
+// Get sorted years (most recent first)
+const years = Object.keys(pubsByYear).sort((a, b) => Number(b) - Number(a));
+---
+
+<BaseLayout title="Massively Parallel Functional Genomics | Shendure Lab">
+  <!-- Mobile Year Scrollbar -->
+  <nav class="lg:hidden sticky top-16 z-40 year-scrollbar border-b" aria-label="Jump to year">
+    <div class="flex overflow-x-auto scrollbar-hide px-4 py-2 gap-2" role="list">
+      {years.map(year => (
+        <a
+          href={`#year-${year}`}
+          class="year-pill flex-shrink-0 px-4 py-3 text-sm rounded-full border transition-colors"
+          role="listitem"
+          aria-label={`Jump to ${year} publications`}
+        >
+          {year}
+        </a>
+      ))}
+    </div>
+  </nav>
+
+  <div class="w-full max-w-[1000px] mx-auto px-4 py-12 pb-[60vh]">
+    <h1 class="w-full text-2xl md:text-3xl font-bold text-lab-orange mb-8 text-center">Massively Parallel Functional Genomics</h1>
+    <p class="w-full text-center page-subtitle mb-10">(selected publications)</p>
+
+    <div class="w-full mb-8 text-center">
+      <a href="/research" class="text-lab-blue hover:underline">&larr; Back to Research</a>
+    </div>
+
+    {years.map(year => (
+      <div id={`year-${year}`} class="mb-12 scroll-mt-32">
+        <h2 class="text-xl font-bold text-lab-orange mb-6 text-center lg:text-left">{year}</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 justify-items-center">
+          {pubsByYear[year].map((pub) => (
+            <ResearchPubCard
+              image={pub.image}
+              articleUrl={pub.articleUrl}
+              authors={pub.authors}
+              title={pub.title}
+              journal={pub.journal}
+              year={pub.year}
+              pmid={pub.pmid}
+              pdfFile={pub.pdfFile}
+              collaboration={pub.collaboration}
+            />
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <YearNavScript />
+</BaseLayout>
+
+<style>
+  .year-scrollbar {
+    background-color: var(--theme-bg);
+    border-color: var(--theme-border);
+  }
+  .year-pill {
+    background-color: var(--theme-bg);
+    border-color: var(--theme-border);
+    color: var(--theme-text-secondary);
+  }
+  .year-pill:hover, .year-pill:focus-visible {
+    background-color: var(--color-lab-orange);
+    border-color: var(--color-lab-orange);
+    color: white;
+  }
+  .page-subtitle {
+    color: var(--theme-text-secondary);
+  }
+</style>

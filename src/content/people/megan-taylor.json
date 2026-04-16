@@ -1,0 +1,13 @@
+{
+  "name": "Megan Taylor",
+  "slug": "megan-taylor",
+  "photo": "/images/lab/taylor1.jpg",
+  "title": "Research Scientist",
+  "role": "research-scientist",
+  "status": "alumni",
+  "startYear": 2019,
+  "endYear": 2024,
+  "currentPosition": "Graduate Student, Department of Genome Sciences, UW",
+  "sortOrder": 11,
+  "currentPositionUrl": "https://www.gs.washington.edu/"
+}

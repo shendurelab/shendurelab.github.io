@@ -1,0 +1,14 @@
+{
+  "name": "Xingfan (Fanny) Huang",
+  "slug": "xingfan-fanny-huang",
+  "photo": "/images/lab/huang1.jpg",
+  "title": "Graduate Student (CSE)",
+  "role": "graduate-student",
+  "status": "alumni",
+  "startYear": 2017,
+  "endYear": 2023,
+  "dissertation": "Computational methods of high-dimensional datasets derived from molecular profiling of biological systems",
+  "currentPosition": "Computational Biologist, Calico Life Sciences",
+  "sortOrder": 19,
+  "currentPositionUrl": "https://www.calicolabs.com/"
+}

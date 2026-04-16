@@ -1,0 +1,13 @@
+{
+  "category": "research",
+  "articleUrl": "https://www.nature.com/articles/s41592-020-0965-y?proof=t",
+  "thumbnail": "/images/papers/klein_nature_2020_thumb.png",
+  "pdfUrl": "/documents/klein_nature_methods_2020.pdf",
+  "citation": "Klein, Agarwal, Inoue, Keith et al. A systematic evaluation of the design and context dependencies of massively parallel\nreporter assays. Nature Methods (2020)",
+  "year": 2020,
+  "journal": "A systematic evaluation of the design and context dependencies of massively parallel\nreporter assays. Nature Methods",
+  "pmid": "33046894",
+  "collaboration": "with Ahituv Lab",
+  "slug": "klein-2020-a-systematic-evaluation-of-the-design-a",
+  "sortOrder": 26
+}

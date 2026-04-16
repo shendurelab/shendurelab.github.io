@@ -1,0 +1,16 @@
+{
+  "name": "Hannah Pliner",
+  "slug": "hannah-pliner",
+  "photo": "/images/lab/pliner.jpg",
+  "title": "Graduate Student",
+  "role": "graduate-student",
+  "status": "alumni",
+  "startYear": 2015,
+  "endYear": 2019,
+  "jointLab": "Trapnell Lab",
+  "dissertation": "Algorithms for modeling gene regulation and determining cell type using single‐cell molecular profiles",
+  "currentPosition": "Principal Scientist, Computational Biology and Epigenetics, Bristol Myers Squibb",
+  "sortOrder": 41,
+  "jointLabUrl": "https://cole-trapnell-lab.github.io/",
+  "currentPositionUrl": "https://www.linkedin.com/in/hannah-pliner-67779349/?originalSubdomain=es"
+}

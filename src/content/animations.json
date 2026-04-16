@@ -1,0 +1,891 @@
+{
+  "_comment": "Animation configurations for all research papers. Each paper is assigned to one of 13 categories with variation index for visual diversity.",
+  "categories": [
+    "single-cell-transcriptomics",
+    "single-cell-chromatin",
+    "developmental-atlases",
+    "genome-editing",
+    "molecular-recording",
+    "variant-analysis",
+    "regulatory-elements",
+    "exome-genome-sequencing",
+    "3d-genome",
+    "cell-free-dna",
+    "disease-genetics",
+    "infectious-disease",
+    "computational-tools"
+  ],
+  "categoryToType": {
+    "single-cell-transcriptomics": "wellPlate",
+    "single-cell-chromatin": "atacPeaks",
+    "developmental-atlases": "cellClusters",
+    "genome-editing": "rnaHairpin",
+    "molecular-recording": "chevrons",
+    "variant-analysis": "heatmap",
+    "regulatory-elements": "cisRegulatory",
+    "exome-genome-sequencing": "dnaHelix",
+    "3d-genome": "hiCLoops",
+    "cell-free-dna": "cellFreeDNA",
+    "disease-genetics": "scatterPlot",
+    "infectious-disease": "phyloTree",
+    "computational-tools": "trajectoryTree"
+  },
+  "animations": [
+    {
+      "name": "Abadie, 2024, Disease Genetics",
+      "category": "disease-genetics",
+      "type": "scatterPlot",
+      "paperSlug": "abadie-2024-reversible-tunable-epigenetic-silencin",
+      "variation": 5,
+      "sortOrder": 1
+    },
+    {
+      "name": "Adey, 2010, Genome Sequencing",
+      "category": "exome-genome-sequencing",
+      "type": "dnaHelix",
+      "paperSlug": "adey-2010-rapid-low-input-low-bias-construction-of",
+      "variation": 0,
+      "sortOrder": 2
+    },
+    {
+      "name": "Adey, 2012, Genome Sequencing",
+      "category": "exome-genome-sequencing",
+      "type": "dnaHelix",
+      "paperSlug": "adey-2012-ultra-low-input-tagmentation-based-whole",
+      "variation": 0,
+      "sortOrder": 3
+    },
+    {
+      "name": "Adey, 2013, Genome Sequencing",
+      "category": "exome-genome-sequencing",
+      "type": "dnaHelix",
+      "paperSlug": "adey-2013-the-haplotype-resolved-genome-and-epigen",
+      "variation": 4,
+      "sortOrder": 4
+    },
+    {
+      "name": "Adey, 2014, Genome Sequencing",
+      "category": "exome-genome-sequencing",
+      "type": "dnaHelix",
+      "paperSlug": "adey-2014-in-vitro-long-range-sequence-information",
+      "variation": 5,
+      "sortOrder": 5
+    },
+    {
+      "name": "Agarwal, 2020, Computational Tools",
+      "category": "computational-tools",
+      "type": "trajectoryTree",
+      "paperSlug": "agarwal-2020-predicting-mrna-abundance-directly-fr",
+      "variation": 2,
+      "sortOrder": 6
+    },
+    {
+      "name": "Agarwal, 2021, Single-cell Transcriptomics",
+      "category": "single-cell-transcriptomics",
+      "type": "wellPlate",
+      "paperSlug": "agarwal-2021-the-landscape-of-alternative-polyaden",
+      "variation": 2,
+      "sortOrder": 7
+    },
+    {
+      "name": "Agarwal, 2025, Regulatory Elements",
+      "category": "regulatory-elements",
+      "type": "cisRegulatory",
+      "paperSlug": "agarwal-2025-massively-parallel-characterization-o",
+      "variation": 5,
+      "sortOrder": 8
+    },
+    {
+      "name": "Alexander, 2019, Genome Editing",
+      "category": "genome-editing",
+      "type": "rnaHairpin",
+      "paperSlug": "alexander-2019-concurrent-genome-and-epigenome-edi",
+      "variation": 1,
+      "sortOrder": 9
+    },
+    {
+      "name": "Bedford, 2020, Infectious Disease",
+      "category": "infectious-disease",
+      "type": "phyloTree",
+      "paperSlug": "bedford-2020-cryptic-transmission-of-sars-cov-2-in",
+      "variation": 3,
+      "sortOrder": 10
+    },
+    {
+      "name": "Boyle, 2014, Genome Sequencing",
+      "category": "exome-genome-sequencing",
+      "type": "dnaHelix",
+      "paperSlug": "boyle-2014-mipgen-optimized-modeling-and-design-of",
+      "variation": 4,
+      "sortOrder": 11
+    },
+    {
+      "name": "Burton, 2013, Genome Sequencing",
+      "category": "exome-genome-sequencing",
+      "type": "dnaHelix",
+      "paperSlug": "burton-2013-chromosome-scale-scaffolding-of-de-nov",
+      "variation": 3,
+      "sortOrder": 12
+    },
+    {
+      "name": "Burton, 2014, Genome Sequencing",
+      "category": "exome-genome-sequencing",
+      "type": "dnaHelix",
+      "paperSlug": "burton-2014-species-level-deconvolution-of-metagen",
+      "variation": 3,
+      "sortOrder": 13
+    },
+    {
+      "name": "Calderon, 2022, Developmental Atlases",
+      "category": "developmental-atlases",
+      "type": "cellClusters",
+      "paperSlug": "calderon-2022-the-continuum-of-drosophila-embryoni",
+      "variation": 1,
+      "sortOrder": 14
+    },
+    {
+      "name": "Cao, 2017, Single-cell Transcriptomics",
+      "category": "single-cell-transcriptomics",
+      "type": "wellPlate",
+      "paperSlug": "cao-2017-comprehensive-single-cell-transcriptional",
+      "variation": 5,
+      "sortOrder": 15
+    },
+    {
+      "name": "Cao, 2018, Single-cell Chromatin",
+      "category": "single-cell-chromatin",
+      "type": "atacPeaks",
+      "paperSlug": "cao-2018-joint-profiling-of-chromatin-accessibilit",
+      "variation": 4,
+      "sortOrder": 16
+    },
+    {
+      "name": "Cao, 2019, Single-cell Transcriptomics",
+      "category": "single-cell-transcriptomics",
+      "type": "wellPlate",
+      "paperSlug": "cao-2019-the-single-cell-transcriptional-landscape",
+      "variation": 4,
+      "sortOrder": 17
+    },
+    {
+      "name": "Cao, 2020, Single-cell Transcriptomics",
+      "category": "single-cell-transcriptomics",
+      "type": "wellPlate",
+      "paperSlug": "cao-2020-a-human-cell-atlas-of-fetal-gene-expressi",
+      "variation": 1,
+      "sortOrder": 18
+    },
+    {
+      "name": "Cao, 2020, Single-cell Transcriptomics",
+      "category": "single-cell-transcriptomics",
+      "type": "wellPlate",
+      "paperSlug": "cao-2020-sci-fate-characterizes-the-dynamics-of-ge",
+      "variation": 2,
+      "sortOrder": 19
+    },
+    {
+      "name": "Abadie, 2026, Genome Editing",
+      "category": "genome-editing",
+      "type": "rnaHairpin",
+      "paperSlug": "abadie-2026-a-multiplex-prime-editing-framework-f",
+      "variation": 5,
+      "sortOrder": 20
+    },
+    {
+      "name": "Chardon, 2024, Regulatory Elements",
+      "category": "regulatory-elements",
+      "type": "cisRegulatory",
+      "paperSlug": "chardon-2024-multiplex-single-cell-crispra-screeni",
+      "variation": 0,
+      "sortOrder": 21
+    },
+    {
+      "name": "Chen, 2019, Computational Tools",
+      "category": "computational-tools",
+      "type": "trajectoryTree",
+      "paperSlug": "chen-2019-massively-parallel-profiling-and-predict",
+      "variation": 1,
+      "sortOrder": 22
+    },
+    {
+      "name": "Chen, 2024, Molecular Recording",
+      "category": "molecular-recording",
+      "type": "chevrons",
+      "paperSlug": "chen-2024-symbolic-recording-of-signalling-and-cis",
+      "variation": 4,
+      "sortOrder": 23
+    },
+    {
+      "name": "Chiou, 2023, Developmental Atlases",
+      "category": "developmental-atlases",
+      "type": "cellClusters",
+      "paperSlug": "chiou-2023-a-single-cell-multi-omic-atlas-spanning",
+      "variation": 0,
+      "sortOrder": 24
+    },
+    {
+      "name": "Choi, 2022, Molecular Recording",
+      "category": "molecular-recording",
+      "type": "chevrons",
+      "paperSlug": "choi-2022-a-time-resolved-multi-symbol-molecular-r",
+      "variation": 1,
+      "sortOrder": 25
+    },
+    {
+      "name": "Choi, 2022, Genome Editing",
+      "category": "genome-editing",
+      "type": "rnaHairpin",
+      "paperSlug": "choi-2022-precise-genomic-deletions-using-paired-p",
+      "variation": 5,
+      "sortOrder": 26
+    },
+    {
+      "name": "Choi, 2025, Molecular Recording",
+      "category": "molecular-recording",
+      "type": "chevrons",
+      "paperSlug": "choi-2025-a-molecular-proximity-sensor-based-on-an",
+      "variation": 4,
+      "sortOrder": 27
+    },
+    {
+      "name": "Chu, 2020, Infectious Disease",
+      "category": "infectious-disease",
+      "type": "phyloTree",
+      "paperSlug": "chu-2020-early-detection-of-covid-19-through-a-cit",
+      "variation": 4,
+      "sortOrder": 28
+    },
+    {
+      "name": "Cusanovich, 2015, Single-cell Chromatin",
+      "category": "single-cell-chromatin",
+      "type": "atacPeaks",
+      "paperSlug": "cusanovich-2015-multiplex-single-cell-profiling-of",
+      "variation": 2,
+      "sortOrder": 29
+    },
+    {
+      "name": "Cusanovich, 2018, Single-cell Chromatin",
+      "category": "single-cell-chromatin",
+      "type": "atacPeaks",
+      "paperSlug": "cusanovich-2018-a-single-cell-atlas-of-in-vivo-mam",
+      "variation": 2,
+      "sortOrder": 30
+    },
+    {
+      "name": "Cusanovich, 2018, Regulatory Elements",
+      "category": "regulatory-elements",
+      "type": "cisRegulatory",
+      "paperSlug": "cusanovich-2018-the-cis-regulatory-dynamics-of-emb",
+      "variation": 3,
+      "sortOrder": 31
+    },
+    {
+      "name": "Domcke, 2020, Single-cell Chromatin",
+      "category": "single-cell-chromatin",
+      "type": "atacPeaks",
+      "paperSlug": "domcke-2020-a-human-cell-atlas-of-fetal-chromatin-",
+      "variation": 2,
+      "sortOrder": 32
+    },
+    {
+      "name": "Fairfield, 2015, Disease Genetics",
+      "category": "disease-genetics",
+      "type": "scatterPlot",
+      "paperSlug": "fairfield-2015-exome-sequencing-reveals-pathogenic",
+      "variation": 5,
+      "sortOrder": 33
+    },
+    {
+      "name": "Findlay, 2014, Genome Editing",
+      "category": "genome-editing",
+      "type": "rnaHairpin",
+      "paperSlug": "findlay-2014-saturation-editing-of-genomic-regions",
+      "variation": 4,
+      "sortOrder": 34
+    },
+    {
+      "name": "Findlay, 2018, Variant Analysis",
+      "category": "variant-analysis",
+      "type": "heatmap",
+      "paperSlug": "findlay-2018-accurate-classification-of-brca1-vari",
+      "variation": 5,
+      "sortOrder": 35
+    },
+    {
+      "name": "Gasperini, 2017, Genome Editing",
+      "category": "genome-editing",
+      "type": "rnaHairpin",
+      "paperSlug": "gasperini-2017-crispr-cas9-mediated-scanning-for-r",
+      "variation": 0,
+      "sortOrder": 36
+    },
+    {
+      "name": "Gasperini, 2019, Regulatory Elements",
+      "category": "regulatory-elements",
+      "type": "cisRegulatory",
+      "paperSlug": "gasperini-2019-a-genome-wide-framework-for-mapping",
+      "variation": 4,
+      "sortOrder": 37
+    },
+    {
+      "name": "George, 2011, Disease Genetics",
+      "category": "disease-genetics",
+      "type": "scatterPlot",
+      "paperSlug": "george-2011-trans-genomic-capture-and-sequencing-o",
+      "variation": 4,
+      "sortOrder": 38
+    },
+    {
+      "name": "Hamazaki, 2024, Developmental Atlases",
+      "category": "developmental-atlases",
+      "type": "cellClusters",
+      "paperSlug": "hamazaki-2024-retinoic-acid-induces-human-gastrulo",
+      "variation": 2,
+      "sortOrder": 39
+    },
+    {
+      "name": "Hause, 2016, Disease Genetics",
+      "category": "disease-genetics",
+      "type": "scatterPlot",
+      "paperSlug": "hause-2016-classification-and-characterization-of-",
+      "variation": 2,
+      "sortOrder": 40
+    },
+    {
+      "name": "Hiatt, 2010, Genome Sequencing",
+      "category": "exome-genome-sequencing",
+      "type": "dnaHelix",
+      "paperSlug": "hiatt-2010-parallel-tag-directed-assembly-of-local",
+      "variation": 3,
+      "sortOrder": 41
+    },
+    {
+      "name": "Hiatt, 2013, Genome Sequencing",
+      "category": "exome-genome-sequencing",
+      "type": "dnaHelix",
+      "paperSlug": "hiatt-2013-single-molecule-molecular-inversion-pro",
+      "variation": 3,
+      "sortOrder": 42
+    },
+    {
+      "name": "Hill, 2018, Regulatory Elements",
+      "category": "regulatory-elements",
+      "type": "cisRegulatory",
+      "paperSlug": "hill-2018-on-the-design-of-crispr-based-single-cel",
+      "variation": 4,
+      "sortOrder": 43
+    },
+    {
+      "name": "Huang, 2023, Developmental Atlases",
+      "category": "developmental-atlases",
+      "type": "cellClusters",
+      "paperSlug": "huang-2023-single-cell-whole-embryo-phenotyping-of",
+      "variation": 1,
+      "sortOrder": 44
+    },
+    {
+      "name": "Inoue, 2017, Regulatory Elements",
+      "category": "regulatory-elements",
+      "type": "cisRegulatory",
+      "paperSlug": "inoue-2017-a-systematic-comparison-reveals-substan",
+      "variation": 5,
+      "sortOrder": 45
+    },
+    {
+      "name": "Iossifov, 2014, Disease Genetics",
+      "category": "disease-genetics",
+      "type": "scatterPlot",
+      "paperSlug": "iossifov-2014-the-contribution-of-de-novo-coding-m",
+      "variation": 0,
+      "sortOrder": 46
+    },
+    {
+      "name": "Kim, 2017, 3D Genome",
+      "category": "3d-genome",
+      "type": "hiCLoops",
+      "paperSlug": "kim-2017-the-dynamic-three-dimensional-organizatio",
+      "variation": 4,
+      "sortOrder": 47
+    },
+    {
+      "name": "Kim, 2019, 3D Genome",
+      "category": "3d-genome",
+      "type": "hiCLoops",
+      "paperSlug": "kim-2019-a-combination-of-transcription-factors-me",
+      "variation": 2,
+      "sortOrder": 48
+    },
+    {
+      "name": "Kircher, 2014, Disease Genetics",
+      "category": "disease-genetics",
+      "type": "scatterPlot",
+      "paperSlug": "kircher-2014-a-general-framework-for-estimating-th",
+      "variation": 2,
+      "sortOrder": 49
+    },
+    {
+      "name": "Kircher, 2019, Variant Analysis",
+      "category": "variant-analysis",
+      "type": "heatmap",
+      "paperSlug": "kircher-2019-saturation-mutagenesis-of-twenty-dise",
+      "variation": 4,
+      "sortOrder": 50
+    },
+    {
+      "name": "Kitzman, 2011, Genome Sequencing",
+      "category": "exome-genome-sequencing",
+      "type": "dnaHelix",
+      "paperSlug": "kitzman-2011-haplotype-resolved-genome-sequencing-",
+      "variation": 4,
+      "sortOrder": 51
+    },
+    {
+      "name": "Kitzman, 2012, Cell-free DNA",
+      "category": "cell-free-dna",
+      "type": "cellFreeDNA",
+      "paperSlug": "kitzman-2012-noninvasive-whole-genome-sequencing-o",
+      "variation": 1,
+      "sortOrder": 52
+    },
+    {
+      "name": "Kitzman, 2015, Variant Analysis",
+      "category": "variant-analysis",
+      "type": "heatmap",
+      "paperSlug": "kitzman-2015-massively-parallel-single-amino-acid-",
+      "variation": 5,
+      "sortOrder": 53
+    },
+    {
+      "name": "Klein, 2015, Genome Sequencing",
+      "category": "exome-genome-sequencing",
+      "type": "dnaHelix",
+      "paperSlug": "klein-2015-multiplex-pairwise-assembly-of-array-de",
+      "variation": 4,
+      "sortOrder": 54
+    },
+    {
+      "name": "Klein, 2018, Regulatory Elements",
+      "category": "regulatory-elements",
+      "type": "cisRegulatory",
+      "paperSlug": "klein-2018-functional-characterization-of-enhancer",
+      "variation": 1,
+      "sortOrder": 55
+    },
+    {
+      "name": "Klein, 2019, Regulatory Elements",
+      "category": "regulatory-elements",
+      "type": "cisRegulatory",
+      "paperSlug": "klein-2019-functional-testing-of-thousands-of-oste",
+      "variation": 1,
+      "sortOrder": 56
+    },
+    {
+      "name": "Klein, 2020, Regulatory Elements",
+      "category": "regulatory-elements",
+      "type": "cisRegulatory",
+      "paperSlug": "klein-2020-a-systematic-evaluation-of-the-design-a",
+      "variation": 2,
+      "sortOrder": 57
+    },
+    {
+      "name": "Kumar, 2011, Disease Genetics",
+      "category": "disease-genetics",
+      "type": "scatterPlot",
+      "paperSlug": "kumar-2011-exome-sequencing-identifies-a-spectrum-",
+      "variation": 0,
+      "sortOrder": 58
+    },
+    {
+      "name": "Kumar, 2014, Disease Genetics",
+      "category": "disease-genetics",
+      "type": "scatterPlot",
+      "paperSlug": "kumar-2014-deep-sequencing-of-multiple-regions-of-",
+      "variation": 1,
+      "sortOrder": 59
+    },
+    {
+      "name": "Kumar, 2015, Cell-free DNA",
+      "category": "cell-free-dna",
+      "type": "cellFreeDNA",
+      "paperSlug": "kumar-2015-whole-genome-prediction-for-preimplanta",
+      "variation": 0,
+      "sortOrder": 60
+    },
+    {
+      "name": "Kumar, 2016, Disease Genetics",
+      "category": "disease-genetics",
+      "type": "scatterPlot",
+      "paperSlug": "kumar-2016-substantial-interindividual-and-limited",
+      "variation": 4,
+      "sortOrder": 61
+    },
+    {
+      "name": "Lalanne, 2024, Regulatory Elements",
+      "category": "regulatory-elements",
+      "type": "cisRegulatory",
+      "paperSlug": "lalanne-2024-multiplex-profiling-of-developmental-",
+      "variation": 3,
+      "sortOrder": 62
+    },
+    {
+      "name": "Li, 2024, Single-cell Chromatin",
+      "category": "single-cell-chromatin",
+      "type": "atacPeaks",
+      "paperSlug": "li-2024-chromatin-context-dependent-regulation-and",
+      "variation": 4,
+      "sortOrder": 63
+    },
+    {
+      "name": "Martin, 2022, Single-cell Transcriptomics",
+      "category": "single-cell-transcriptomics",
+      "type": "wellPlate",
+      "paperSlug": "martin-2022-optimized-single-nucleus-transcription",
+      "variation": 4,
+      "sortOrder": 64
+    },
+    {
+      "name": "Matreyek, 2018, Variant Analysis",
+      "category": "variant-analysis",
+      "type": "heatmap",
+      "paperSlug": "matreyek-2018-multiplex-assessment-of-protein-vari",
+      "variation": 2,
+      "sortOrder": 65
+    },
+    {
+      "name": "Mcdiarmid, 2025, Regulatory Elements",
+      "category": "regulatory-elements",
+      "type": "cisRegulatory",
+      "paperSlug": "mcdiarmid-2025-a-parts-list-of-promoters-and-grna-",
+      "variation": 5,
+      "sortOrder": 66
+    },
+    {
+      "name": "Mckenna, 2016, Molecular Recording",
+      "category": "molecular-recording",
+      "type": "chevrons",
+      "paperSlug": "mckenna-2016-whole-organism-lineage-tracing-by-com",
+      "variation": 4,
+      "sortOrder": 67
+    },
+    {
+      "name": "Mckenna, 2018, Genome Editing",
+      "category": "genome-editing",
+      "type": "rnaHairpin",
+      "paperSlug": "mckenna-2018-flashfry-a-fast-and-flexible-tool-for",
+      "variation": 0,
+      "sortOrder": 68
+    },
+    {
+      "name": "Neveling, 2017, Infectious Disease",
+      "category": "infectious-disease",
+      "type": "phyloTree",
+      "paperSlug": "neveling-2017-brca-testing-by-single-molecule-mole",
+      "variation": 5,
+      "sortOrder": 69
+    },
+    {
+      "name": "Ng, 2009, Genome Sequencing",
+      "category": "exome-genome-sequencing",
+      "type": "dnaHelix",
+      "paperSlug": "ng-2009-targeted-capture-and-massively-parallel-se",
+      "variation": 3,
+      "sortOrder": 70
+    },
+    {
+      "name": "Ng, 2010, Disease Genetics",
+      "category": "disease-genetics",
+      "type": "scatterPlot",
+      "paperSlug": "ng-2010-exome-sequencing-identifies-mll2-mutations",
+      "variation": 1,
+      "sortOrder": 71
+    },
+    {
+      "name": "Ng, 2010, Disease Genetics",
+      "category": "disease-genetics",
+      "type": "scatterPlot",
+      "paperSlug": "ng-2010-exome-sequencing-identifies-the-cause-of-a",
+      "variation": 0,
+      "sortOrder": 72
+    },
+    {
+      "name": "O'Roak, 2011, Disease Genetics",
+      "category": "disease-genetics",
+      "type": "scatterPlot",
+      "paperSlug": "o-roak-2011-exome-sequencing-in-sporadic-autism-sp",
+      "variation": 3,
+      "sortOrder": 73
+    },
+    {
+      "name": "O'Roak, 2012, Disease Genetics",
+      "category": "disease-genetics",
+      "type": "scatterPlot",
+      "paperSlug": "o-roak-2012-multiplex-targeted-sequencing-identifi",
+      "variation": 4,
+      "sortOrder": 74
+    },
+    {
+      "name": "O'Roak, 2012, Disease Genetics",
+      "category": "disease-genetics",
+      "type": "scatterPlot",
+      "paperSlug": "o-roak-2012-sporadic-autism-exomes-reveal-a-highly",
+      "variation": 4,
+      "sortOrder": 75
+    },
+    {
+      "name": "O'Roak, 2014, Disease Genetics",
+      "category": "disease-genetics",
+      "type": "scatterPlot",
+      "paperSlug": "o-roak-2014-recurrent-de-novo-mutations-implicate-",
+      "variation": 2,
+      "sortOrder": 76
+    },
+    {
+      "name": "Patwardhan, 2009, Regulatory Elements",
+      "category": "regulatory-elements",
+      "type": "cisRegulatory",
+      "paperSlug": "patwardhan-2009-high-resolution-analysis-of-dna-re",
+      "variation": 2,
+      "sortOrder": 77
+    },
+    {
+      "name": "Patwardhan, 2012, Regulatory Elements",
+      "category": "regulatory-elements",
+      "type": "cisRegulatory",
+      "paperSlug": "patwardhan-2012-massively-parallel-functional-diss",
+      "variation": 1,
+      "sortOrder": 78
+    },
+    {
+      "name": "Pinglay, 2025, Genome Sequencing",
+      "category": "exome-genome-sequencing",
+      "type": "dnaHelix",
+      "paperSlug": "pinglay-2025-multiplex-generation-and-single-cell-",
+      "variation": 4,
+      "sortOrder": 79
+    },
+    {
+      "name": "Pliner, 2018, 3D Genome",
+      "category": "3d-genome",
+      "type": "hiCLoops",
+      "paperSlug": "pliner-2018-cicero-predicts-cis-regulatory-dna-int",
+      "variation": 3,
+      "sortOrder": 80
+    },
+    {
+      "name": "Pliner, 2019, Computational Tools",
+      "category": "computational-tools",
+      "type": "trajectoryTree",
+      "paperSlug": "pliner-2019-supervised-classification-enables-rapi",
+      "variation": 2,
+      "sortOrder": 81
+    },
+    {
+      "name": "Qiu, 2022, Computational Tools",
+      "category": "computational-tools",
+      "type": "trajectoryTree",
+      "paperSlug": "qiu-2022-systematic-reconstruction-of-cellular-tra",
+      "variation": 4,
+      "sortOrder": 82
+    },
+    {
+      "name": "Qiu, 2024, Developmental Atlases",
+      "category": "developmental-atlases",
+      "type": "cellClusters",
+      "paperSlug": "qiu-2024-a-single-cell-time-lapse-of-mouse-prenata",
+      "variation": 0,
+      "sortOrder": 83
+    },
+    {
+      "name": "Ramani, 2015, 3D Genome",
+      "category": "3d-genome",
+      "type": "hiCLoops",
+      "paperSlug": "ramani-2015-high-throughput-determination-of-rna-s",
+      "variation": 0,
+      "sortOrder": 84
+    },
+    {
+      "name": "Ramani, 2016, 3D Genome",
+      "category": "3d-genome",
+      "type": "hiCLoops",
+      "paperSlug": "ramani-2016-mapping-3d-genome-architecture-through",
+      "variation": 0,
+      "sortOrder": 85
+    },
+    {
+      "name": "Ramani, 2017, 3D Genome",
+      "category": "3d-genome",
+      "type": "hiCLoops",
+      "paperSlug": "ramani-2017-massively-multiplex-single-cell-hi-c-n",
+      "variation": 1,
+      "sortOrder": 86
+    },
+    {
+      "name": "Ramani, 2019, Single-cell Chromatin",
+      "category": "single-cell-chromatin",
+      "type": "atacPeaks",
+      "paperSlug": "ramani-2019-high-sensitivity-profiling-of-chromati",
+      "variation": 1,
+      "sortOrder": 87
+    },
+    {
+      "name": "Rentzsch, 2019, Disease Genetics",
+      "category": "disease-genetics",
+      "type": "scatterPlot",
+      "paperSlug": "rentzsch-2019-cadd-predicting-the-deleteriousness-",
+      "variation": 1,
+      "sortOrder": 88
+    },
+    {
+      "name": "Roach, 2015, Infectious Disease",
+      "category": "infectious-disease",
+      "type": "phyloTree",
+      "paperSlug": "roach-2015-a-year-of-infection-in-the-intensive-ca",
+      "variation": 0,
+      "sortOrder": 89
+    },
+    {
+      "name": "Salipante, 2014, Infectious Disease",
+      "category": "infectious-disease",
+      "type": "phyloTree",
+      "paperSlug": "salipante-2014-large-scale-genomic-sequencing-of-e",
+      "variation": 3,
+      "sortOrder": 90
+    },
+    {
+      "name": "Schwartz, 2012, Genome Sequencing",
+      "category": "exome-genome-sequencing",
+      "type": "dnaHelix",
+      "paperSlug": "schwartz-2012-accurate-gene-synthesis-with-tag-dir",
+      "variation": 0,
+      "sortOrder": 91
+    },
+    {
+      "name": "Schwartz, 2012, Genome Sequencing",
+      "category": "exome-genome-sequencing",
+      "type": "dnaHelix",
+      "paperSlug": "schwartz-2012-capturing-native-long-range-contigui",
+      "variation": 0,
+      "sortOrder": 92
+    },
+    {
+      "name": "Schwartz, 2014, Disease Genetics",
+      "category": "disease-genetics",
+      "type": "scatterPlot",
+      "paperSlug": "schwartz-2014-primate-evolution-of-the-recombinati",
+      "variation": 0,
+      "sortOrder": 93
+    },
+    {
+      "name": "Simeonov, 2021, Molecular Recording",
+      "category": "molecular-recording",
+      "type": "chevrons",
+      "paperSlug": "simeonov-2021-single-cell-lineage-tracing-of-metas",
+      "variation": 1,
+      "sortOrder": 94
+    },
+    {
+      "name": "Smith, 2013, Regulatory Elements",
+      "category": "regulatory-elements",
+      "type": "cisRegulatory",
+      "paperSlug": "smith-2013-massively-parallel-decoding-of-mammalia",
+      "variation": 5,
+      "sortOrder": 95
+    },
+    {
+      "name": "Snyder, 2015, Cell-free DNA",
+      "category": "cell-free-dna",
+      "type": "cellFreeDNA",
+      "paperSlug": "snyder-2015-copy-number-variation-and-false-positi",
+      "variation": 2,
+      "sortOrder": 96
+    },
+    {
+      "name": "Snyder, 2016, Cell-free DNA",
+      "category": "cell-free-dna",
+      "type": "cellFreeDNA",
+      "paperSlug": "snyder-2016-cell-free-dna-comprises-an-in-vivo-nuc",
+      "variation": 0,
+      "sortOrder": 97
+    },
+    {
+      "name": "Srivatsan, 2020, Single-cell Transcriptomics",
+      "category": "single-cell-transcriptomics",
+      "type": "wellPlate",
+      "paperSlug": "srivatsan-2020-massively-multiplex-chemical-transc",
+      "variation": 3,
+      "sortOrder": 98
+    },
+    {
+      "name": "Srivatsan, 2021, Single-cell Transcriptomics",
+      "category": "single-cell-transcriptomics",
+      "type": "wellPlate",
+      "paperSlug": "srivatsan-2021-embryo-scale-single-cell-spatial-tr",
+      "variation": 4,
+      "sortOrder": 99
+    },
+    {
+      "name": "Srivatsan, 2021, Infectious Disease",
+      "category": "infectious-disease",
+      "type": "phyloTree",
+      "paperSlug": "srivatsan-2021-swabexpress-an-end-to-end-protocol-",
+      "variation": 1,
+      "sortOrder": 100
+    },
+    {
+      "name": "Starita, 2015, Variant Analysis",
+      "category": "variant-analysis",
+      "type": "heatmap",
+      "paperSlug": "starita-2015-massively-parallel-functional-analysi",
+      "variation": 5,
+      "sortOrder": 101
+    },
+    {
+      "name": "Starita, 2018, Variant Analysis",
+      "category": "variant-analysis",
+      "type": "heatmap",
+      "paperSlug": "starita-2018-a-multiplex-homology-directed-dna-rep",
+      "variation": 4,
+      "sortOrder": 102
+    },
+    {
+      "name": "Suiter, 2025, Variant Analysis",
+      "category": "variant-analysis",
+      "type": "heatmap",
+      "paperSlug": "suiter-2025-combinatorial-mapping-of-e3-ubiquitin-",
+      "variation": 3,
+      "sortOrder": 103
+    },
+    {
+      "name": "Turner, 2009, Genome Sequencing",
+      "category": "exome-genome-sequencing",
+      "type": "dnaHelix",
+      "paperSlug": "turner-2009-massively-parallel-exon-capture-and-li",
+      "variation": 0,
+      "sortOrder": 104
+    },
+    {
+      "name": "Underhill, 2016, Cell-free DNA",
+      "category": "cell-free-dna",
+      "type": "cellFreeDNA",
+      "paperSlug": "underhill-2016-fragment-length-of-circulating-tumo",
+      "variation": 4,
+      "sortOrder": 105
+    },
+    {
+      "name": "Vasta, 2009, Genome Sequencing",
+      "category": "exome-genome-sequencing",
+      "type": "dnaHelix",
+      "paperSlug": "vasta-2009-next-generation-sequence-analysis-for-m",
+      "variation": 3,
+      "sortOrder": 106
+    },
+    {
+      "name": "Yin, 2019, Single-cell Transcriptomics",
+      "category": "single-cell-transcriptomics",
+      "type": "wellPlate",
+      "paperSlug": "yin-2019-high-throughput-single-cell-sequencing-wi",
+      "variation": 4,
+      "sortOrder": 107
+    }
+  ]
+}

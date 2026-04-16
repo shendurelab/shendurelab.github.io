@@ -1,0 +1,12 @@
+{
+  "category": "research",
+  "articleUrl": "http://bioinformatics.oxfordjournals.org/content/early/2014/06/14/bioinformatics.btu353.full.pdf",
+  "thumbnail": "/images/papers/boyle_bioinformatics_2014_thumb.jpg",
+  "pdfUrl": "http://bioinformatics.oxfordjournals.org/content/early/2014/06/14/bioinformatics.btu353.full.pdf",
+  "citation": "Boyle et al. MIPgen: optimized modeling and design of molecular inversion probes for targeted resequencing. Bioinformatics (2014)",
+  "year": 2014,
+  "journal": "MIPgen: optimized modeling and design of molecular inversion probes for targeted resequencing. Bioinformatics",
+  "pmid": "24867941",
+  "slug": "boyle-2014-mipgen-optimized-modeling-and-design-of",
+  "sortOrder": 82
+}

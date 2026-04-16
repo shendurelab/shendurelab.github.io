@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ResearchPubCard from '../../components/research/ResearchPubCard.astro';
+import YearNavScript from '../../components/shared/YearNavScript.astro';
+
+const publicationRows = [
+  [
+    { image: 'Simeonov_cancerCell_2021_thumb(2).png', articleUrl: 'https://www.cell.com/cancer-cell/fulltext/S1535-6108(21)00271-3', authors: 'Simeonov et al.', title: 'Single-cell lineage tracing of metastatic cancer reveals selection of hybrid EMT states', journal: 'Cancer Cell', year: 2021, pmid: '34115987', pdfFile: 'Simeonov_cancerCell_2021(correctpaper).pdf', collaboration: 'with Lengner and McKenna Labs' },
+    { image: 'kircher_nature_communications_2019 thumbnail.jpg', articleUrl: 'https://www.nature.com/articles/s41467-019-11526-w', authors: 'Kircher, Xiong, Martin, Schubach et al.', title: 'Saturation mutagenesis of twenty disease-associated regulatory elements at single base-pair resolution', journal: 'Nature Communications', year: 2019, pmid: '31395865', pdfFile: 'kircher_nature_communications_2019.pdf', collaboration: 'with Ahituv and Kircher Labs' },
+    { image: 'klein_nature_2019_thumb.jpg', articleUrl: 'https://www.nature.com/articles/s41467-019-10439-y', authors: 'Klein et al.', title: 'Functional testing of thousands of osteoarthritis-associated variants for regulatory activity', journal: 'Nature Communications', year: 2019, pmid: '31164647', pdfFile: 'klein_nature_2019.pdf' },
+  ],
+  [
+    { image: 'rentzsch_nucleic_2019.png', articleUrl: 'https://academic.oup.com/nar/article/47/D1/D886/5146191', authors: 'Rentzsch et al.', title: 'CADD: predicting the deleteriousness of variants throughout the human genome', journal: 'Nucleic Acids Research', year: 2019, pmid: '30371827', pdfFile: 'rentzsch_nucleic_2019.pdf', collaboration: 'with Kircher Lab' },
+    { image: 'findlay_nature_2018_thumb.png', articleUrl: 'https://www.nature.com/articles/s41586-018-0461-z', authors: 'Findlay et al.', title: 'Accurate classification of BRCA1 variants with saturation genome editing', journal: 'Nature', year: 2018, pmid: '30209399', pdfFile: 'findlay_nature_2018.pdf', collaboration: 'with Starita Lab' },
+    { image: 'starita_ajhg_2018_thumb.png', articleUrl: 'https://www.sciencedirect.com/science/article/pii/S000292971830243X', authors: 'Starita et al.', title: 'A Multiplex Homology-Directed DNA Repair Assay Reveals the Impact of More Than 1,000 BRCA1 Missense Substitution Variants on Protein Function', journal: 'AJHG', year: 2018, pmid: '30219179', pdfFile: 'starita_ajhg_2018.pdf', collaboration: 'with Parvin Lab' },
+  ],
+  [
+    { image: 'cusanovich_cell_2018.png', articleUrl: 'https://www.cell.com/cell/abstract/S0092-8674(18)30855-9', authors: 'Cusanovich, Hill et al.', title: 'A Single-Cell Atlas of In Vivo Mammalian Chromatin Accessibility', journal: 'Cell', year: 2018, pmid: '30078704', pdfFile: 'cusanovich_cell_2018.pdf', collaboration: 'with Trapnell Lab' },
+    { image: 'gasperini_AJHG_2017_thumb.jpg', articleUrl: 'http://www.sciencedirect.com/science/article/pii/S0002929717302458', authors: 'Gasperini, Findlay et al.', title: 'CRISPR/Cas9-Mediated Scanning for Regulatory Elements Required for HPRT1 Expression via Thousands of Large, Programmed Genomic Deletions', journal: 'AJHG', year: 2017, pmid: '28712454', pdfFile: 'gasperini_ajhd_2017.pdf' },
+    { image: 'shendure_nature_2016_thumb.jpg', articleUrl: 'http://www.nature.com/nature/journal/v536/n7616/full/536277a.html', authors: 'Shendure', title: 'Human genomics: A deep dive into genetic variation', journal: 'Nature', year: 2016, pmid: '27535530', pdfFile: 'shendure_nature_2016.pdf' },
+  ],
+  [
+    { image: 'hause_nature_medicine_2017_thumb.jpg', articleUrl: 'http://www.nature.com/nm/journal/v22/n11/full/nm.4191.html', authors: 'Hause et al.', title: 'Classification and characterization of microsatellite instability across 18 cancer types', journal: 'Nature Medicine', year: 2016, pmid: '27694933', pdfFile: 'hause_nature_medicine_2016.pdf', collaboration: 'with Salipante Lab' },
+    { image: 'kumar_nature_medicine_2016_thumb.png', articleUrl: 'http://www.nature.com/nm/journal/v22/n4/abs/nm.4053.html', authors: 'Kumar, Coleman et al.', title: 'Substantial interindividual and limited intraindividual genomic diversity among tumors from men with metastatic prostate cancer', journal: 'Nature Medicine', year: 2016, pmid: '26928463', pdfFile: 'kumar_nature_medicine_2016.pdf', collaboration: 'with Nelson Lab' },
+    { image: 'fairfield_genome_research_2015_thumb.jpg', articleUrl: 'http://genome.cshlp.org/content/25/7/948.long', authors: 'Fairfield, Srivatsava, Ananda, Liu et al.', title: 'Exome sequencing reveals pathogenic mutations in 91 strains of mice with Mendelian disorders', journal: 'Genome Research', year: 2015, pmid: '25917818', pdfFile: 'fairfield_genome_research_2015.pdf', collaboration: 'with Reinholdt Lab' },
+  ],
+  [
+    { image: 'shendure_science_2015_thumb.jpg', articleUrl: 'http://science.sciencemag.org/content/349/6255/1478', authors: 'Shendure, Akey', title: 'The origins, determinants, and consequences of human mutations', journal: 'Science', year: 2015, pmid: '26404824', pdfFile: 'shendure_science_2015.pdf' },
+    { image: 'oroak_nature_communications_2014_thumb.png', articleUrl: 'http://www.nature.com/ncomms/2014/141124/ncomms6595/full/ncomms6595.html', authors: "O'Roak, Stessman et al.", title: 'Recurrent de novo mutations implicate novel genes underlying simplex autism risk', journal: 'Nature Communications', year: 2014, pmid: '25418537', pdfFile: 'oroak_nature_communications_2014.pdf', collaboration: 'with Eichler Lab' },
+    { image: 'iossifov_nature_2014_thumb.png', articleUrl: 'http://www.nature.com/nature/journal/v515/n7526/full/nature13908.html', authors: "Iossifov, O'Roak, Sanders, Ronemus et al.", title: 'The contribution of de novo coding mutations to autism spectrum disorder', journal: 'Nature', year: 2014, pmid: '25363768', pdfFile: 'iossifov_nature_2014.pdf', collaboration: 'with Wigler, State and Eichler Labs' },
+  ],
+  [
+    { image: 'kircher_nature_genetics_2014_thumb.jpg', articleUrl: 'http://www.nature.com/ng/journal/vaop/ncurrent/full/ng.2892.html', authors: 'Kircher, Witten et al.', title: 'A general framework for estimating the relative pathogenicity of human genetic variants', journal: 'Nature Genetics', year: 2014, pmid: '24487276', pdfFile: 'kircher_nature_genetics_2014.pdf', collaboration: 'with Cooper Lab' },
+    { image: 'kumar_plos_one_2014_thumb.jpg', articleUrl: 'http://www.plosone.org/article/info%3Adoi%2F10.1371%2Fjournal.pone.0106744', authors: 'Kumar et al.', title: 'Genome sequencing of idiopathic pulmonary fibrosis in conjunction with a medical school human anatomy course', journal: 'PLoS One', year: 2014, pmid: '25192356', pdfFile: 'kumar_plos_one_2014.pdf' },
+    { image: 'oroak_nature_2012_thumb.png', articleUrl: 'http://www.nature.com/nature/journal/v485/n7397/full/nature10989.html', authors: "O'Roak et al.", title: 'Sporadic autism exomes reveal a highly interconnected protein network of de novo mutations', journal: 'Nature', year: 2012, pmid: '22495309', pdfFile: 'oroak_nature_2012.pdf', collaboration: 'with Eichler Lab' },
+  ],
+  [
+    { image: 'oroak_science_2012_thumb.jpg', articleUrl: 'http://www.sciencemag.org/content/338/6114/1619.full', authors: "O'Roak et al.", title: 'Multiplex Targeted Sequencing Identifies Recurrently Mutated Genes in Autism Spectrum Disorders', journal: 'Science', year: 2012, pmid: '23160955', pdfFile: 'oroak_science_2012.pdf', collaboration: 'with Eichler Lab' },
+    { image: 'bamshad_nrg_2011_thumb.jpg', articleUrl: 'http://www.nature.com/nrg/journal/v12/n11/full/nrg3031.html', authors: 'Bamshad et al.', title: 'Exome sequencing as a tool for Mendelian disease gene discovery', journal: 'Nature Reviews Genetics', year: 2011, pmid: '21946919', pdfFile: 'bamshad_nrg_2011.pdf' },
+    { image: 'cooper_nrg_2011_thumb.jpg', articleUrl: 'http://www.nature.com/nrg/journal/v12/n9/full/nrg3046.html', authors: 'Cooper, Shendure', title: 'Needles in stacks of needles: finding disease-causal variants in a wealth of genomic data', journal: 'Nature Reviews Genetics', year: 2011, pmid: '21850043', pdfFile: 'cooper_nrg_2011.pdf' },
+  ],
+  [
+    { image: 'kumar_pnas_2011_thumb.jpg', articleUrl: 'http://www.pnas.org/content/early/2011/09/22/1108745108.full.pdf+html', authors: 'Kumar et al.', title: 'Exome sequencing identifies a spectrum of mutation frequencies in advanced and lethal prostate cancers', journal: 'PNAS', year: 2011, pmid: '21949389', pdfFile: 'kumar_pnas_2011.pdf', collaboration: 'with Nelson Lab' },
+    { image: 'shendure_genome_biology_2011_thumb.jpg', articleUrl: 'http://genomebiology.com/content/pdf/gb-2011-12-9-408.pdf', authors: 'Shendure', title: 'Next-generation human genetics', journal: 'Genome Biology', year: 2011, pmid: '21920048', pdfFile: 'shendure_genome_biology_2011.pdf' },
+    { image: 'oroak_nature_genetics_2011_thumb.jpg', articleUrl: 'http://www.nature.com/ng/journal/v43/n6/full/ng.835.html', authors: "O'Roak et al.", title: 'Exome sequencing in sporadic autism spectrum disorders identifies severe de novo mutations', journal: 'Nature Genetics', year: 2011, pmid: '21572417', pdfFile: 'oroak_nature_genetics_2011.pdf', collaboration: 'with Eichler Lab' },
+  ],
+  [
+    { image: 'ng_nature_genetics_2010a_thumb.jpg', articleUrl: 'http://www.nature.com/ng/journal/v42/n1/full/ng.499.html', authors: 'Ng, Bigham et al.', title: 'Exome sequencing identifies the cause of a mendelian disorder', journal: 'Nature Genetics', year: 2010, pmid: '19915526', pdfFile: 'ng_nature_genetics_2010a.pdf', collaboration: 'with Bamshad Lab' },
+    { image: 'ng_nature_genetics_2010b_thumb.jpg', articleUrl: 'http://www.nature.com/ng/journal/v42/n9/full/ng.646.html', authors: 'Ng, Bigham et al.', title: 'Exome sequencing identifies MLL2 mutations as a cause of Kabuki syndrome', journal: 'Nature Genetics', year: 2010, pmid: '20711175', pdfFile: 'ng_nature_genetics_2010b.pdf', collaboration: 'with Bamshad Lab' },
+    { image: 'ng_nature_2009_thumb.jpg', articleUrl: 'http://www.nature.com/nature/journal/v461/n7261/full/nature08250.html', authors: 'Ng et al.', title: 'Targeted capture and massively parallel sequencing of 12 human exomes', journal: 'Nature', year: 2009, pmid: '19684571', pdfFile: 'ng_nature_2009.pdf' },
+  ],
+];
+
+// Flatten and group by year
+const allPubs = publicationRows.flat();
+const pubsByYear = allPubs.reduce((acc, pub) => {
+  const year = pub.year || 'Unknown';
+  if (!acc[year]) acc[year] = [];
+  acc[year].push(pub);
+  return acc;
+}, {} as Record<number | string, typeof allPubs>);
+
+// Get sorted years (most recent first)
+const years = Object.keys(pubsByYear).sort((a, b) => Number(b) - Number(a));
+---
+
+<BaseLayout title="Genetic Basis of Human Disease | Shendure Lab">
+  <!-- Mobile Year Scrollbar -->
+  <nav class="lg:hidden sticky top-16 z-40 year-scrollbar border-b" aria-label="Jump to year">
+    <div class="flex overflow-x-auto scrollbar-hide px-4 py-2 gap-2" role="list">
+      {years.map(year => (
+        <a
+          href={`#year-${year}`}
+          class="year-pill flex-shrink-0 px-4 py-3 text-sm rounded-full border transition-colors"
+          role="listitem"
+          aria-label={`Jump to ${year} publications`}
+        >
+          {year}
+        </a>
+      ))}
+    </div>
+  </nav>
+
+  <div class="w-full max-w-[1000px] mx-auto px-4 py-12 pb-[60vh]">
+    <h1 class="w-full text-2xl md:text-3xl font-bold text-lab-orange mb-8 text-center">Genetic Basis of Human Disease</h1>
+    <p class="w-full text-center page-subtitle mb-10">(selected publications)</p>
+
+    <div class="w-full mb-8 text-center">
+      <a href="/research" class="text-lab-blue hover:underline">&larr; Back to Research</a>
+    </div>
+
+    {years.map(year => (
+      <div id={`year-${year}`} class="mb-12 scroll-mt-32">
+        <h2 class="text-xl font-bold text-lab-orange mb-6 text-center lg:text-left">{year}</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 justify-items-center">
+          {pubsByYear[year].map((pub) => (
+            <ResearchPubCard
+              image={pub.image}
+              articleUrl={pub.articleUrl}
+              authors={pub.authors}
+              title={pub.title}
+              journal={pub.journal}
+              year={pub.year}
+              pmid={pub.pmid}
+              pdfFile={pub.pdfFile}
+              collaboration={pub.collaboration}
+            />
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <YearNavScript />
+</BaseLayout>
+
+<style>
+  .year-scrollbar {
+    background-color: var(--theme-bg);
+    border-color: var(--theme-border);
+  }
+  .year-pill {
+    background-color: var(--theme-bg);
+    border-color: var(--theme-border);
+    color: var(--theme-text-secondary);
+  }
+  .year-pill:hover, .year-pill:focus-visible {
+    background-color: var(--color-lab-orange);
+    border-color: var(--color-lab-orange);
+    color: white;
+  }
+  .page-subtitle {
+    color: var(--theme-text-secondary);
+  }
+</style>

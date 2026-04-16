@@ -1,0 +1,327 @@
+---
+// Search Modal Component
+// Client-side search for people, publications, and news
+// Note: The search buttons are in Header.astro, this component only renders the modal overlay
+---
+
+<!-- Search Modal Overlay -->
+<div
+  id="search-modal"
+  class="fixed inset-0 z-[100] hidden"
+  role="dialog"
+  aria-modal="true"
+  aria-labelledby="search-dialog-title"
+>
+  <!-- Backdrop -->
+  <div id="search-backdrop" class="absolute inset-0 bg-black/50" aria-hidden="true"></div>
+
+  <!-- Modal Content -->
+  <div class="relative z-10 flex items-start justify-center pt-20 px-4">
+    <div class="search-modal-content rounded-xl shadow-2xl w-full max-w-2xl max-h-[70vh] overflow-hidden" role="document">
+      <!-- Search Input -->
+      <div class="p-4 border-b search-modal-border">
+        <h2 id="search-dialog-title" class="sr-only">Search Shendure Lab</h2>
+        <div class="relative">
+          <svg class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 search-modal-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+          <label for="search-input" class="sr-only">Search people, publications, and news</label>
+          <input
+            id="search-input"
+            type="search"
+            placeholder="Search people, publications, news..."
+            class="search-modal-input w-full pl-12 pr-12 py-3 text-lg border rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lab-orange focus-visible:border-transparent"
+            autocomplete="off"
+            aria-describedby="search-hint"
+          />
+          <span id="search-hint" class="sr-only">Press Escape to close, or use Cmd+K / Ctrl+K to open search anytime</span>
+          <button
+            id="search-close"
+            class="absolute right-4 top-1/2 -translate-y-1/2 search-modal-close"
+            aria-label="Close search"
+          >
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Search Results -->
+      <div id="search-results" class="overflow-y-auto max-h-[50vh] p-4" role="region" aria-live="polite" aria-label="Search results">
+        <p class="search-modal-muted text-center py-8">Start typing to search...</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .search-modal-content {
+    background-color: var(--theme-bg);
+  }
+  .search-modal-border {
+    border-color: var(--theme-border);
+  }
+  .search-modal-icon {
+    color: var(--theme-text-muted);
+  }
+  .search-modal-input {
+    background-color: var(--theme-bg);
+    border-color: var(--theme-border);
+    color: var(--theme-text);
+  }
+  .search-modal-input::placeholder {
+    color: var(--theme-text-muted);
+  }
+  .search-modal-close {
+    color: var(--theme-text-muted);
+  }
+  .search-modal-close:hover {
+    color: var(--theme-text);
+  }
+  .search-modal-muted {
+    color: var(--theme-text-muted);
+  }
+  .search-result-link:hover {
+    background-color: var(--theme-bg-secondary);
+  }
+  .search-result-title {
+    color: var(--theme-text);
+  }
+</style>
+
+<script>
+  // Search data will be populated from JSON files
+  interface Person {
+    name: string;
+    slug: string;
+    title: string;
+    status: string;
+  }
+
+  interface Publication {
+    title: string;
+    authors: string;
+    journal: string;
+    year: number;
+    category: string;
+    slug: string;
+  }
+
+  interface NewsItem {
+    date: string;
+    source: string;
+    headline: string;
+    url: string;
+    year: number | null;
+  }
+
+  let peopleData: Person[] = [];
+  let publicationsData: Publication[] = [];
+  let newsData: NewsItem[] = [];
+  let dataLoaded = false;
+
+  // Load search data - exposed globally for mobile search button
+  async function loadSearchData() {
+    if (dataLoaded) return;
+
+    try {
+      // Load people
+      const peopleResponse = await fetch('/data/people-search.json');
+      if (peopleResponse.ok) {
+        peopleData = await peopleResponse.json();
+      }
+
+      // Load publications
+      const pubsResponse = await fetch('/data/publications-search.json');
+      if (pubsResponse.ok) {
+        publicationsData = await pubsResponse.json();
+      }
+
+      // Load news
+      const newsResponse = await fetch('/data/news-search.json');
+      if (newsResponse.ok) {
+        newsData = await newsResponse.json();
+      }
+
+      dataLoaded = true;
+    } catch (e) {
+      console.log('Search data not available');
+    }
+  }
+
+  // Expose loadSearchData globally for mobile search button
+  (window as any).loadSearchData = loadSearchData;
+
+  // Search function
+  function search(query: string): { people: Person[], publications: Publication[], news: NewsItem[] } {
+    const q = query.toLowerCase().trim();
+    if (!q) return { people: [], publications: [], news: [] };
+
+    const people = peopleData.filter(p =>
+      p.name.toLowerCase().includes(q) ||
+      p.title.toLowerCase().includes(q)
+    ).slice(0, 5);
+
+    const publications = publicationsData.filter(p =>
+      p.title.toLowerCase().includes(q) ||
+      p.authors.toLowerCase().includes(q) ||
+      p.journal.toLowerCase().includes(q)
+    ).slice(0, 5);
+
+    const news = newsData.filter(n =>
+      n.headline.toLowerCase().includes(q) ||
+      n.source.toLowerCase().includes(q)
+    ).slice(0, 5);
+
+    return { people, publications, news };
+  }
+
+  // Render results
+  function renderResults(results: { people: Person[], publications: Publication[], news: NewsItem[] }) {
+    const container = document.getElementById('search-results');
+    if (!container) return;
+
+    if (results.people.length === 0 && results.publications.length === 0 && results.news.length === 0) {
+      container.innerHTML = '<p class="search-modal-muted text-center py-8">No results found</p>';
+      return;
+    }
+
+    let html = '';
+
+    if (results.people.length > 0) {
+      html += '<div class="mb-6"><h3 class="text-sm font-semibold search-modal-muted uppercase tracking-wider mb-3">People</h3><div class="space-y-2">';
+      results.people.forEach(p => {
+        const url = p.slug
+          ? (p.status === 'alumni' ? `/people/alumni#${p.slug}` : `/people#${p.slug}`)
+          : '/people/alumni';
+        html += `<a href="${url}" class="search-result-link block p-3 rounded-lg transition-colors">
+          <div class="font-medium search-result-title">${p.name}</div>
+          <div class="text-sm search-modal-muted">${p.title}</div>
+        </a>`;
+      });
+      html += '</div></div>';
+    }
+
+    if (results.publications.length > 0) {
+      html += '<div class="mb-6"><h3 class="text-sm font-semibold search-modal-muted uppercase tracking-wider mb-3">Publications</h3><div class="space-y-2">';
+      results.publications.forEach(p => {
+        // Map category values to actual page URLs
+        const categoryMap: Record<string, string> = {
+          'preprint': 'preprints',
+          'review': 'reviews',
+          'pre2007': 'pre-2007',
+          'research': 'research'
+        };
+        const pageCategory = categoryMap[p.category] || p.category;
+        const url = p.slug ? `/publications/${pageCategory}#${p.slug}` : `/publications/${pageCategory}`;
+        html += `<a href="${url}" class="search-result-link block p-3 rounded-lg transition-colors">
+          <div class="font-medium search-result-title line-clamp-1">${p.title}</div>
+          <div class="text-sm search-modal-muted">${p.journal} (${p.year})</div>
+        </a>`;
+      });
+      html += '</div></div>';
+    }
+
+    if (results.news.length > 0) {
+      html += '<div><h3 class="text-sm font-semibold search-modal-muted uppercase tracking-wider mb-3">News</h3><div class="space-y-2">';
+      results.news.forEach(n => {
+        html += `<a href="${n.url}" target="_blank" rel="noopener noreferrer" class="search-result-link block p-3 rounded-lg transition-colors">
+          <div class="font-medium search-result-title line-clamp-2">${n.headline}</div>
+          <div class="text-sm search-modal-muted">${n.source} (${n.date})</div>
+          <span class="sr-only">(opens in new tab)</span>
+        </a>`;
+      });
+      html += '</div></div>';
+    }
+
+    container.innerHTML = html;
+  }
+
+  // DOM Elements
+  const searchBtn = document.getElementById('search-btn'); // Desktop button in Header
+  const mobileSearchBtn = document.getElementById('mobile-search-btn'); // Mobile button in Header
+  const searchModal = document.getElementById('search-modal');
+  const searchBackdrop = document.getElementById('search-backdrop');
+  const searchClose = document.getElementById('search-close');
+  const searchInput = document.getElementById('search-input') as HTMLInputElement;
+
+  // Open modal function
+  async function openSearchModal() {
+    triggerElement = document.activeElement as HTMLElement;
+    searchModal?.classList.remove('hidden');
+    await loadSearchData();
+    setTimeout(() => searchInput?.focus(), 100);
+  }
+
+  // Desktop search button
+  searchBtn?.addEventListener('click', openSearchModal);
+
+  // Mobile search button
+  mobileSearchBtn?.addEventListener('click', openSearchModal);
+
+  // Track which button opened the modal so we can restore focus
+  let triggerElement: HTMLElement | null = null;
+
+  // Close modal
+  function closeModal() {
+    searchModal?.classList.add('hidden');
+    if (searchInput) searchInput.value = '';
+    const container = document.getElementById('search-results');
+    if (container) container.innerHTML = '<p class="search-modal-muted text-center py-8">Start typing to search...</p>';
+    // Restore focus to the element that opened the modal
+    triggerElement?.focus();
+    triggerElement = null;
+  }
+
+  // Focus trap: keep Tab/Shift+Tab within the modal
+  searchModal?.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key !== 'Tab') return;
+    const focusable = searchModal.querySelectorAll<HTMLElement>(
+      'input, button, a[href], [tabindex]:not([tabindex="-1"])'
+    );
+    if (focusable.length === 0) return;
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (e.shiftKey && document.activeElement === first) {
+      e.preventDefault();
+      last.focus();
+    } else if (!e.shiftKey && document.activeElement === last) {
+      e.preventDefault();
+      first.focus();
+    }
+  });
+
+  searchBackdrop?.addEventListener('click', closeModal);
+  searchClose?.addEventListener('click', closeModal);
+
+  // Close on Escape
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !searchModal?.classList.contains('hidden')) {
+      closeModal();
+    }
+    // Open on Cmd/Ctrl + K
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      searchModal?.classList.remove('hidden');
+      loadSearchData();
+      searchInput?.focus();
+    }
+  });
+
+  // Search on input
+  let debounceTimer: number;
+  searchInput?.addEventListener('input', () => {
+    clearTimeout(debounceTimer);
+    debounceTimer = window.setTimeout(() => {
+      const query = searchInput.value;
+      if (query.length < 2) {
+        const container = document.getElementById('search-results');
+        if (container) container.innerHTML = '<p class="search-modal-muted text-center py-8">Start typing to search...</p>';
+        return;
+      }
+      const results = search(query);
+      renderResults(results);
+    }, 200);
+  });
+</script>

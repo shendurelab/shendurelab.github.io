@@ -1,0 +1,314 @@
+---
+import SearchModal from '../search/SearchModal.astro';
+
+// Navigation items matching the current site structure
+const navItems = [
+  {
+    label: 'People',
+    href: '/people',
+    children: [
+      { label: 'Current', href: '/people' },
+      { label: 'Alumni', href: '/people/alumni' },
+    ]
+  },
+  {
+    label: 'Research',
+    href: '/research',
+    children: [
+      { label: 'Developing New Molecular Methods', href: '/research/molecular-methods' },
+      { label: 'Genomic Approaches to Developmental Biology', href: '/research/developmental-biology' },
+      { label: 'Massively Parallel Functional Genomics', href: '/research/functional-genomics' },
+      { label: 'Genetic Basis of Human Disease', href: '/research/human-disease' },
+      { label: 'Translating Genomics to the Clinic', href: '/research/clinical-genomics' },
+      { label: 'Genome Sequencing Technologies', href: '/research/sequencing-technologies' },
+    ]
+  },
+  {
+    label: 'Publications',
+    href: '/publications',
+    children: [
+      { label: 'Featured Research Articles', href: '/publications/research' },
+      { label: 'Featured Review Articles', href: '/publications/reviews' },
+      { label: 'Featured Preprint Papers', href: '/publications/preprints' },
+      { label: 'Pre-2007', href: '/publications/pre-2007' },
+      { label: 'All Publications (PubMed)', href: 'https://pubmed.ncbi.nlm.nih.gov/?term=shendure%5Bau%5D', external: true },
+    ]
+  },
+  {
+    label: 'Press',
+    href: '/press',
+    children: [
+      { label: 'Featured News', href: '/press' },
+      { label: 'All News', href: '/press/all' },
+    ]
+  },
+  { label: 'Wiki', href: 'https://wikisrv.gs.washington.edu/twiki/bin/view/ShendureLab/WebHome', external: true },
+  {
+    label: 'Resources',
+    href: '/resources',
+    children: [
+      { label: 'Centers', href: '/resources/centers' },
+      { label: 'Software', href: '/resources/software' },
+      { label: 'Cell Atlas', href: 'https://atlas.brotmanbaty.org/', external: true },
+      { label: 'CADD Scores', href: 'https://cadd.gs.washington.edu/', external: true },
+      { label: 'BRCA1 Scores', href: 'https://sge.gs.washington.edu/BRCA1/', external: true },
+      { label: 'Xpresso', href: 'https://xpresso.gs.washington.edu/', external: true },
+    ]
+  },
+  { label: 'Upcoming', href: '/upcoming' },
+  { label: 'Fun', href: '/fun' },
+  { label: 'Support', href: '/support' },
+  { label: 'Contact', href: '/contact' },
+];
+---
+
+<header class="header-component border-b sticky top-0 z-50" role="banner">
+  <div class="max-w-[1200px] mx-auto px-4">
+    <nav class="flex items-center justify-between h-16" role="navigation" aria-label="Main navigation">
+      <!-- Logo -->
+      <a href="/" class="flex-shrink-0 py-1" aria-label="Shendure Lab - Home">
+        <img src="/images/shendurelab.png" alt="Shendure Lab" class="header-logo h-10 bg-white px-2 py-1 rounded" />
+      </a>
+
+      <!-- Desktop Navigation (xl: 1280px+) -->
+      <div class="hidden xl:flex items-center gap-1">
+        {navItems.map((item) => (
+          <div class="relative group">
+            <a
+              href={item.href}
+              class="px-3 py-2 text-sm header-nav-link transition-colors"
+              aria-haspopup={item.children ? "true" : undefined}
+            >
+              {item.label}
+              {item.children && (
+                <svg class="inline-block w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              )}
+            </a>
+
+            {/* Dropdown - shows on hover AND keyboard focus */}
+            {item.children && (
+              <div class="absolute left-0 top-full pt-1 hidden group-hover:block group-focus-within:block">
+                <div class="header-dropdown border rounded-lg shadow-lg py-2 min-w-[180px]">
+                  {item.children.map((child) => (
+                    <a
+                      href={child.href}
+                      target={child.external ? '_blank' : undefined}
+                      rel={child.external ? 'noopener noreferrer' : undefined}
+                      class="block px-4 py-2 text-sm header-dropdown-link"
+                    >
+                      {child.label}
+                      {child.external && (
+                        <>
+                          <span class="sr-only">(opens in new tab)</span>
+                          <svg class="inline-block w-3 h-3 ml-1 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                          </svg>
+                        </>
+                      )}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        ))}
+
+        <!-- Search Button (desktop) -->
+        <button
+          id="search-btn"
+          class="p-3 header-icon transition-colors"
+          aria-label="Search the site"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile/Tablet Search & Menu Buttons (below xl: 1280px) -->
+      <div class="xl:hidden flex items-center gap-1">
+        <!-- Mobile Search Button -->
+        <button
+          id="mobile-search-btn"
+          class="p-3 header-icon"
+          aria-label="Search the site"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </button>
+
+        <!-- Mobile Menu Button -->
+        <button
+          id="mobile-menu-btn"
+          class="p-3 header-icon"
+          aria-label="Open menu"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- Mobile/Tablet Navigation -->
+  <nav id="mobile-menu" class="hidden xl:hidden border-t header-mobile-menu max-h-[calc(100vh-5rem)] overflow-y-auto scrollbar-hide" aria-label="Mobile navigation">
+    <div class="px-4 py-4 space-y-2">
+      {navItems.map((item) => (
+        <div>
+          <a
+            href={item.href}
+            class="block py-3 header-mobile-link font-medium"
+          >
+            {item.label}
+          </a>
+          {item.children && (
+            <div class="pl-4 space-y-1">
+              {item.children.map((child) => (
+                <a
+                  href={child.href}
+                  target={child.external ? '_blank' : undefined}
+                  rel={child.external ? 'noopener noreferrer' : undefined}
+                  class="block py-3 text-sm header-mobile-sublink"
+                >
+                  {child.label}
+                  {child.external && <span class="sr-only">(opens in new tab)</span>}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </nav>
+
+  <!-- UW Gold accent bar -->
+  <div class="h-1 bg-uw-gold"></div>
+</header>
+
+<!-- Search Modal (outside header so it's always accessible) -->
+<SearchModal />
+
+<style>
+  .header-component {
+    background-color: var(--theme-bg);
+    border-color: var(--theme-border);
+  }
+  .header-nav-link {
+    color: var(--theme-text-secondary);
+  }
+  .header-nav-link:hover {
+    color: var(--color-uw-purple);
+  }
+  .header-nav-link:focus-visible {
+    color: var(--color-uw-purple);
+    background-color: var(--theme-bg-secondary);
+    border-radius: 0.375rem;
+  }
+  .header-dropdown {
+    background-color: var(--theme-bg);
+    border-color: var(--theme-border);
+  }
+  .header-dropdown-link {
+    color: var(--theme-text-secondary);
+  }
+  .header-dropdown-link:hover,
+  .header-dropdown-link:focus-visible {
+    background-color: var(--theme-bg-secondary);
+    color: var(--color-uw-purple);
+  }
+  .header-mobile-menu {
+    background-color: var(--theme-bg);
+    border-color: var(--theme-border);
+  }
+  .header-mobile-link {
+    color: var(--theme-text-secondary);
+  }
+  .header-mobile-link:hover,
+  .header-mobile-link:focus-visible {
+    color: var(--color-uw-purple);
+  }
+  .header-mobile-sublink {
+    color: var(--theme-text-muted);
+  }
+  .header-mobile-sublink:hover,
+  .header-mobile-sublink:focus-visible {
+    color: var(--color-uw-purple);
+  }
+  .header-icon {
+    color: var(--theme-text-secondary);
+  }
+  .header-icon:hover {
+    color: var(--color-uw-purple);
+  }
+
+  /* Nest Hub and similar wide/short displays */
+  @media (min-width: 1024px) and (max-height: 800px) and (min-aspect-ratio: 4/3) {
+    .header-logo {
+      height: 1.75rem; /* smaller logo */
+      padding: 0.25rem 0.5rem;
+    }
+    .header-nav-link {
+      font-size: 0.7rem;
+      padding: 0.375rem 0.5rem;
+    }
+  }
+  </style>
+
+<script>
+  // Mobile menu toggle
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+
+  btn?.addEventListener('click', () => {
+    const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', (!isExpanded).toString());
+    btn.setAttribute('aria-label', isExpanded ? 'Open menu' : 'Close menu');
+    menu?.classList.toggle('hidden');
+  });
+
+  // Desktop dropdown keyboard navigation
+  // Keep dropdown open when using arrow keys, close on Escape
+  document.querySelectorAll('.group').forEach((group) => {
+    const trigger = group.querySelector('a[aria-haspopup]');
+    const dropdown = group.querySelector('.header-dropdown');
+    if (!trigger || !dropdown) return;
+
+    const dropdownLinks = dropdown.querySelectorAll('a');
+
+    // Arrow down from trigger opens dropdown and focuses first item
+    trigger.addEventListener('keydown', (e: KeyboardEvent) => {
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const firstLink = dropdownLinks[0] as HTMLElement;
+        firstLink?.focus();
+      }
+    });
+
+    // Arrow navigation within dropdown
+    dropdownLinks.forEach((link, i) => {
+      link.addEventListener('keydown', (e: KeyboardEvent) => {
+        if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          const next = dropdownLinks[i + 1] as HTMLElement;
+          next?.focus();
+        } else if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (i === 0) {
+            (trigger as HTMLElement).focus();
+          } else {
+            (dropdownLinks[i - 1] as HTMLElement).focus();
+          }
+        } else if (e.key === 'Escape') {
+          e.preventDefault();
+          (trigger as HTMLElement).focus();
+        }
+      });
+    });
+  });
+</script>

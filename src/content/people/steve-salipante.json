@@ -1,0 +1,15 @@
+{
+  "name": "Steve Salipante",
+  "slug": "steve-salipante",
+  "photo": "/images/people/salipante.jpg",
+  "title": "Postdoctoral Fellow",
+  "role": "postdoc",
+  "status": "alumni",
+  "startYear": 2011,
+  "endYear": 2014,
+  "jointLab": "Lab Medicine",
+  "currentPosition": "Professor, University of Washington",
+  "sortOrder": 65,
+  "jointLabUrl": "https://dlmp.uw.edu/",
+  "currentPositionUrl": "http://depts.washington.edu/labweb/"
+}

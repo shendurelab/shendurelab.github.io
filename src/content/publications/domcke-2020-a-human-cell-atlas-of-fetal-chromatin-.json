@@ -1,0 +1,13 @@
+{
+  "category": "research",
+  "articleUrl": "https://science.sciencemag.org/content/370/6518/eaba7612.full?ijkey=cXtIBunS1NR.E&keytype=ref&siteid=sci",
+  "thumbnail": "/images/papers/domcke_science_2020_thumb.png",
+  "pdfUrl": "/documents/domcke_science_2020.pdf",
+  "citation": "Domcke, Hill, Daza et al.  A human cell atlas of fetal chromatin accessibility. Science (2020)",
+  "year": 2020,
+  "journal": "A human cell atlas of fetal chromatin accessibility. Science",
+  "pmid": "33184180",
+  "collaboration": "with Cusanovich and Trapnell Labs",
+  "slug": "domcke-2020-a-human-cell-atlas-of-fetal-chromatin-",
+  "sortOrder": 25
+}

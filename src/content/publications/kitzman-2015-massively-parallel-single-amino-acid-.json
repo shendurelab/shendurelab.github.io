@@ -1,0 +1,13 @@
+{
+  "category": "research",
+  "articleUrl": "http://www.nature.com/nmeth/journal/v12/n3/full/nmeth.3223.html",
+  "thumbnail": "/images/papers/kitzman_nature_methods_2015_thumb.jpg",
+  "pdfUrl": "/documents/kitzman_nature_methods_2015.pdf",
+  "citation": "Kitzman, Starita et al. Massively parallel single-amino-acid mutagenesis. Nature Methods (2015)",
+  "year": 2015,
+  "journal": "Massively parallel single-amino-acid mutagenesis. Nature Methods",
+  "pmid": "25559584",
+  "collaboration": "with Fields Lab",
+  "slug": "kitzman-2015-massively-parallel-single-amino-acid-",
+  "sortOrder": 70
+}

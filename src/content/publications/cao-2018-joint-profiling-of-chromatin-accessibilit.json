@@ -1,0 +1,13 @@
+{
+  "category": "research",
+  "articleUrl": "http://science.sciencemag.org/content/361/6409/1380/tab-pdf",
+  "thumbnail": "/images/papers/cao_science_2018_thumb.png",
+  "pdfUrl": "/documents/cao_science_2018.pdf",
+  "citation": "Cao et al. Joint profiling of chromatin accessibility and gene expression in thousands of single cells. Science (2018)",
+  "year": 2018,
+  "journal": "Joint profiling of chromatin accessibility and gene expression in thousands of single cells. Science",
+  "pmid": "30166440",
+  "collaboration": "with Trapnell Lab",
+  "slug": "cao-2018-joint-profiling-of-chromatin-accessibilit",
+  "sortOrder": 45
+}

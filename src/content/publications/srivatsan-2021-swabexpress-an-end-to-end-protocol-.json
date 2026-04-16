@@ -1,0 +1,12 @@
+{
+  "category": "research",
+  "articleUrl": "https://academic.oup.com/clinchem/article/68/1/143/6323225?searchresult=1",
+  "thumbnail": "/images/papers/Srivatsan_ClinicalChemistry_2022_thumb.png",
+  "pdfUrl": "/documents/Srivatsan_ClinicalChemistry_2022.pdf",
+  "citation": "Srivatsan et al. SwabExpress: An end-to-end protocol for extraction-free COVID-19 testing. Clinical Chemistry (2021)",
+  "year": 2021,
+  "journal": "SwabExpress: An end-to-end protocol for extraction-free COVID-19 testing. Clinical Chemistry",
+  "pmid": "32511368",
+  "slug": "srivatsan-2021-swabexpress-an-end-to-end-protocol-",
+  "sortOrder": 22
+}

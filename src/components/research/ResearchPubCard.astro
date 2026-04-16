@@ -1,0 +1,64 @@
+---
+interface Props {
+  image: string;
+  articleUrl?: string;
+  authors: string;
+  title: string;
+  journal: string;
+  year: number;
+  pmid?: string;
+  pdfFile?: string;
+  collaboration?: string;
+}
+
+const { image, articleUrl, authors, title, journal, year, pmid, pdfFile, collaboration } = Astro.props;
+
+// Remove trailing period from authors if present (to avoid double periods with "et al.")
+const authorsFormatted = authors.endsWith('.') ? authors.slice(0, -1) : authors;
+
+// Format collaboration text
+const collaborationFormatted = collaboration || null;
+---
+
+<div class="w-full max-w-[270px] flex flex-col break-words">
+  {articleUrl ? (
+    <a href={articleUrl} target="_blank" rel="noopener noreferrer">
+      <img
+        src={`/images/papers/${image}`}
+        alt={title}
+        class="w-full aspect-[3/4] object-contain p-px border border-gray-300"
+        loading="lazy"
+      />
+      <span class="sr-only">(opens in new tab)</span>
+    </a>
+  ) : (
+    <img
+      src={`/images/papers/${image}`}
+      alt={title}
+      class="w-full aspect-[3/4] object-contain p-px border border-gray-300"
+      loading="lazy"
+    />
+  )}
+  <p class="text-gray-700 mt-2 text-xs" style="text-align: left; line-height: 1.4;">
+    {authorsFormatted}. {title}.
+  </p>
+  <p class="text-gray-600 text-xs mt-1" style="text-align: left;">
+    <em>{journal}</em> ({year})
+  </p>
+  {pmid && (
+    <p class="text-xs text-gray-600 mt-1" style="text-align: left;">
+      PMID: <a href={`https://pubmed.ncbi.nlm.nih.gov/${pmid}/`} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">{pmid}<span class="sr-only"> (opens in new tab)</span></a>
+      {pdfFile && (
+        <> | <a href={`/documents/${pdfFile}`} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">PDF<span class="sr-only"> (opens in new tab)</span></a></>
+      )}
+    </p>
+  )}
+  {!pmid && pdfFile && (
+    <p class="text-xs text-gray-600 mt-1" style="text-align: left;">
+      <a href={`/documents/${pdfFile}`} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">PDF<span class="sr-only"> (opens in new tab)</span></a>
+    </p>
+  )}
+  {collaborationFormatted && (
+    <p class="text-xs text-gray-600 mt-1" style="text-align: left;">({collaborationFormatted})</p>
+  )}
+</div>

@@ -1,0 +1,13 @@
+{
+  "category": "research",
+  "articleUrl": "https://www.nature.com/articles/s41586-019-0969-x",
+  "thumbnail": "/images/papers/cao_nature_2019_thumb.jpg",
+  "pdfUrl": "/documents/cao_nature_2019.pdf",
+  "citation": "Cao, Spielmann et al. The single-cell transcriptional landscape of mammalian organogenesis. Nature (2019)",
+  "year": 2019,
+  "journal": "The single-cell transcriptional landscape of mammalian organogenesis. Nature",
+  "pmid": "30787437",
+  "collaboration": "with Trapnell Lab",
+  "slug": "cao-2019-the-single-cell-transcriptional-landscape",
+  "sortOrder": 40
+}

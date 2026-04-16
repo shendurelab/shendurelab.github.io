@@ -1,0 +1,16 @@
+{
+  "name": "Sam Regalado",
+  "slug": "sam-regalado",
+  "photo": "/images/people/regalado2.jpg",
+  "title": "MD-PhD Student (GS)",
+  "role": "graduate-student",
+  "status": "alumni",
+  "startYear": 2016,
+  "endYear": 2024,
+  "jointLab": "Trapnell Lab",
+  "dissertation": "Scalable methods for genomic analysis of in vitro models of mammalian embryogenesis ",
+  "currentPosition": "Medical Student",
+  "sortOrder": 8,
+  "jointLabUrl": "https://cole-trapnell-lab.github.io/",
+  "currentPositionUrl": "https://mstp.washington.edu/"
+}

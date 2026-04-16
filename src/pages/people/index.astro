@@ -1,0 +1,148 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PersonCard from '../../components/people/PersonCard.astro';
+import ObfuscatedEmail from '../../components/shared/ObfuscatedEmail.astro';
+import fs from 'node:fs';
+import path from 'node:path';
+
+// Load people data
+const peopleDir = path.join(process.cwd(), 'src/content/people');
+const files = fs.readdirSync(peopleDir).filter(f => f.endsWith('.json') && !f.startsWith('_'));
+
+const allPeople = files.map(f => {
+  const content = fs.readFileSync(path.join(peopleDir, f), 'utf-8');
+  return JSON.parse(content);
+});
+
+// Filter current members only
+const currentMembers = allPeople.filter(p => p.status === 'current');
+
+// Separate PI, rotation students, and other members
+const pi = currentMembers.find(p => p.role === 'pi');
+const rotationStudents = currentMembers.filter(p => p.role === 'rotation');
+const labMembers = currentMembers.filter(p => p.role !== 'rotation' && p.role !== 'pi');
+
+// Sort lab members alphabetically by last name
+const sortedLabMembers = labMembers.sort((a, b) => {
+  const aLast = a.name.split(' ').pop() || '';
+  const bLast = b.name.split(' ').pop() || '';
+  return aLast.localeCompare(bLast);
+});
+
+// Sort rotation students alphabetically by last name
+const sortedRotation = rotationStudents.sort((a, b) => {
+  const aLast = a.name.split(' ').pop() || '';
+  const bLast = b.name.split(' ').pop() || '';
+  return aLast.localeCompare(bLast);
+});
+---
+
+<BaseLayout title="People" description="Meet the current members of the Shendure Lab">
+  <div class="w-full max-w-[1000px] mx-auto px-4 py-12">
+    <h1 class="w-full text-2xl md:text-3xl font-bold text-lab-orange mb-8 text-center">Current Lab Members</h1>
+
+    <!-- Principal Investigator - Featured at Top -->
+    {pi && (
+      <div class="text-center mb-16 md:mb-20">
+        <img
+          src={pi.photo}
+          alt={pi.name}
+          class="w-32 h-32 md:w-[152px] md:h-[152px] object-cover mx-auto"
+        />
+        <p class="pi-name font-bold mt-3 text-lg md:text-xl">
+          {pi.profileUrl ? (
+            <a href={pi.profileUrl} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">{pi.name}<span class="sr-only"> (opens in new tab)</span></a>
+          ) : pi.name}
+        </p>
+        <p class="pi-title text-sm">{pi.title}</p>
+        {pi.admin && (
+          <p class="pi-meta text-xs">
+            Admin: <ObfuscatedEmail email={pi.admin.email} class="text-lab-blue hover:underline" /> ({pi.admin.name})
+          </p>
+        )}
+        {pi.links && (
+          <p class="mt-1 text-xs">
+            <a href={pi.links.hhmi} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">HHMI Page<span class="sr-only"> (opens in new tab)</span></a>,{" "}
+            <a href={pi.links.briefBio} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">Brief Bio<span class="sr-only"> (opens in new tab)</span></a>,{" "}
+            <a href={pi.links.nihBiosketch} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">NIH Biosketch<span class="sr-only"> (opens in new tab)</span></a>,{" "}
+            <a href={pi.links.cv} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">CV<span class="sr-only"> (opens in new tab)</span></a>
+          </p>
+        )}
+      </div>
+    )}
+
+    <!-- Lab Members - Responsive Grid -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6 justify-items-center">
+      {sortedLabMembers.map(person => (
+        <PersonCard {...person} />
+      ))}
+    </div>
+
+    <!-- Rotation Students Section -->
+    {sortedRotation.length > 0 && (
+      <div class="mt-16 md:mt-20">
+        <h2 class="text-xl md:text-2xl font-bold text-lab-orange mb-8 text-center">Current Rotation Students</h2>
+        {sortedRotation.length === 1 ? (
+          <div class="flex justify-center">
+            <PersonCard {...sortedRotation[0]} />
+          </div>
+        ) : (
+          <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6 justify-items-center">
+            {sortedRotation.map(person => (
+              <PersonCard {...person} />
+            ))}
+          </div>
+        )}
+      </div>
+    )}
+
+    <!-- Link to Alumni -->
+    <div class="mt-16 text-center">
+      <a href="/people/alumni" class="text-lab-blue hover:underline text-lg">
+        View Alumni &rarr;
+      </a>
+    </div>
+  </div>
+
+  <style>
+    :global(.person-card.highlighted) {
+      background-color: rgba(237, 148, 60, 0.15);
+      box-shadow: 0 0 0 3px rgba(237, 148, 60, 0.4);
+    }
+    .pi-name {
+      color: var(--theme-text);
+    }
+    .pi-title {
+      color: var(--theme-text-secondary);
+    }
+    .pi-meta {
+      color: var(--theme-text-muted);
+    }
+  </style>
+
+  <script>
+    function highlightCard() {
+      const hash = window.location.hash.slice(1);
+      if (!hash) return;
+
+      document.querySelectorAll('.person-card.highlighted').forEach(el => {
+        el.classList.remove('highlighted');
+      });
+
+      const card = document.getElementById(hash);
+      if (card) {
+        setTimeout(() => {
+          card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          card.classList.add('highlighted');
+
+          setTimeout(() => {
+            card.classList.remove('highlighted');
+          }, 5000);
+        }, 100);
+      }
+    }
+
+    highlightCard();
+    window.addEventListener('hashchange', highlightCard);
+  </script>
+</BaseLayout>

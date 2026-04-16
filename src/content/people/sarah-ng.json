@@ -1,0 +1,14 @@
+{
+  "name": "Sarah Ng",
+  "slug": "sarah-ng",
+  "photo": "/images/people/ng.jpg",
+  "title": "Graduate Student (GS)",
+  "role": "graduate-student",
+  "status": "alumni",
+  "startYear": 2008,
+  "endYear": 2013,
+  "dissertation": "Next Generation Mendelian Genetics",
+  "currentPosition": "Head, Genome Innovation Lab, Genome Institute of Singapore",
+  "sortOrder": 73,
+  "currentPositionUrl": "https://www.a-star.edu.sg/gis"
+}

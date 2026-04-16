@@ -1,0 +1,76 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+// ANIMATIONS COMMENTED OUT 3/23/26 per Jay's request — uncomment import + component to re-enable
+// import DNAAnimation from '../components/special/DNAAnimation.astro';
+---
+
+<BaseLayout title="Home" description="Shendure Lab - Developing and applying new technologies for DNA sequencing, genome function, and human genetics.">
+
+  <!-- Hero Section with Animation Background -->
+  <section class="hero-section relative border-b overflow-hidden min-h-[calc(100vh-140px)]">
+    <!-- ANIMATION COMMENTED OUT 3/23/26 — uncomment to re-enable -->
+    <!-- <DNAAnimation height="100%" class="!absolute inset-0 w-full h-full" variant="hero" /> -->
+
+    <!-- Content overlay - pointer-events:none allows clicks to pass through to canvas -->
+    <div class="relative z-10 py-16 sm:py-24 lg:py-40 flex items-center min-h-[calc(100vh-140px)] pointer-events-none">
+      <div class="max-w-[1200px] mx-auto px-4 text-center">
+        <h1 class="sr-only">Shendure Lab — University of Washington Department of Genome Sciences</h1>
+        <img src="/images/shendurelab.png" alt="Shendure Lab" class="h-12 sm:h-16 lg:h-20 mx-auto mb-6 sm:mb-10 lg:mb-16 hero-logo" />
+
+        <p class="text-base sm:text-lg lg:text-xl hero-subtitle mb-4 sm:mb-6 lg:mb-10">
+          University of Washington | Department of Genome Sciences
+        </p>
+
+        <p class="text-lg sm:text-xl lg:text-2xl hero-text max-w-3xl mx-auto leading-relaxed px-2">
+          Developing new molecular and genomic technologies to understand
+          human development, disease, and the regulatory genome.
+        </p>
+        <div class="mt-4 sm:mt-8 lg:mt-12 flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center pointer-events-auto px-6 sm:px-4">
+          <a href="/research" class="hero-btn px-4 py-2 text-sm sm:px-7 sm:py-3.5 sm:text-base lg:px-8 lg:py-4 lg:text-lg bg-lab-orange-dark text-white font-semibold rounded-lg hover:bg-lab-orange transition-colors">
+            Our Research
+          </a>
+          <a href="/publications" class="hero-btn px-4 py-2 text-sm sm:px-7 sm:py-3.5 sm:text-base lg:px-8 lg:py-4 lg:text-lg border-2 border-lab-blue text-lab-blue font-semibold rounded-lg hover:bg-lab-blue hover:text-white transition-colors">
+            Publications
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .hero-section {
+      border-color: var(--theme-border);
+    }
+    .hero-subtitle {
+      color: var(--theme-text-secondary);
+    }
+    .hero-text {
+      color: var(--theme-text);
+    }
+    .hero-logo {
+      transition: background-color 0.3s, padding 0.3s, border-radius 0.3s;
+    }
+    :global(.dark) .hero-logo {
+      background-color: white;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.5rem;
+    }
+    /* Compact buttons for very small screens - maintain 44px min touch target */
+    @media (max-width: 380px) {
+      .hero-btn {
+        padding: 10px 12px !important;
+        font-size: 12px !important;
+        min-height: 44px;
+      }
+    }
+    /* Compact buttons for Surface Duo (540px) */
+    @media (min-width: 381px) and (max-width: 550px) {
+      .hero-btn {
+        padding: 10px 12px !important;
+        font-size: 12px !important;
+        min-height: 44px;
+      }
+    }
+  </style>
+
+</BaseLayout>

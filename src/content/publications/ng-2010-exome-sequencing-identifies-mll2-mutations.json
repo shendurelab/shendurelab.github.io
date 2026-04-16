@@ -1,0 +1,13 @@
+{
+  "category": "research",
+  "articleUrl": "http://www.nature.com/ng/journal/v42/n9/full/ng.646.html",
+  "thumbnail": "/images/papers/ng_nature_genetics_2010b_thumb.jpg",
+  "pdfUrl": "/documents/ng_nature_genetics_2010b.pdf",
+  "citation": "Ng, Bigham et al. Exome sequencing identifies MLL2 mutations as a cause of Kabuki syndrome. Nature Genetics (2010)",
+  "year": 2010,
+  "journal": "Exome sequencing identifies MLL2 mutations as a cause of Kabuki syndrome. Nature Genetics",
+  "pmid": "20711175",
+  "collaboration": "with Bamshad Lab",
+  "slug": "ng-2010-exome-sequencing-identifies-mll2-mutations",
+  "sortOrder": 99
+}

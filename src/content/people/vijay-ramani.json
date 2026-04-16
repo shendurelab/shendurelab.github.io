@@ -1,0 +1,14 @@
+{
+  "name": "Vijay Ramani",
+  "slug": "vijay-ramani",
+  "photo": "/images/lab/ramani.png",
+  "title": "Graduate Student (GS)",
+  "role": "graduate-student",
+  "status": "alumni",
+  "startYear": 2014,
+  "endYear": 2018,
+  "dissertation": "Massively parallel analysis of nucleic acid structure",
+  "currentPosition": "Assistant Professor, Gladstone Institutes, UCSF",
+  "sortOrder": 43,
+  "currentPositionUrl": "http://kamakshi.ucsf.edu/"
+}

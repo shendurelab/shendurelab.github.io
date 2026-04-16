@@ -1,0 +1,12 @@
+{
+  "category": "research",
+  "articleUrl": "https://www.ncbi.nlm.nih.gov/pubmed/29976198",
+  "thumbnail": "/images/papers/mckenna_bmcbio_2018.png",
+  "pdfUrl": "/documents/mckenna_bmcbio_2018.pdf",
+  "citation": "McKenna & Shendure. FlashFry: a fast and flexible tool for large-scale CRISPR target design. BMC Biology (2018)",
+  "year": 2018,
+  "journal": "FlashFry: a fast and flexible tool for large-scale CRISPR target design. BMC Biology",
+  "pmid": "29976198",
+  "slug": "mckenna-2018-flashfry-a-fast-and-flexible-tool-for",
+  "sortOrder": 48
+}

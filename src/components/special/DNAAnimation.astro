@@ -1,0 +1,1859 @@
+---
+import animationsConfig from '../../content/animations.json';
+
+interface Props {
+  height?: string;
+  class?: string;
+  variant?: 'default' | 'hero'; // hero variant uses larger animations for homepage
+}
+
+const { height = '100%', class: className = '', variant = 'default' } = Astro.props;
+
+// Sort animations by sortOrder - now organized by 13 research categories
+const sortedAnimations = [...animationsConfig.animations]
+  .sort((a, b) => a.sortOrder - b.sortOrder);
+---
+
+<div
+  class:list={['genome-animation-container overflow-hidden', className]}
+  style={`height: ${height}; position: absolute; top: 0; left: 0; right: 0; bottom: 0;`}
+  role="img"
+  aria-label="Animated visualization of genomics research data patterns representing different Shendure Lab research areas"
+  data-variant={variant}
+>
+  <canvas id="genome-canvas" style="width: 100%; height: 100%; display: block;" aria-hidden="true"></canvas>
+</div>
+
+<script define:vars={{ animationData: sortedAnimations }}>
+  window.__animationData = animationData;
+</script>
+
+<script>
+/**
+ * Genomics Animation - Four Corners with Morphing
+ * Each corner cycles through different research figure shapes
+ * Animations are loaded from animations.json and sorted by recency
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  const canvas = document.getElementById('genome-canvas') as HTMLCanvasElement;
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  if (!ctx) return;
+
+  // Get variant from container - hero variant uses larger animations
+  const container = canvas.closest('.genome-animation-container') as HTMLElement;
+  const variant = container?.dataset.variant || 'default';
+
+  // Check for reduced motion preference
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Get animation data from server-side config (13 research categories)
+  const animationData = (window as any).__animationData || [];
+
+  // Base colors matching the paper figures
+  const COLORS = {
+    blue: 'rgba(52, 144, 220, 0.7)',
+    orange: 'rgba(237, 148, 60, 0.7)',
+    green: 'rgba(72, 187, 120, 0.7)',
+    red: 'rgba(220, 80, 80, 0.7)',
+    yellow: 'rgba(236, 201, 75, 0.7)',
+    purple: 'rgba(75, 46, 131, 0.7)',
+    cyan: 'rgba(56, 178, 172, 0.7)',
+    pink: 'rgba(237, 100, 166, 0.7)',
+  };
+
+  const colorArray = Object.values(COLORS);
+
+  // Color palettes for variations (6 palettes)
+  const COLOR_PALETTES = [
+    // Palette 0: Default (blues/purples)
+    { primary: COLORS.blue, secondary: COLORS.purple, accent: COLORS.cyan, highlight: COLORS.green },
+    // Palette 1: Warm (oranges/reds)
+    { primary: COLORS.orange, secondary: COLORS.red, accent: COLORS.yellow, highlight: COLORS.pink },
+    // Palette 2: Cool (greens/cyans)
+    { primary: COLORS.green, secondary: COLORS.cyan, accent: COLORS.blue, highlight: COLORS.purple },
+    // Palette 3: Vibrant (mixed)
+    { primary: COLORS.pink, secondary: COLORS.orange, accent: COLORS.cyan, highlight: COLORS.yellow },
+    // Palette 4: Earth (purples/greens)
+    { primary: COLORS.purple, secondary: COLORS.green, accent: COLORS.orange, highlight: COLORS.blue },
+    // Palette 5: Ocean (blues/cyans)
+    { primary: COLORS.cyan, secondary: COLORS.blue, accent: COLORS.green, highlight: COLORS.purple },
+  ];
+
+  // Size multipliers for variations
+  const SIZE_MULTIPLIERS = [1.0, 0.9, 1.1, 0.95, 1.05, 1.0];
+
+  interface Particle {
+    x: number;
+    y: number;
+    targetX: number;
+    targetY: number;
+    vx: number;
+    vy: number;
+    radius: number;
+    color: string;
+    targetColor: string;
+    corner: number;
+  }
+
+  interface Connection {
+    from: number;
+    to: number;
+    color: string;
+  }
+
+  interface CornerState {
+    particles: Particle[];
+    connections: Connection[];
+    currentShape: number;
+    shapeTimer: number;
+  }
+
+  let corners: CornerState[] = [];
+  let width = 0;
+  let height = 0;
+  let cornerCenters: {x: number, y: number}[] = [];
+  let cornerSize = 0;
+  let hoveredCorner: number | null = null;
+
+  const config = {
+    particlesPerCorner: 30,
+    easing: prefersReducedMotion ? 0.5 : 0.006,  // Faster easing for reduced motion
+    wanderStrength: prefersReducedMotion ? 0 : 0.008,  // No wandering for reduced motion
+    shapeDuration: prefersReducedMotion ? 60000 : 20000,  // Slower shape changes for reduced motion
+    transitionDuration: 12000,
+  };
+
+  // Build shape links from animation data with variation info
+  const shapeLinks = animationData.map((anim: any) => ({
+    name: anim.name,
+    type: anim.type,
+    category: anim.category,
+    variation: anim.variation || 0,
+    url: `/publications/research#${anim.paperSlug}`
+  }));
+
+  // Group animation indices by category for diverse corner selection
+  const animationsByCategory: { [category: string]: number[] } = {};
+  shapeLinks.forEach((link: any, idx: number) => {
+    if (!animationsByCategory[link.category]) {
+      animationsByCategory[link.category] = [];
+    }
+    animationsByCategory[link.category].push(idx);
+  });
+  const allCategories = Object.keys(animationsByCategory);
+
+  // Track which categories are currently displayed in each corner
+  let cornerCategories: string[] = [];
+
+  // Track which color palettes are currently used by each corner (0-5)
+  let cornerPalettes: number[] = [];
+
+  // Get a random animation index from a specific category
+  const getRandomFromCategory = (category: string): number => {
+    const indices = animationsByCategory[category];
+    return indices[Math.floor(Math.random() * indices.length)];
+  };
+
+  // Pick a random category that isn't currently used by other corners
+  const pickNewCategoryForCorner = (cornerIdx: number): string => {
+    const usedCategories = cornerCategories.filter((_, i) => i !== cornerIdx);
+    const availableCategories = allCategories.filter(cat => !usedCategories.includes(cat));
+    // If all categories used (shouldn't happen with 13 categories and 4 corners), allow any
+    const pool = availableCategories.length > 0 ? availableCategories : allCategories;
+    return pool[Math.floor(Math.random() * pool.length)];
+  };
+
+  // Pick a random palette that isn't currently used by other corners
+  const pickNewPaletteForCorner = (cornerIdx: number): number => {
+    const usedPalettes = cornerPalettes.filter((_, i) => i !== cornerIdx);
+    const allPaletteIndices = [0, 1, 2, 3, 4, 5];
+    const availablePalettes = allPaletteIndices.filter(p => !usedPalettes.includes(p));
+    // With 6 palettes and 4 corners, we always have available options
+    const pool = availablePalettes.length > 0 ? availablePalettes : allPaletteIndices;
+    return pool[Math.floor(Math.random() * pool.length)];
+  };
+
+  // Get variation parameters for a shape (colors and size only, no rotation)
+  const getVariationParams = (variation: number) => ({
+    palette: COLOR_PALETTES[variation % COLOR_PALETTES.length],
+    sizeMult: SIZE_MULTIPLIERS[variation % SIZE_MULTIPLIERS.length],
+  });
+
+  /**
+   * Dynamic animation positioning based on screen dimensions
+   * Calculates safe zones to keep animations in corners, away from center content
+   * @param w - screen width
+   * @param h - screen height
+   * @param isHero - if true, use larger animations (for homepage where content is centered)
+   */
+  const calculateAnimationLayout = (w: number, h: number, isHero: boolean = false) => {
+    const aspectRatio = w / h;
+    const isNarrowMobile = w < 550; // iPhone SE, Galaxy S8+, Surface Duo
+    const isPortrait = aspectRatio < 1;
+
+    // For narrow mobile: make animations much smaller and push to extreme edges
+    let size: number;
+    let leftX: number, rightX: number, topY: number, bottomY: number;
+
+    if (isNarrowMobile) {
+      // Narrow phones - scale size based on screen width
+      // iPhone SE (375px) stays small, Surface Duo (540px) moderate
+      // Range: 320px -> 10%, 550px -> 18%
+      const sizePercent = 0.10 + (w - 320) / (550 - 320) * 0.08;
+      size = Math.min(w, h) * Math.min(0.18, Math.max(0.10, sizePercent));
+
+      // Position animations with enough margin to not get cut off
+      const halfSize = size * 0.5;
+      const edgePadding = 15;
+      leftX = edgePadding + halfSize;
+      rightX = w - edgePadding - halfSize;
+      const verticalOffset = 50 + halfSize;
+      topY = verticalOffset;
+      bottomY = h - verticalOffset;
+    } else if (isPortrait && w < 640) {
+      // Regular mobile (larger phones like iPhone XR, iPhone 14 Pro Max)
+      // Range: 550px -> 18%, 640px -> 24%
+      const sizePercent = 0.18 + (w - 550) / (640 - 550) * 0.06;
+      size = Math.min(w, h) * Math.min(0.24, Math.max(0.18, sizePercent));
+
+      // Position with margin based on animation size
+      const halfSize = size * 0.5;
+      const edgePadding = 20;
+      leftX = edgePadding + halfSize;
+      rightX = w - edgePadding - halfSize;
+      const verticalOffset = 65 + halfSize;
+      topY = verticalOffset;
+      bottomY = h - verticalOffset;
+    } else if (w < 1024) {
+      // Tablet - scale size based on screen width
+      // Range: 640px -> 20%, 1024px -> 28% (hero) or 24% (default)
+      const basePercent = isHero ? 0.28 : 0.24;
+      const minPercent = isHero ? 0.20 : 0.18;
+      const sizePercent = minPercent + (w - 640) / (1024 - 640) * (basePercent - minPercent);
+      size = Math.min(w, h) * Math.min(basePercent, Math.max(minPercent, sizePercent));
+
+      // Position with margin based on animation size to prevent cutoff
+      const halfSize = size * 0.5;
+      const edgePadding = 25;
+      leftX = edgePadding + halfSize;
+      rightX = w - edgePadding - halfSize;
+      const verticalOffset = 75 + halfSize;
+      topY = verticalOffset;
+      bottomY = h - verticalOffset;
+    } else if (aspectRatio > 1.4 && h < 800) {
+      // Wide short displays (Nest Hub) - scale based on height
+      // Range: 600px -> 28%, 800px -> 35%
+      const sizePercent = 0.28 + (h - 600) / (800 - 600) * 0.07;
+      size = Math.min(w, h) * Math.min(0.35, Math.max(0.28, sizePercent));
+
+      // Position with margin based on animation size
+      const halfSize = size * 0.5;
+      const edgePadding = 30;
+      leftX = edgePadding + halfSize;
+      rightX = w - edgePadding - halfSize;
+      const verticalOffset = 80 + halfSize;
+      topY = verticalOffset;
+      bottomY = h - verticalOffset;
+    } else if (w >= 1024 && w <= 1400) {
+      // Large tablets and small desktops
+      // Hero can use larger animations since content is centered
+      size = Math.min(w, h) * (isHero ? 0.25 : 0.18);
+
+      // Position with margin based on animation size to prevent cutoff
+      const halfSize = size * 0.5;
+      const edgePadding = 30;
+      leftX = edgePadding + halfSize;
+      rightX = w - edgePadding - halfSize;
+      const verticalOffset = 70 + halfSize;
+      topY = verticalOffset;
+      bottomY = h - verticalOffset;
+    } else {
+      // Desktop (large screens > 1400px)
+      // Hero uses larger animations since homepage content is well-centered
+      size = Math.min(w, h) * (isHero ? 0.4 : 0.3);
+
+      // Position with margin based on animation size to prevent cutoff
+      const halfSize = size * 0.5;
+      const edgePadding = 40;
+      leftX = edgePadding + halfSize;
+      rightX = w - edgePadding - halfSize;
+      const verticalOffset = 70 + halfSize;
+      topY = verticalOffset;
+      bottomY = h - verticalOffset;
+    }
+
+    return {
+      size,
+      corners: [
+        { x: leftX, y: topY },      // top-left
+        { x: rightX, y: topY },     // top-right
+        { x: leftX, y: bottomY },   // bottom-left
+        { x: rightX, y: bottomY }   // bottom-right
+      ]
+    };
+  };
+
+  const resizeCanvas = () => {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+    canvas.width = rect.width * dpr;
+    canvas.height = rect.height * dpr;
+    ctx.scale(dpr, dpr);
+    width = rect.width;
+    height = rect.height;
+
+    // Use dynamic layout calculation (hero variant gets larger animations)
+    const isHero = variant === 'hero';
+    const layout = calculateAnimationLayout(width, height, isHero);
+    cornerSize = layout.size;
+    cornerCenters = layout.corners;
+  };
+
+  // Shape generators - each returns targets and connections
+  type ShapeGenerator = (cx: number, cy: number, s: number) => { targets: {x: number, y: number, color: string}[], connections: Connection[] };
+
+  // Apply variation to generated shape (transform colors, positions)
+  const applyVariation = (
+    result: { targets: {x: number, y: number, color: string}[], connections: Connection[] },
+    cx: number, cy: number,
+    variation: number
+  ) => {
+    const { palette, sizeMult } = getVariationParams(variation);
+
+    // Map base colors to palette colors
+    const colorMap: { [key: string]: string } = {
+      [COLORS.blue]: palette.primary,
+      [COLORS.purple]: palette.secondary,
+      [COLORS.cyan]: palette.accent,
+      [COLORS.green]: palette.highlight,
+      [COLORS.orange]: palette.primary,
+      [COLORS.red]: palette.secondary,
+      [COLORS.yellow]: palette.accent,
+      [COLORS.pink]: palette.highlight,
+    };
+
+    // Transform targets (apply size scaling and color mapping, no rotation)
+    const transformedTargets = result.targets.map(t => {
+      // Apply size scaling around center
+      const dx = t.x - cx;
+      const dy = t.y - cy;
+      const newX = cx + dx * sizeMult;
+      const newY = cy + dy * sizeMult;
+
+      // Map color to palette
+      const newColor = colorMap[t.color] || t.color;
+
+      return { x: newX, y: newY, color: newColor };
+    });
+
+    // Transform connection colors
+    const transformedConnections = result.connections.map(c => ({
+      ...c,
+      color: colorMap[c.color] || c.color
+    }));
+
+    return { targets: transformedTargets, connections: transformedConnections };
+  };
+
+  // 1. Candidate Key TFs (dendrogram style - vertical time axis with branching)
+  const createTree: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Root at top
+    targets.push({ x: cx, y: cy - s * 0.38, color: COLORS.purple }); // 0: root
+
+    // First branch level (2 main branches)
+    targets.push({ x: cx, y: cy - s * 0.25, color: COLORS.purple }); // 1: first split point
+    conns.push({ from: 0, to: 1, color: COLORS.purple });
+
+    // Left main branch
+    targets.push({ x: cx - s * 0.2, y: cy - s * 0.15, color: COLORS.blue }); // 2
+    conns.push({ from: 1, to: 2, color: COLORS.blue });
+
+    // Right main branch
+    targets.push({ x: cx + s * 0.2, y: cy - s * 0.15, color: COLORS.orange }); // 3
+    conns.push({ from: 1, to: 3, color: COLORS.orange });
+
+    // Left sub-branches (3 terminal fates)
+    targets.push({ x: cx - s * 0.32, y: cy + s * 0.05, color: COLORS.blue }); // 4
+    targets.push({ x: cx - s * 0.2, y: cy + s * 0.1, color: COLORS.cyan }); // 5
+    targets.push({ x: cx - s * 0.08, y: cy + s * 0.05, color: COLORS.green }); // 6
+    conns.push({ from: 2, to: 4, color: COLORS.blue });
+    conns.push({ from: 2, to: 5, color: COLORS.cyan });
+    conns.push({ from: 2, to: 6, color: COLORS.green });
+
+    // Right sub-branches (3 terminal fates)
+    targets.push({ x: cx + s * 0.08, y: cy + s * 0.05, color: COLORS.yellow }); // 7
+    targets.push({ x: cx + s * 0.2, y: cy + s * 0.1, color: COLORS.orange }); // 8
+    targets.push({ x: cx + s * 0.32, y: cy + s * 0.05, color: COLORS.red }); // 9
+    conns.push({ from: 3, to: 7, color: COLORS.yellow });
+    conns.push({ from: 3, to: 8, color: COLORS.orange });
+    conns.push({ from: 3, to: 9, color: COLORS.red });
+
+    // Terminal endpoints (larger visual clusters at each fate)
+    const terminalColors = [COLORS.blue, COLORS.cyan, COLORS.green, COLORS.yellow, COLORS.orange, COLORS.red];
+    const terminalX = [cx - s * 0.32, cx - s * 0.2, cx - s * 0.08, cx + s * 0.08, cx + s * 0.2, cx + s * 0.32];
+
+    for (let t = 0; t < 6; t++) {
+      // Add 2-3 dots below each terminal to represent TF clusters
+      for (let d = 0; d < 3; d++) {
+        targets.push({
+          x: terminalX[t] + (Math.random() - 0.5) * s * 0.06,
+          y: cy + s * 0.18 + d * s * 0.08 + (Math.random() - 0.5) * s * 0.03,
+          color: terminalColors[t]
+        });
+      }
+    }
+
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({ x: cx + (Math.random() - 0.5) * s * 0.7, y: cy + (Math.random() - 0.5) * s * 0.8, color: colorArray[Math.floor(Math.random() * colorArray.length)] });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 2. Well Plate Grid
+  const createGrid: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const cols = 6, rows = 5, cellSize = s * 0.14;
+    const startX = cx - (cols - 1) * cellSize / 2;
+    const startY = cy - (rows - 1) * cellSize / 2;
+
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        if (targets.length >= config.particlesPerCorner) break;
+        targets.push({ x: startX + c * cellSize, y: startY + r * cellSize, color: colorArray[(r + c) % colorArray.length] });
+      }
+    }
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({ x: cx + (Math.random() - 0.5) * s, y: cy + (Math.random() - 0.5) * s, color: colorArray[Math.floor(Math.random() * colorArray.length)] });
+    }
+    return { targets, connections: [] };
+  };
+
+  // 3. DNA Double Helix
+  const createHelix: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+    const len = s * 0.85, nodes = 10;
+    const startX = cx - len / 2;
+
+    for (let i = 0; i < nodes; i++) {
+      const x = startX + (i / nodes) * len;
+      const phase = i * 0.7;
+      targets.push({ x, y: cy + Math.sin(phase) * s * 0.2, color: [COLORS.cyan, COLORS.green, COLORS.yellow, COLORS.purple][i % 4] });
+      targets.push({ x, y: cy + Math.sin(phase + Math.PI) * s * 0.2, color: [COLORS.orange, COLORS.red, COLORS.pink, COLORS.blue][i % 4] });
+      if (i > 0) {
+        conns.push({ from: (i - 1) * 2, to: i * 2, color: COLORS.cyan });
+        conns.push({ from: (i - 1) * 2 + 1, to: i * 2 + 1, color: COLORS.orange });
+      }
+      conns.push({ from: i * 2, to: i * 2 + 1, color: 'rgba(150,150,150,0.3)' });
+    }
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({ x: cx + (Math.random() - 0.5) * s, y: cy + (Math.random() - 0.5) * s * 0.5, color: colorArray[Math.floor(Math.random() * colorArray.length)] });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 4. Mouse Embryo Atlas (UMAP-style developmental trajectory)
+  const createClusters: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Cell type colors representing different lineages
+    const lineageColors = [
+      COLORS.blue,    // Neural
+      COLORS.cyan,    // Ectoderm
+      COLORS.green,   // Mesoderm
+      COLORS.yellow,  // Endoderm
+      COLORS.orange,  // Primitive streak
+      COLORS.red,     // Blood/Hematopoietic
+      COLORS.pink,    // Cardiac
+      COLORS.purple,  // Pluripotent
+    ];
+
+    // Create UMAP-like clusters along a developmental trajectory
+    // Main trajectory flows from top-left (early) to bottom-right (late)
+    const clusters = [
+      // Early embryo (top-left) - pluripotent cells
+      { x: -0.28, y: -0.25, color: COLORS.purple, size: 3 },
+      // Primitive streak (branching point)
+      { x: -0.1, y: -0.1, color: COLORS.orange, size: 4 },
+      // Ectoderm branch (top)
+      { x: 0.1, y: -0.3, color: COLORS.cyan, size: 3 },
+      { x: 0.28, y: -0.25, color: COLORS.blue, size: 4 },  // Neural
+      // Mesoderm branch (middle)
+      { x: 0.15, y: 0.05, color: COLORS.green, size: 4 },
+      { x: 0.32, y: 0.1, color: COLORS.pink, size: 3 },   // Cardiac
+      // Endoderm branch (bottom)
+      { x: 0.05, y: 0.25, color: COLORS.yellow, size: 3 },
+      // Blood (bottom-right)
+      { x: 0.25, y: 0.3, color: COLORS.red, size: 3 },
+    ];
+
+    // Draw trajectory connections (faint lines showing developmental flow)
+    const trajectoryPoints: number[] = [];
+
+    clusters.forEach((cluster, idx) => {
+      const clusterCx = cx + cluster.x * s;
+      const clusterCy = cy + cluster.y * s;
+
+      // Add cells in each cluster (scattered cloud-like)
+      for (let i = 0; i < cluster.size; i++) {
+        const angle = (i / cluster.size) * Math.PI * 2 + Math.random() * 0.5;
+        const dist = s * 0.06 * (0.5 + Math.random() * 0.5);
+        targets.push({
+          x: clusterCx + Math.cos(angle) * dist,
+          y: clusterCy + Math.sin(angle) * dist,
+          color: cluster.color
+        });
+      }
+
+      // Store first point of each cluster for trajectory
+      trajectoryPoints.push(targets.length - cluster.size);
+    });
+
+    // Connect clusters with faint trajectory lines
+    // Early -> Primitive streak
+    conns.push({ from: trajectoryPoints[0], to: trajectoryPoints[1], color: 'rgba(150,150,150,0.2)' });
+    // Primitive streak -> three germ layers
+    conns.push({ from: trajectoryPoints[1], to: trajectoryPoints[2], color: 'rgba(150,150,150,0.2)' });
+    conns.push({ from: trajectoryPoints[1], to: trajectoryPoints[4], color: 'rgba(150,150,150,0.2)' });
+    conns.push({ from: trajectoryPoints[1], to: trajectoryPoints[6], color: 'rgba(150,150,150,0.2)' });
+    // Further differentiation
+    conns.push({ from: trajectoryPoints[2], to: trajectoryPoints[3], color: 'rgba(150,150,150,0.2)' });
+    conns.push({ from: trajectoryPoints[4], to: trajectoryPoints[5], color: 'rgba(150,150,150,0.2)' });
+    conns.push({ from: trajectoryPoints[6], to: trajectoryPoints[7], color: 'rgba(150,150,150,0.2)' });
+
+    while (targets.length < config.particlesPerCorner) {
+      // Fill remaining with scattered cells
+      const randCluster = clusters[Math.floor(Math.random() * clusters.length)];
+      targets.push({
+        x: cx + randCluster.x * s + (Math.random() - 0.5) * s * 0.15,
+        y: cy + randCluster.y * s + (Math.random() - 0.5) * s * 0.15,
+        color: randCluster.color
+      });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 5. DNA Typewriter (sequential recording tape with symbols)
+  const createChevrons: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Symbol colors representing different insertion types (A, B, C, D)
+    const symbolColors = [COLORS.orange, COLORS.blue, COLORS.green, COLORS.red];
+
+    // Draw 4 horizontal "tape" rows showing different recording outcomes
+    const numRows = 4;
+    const numSymbols = 6;
+    const rowSpacing = s * 0.18;
+    const symbolSpacing = s * 0.12;
+
+    for (let row = 0; row < numRows; row++) {
+      const rowY = cy - (numRows - 1) * rowSpacing / 2 + row * rowSpacing;
+
+      // Draw the tape backbone (horizontal line)
+      const tapeStart = cx - s * 0.38;
+      const tapeEnd = cx + s * 0.38;
+
+      // Add tape endpoints
+      targets.push({ x: tapeStart, y: rowY, color: COLORS.purple });
+      targets.push({ x: tapeEnd, y: rowY, color: COLORS.purple });
+      const tapeIdx = targets.length - 2;
+      conns.push({ from: tapeIdx, to: tapeIdx + 1, color: 'rgba(75, 46, 131, 0.3)' });
+
+      // Add symbols along the tape (different patterns per row to show different recordings)
+      const rowPattern = [
+        [0, 1, 2, 0, 3, 1],  // Row 1: A B C A D B
+        [1, 0, 0, 2, 1, 3],  // Row 2: B A A C B D
+        [2, 2, 1, 3, 0, 0],  // Row 3: C C B D A A
+        [0, 3, 1, 1, 2, 3],  // Row 4: A D B B C D
+      ][row];
+
+      for (let i = 0; i < numSymbols; i++) {
+        const symbolX = tapeStart + (i + 0.5) * (tapeEnd - tapeStart) / numSymbols;
+        const symbolColor = symbolColors[rowPattern[i]];
+
+        // Draw small triangle/arrow symbols pointing up (like insertion markers)
+        targets.push({ x: symbolX, y: rowY - s * 0.04, color: symbolColor });
+      }
+    }
+
+    // Add a "write head" indicator at the right side
+    targets.push({ x: cx + s * 0.42, y: cy - s * 0.08, color: COLORS.cyan });
+    targets.push({ x: cx + s * 0.42, y: cy + s * 0.08, color: COLORS.cyan });
+    conns.push({ from: targets.length - 2, to: targets.length - 1, color: COLORS.cyan });
+
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({ x: cx + (Math.random() - 0.5) * s * 0.9, y: cy + (Math.random() - 0.5) * s * 0.5, color: colorArray[Math.floor(Math.random() * colorArray.length)] });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 6. RNA Hairpin (Prime Editing)
+  const createHairpin: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Use full scale to match other animations
+    const scale = 1.0;
+    const ss = s * scale;
+
+    // Stem (vertical)
+    const stemNodes = 6;
+    for (let i = 0; i < stemNodes; i++) {
+      targets.push({ x: cx - ss * 0.08, y: cy + ss * 0.3 - i * ss * 0.1, color: COLORS.orange });
+      targets.push({ x: cx + ss * 0.08, y: cy + ss * 0.3 - i * ss * 0.1, color: COLORS.purple });
+      if (i > 0) {
+        conns.push({ from: (i - 1) * 2, to: i * 2, color: COLORS.orange });
+        conns.push({ from: (i - 1) * 2 + 1, to: i * 2 + 1, color: COLORS.purple });
+      }
+      conns.push({ from: i * 2, to: i * 2 + 1, color: 'rgba(150,150,150,0.2)' });
+    }
+
+    // Loop at top
+    const loopNodes = 5;
+    const loopBase = targets.length;
+    for (let i = 0; i < loopNodes; i++) {
+      const angle = Math.PI + (i / (loopNodes - 1)) * Math.PI;
+      targets.push({ x: cx + Math.cos(angle) * ss * 0.15, y: cy - ss * 0.35 + Math.sin(angle) * ss * 0.12, color: COLORS.cyan });
+      if (i > 0) conns.push({ from: loopBase + i - 1, to: loopBase + i, color: COLORS.cyan });
+    }
+    conns.push({ from: (stemNodes - 1) * 2, to: loopBase, color: COLORS.orange });
+    conns.push({ from: loopBase + loopNodes - 1, to: (stemNodes - 1) * 2 + 1, color: COLORS.purple });
+
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({ x: cx + (Math.random() - 0.5) * ss * 0.6, y: cy + (Math.random() - 0.5) * ss, color: colorArray[Math.floor(Math.random() * colorArray.length)] });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 7. Scatter Plot
+  const createScatter: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Diagonal trend with scatter
+    for (let i = 0; i < config.particlesPerCorner - 4; i++) {
+      const t = i / (config.particlesPerCorner - 5);
+      const baseX = cx - s * 0.35 + t * s * 0.7;
+      const baseY = cy + s * 0.35 - t * s * 0.7;
+      targets.push({
+        x: baseX + (Math.random() - 0.5) * s * 0.15,
+        y: baseY + (Math.random() - 0.5) * s * 0.15,
+        color: t < 0.33 ? COLORS.blue : t < 0.66 ? COLORS.green : COLORS.red
+      });
+    }
+
+    // Axes
+    targets.push({ x: cx - s * 0.4, y: cy + s * 0.4, color: COLORS.purple });
+    targets.push({ x: cx + s * 0.4, y: cy + s * 0.4, color: COLORS.purple });
+    targets.push({ x: cx - s * 0.4, y: cy + s * 0.4, color: COLORS.purple });
+    targets.push({ x: cx - s * 0.4, y: cy - s * 0.4, color: COLORS.purple });
+    const axisBase = targets.length - 4;
+    conns.push({ from: axisBase, to: axisBase + 1, color: COLORS.purple });
+    conns.push({ from: axisBase + 2, to: axisBase + 3, color: COLORS.purple });
+
+    return { targets, connections: conns };
+  };
+
+  // 8. Bar Chart / Heatmap
+  const createBars: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+    const barColors = [COLORS.blue, COLORS.orange, COLORS.green, COLORS.red, COLORS.purple];
+    const numBars = 5;
+    const barWidth = s * 0.12;
+    const maxHeight = s * 0.6;
+    const heights = [0.4, 0.7, 0.5, 0.9, 0.6];
+
+    for (let i = 0; i < numBars; i++) {
+      const barX = cx - (numBars - 1) * barWidth / 2 + i * barWidth;
+      const barHeight = maxHeight * heights[i];
+      const nodesPerBar = 4;
+
+      for (let j = 0; j < nodesPerBar; j++) {
+        targets.push({
+          x: barX,
+          y: cy + s * 0.35 - (j / (nodesPerBar - 1)) * barHeight,
+          color: barColors[i]
+        });
+        if (j > 0) conns.push({ from: targets.length - 2, to: targets.length - 1, color: barColors[i] });
+      }
+    }
+
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({ x: cx + (Math.random() - 0.5) * s, y: cy + (Math.random() - 0.5) * s, color: colorArray[Math.floor(Math.random() * colorArray.length)] });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 9. Chromosomes (Structural Variants - showing chromosome pairs with breakpoints)
+  const createChromosomes: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Draw 3 chromosome pairs
+    const chromColors = [COLORS.blue, COLORS.purple, COLORS.green];
+    const positions = [-0.25, 0, 0.25];
+
+    for (let c = 0; c < 3; c++) {
+      const chromX = cx + positions[c] * s;
+      const color = chromColors[c];
+
+      // Each chromosome is a vertical line with centromere
+      for (let i = 0; i < 6; i++) {
+        const y = cy - s * 0.35 + i * s * 0.14;
+        targets.push({ x: chromX - s * 0.04, y, color });
+        targets.push({ x: chromX + s * 0.04, y, color });
+        if (i > 0) {
+          conns.push({ from: targets.length - 4, to: targets.length - 2, color });
+          conns.push({ from: targets.length - 3, to: targets.length - 1, color });
+        }
+        // Centromere connection
+        if (i === 2 || i === 3) {
+          conns.push({ from: targets.length - 2, to: targets.length - 1, color: 'rgba(150,150,150,0.3)' });
+        }
+      }
+    }
+
+    // Add breakpoint indicators (red dots)
+    targets.push({ x: cx - s * 0.25, y: cy - s * 0.1, color: COLORS.red });
+    targets.push({ x: cx + s * 0.25, y: cy + s * 0.1, color: COLORS.red });
+
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({ x: cx + (Math.random() - 0.5) * s * 0.8, y: cy + (Math.random() - 0.5) * s * 0.8, color: colorArray[Math.floor(Math.random() * colorArray.length)] });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 10. Signal Waves (Symbolic Recording - oscillating signal patterns)
+  const createSignalWaves: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Create 3 wave patterns (representing different signals)
+    const waveColors = [COLORS.orange, COLORS.cyan, COLORS.pink];
+    const waveOffsets = [-0.2, 0, 0.2];
+    const wavePhases = [0, Math.PI / 3, Math.PI * 2 / 3];
+
+    for (let w = 0; w < 3; w++) {
+      const baseY = cy + waveOffsets[w] * s;
+      const color = waveColors[w];
+      const phase = wavePhases[w];
+
+      for (let i = 0; i < 8; i++) {
+        const x = cx - s * 0.35 + i * s * 0.1;
+        const y = baseY + Math.sin(i * 0.8 + phase) * s * 0.08;
+        targets.push({ x, y, color });
+        if (i > 0) {
+          conns.push({ from: targets.length - 2, to: targets.length - 1, color });
+        }
+      }
+    }
+
+    // Add recording symbols (small squares at the end)
+    for (let i = 0; i < 3; i++) {
+      targets.push({ x: cx + s * 0.42, y: cy + waveOffsets[i] * s, color: COLORS.purple });
+    }
+
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({ x: cx + (Math.random() - 0.5) * s, y: cy + (Math.random() - 0.5) * s * 0.6, color: colorArray[Math.floor(Math.random() * colorArray.length)] });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 11. Heatmap Grid (for MAVE/variant data)
+  const createHeatmap: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const cols = 6, rows = 5, cellSize = s * 0.12;
+    const startX = cx - (cols - 1) * cellSize / 2;
+    const startY = cy - (rows - 1) * cellSize / 2;
+
+    // Gradient colors for heatmap effect
+    const heatColors = [COLORS.blue, COLORS.cyan, COLORS.green, COLORS.yellow, COLORS.orange, COLORS.red];
+
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        if (targets.length >= config.particlesPerCorner) break;
+        // Create a gradient-like pattern
+        const colorIdx = Math.floor((r + c) / 2) % heatColors.length;
+        targets.push({ x: startX + c * cellSize, y: startY + r * cellSize, color: heatColors[colorIdx] });
+      }
+    }
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({ x: cx + (Math.random() - 0.5) * s, y: cy + (Math.random() - 0.5) * s, color: colorArray[Math.floor(Math.random() * colorArray.length)] });
+    }
+    return { targets, connections: [] };
+  };
+
+  // 12. GESTALT Lineage Tree (barcode-based with fishbone pattern)
+  const createLineageTree: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Main trunk (thicker, representing the original barcode)
+    for (let i = 0; i < 5; i++) {
+      targets.push({ x: cx, y: cy - s * 0.35 + i * s * 0.18, color: COLORS.purple });
+      if (i > 0) conns.push({ from: i - 1, to: i, color: COLORS.purple });
+    }
+
+    // Fishbone branches (alternating sides, representing mutations)
+    const branchColors = [COLORS.blue, COLORS.orange, COLORS.green, COLORS.red, COLORS.cyan, COLORS.yellow];
+    for (let i = 1; i < 5; i++) {
+      const side = i % 2 === 0 ? 1 : -1;
+      const baseIdx = targets.length;
+      for (let j = 0; j < 3; j++) {
+        targets.push({
+          x: cx + side * (j + 1) * s * 0.1,
+          y: cy - s * 0.35 + i * s * 0.18 - j * s * 0.03,
+          color: branchColors[(i + j) % branchColors.length]
+        });
+        if (j === 0) {
+          conns.push({ from: i, to: baseIdx, color: branchColors[i % branchColors.length] });
+        } else {
+          conns.push({ from: baseIdx + j - 1, to: baseIdx + j, color: branchColors[(i + j) % branchColors.length] });
+        }
+      }
+    }
+
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({ x: cx + (Math.random() - 0.5) * s * 0.7, y: cy + (Math.random() - 0.5) * s * 0.8, color: colorArray[Math.floor(Math.random() * colorArray.length)] });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 13. Joint Profile (sci-CAR - overlapping ATAC + RNA layers)
+  const createJointProfile: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Two overlapping circular clusters - ATAC (left, blue/purple) and RNA (right, orange/yellow)
+    const offset = s * 0.15;
+    const clusterRadius = s * 0.28;
+
+    // ATAC cluster (chromatin - blues/purples) - left side
+    const atacColors = [COLORS.blue, COLORS.purple, COLORS.cyan];
+    for (let i = 0; i < 12; i++) {
+      const angle = (i / 12) * Math.PI * 2 + Math.random() * 0.3;
+      const dist = clusterRadius * (0.3 + Math.random() * 0.7);
+      targets.push({
+        x: cx - offset + Math.cos(angle) * dist,
+        y: cy + Math.sin(angle) * dist,
+        color: atacColors[i % atacColors.length]
+      });
+    }
+
+    // RNA cluster (expression - oranges/yellows) - right side
+    const rnaColors = [COLORS.orange, COLORS.yellow, COLORS.red];
+    for (let i = 0; i < 12; i++) {
+      const angle = (i / 12) * Math.PI * 2 + Math.random() * 0.3;
+      const dist = clusterRadius * (0.3 + Math.random() * 0.7);
+      targets.push({
+        x: cx + offset + Math.cos(angle) * dist,
+        y: cy + Math.sin(angle) * dist,
+        color: rnaColors[i % rnaColors.length]
+      });
+    }
+
+    // Overlap region in center (green - combined signal)
+    for (let i = 0; i < 4; i++) {
+      const angle = (i / 4) * Math.PI * 2;
+      const dist = s * 0.08;
+      targets.push({
+        x: cx + Math.cos(angle) * dist,
+        y: cy + Math.sin(angle) * dist,
+        color: COLORS.green
+      });
+    }
+
+    // Connection lines between layers
+    conns.push({ from: 0, to: 12, color: 'rgba(150,150,150,0.2)' });
+    conns.push({ from: 6, to: 18, color: 'rgba(150,150,150,0.2)' });
+
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({ x: cx + (Math.random() - 0.5) * s * 0.8, y: cy + (Math.random() - 0.5) * s * 0.8, color: colorArray[Math.floor(Math.random() * colorArray.length)] });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 14. Gene Flux (sci-fate - RNA dynamics with flow arrows)
+  const createGeneFlux: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Nascent RNA (left) flowing to Mature RNA (right)
+    // Three parallel flow streams representing different genes
+
+    const streamColors = [
+      [COLORS.cyan, COLORS.blue],      // Gene 1: nascent -> mature
+      [COLORS.yellow, COLORS.orange],  // Gene 2
+      [COLORS.pink, COLORS.red],       // Gene 3
+    ];
+
+    const streamY = [-0.2, 0, 0.2];
+
+    for (let stream = 0; stream < 3; stream++) {
+      const baseY = cy + streamY[stream] * s;
+      const [nascentColor, matureColor] = streamColors[stream];
+
+      // Nascent RNA dots (left side, smaller cluster)
+      for (let i = 0; i < 3; i++) {
+        targets.push({
+          x: cx - s * 0.3 + (Math.random() - 0.5) * s * 0.1,
+          y: baseY + (Math.random() - 0.5) * s * 0.08,
+          color: nascentColor
+        });
+      }
+
+      // Flow arrow points (middle)
+      const arrowStart = targets.length;
+      for (let i = 0; i < 3; i++) {
+        targets.push({
+          x: cx - s * 0.1 + i * s * 0.1,
+          y: baseY,
+          color: nascentColor
+        });
+        if (i > 0) {
+          conns.push({ from: arrowStart + i - 1, to: arrowStart + i, color: nascentColor });
+        }
+      }
+
+      // Mature RNA dots (right side, larger cluster)
+      for (let i = 0; i < 4; i++) {
+        targets.push({
+          x: cx + s * 0.3 + (Math.random() - 0.5) * s * 0.12,
+          y: baseY + (Math.random() - 0.5) * s * 0.1,
+          color: matureColor
+        });
+      }
+    }
+
+    // Time axis at bottom
+    targets.push({ x: cx - s * 0.35, y: cy + s * 0.38, color: COLORS.purple });
+    targets.push({ x: cx + s * 0.35, y: cy + s * 0.38, color: COLORS.purple });
+    conns.push({ from: targets.length - 2, to: targets.length - 1, color: COLORS.purple });
+
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({ x: cx + (Math.random() - 0.5) * s * 0.8, y: cy + (Math.random() - 0.5) * s * 0.6, color: colorArray[Math.floor(Math.random() * colorArray.length)] });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 15. Fly Embryo (Drosophila development continuum)
+  const createFlyEmbryo: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Drosophila embryo - elongated oval shape with segmentation
+    const embryoWidth = s * 0.4;
+    const embryoHeight = s * 0.25;
+
+    // Embryo outline (ellipse of points)
+    const outlineColors = [COLORS.purple, COLORS.blue, COLORS.cyan];
+    for (let i = 0; i < 16; i++) {
+      const angle = (i / 16) * Math.PI * 2;
+      targets.push({
+        x: cx + Math.cos(angle) * embryoWidth,
+        y: cy + Math.sin(angle) * embryoHeight,
+        color: outlineColors[i % outlineColors.length]
+      });
+      if (i > 0) conns.push({ from: i - 1, to: i, color: 'rgba(75, 46, 131, 0.3)' });
+    }
+    conns.push({ from: 15, to: 0, color: 'rgba(75, 46, 131, 0.3)' });
+
+    // Internal segments (anterior-posterior axis)
+    const segmentColors = [COLORS.red, COLORS.orange, COLORS.yellow, COLORS.green, COLORS.cyan, COLORS.blue];
+    for (let seg = 0; seg < 6; seg++) {
+      const segX = cx - embryoWidth * 0.7 + seg * (embryoWidth * 0.28);
+      targets.push({
+        x: segX,
+        y: cy + (Math.random() - 0.5) * embryoHeight * 0.6,
+        color: segmentColors[seg]
+      });
+    }
+
+    // Developmental time arrow below
+    targets.push({ x: cx - s * 0.35, y: cy + s * 0.38, color: COLORS.purple });
+    targets.push({ x: cx + s * 0.35, y: cy + s * 0.38, color: COLORS.orange });
+    conns.push({ from: targets.length - 2, to: targets.length - 1, color: 'rgba(150,150,150,0.3)' });
+
+    while (targets.length < config.particlesPerCorner) {
+      const angle = Math.random() * Math.PI * 2;
+      const rx = embryoWidth * 0.8 * Math.random();
+      const ry = embryoHeight * 0.8 * Math.random();
+      targets.push({
+        x: cx + Math.cos(angle) * rx,
+        y: cy + Math.sin(angle) * ry,
+        color: segmentColors[Math.floor(Math.random() * segmentColors.length)]
+      });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 16. Embryo Phenotype (mouse embryo with developmental disorder markers)
+  const createEmbryoPhenotype: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Mouse embryo shape - more rounded/curved
+    const bodyWidth = s * 0.3;
+    const bodyHeight = s * 0.35;
+
+    // Main body outline
+    for (let i = 0; i < 12; i++) {
+      const angle = (i / 12) * Math.PI * 2;
+      // Slightly egg-shaped (wider at bottom)
+      const radiusX = bodyWidth * (1 + 0.2 * Math.sin(angle));
+      const radiusY = bodyHeight;
+      targets.push({
+        x: cx + Math.cos(angle) * radiusX,
+        y: cy + Math.sin(angle) * radiusY * 0.9,
+        color: COLORS.cyan
+      });
+      if (i > 0) conns.push({ from: i - 1, to: i, color: 'rgba(56, 178, 172, 0.3)' });
+    }
+    conns.push({ from: 11, to: 0, color: 'rgba(56, 178, 172, 0.3)' });
+
+    // Head region (top)
+    targets.push({ x: cx, y: cy - bodyHeight * 0.7, color: COLORS.blue });
+
+    // Normal tissue regions (green)
+    const normalPositions = [
+      { x: -0.15, y: -0.1 }, { x: 0.15, y: -0.1 },
+      { x: -0.1, y: 0.15 }, { x: 0.1, y: 0.15 },
+    ];
+    normalPositions.forEach(pos => {
+      targets.push({
+        x: cx + pos.x * s,
+        y: cy + pos.y * s,
+        color: COLORS.green
+      });
+    });
+
+    // Disorder markers (red/orange - affected regions)
+    const disorderPositions = [
+      { x: 0, y: 0 }, { x: -0.2, y: 0.05 }, { x: 0.18, y: -0.05 },
+    ];
+    disorderPositions.forEach(pos => {
+      targets.push({
+        x: cx + pos.x * s,
+        y: cy + pos.y * s,
+        color: COLORS.red
+      });
+    });
+
+    // Warning/phenotype indicator
+    targets.push({ x: cx + s * 0.35, y: cy - s * 0.25, color: COLORS.orange });
+    targets.push({ x: cx + s * 0.35, y: cy - s * 0.15, color: COLORS.orange });
+    conns.push({ from: targets.length - 2, to: targets.length - 1, color: COLORS.orange });
+
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({
+        x: cx + (Math.random() - 0.5) * bodyWidth * 1.5,
+        y: cy + (Math.random() - 0.5) * bodyHeight * 1.5,
+        color: Math.random() > 0.7 ? COLORS.red : COLORS.green
+      });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 17. PolyA Tails (alternative polyadenylation - mRNAs with varying tail lengths)
+  const createPolyATails: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Multiple mRNA molecules with different polyA tail lengths
+    const mRNAColors = [COLORS.blue, COLORS.cyan, COLORS.green, COLORS.orange];
+    const tailLengths = [3, 5, 7, 4]; // Different polyA tail lengths
+
+    for (let rna = 0; rna < 4; rna++) {
+      const baseY = cy - s * 0.25 + rna * s * 0.17;
+      const color = mRNAColors[rna];
+
+      // mRNA body (5' to 3')
+      const bodyStart = targets.length;
+      for (let i = 0; i < 4; i++) {
+        targets.push({
+          x: cx - s * 0.3 + i * s * 0.12,
+          y: baseY,
+          color: color
+        });
+        if (i > 0) conns.push({ from: bodyStart + i - 1, to: bodyStart + i, color: color });
+      }
+
+      // PolyA tail (variable length, yellow/orange)
+      const tailStart = targets.length;
+      for (let i = 0; i < tailLengths[rna]; i++) {
+        targets.push({
+          x: cx + s * 0.08 + i * s * 0.05,
+          y: baseY + (Math.random() - 0.5) * s * 0.03,
+          color: COLORS.yellow
+        });
+        if (i > 0) conns.push({ from: tailStart + i - 1, to: tailStart + i, color: 'rgba(236, 201, 75, 0.5)' });
+      }
+      // Connect body to tail
+      conns.push({ from: bodyStart + 3, to: tailStart, color: 'rgba(150,150,150,0.3)' });
+    }
+
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({ x: cx + (Math.random() - 0.5) * s * 0.8, y: cy + (Math.random() - 0.5) * s * 0.6, color: COLORS.yellow });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 18. Spatial Grid (embryo-scale spatial transcriptomics)
+  const createSpatialGrid: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Embryo section with spatial coordinate grid
+    // Outer embryo boundary (curved)
+    const boundaryPoints: number[] = [];
+    for (let i = 0; i < 10; i++) {
+      const angle = (i / 10) * Math.PI * 2;
+      const radius = s * 0.35 * (1 + 0.1 * Math.sin(angle * 2));
+      boundaryPoints.push(targets.length);
+      targets.push({
+        x: cx + Math.cos(angle) * radius,
+        y: cy + Math.sin(angle) * radius,
+        color: COLORS.purple
+      });
+      if (i > 0) conns.push({ from: boundaryPoints[i - 1], to: boundaryPoints[i], color: 'rgba(75, 46, 131, 0.3)' });
+    }
+    conns.push({ from: boundaryPoints[9], to: boundaryPoints[0], color: 'rgba(75, 46, 131, 0.3)' });
+
+    // Internal spatial spots (gene expression at locations)
+    const spotColors = [COLORS.red, COLORS.orange, COLORS.yellow, COLORS.green, COLORS.cyan, COLORS.blue];
+    for (let row = 0; row < 4; row++) {
+      for (let col = 0; col < 4; col++) {
+        const spotX = cx - s * 0.2 + col * s * 0.13;
+        const spotY = cy - s * 0.2 + row * s * 0.13;
+        // Only add if inside embryo boundary (rough check)
+        const dist = Math.sqrt((spotX - cx) ** 2 + (spotY - cy) ** 2);
+        if (dist < s * 0.3) {
+          targets.push({
+            x: spotX,
+            y: spotY,
+            color: spotColors[(row + col) % spotColors.length]
+          });
+        }
+      }
+    }
+
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({ x: cx + (Math.random() - 0.5) * s * 0.5, y: cy + (Math.random() - 0.5) * s * 0.5, color: spotColors[Math.floor(Math.random() * spotColors.length)] });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 19. ATAC Peaks (chromatin accessibility peaks)
+  const createAtacPeaks: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Genome axis (horizontal line)
+    targets.push({ x: cx - s * 0.4, y: cy + s * 0.2, color: COLORS.purple });
+    targets.push({ x: cx + s * 0.4, y: cy + s * 0.2, color: COLORS.purple });
+    conns.push({ from: 0, to: 1, color: COLORS.purple });
+
+    // ATAC-seq peaks (vertical bars of varying heights)
+    const peakPositions = [-0.3, -0.15, -0.05, 0.1, 0.2, 0.35];
+    const peakHeights = [0.25, 0.4, 0.2, 0.35, 0.15, 0.3];
+    const peakColors = [COLORS.blue, COLORS.cyan, COLORS.blue, COLORS.cyan, COLORS.blue, COLORS.cyan];
+
+    peakPositions.forEach((pos, idx) => {
+      const peakX = cx + pos * s;
+      const peakH = peakHeights[idx] * s;
+      const baseIdx = targets.length;
+
+      // Peak as connected points (triangle-ish shape)
+      targets.push({ x: peakX - s * 0.03, y: cy + s * 0.2, color: peakColors[idx] });
+      targets.push({ x: peakX, y: cy + s * 0.2 - peakH, color: peakColors[idx] });
+      targets.push({ x: peakX + s * 0.03, y: cy + s * 0.2, color: peakColors[idx] });
+
+      conns.push({ from: baseIdx, to: baseIdx + 1, color: peakColors[idx] });
+      conns.push({ from: baseIdx + 1, to: baseIdx + 2, color: peakColors[idx] });
+    });
+
+    // Open chromatin label
+    targets.push({ x: cx - s * 0.35, y: cy - s * 0.35, color: COLORS.green });
+
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({ x: cx + (Math.random() - 0.5) * s * 0.8, y: cy + (Math.random() - 0.5) * s * 0.3, color: COLORS.cyan });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 20. Chromatin Atlas (tissue-specific chromatin accessibility map)
+  const createChromatinAtlas: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Multiple tissue clusters arranged in a circular pattern
+    const tissues = [
+      { name: 'Brain', color: COLORS.purple, angle: 0 },
+      { name: 'Heart', color: COLORS.red, angle: Math.PI * 0.4 },
+      { name: 'Liver', color: COLORS.orange, angle: Math.PI * 0.8 },
+      { name: 'Kidney', color: COLORS.yellow, angle: Math.PI * 1.2 },
+      { name: 'Lung', color: COLORS.cyan, angle: Math.PI * 1.6 },
+    ];
+
+    const clusterRadius = s * 0.28;
+    const dotRadius = s * 0.08;
+
+    tissues.forEach((tissue, tIdx) => {
+      const clusterCx = cx + Math.cos(tissue.angle) * clusterRadius;
+      const clusterCy = cy + Math.sin(tissue.angle) * clusterRadius;
+
+      // Each tissue cluster has several dots
+      for (let i = 0; i < 4; i++) {
+        const angle = (i / 4) * Math.PI * 2 + Math.random() * 0.5;
+        const dist = dotRadius * (0.5 + Math.random() * 0.5);
+        targets.push({
+          x: clusterCx + Math.cos(angle) * dist,
+          y: clusterCy + Math.sin(angle) * dist,
+          color: tissue.color
+        });
+      }
+    });
+
+    // Central hub connecting tissues
+    const hubIdx = targets.length;
+    targets.push({ x: cx, y: cy, color: COLORS.green });
+
+    // Connect hub to first dot of each cluster
+    for (let t = 0; t < 5; t++) {
+      conns.push({ from: hubIdx, to: t * 4, color: 'rgba(150,150,150,0.2)' });
+    }
+
+    while (targets.length < config.particlesPerCorner) {
+      const tissue = tissues[Math.floor(Math.random() * tissues.length)];
+      targets.push({
+        x: cx + Math.cos(tissue.angle) * clusterRadius + (Math.random() - 0.5) * s * 0.15,
+        y: cy + Math.sin(tissue.angle) * clusterRadius + (Math.random() - 0.5) * s * 0.15,
+        color: tissue.color
+      });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 21. Cis-Regulatory (enhancer-gene connections during development)
+  const createCisRegulatory: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Gene promoters (bottom row)
+    const geneColors = [COLORS.blue, COLORS.cyan, COLORS.green, COLORS.purple];
+    const genePositions = [-0.25, -0.08, 0.08, 0.25];
+
+    genePositions.forEach((pos, idx) => {
+      targets.push({
+        x: cx + pos * s,
+        y: cy + s * 0.25,
+        color: geneColors[idx]
+      });
+    });
+
+    // Enhancers (top scattered)
+    const enhancerPositions = [
+      { x: -0.3, y: -0.25 }, { x: -0.1, y: -0.3 }, { x: 0.15, y: -0.2 },
+      { x: 0.3, y: -0.28 }, { x: -0.2, y: -0.1 }, { x: 0.25, y: -0.1 },
+    ];
+
+    enhancerPositions.forEach((pos, idx) => {
+      targets.push({
+        x: cx + pos.x * s,
+        y: cy + pos.y * s,
+        color: COLORS.orange
+      });
+    });
+
+    // Arcing connections (enhancer to gene)
+    conns.push({ from: 4, to: 0, color: 'rgba(237, 148, 60, 0.4)' });
+    conns.push({ from: 5, to: 1, color: 'rgba(237, 148, 60, 0.4)' });
+    conns.push({ from: 6, to: 2, color: 'rgba(237, 148, 60, 0.4)' });
+    conns.push({ from: 7, to: 3, color: 'rgba(237, 148, 60, 0.4)' });
+    conns.push({ from: 8, to: 1, color: 'rgba(237, 148, 60, 0.3)' });
+    conns.push({ from: 9, to: 2, color: 'rgba(237, 148, 60, 0.3)' });
+
+    // Developmental time indicator
+    targets.push({ x: cx - s * 0.4, y: cy + s * 0.38, color: COLORS.purple });
+    targets.push({ x: cx + s * 0.4, y: cy + s * 0.38, color: COLORS.red });
+    conns.push({ from: targets.length - 2, to: targets.length - 1, color: 'rgba(150,150,150,0.3)' });
+
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({ x: cx + (Math.random() - 0.5) * s * 0.7, y: cy + (Math.random() - 0.5) * s * 0.6, color: COLORS.orange });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 22. Fetal Chromatin (developmental chromatin states)
+  const createFetalChromatin: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Developmental stages as vertical columns
+    const stages = ['Early', 'Mid', 'Late'];
+    const stageColors = [COLORS.cyan, COLORS.green, COLORS.orange];
+
+    for (let stage = 0; stage < 3; stage++) {
+      const stageX = cx - s * 0.25 + stage * s * 0.25;
+
+      // Column of chromatin states
+      for (let row = 0; row < 5; row++) {
+        const openness = Math.random(); // Random accessibility
+        targets.push({
+          x: stageX + (Math.random() - 0.5) * s * 0.08,
+          y: cy - s * 0.25 + row * s * 0.12,
+          color: openness > 0.5 ? stageColors[stage] : COLORS.purple
+        });
+      }
+
+      // Stage label dot
+      targets.push({
+        x: stageX,
+        y: cy + s * 0.35,
+        color: stageColors[stage]
+      });
+    }
+
+    // Connecting developmental trajectory
+    conns.push({ from: 15, to: 16, color: 'rgba(150,150,150,0.3)' });
+    conns.push({ from: 16, to: 17, color: 'rgba(150,150,150,0.3)' });
+
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({ x: cx + (Math.random() - 0.5) * s * 0.7, y: cy + (Math.random() - 0.5) * s * 0.6, color: stageColors[Math.floor(Math.random() * 3)] });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 23. CRISPRa Screen (activation screening grid)
+  const createCrispraScreen: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Grid of guide RNAs with activation effects
+    const gridSize = 5;
+    const cellSize = s * 0.12;
+    const startX = cx - (gridSize - 1) * cellSize / 2;
+    const startY = cy - (gridSize - 1) * cellSize / 2;
+
+    for (let row = 0; row < gridSize; row++) {
+      for (let col = 0; col < gridSize; col++) {
+        const isActivated = Math.random() > 0.6; // Some guides show activation
+        const isHit = Math.random() > 0.85; // Strong hits
+
+        let color = COLORS.blue; // Baseline
+        if (isActivated) color = COLORS.green;
+        if (isHit) color = COLORS.orange;
+
+        targets.push({
+          x: startX + col * cellSize,
+          y: startY + row * cellSize,
+          color: color
+        });
+      }
+    }
+
+    // CRISPRa indicator (lightning bolt shape simplified)
+    targets.push({ x: cx + s * 0.38, y: cy - s * 0.2, color: COLORS.yellow });
+    targets.push({ x: cx + s * 0.35, y: cy, color: COLORS.yellow });
+    targets.push({ x: cx + s * 0.38, y: cy + s * 0.2, color: COLORS.yellow });
+    conns.push({ from: targets.length - 3, to: targets.length - 2, color: COLORS.yellow });
+    conns.push({ from: targets.length - 2, to: targets.length - 1, color: COLORS.yellow });
+
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({ x: cx + (Math.random() - 0.5) * s * 0.8, y: cy + (Math.random() - 0.5) * s * 0.8, color: COLORS.green });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 24. Perturb Screen (CRISPR perturbation network)
+  const createPerturbScreen: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Central gene being perturbed
+    targets.push({ x: cx, y: cy, color: COLORS.red });
+
+    // Surrounding effect nodes in a network
+    const effectAngles = [0, 0.7, 1.4, 2.1, 2.8, 3.5, 4.2, 4.9, 5.6];
+    const effectColors = [COLORS.blue, COLORS.cyan, COLORS.green, COLORS.yellow, COLORS.orange, COLORS.purple, COLORS.pink, COLORS.blue, COLORS.cyan];
+
+    effectAngles.forEach((angle, idx) => {
+      const radius = s * (0.25 + Math.random() * 0.1);
+      targets.push({
+        x: cx + Math.cos(angle) * radius,
+        y: cy + Math.sin(angle) * radius,
+        color: effectColors[idx]
+      });
+      // Connect to center
+      conns.push({ from: 0, to: idx + 1, color: 'rgba(220, 80, 80, 0.3)' });
+    });
+
+    // Secondary effects (outer ring)
+    for (let i = 0; i < 6; i++) {
+      const angle = i * Math.PI / 3 + 0.3;
+      const radius = s * 0.38;
+      targets.push({
+        x: cx + Math.cos(angle) * radius,
+        y: cy + Math.sin(angle) * radius,
+        color: COLORS.purple
+      });
+      // Connect to nearest primary effect
+      conns.push({ from: (i % effectAngles.length) + 1, to: targets.length - 1, color: 'rgba(150,150,150,0.2)' });
+    }
+
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({ x: cx + (Math.random() - 0.5) * s * 0.8, y: cy + (Math.random() - 0.5) * s * 0.8, color: effectColors[Math.floor(Math.random() * effectColors.length)] });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 25. Hi-C Contact Map (3D genome / chromatin loops)
+  const createHiCLoops: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Create a triangular contact map representation
+    // Diagonal line (represents the chromosome)
+    const diagPoints = 8;
+    for (let i = 0; i < diagPoints; i++) {
+      const t = i / (diagPoints - 1);
+      targets.push({
+        x: cx - s * 0.35 + t * s * 0.7,
+        y: cy + s * 0.35 - t * s * 0.7,
+        color: COLORS.purple
+      });
+      if (i > 0) conns.push({ from: i - 1, to: i, color: COLORS.purple });
+    }
+
+    // Chromatin loops (arcs above diagonal showing long-range contacts)
+    const loopColors = [COLORS.red, COLORS.orange, COLORS.yellow, COLORS.cyan];
+    const loops = [
+      { start: 1, end: 4, height: 0.15 },  // Short loop
+      { start: 2, end: 6, height: 0.25 },  // Medium loop
+      { start: 0, end: 5, height: 0.2 },   // Another loop
+      { start: 3, end: 7, height: 0.3 },   // Long loop
+    ];
+
+    loops.forEach((loop, loopIdx) => {
+      const startPt = targets[loop.start];
+      const endPt = targets[loop.end];
+      const midX = (startPt.x + endPt.x) / 2;
+      const midY = (startPt.y + endPt.y) / 2 - loop.height * s;
+      const color = loopColors[loopIdx];
+
+      // Arc represented by 3 points
+      const arcStart = targets.length;
+      targets.push({ x: startPt.x, y: startPt.y - s * 0.03, color });
+      targets.push({ x: midX, y: midY, color });
+      targets.push({ x: endPt.x, y: endPt.y - s * 0.03, color });
+
+      conns.push({ from: arcStart, to: arcStart + 1, color });
+      conns.push({ from: arcStart + 1, to: arcStart + 2, color });
+    });
+
+    // Contact intensity dots (off-diagonal signals)
+    const contactColors = [COLORS.red, COLORS.orange, COLORS.yellow];
+    for (let i = 0; i < 6; i++) {
+      const intensity = Math.random();
+      targets.push({
+        x: cx + (Math.random() - 0.5) * s * 0.4,
+        y: cy - s * 0.1 + (Math.random() - 0.5) * s * 0.3,
+        color: contactColors[Math.floor(intensity * contactColors.length)]
+      });
+    }
+
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({ x: cx + (Math.random() - 0.5) * s * 0.6, y: cy + (Math.random() - 0.5) * s * 0.6, color: COLORS.purple });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 26. Cell-free DNA (fragmented DNA molecules in circulation)
+  const createCellFreeDNA: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Multiple short DNA fragments scattered (representing cfDNA)
+    const fragmentColors = [COLORS.cyan, COLORS.blue, COLORS.green, COLORS.purple];
+    const fragments = [
+      { x: -0.25, y: -0.2, angle: 0.3, len: 3 },
+      { x: 0.2, y: -0.15, angle: -0.5, len: 4 },
+      { x: -0.1, y: 0.1, angle: 0.8, len: 3 },
+      { x: 0.25, y: 0.2, angle: -0.2, len: 5 },
+      { x: -0.3, y: 0.25, angle: 0.1, len: 3 },
+      { x: 0.05, y: -0.3, angle: -0.7, len: 4 },
+      { x: 0.3, y: -0.05, angle: 0.5, len: 3 },
+    ];
+
+    fragments.forEach((frag, fIdx) => {
+      const color = fragmentColors[fIdx % fragmentColors.length];
+      const startIdx = targets.length;
+
+      for (let i = 0; i < frag.len; i++) {
+        const t = i / (frag.len - 1);
+        targets.push({
+          x: cx + frag.x * s + Math.cos(frag.angle) * t * s * 0.12,
+          y: cy + frag.y * s + Math.sin(frag.angle) * t * s * 0.12,
+          color: color
+        });
+        if (i > 0) conns.push({ from: startIdx + i - 1, to: startIdx + i, color });
+      }
+    });
+
+    // Blood vessel / circulation indicator (curved line at bottom)
+    const vesselStart = targets.length;
+    for (let i = 0; i < 5; i++) {
+      const t = i / 4;
+      targets.push({
+        x: cx - s * 0.35 + t * s * 0.7,
+        y: cy + s * 0.38 + Math.sin(t * Math.PI) * s * 0.05,
+        color: COLORS.red
+      });
+      if (i > 0) conns.push({ from: vesselStart + i - 1, to: vesselStart + i, color: 'rgba(220, 80, 80, 0.4)' });
+    }
+
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({ x: cx + (Math.random() - 0.5) * s * 0.7, y: cy + (Math.random() - 0.5) * s * 0.6, color: fragmentColors[Math.floor(Math.random() * fragmentColors.length)] });
+    }
+    return { targets, connections: conns };
+  };
+
+  // 27. Phylogenetic Tree (infectious disease / viral evolution)
+  const createPhyloTree: ShapeGenerator = (cx, cy, s) => {
+    const targets: {x: number, y: number, color: string}[] = [];
+    const conns: Connection[] = [];
+
+    // Root at left, branches spread right (like a viral phylogeny)
+    // Root
+    targets.push({ x: cx - s * 0.38, y: cy, color: COLORS.purple }); // 0: root
+
+    // First split
+    targets.push({ x: cx - s * 0.2, y: cy, color: COLORS.purple }); // 1
+    conns.push({ from: 0, to: 1, color: COLORS.purple });
+
+    // Upper branch
+    targets.push({ x: cx - s * 0.2, y: cy - s * 0.15, color: COLORS.blue }); // 2
+    targets.push({ x: cx + s * 0.05, y: cy - s * 0.15, color: COLORS.blue }); // 3
+    conns.push({ from: 1, to: 2, color: COLORS.blue });
+    conns.push({ from: 2, to: 3, color: COLORS.blue });
+
+    // Upper-upper terminal
+    targets.push({ x: cx + s * 0.05, y: cy - s * 0.28, color: COLORS.cyan }); // 4
+    targets.push({ x: cx + s * 0.25, y: cy - s * 0.28, color: COLORS.cyan }); // 5
+    conns.push({ from: 3, to: 4, color: COLORS.cyan });
+    conns.push({ from: 4, to: 5, color: COLORS.cyan });
+
+    // Upper-lower terminal
+    targets.push({ x: cx + s * 0.25, y: cy - s * 0.08, color: COLORS.blue }); // 6
+    conns.push({ from: 3, to: 6, color: COLORS.blue });
+
+    // Lower branch
+    targets.push({ x: cx - s * 0.2, y: cy + s * 0.15, color: COLORS.orange }); // 7
+    targets.push({ x: cx + s * 0.1, y: cy + s * 0.15, color: COLORS.orange }); // 8
+    conns.push({ from: 1, to: 7, color: COLORS.orange });
+    conns.push({ from: 7, to: 8, color: COLORS.orange });
+
+    // Lower terminals
+    targets.push({ x: cx + s * 0.1, y: cy + s * 0.05, color: COLORS.yellow }); // 9
+    targets.push({ x: cx + s * 0.28, y: cy + s * 0.05, color: COLORS.yellow }); // 10
+    conns.push({ from: 8, to: 9, color: COLORS.yellow });
+    conns.push({ from: 9, to: 10, color: COLORS.yellow });
+
+    targets.push({ x: cx + s * 0.1, y: cy + s * 0.28, color: COLORS.red }); // 11
+    targets.push({ x: cx + s * 0.3, y: cy + s * 0.28, color: COLORS.red }); // 12
+    conns.push({ from: 8, to: 11, color: COLORS.red });
+    conns.push({ from: 11, to: 12, color: COLORS.red });
+
+    // Terminal markers (larger dots for strains/samples)
+    const terminals = [5, 6, 10, 12];
+    terminals.forEach(idx => {
+      const pt = targets[idx];
+      targets.push({
+        x: pt.x + s * 0.04,
+        y: pt.y,
+        color: targets[idx].color
+      });
+    });
+
+    while (targets.length < config.particlesPerCorner) {
+      targets.push({ x: cx + (Math.random() - 0.5) * s * 0.8, y: cy + (Math.random() - 0.5) * s * 0.7, color: colorArray[Math.floor(Math.random() * colorArray.length)] });
+    }
+    return { targets, connections: conns };
+  };
+
+  // Map animation types to generator functions
+  const generatorMap: { [key: string]: ShapeGenerator } = {
+    'trajectoryTree': createTree,
+    'wellPlate': createGrid,
+    'dnaHelix': createHelix,
+    'cellClusters': createClusters,
+    'chevrons': createChevrons,
+    'rnaHairpin': createHairpin,
+    'scatterPlot': createScatter,
+    'heatmap': createHeatmap,
+    'chromosomes': createChromosomes,
+    'signalWaves': createSignalWaves,
+    'lineageTree': createLineageTree,
+    'barChart': createBars,
+    'jointProfile': createJointProfile,
+    'geneFlux': createGeneFlux,
+    'flyEmbryo': createFlyEmbryo,
+    'embryoPhenotype': createEmbryoPhenotype,
+    'polyATails': createPolyATails,
+    'spatialGrid': createSpatialGrid,
+    'atacPeaks': createAtacPeaks,
+    'chromatinAtlas': createChromatinAtlas,
+    'cisRegulatory': createCisRegulatory,
+    'fetalChromatin': createFetalChromatin,
+    'crispraScreen': createCrispraScreen,
+    'perturbScreen': createPerturbScreen,
+    'hiCLoops': createHiCLoops,
+    'cellFreeDNA': createCellFreeDNA,
+    'phyloTree': createPhyloTree,
+  };
+
+  // Build shape generators array from animation data (13 categories)
+  const shapeGenerators: ShapeGenerator[] = shapeLinks.map((link: any) =>
+    generatorMap[link.type] || createClusters // fallback to clusters if type not found
+  );
+
+  const setCornerShape = (cornerIdx: number, shapeIdx: number) => {
+    const corner = corners[cornerIdx];
+    const center = cornerCenters[cornerIdx];
+
+    // Generate base shape
+    const baseResult = shapeGenerators[shapeIdx](center.x, center.y, cornerSize);
+
+    // Use corner's assigned palette (ensures no duplicate colors across corners)
+    const paletteIdx = cornerPalettes[cornerIdx] || 0;
+    const { targets, connections: conns } = applyVariation(baseResult, center.x, center.y, paletteIdx);
+
+    corner.connections = conns;
+    corner.particles.forEach((p, i) => {
+      if (i < targets.length) {
+        p.targetX = targets[i].x;
+        p.targetY = targets[i].y;
+        p.targetColor = targets[i].color;
+      }
+    });
+  };
+
+  const init = () => {
+    resizeCanvas();
+    corners = [];
+    cornerCategories = [];
+    cornerPalettes = [];
+
+    // Shuffle categories and pick 4 different ones for the 4 corners
+    const shuffledCategories = [...allCategories].sort(() => Math.random() - 0.5);
+    const initialCategories = shuffledCategories.slice(0, 4);
+
+    // Shuffle palettes and pick 4 different ones for the 4 corners
+    const shuffledPalettes = [0, 1, 2, 3, 4, 5].sort(() => Math.random() - 0.5);
+    const initialPalettes = shuffledPalettes.slice(0, 4);
+
+    for (let c = 0; c < cornerCenters.length; c++) {
+      const center = cornerCenters[c];
+      // Pick a category and palette for this corner (ensuring diversity)
+      const category = initialCategories[c];
+      const palette = initialPalettes[c];
+      cornerCategories.push(category);
+      cornerPalettes.push(palette);
+      const particles: Particle[] = [];
+
+      // Particle size scales with screen size - smaller dots for mobile/tablet/Nest Hub
+      const isSmallScreen = width < 768;
+      const isMediumScreen = width >= 768 && width < 1400;
+      const particleRadius = isSmallScreen
+        ? Math.max(1, Math.min(2, cornerSize / 50))  // Smaller dots for mobile
+        : isMediumScreen
+          ? Math.max(1.2, Math.min(2.5, cornerSize / 45))  // Medium dots for tablet/Nest Hub
+          : Math.max(1.5, Math.min(3.5, cornerSize / 40));  // Normal dots for desktop
+
+      for (let i = 0; i < config.particlesPerCorner; i++) {
+        particles.push({
+          x: center.x + (Math.random() - 0.5) * cornerSize,
+          y: center.y + (Math.random() - 0.5) * cornerSize,
+          targetX: center.x,
+          targetY: center.y,
+          vx: 0,
+          vy: 0,
+          radius: particleRadius,
+          color: colorArray[Math.floor(Math.random() * colorArray.length)],
+          targetColor: colorArray[0],
+          corner: c
+        });
+      }
+
+      // Get a random animation from this corner's category
+      const initialShapeIdx = getRandomFromCategory(category);
+
+      corners.push({
+        particles,
+        connections: [],
+        currentShape: initialShapeIdx,
+        shapeTimer: c * 5000 // Stagger start times
+      });
+
+      setCornerShape(c, corners[c].currentShape);
+    }
+  };
+
+  window.addEventListener('resize', init);
+
+  let lastTime = 0;
+  const animate = (timestamp: number) => {
+    const deltaTime = timestamp - lastTime;
+    lastTime = timestamp;
+
+    // Clear canvas with theme-aware background
+    const isDark = document.documentElement.classList.contains('dark');
+    ctx.fillStyle = isDark ? '#111827' : '#f9fafb';
+    ctx.fillRect(0, 0, width, height);
+
+    // Update each corner
+    corners.forEach((corner, cornerIdx) => {
+      // Shape cycling - pick new category different from other corners
+      corner.shapeTimer += deltaTime;
+
+      if (corner.shapeTimer > config.shapeDuration) {
+        corner.shapeTimer = 0;
+        // Pick a new category that's different from the other 3 corners
+        const newCategory = pickNewCategoryForCorner(cornerIdx);
+        cornerCategories[cornerIdx] = newCategory;
+        // Pick a new palette that's different from the other 3 corners
+        const newPalette = pickNewPaletteForCorner(cornerIdx);
+        cornerPalettes[cornerIdx] = newPalette;
+        // Get a random animation from this new category
+        corner.currentShape = getRandomFromCategory(newCategory);
+        setCornerShape(cornerIdx, corner.currentShape);
+      }
+
+      // Draw connections (thinner on mobile)
+      const lineWidth = width < 768 ? 1 : 2;
+      corner.connections.forEach(conn => {
+        const fromP = corner.particles[conn.from];
+        const toP = corner.particles[conn.to];
+        if (!fromP || !toP) return;
+
+        ctx.beginPath();
+        ctx.moveTo(fromP.x, fromP.y);
+        ctx.lineTo(toP.x, toP.y);
+        ctx.strokeStyle = conn.color.replace('0.7', '0.2');
+        ctx.lineWidth = lineWidth;
+        ctx.stroke();
+      });
+
+      // Update and draw particles
+      corner.particles.forEach((p, pIdx) => {
+        const dx = p.targetX - p.x;
+        const dy = p.targetY - p.y;
+        p.vx += dx * config.easing;
+        p.vy += dy * config.easing;
+        p.vx += (Math.random() - 0.5) * config.wanderStrength;
+        p.vy += (Math.random() - 0.5) * config.wanderStrength;
+        p.vx *= 0.92;
+        p.vy *= 0.92;
+        p.x += p.vx;
+        p.y += p.vy;
+
+        // Smooth color transition
+        p.color = p.targetColor;
+
+        // Gentle floating effect - subtle sine wave movement when near target (disabled for reduced motion)
+        const distToTarget = Math.sqrt(dx * dx + dy * dy);
+        const floatIntensity = prefersReducedMotion ? 0 : Math.max(0, 1 - distToTarget / 20) * 2;
+        const floatX = Math.sin(timestamp * 0.001 + pIdx * 0.5) * floatIntensity;
+        const floatY = Math.cos(timestamp * 0.0012 + pIdx * 0.7) * floatIntensity;
+
+        ctx.beginPath();
+        ctx.arc(p.x + floatX, p.y + floatY, p.radius, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.fill();
+      });
+
+      // Draw hover indicator for clickable area (UW Purple and Gold) - desktop only
+      if (hoveredCorner === cornerIdx && width >= 768) {
+        const center = cornerCenters[cornerIdx];
+        ctx.beginPath();
+        ctx.arc(center.x, center.y, cornerSize * 0.42, 0, Math.PI * 2);
+        ctx.strokeStyle = 'rgba(183, 165, 122, 0.7)';  // UW Gold
+        ctx.lineWidth = 3;
+        ctx.setLineDash([8, 8]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        // Draw shape name and hint below the circle
+        const shapeName = shapeLinks[corner.currentShape].name;
+        ctx.font = 'bold 13px system-ui, sans-serif';
+        ctx.fillStyle = 'rgba(75, 46, 131, 0.9)';  // UW Purple
+        ctx.textAlign = 'center';
+        ctx.fillText(shapeName, center.x, center.y + cornerSize * 0.47 + 12);
+        ctx.font = '11px system-ui, sans-serif';
+        ctx.fillStyle = 'rgba(183, 165, 122, 0.9)';  // UW Gold
+        ctx.fillText('Click to see the paper', center.x, center.y + cornerSize * 0.47 + 26);
+      }
+    });
+
+    requestAnimationFrame(animate);
+  };
+
+  init();
+  requestAnimationFrame(animate);
+
+  // Helper to find which animation's center area contains a point
+  const getCornerAtPoint = (x: number, y: number): number | null => {
+    for (let i = 0; i < cornerCenters.length; i++) {
+      const center = cornerCenters[i];
+      const dist = Math.sqrt((x - center.x) ** 2 + (y - center.y) ** 2);
+      // Clickable area is centered on each animation
+      if (dist < cornerSize * 0.6) {
+        return i;
+      }
+    }
+    return null;
+  };
+
+  // Click handler - navigate to paper
+  canvas.addEventListener('click', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const cornerIdx = getCornerAtPoint(x, y);
+    if (cornerIdx !== null) {
+      const shapeIdx = corners[cornerIdx].currentShape;
+      const link = shapeLinks[shapeIdx];
+      if (link && link.url) {
+        window.location.href = link.url;
+      }
+    }
+  });
+
+  // Hover handler - change cursor and show indicator
+  canvas.addEventListener('mousemove', (e) => {
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    const cornerIdx = getCornerAtPoint(x, y);
+    hoveredCorner = cornerIdx;
+    canvas.style.cursor = cornerIdx !== null ? 'pointer' : 'default';
+  });
+
+  // Clear hover when mouse leaves canvas
+  canvas.addEventListener('mouseleave', () => {
+    hoveredCorner = null;
+    canvas.style.cursor = 'default';
+  });
+});
+</script>

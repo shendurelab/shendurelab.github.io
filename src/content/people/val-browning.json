@@ -1,0 +1,15 @@
+{
+  "name": "Val Browning",
+  "slug": "val-browning",
+  "photo": "/images/lab/browning.jpg",
+  "title": "Research Scientist",
+  "role": "research-scientist",
+  "status": "alumni",
+  "sortOrder": 2,
+  "startYear": 2023,
+  "endYear": 2025,
+  "jointLab": "Beliveau Lab",
+  "currentPosition": "Graduate Student, MCB, University of Washington",
+  "jointLabUrl": "https://www.beliveau.io/",
+  "currentPositionUrl": "https://mcb-seattle.edu/"
+}

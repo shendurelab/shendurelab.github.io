@@ -1,0 +1,13 @@
+{
+  "category": "research",
+  "articleUrl": "https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5204343/",
+  "thumbnail": "/images/papers/inoue_genome_research_2017_thumb.jpg",
+  "pdfUrl": "/documents/inoue_nature_methods_2017.pdf",
+  "citation": "Inoue, Kircher et al. A systematic comparison reveals substantial differences in chromosomal versus episomal encoding of enhancer activity. Genome Research (2017)",
+  "year": 2017,
+  "journal": "A systematic comparison reveals substantial differences in chromosomal versus episomal encoding of enhancer activity. Genome Research",
+  "pmid": "27831498",
+  "collaboration": "with Ahituv Lab",
+  "slug": "inoue-2017-a-systematic-comparison-reveals-substan",
+  "sortOrder": 57
+}

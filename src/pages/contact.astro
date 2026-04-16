@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ObfuscatedEmail from '../components/shared/ObfuscatedEmail.astro';
+---
+
+<BaseLayout title="Contact | Shendure Lab">
+  <div class="max-w-[1100px] mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold text-lab-orange mb-12 text-center">Contact</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Contact Info -->
+      <div class="contact-card border rounded-xl p-8">
+        <h2 class="text-xl font-bold text-uw-purple mb-6">Contact Information</h2>
+
+        <div class="space-y-4">
+          <div>
+            <p class="font-medium contact-text">Admin (Olga Oseth)</p>
+            <ObfuscatedEmail email="ooseth@uw.edu" class="text-lab-blue hover:underline" />
+          </div>
+
+          <div>
+            <p class="font-medium contact-text">Lab Manager (Charlie Lee)</p>
+            <ObfuscatedEmail email="cholilee@uw.edu" class="text-lab-blue hover:underline" />
+          </div>
+
+          <div class="pt-4 border-t contact-divider">
+            <p class="contact-text-secondary"><span class="font-medium">Main Lab Phone:</span> (206) 685-3720</p>
+            <p class="contact-text-secondary"><span class="font-medium">PI Office Phone:</span> (206) 685-8543</p>
+            <p class="contact-text-secondary"><span class="font-medium">Fax:</span> (206) 685-7301</p>
+          </div>
+
+          <div class="pt-4 border-t contact-divider">
+            <p class="contact-text-muted text-sm">
+              If you are here for a meeting, please call (206) 685-3720 to be let into the building.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mailing Address -->
+      <div class="contact-card border rounded-xl p-8">
+        <h2 class="text-xl font-bold text-uw-purple mb-6">Mailing Address</h2>
+
+        <a href="http://www.gs.washington.edu/office/directions.htm" target="_blank" rel="noopener noreferrer" class="block mb-4" aria-label="Foege Building - view driving directions (opens in new tab)">
+          <img
+            src="/images/William-H-Foege-Genome-Sciences-GNOM.jpg"
+            alt="Foege Building"
+            class="w-full h-40 object-cover rounded-lg hover:opacity-90 transition-opacity"
+          />
+        </a>
+
+        <address class="not-italic contact-address leading-relaxed">
+          Jay Shendure<br />
+          Department of Genome Sciences<br />
+          University of Washington<br />
+          Foege Building S-250, Box 355065<br />
+          3720 15th Ave NE<br />
+          Seattle, WA 98195-5065
+        </address>
+      </div>
+
+      <!-- Shipping Address -->
+      <div class="contact-card border rounded-xl p-8">
+        <h2 class="text-xl font-bold text-uw-purple mb-6">Shipping Address</h2>
+
+        <a href="http://www.washington.edu/maps/?l=GNOM" target="_blank" rel="noopener noreferrer" class="block mb-4" aria-label="Campus map - view interactive UW map (opens in new tab)">
+          <img
+            src="/images/map.jpg"
+            alt="Campus Map"
+            class="w-full h-40 object-cover rounded-lg hover:opacity-90 transition-opacity"
+          />
+        </a>
+
+        <address class="not-italic contact-address leading-relaxed">
+          Shendure Lab, c/o Charlie Lee<br />
+          Department of Genome Sciences<br />
+          University of Washington<br />
+          Foege Building S-210<br />
+          3720 15th Ave NE<br />
+          Seattle, WA 98195-5065
+        </address>
+      </div>
+    </div>
+
+    <!-- Links -->
+    <div class="mt-8 text-center flex flex-wrap justify-center gap-x-6 gap-y-2">
+      <a
+        href="http://www.gs.washington.edu/office/directions.htm"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-lab-blue hover:underline inline-block py-3"
+      >
+        Driving Directions to Foege South<span class="sr-only"> (opens in new tab)</span>
+      </a>
+      <a
+        href="https://transportation.uw.edu/park/visitor/self-serve"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-lab-blue hover:underline inline-block py-3"
+      >
+        Visitor Parking<span class="sr-only"> (opens in new tab)</span>
+      </a>
+      <a
+        href="http://www.washington.edu/maps/?l=GNOM"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-lab-blue hover:underline inline-block py-3"
+      >
+        Interactive UW Campus Map<span class="sr-only"> (opens in new tab)</span>
+      </a>
+    </div>
+  </div>
+
+  <style>
+    .contact-card {
+      background-color: var(--theme-card-bg);
+      border-color: var(--theme-border);
+    }
+    .contact-text {
+      color: var(--theme-text);
+    }
+    .contact-text-secondary {
+      color: var(--theme-text-secondary);
+    }
+    .contact-text-muted {
+      color: var(--theme-text-muted);
+    }
+    .contact-divider {
+      border-color: var(--theme-border);
+    }
+    .contact-address {
+      color: var(--theme-text-secondary);
+    }
+  </style>
+</BaseLayout>

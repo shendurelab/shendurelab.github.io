@@ -1,0 +1,1282 @@
+[
+  {
+    "title": "Computational comparison of two draft sequences of the human genome",
+    "authors": "Aach et al",
+    "journal": "Nature",
+    "year": 2001,
+    "category": "pre2007",
+    "slug": "aach-2001-computational-comparison-of-two-draft"
+  },
+  {
+    "title": "Reversible, tunable epigenetic silencing of TCF-1 generates flexibility in the T cell memory decision",
+    "authors": "Abadie, Clark, Valanparambil et al",
+    "journal": "Cell",
+    "year": 2024,
+    "category": "research",
+    "slug": "abadie-2024-reversible-tunable-epigenetic-silencin"
+  },
+  {
+    "title": "A multiplex, prime editing framework for identifying drug resistance variants at scale",
+    "authors": "Abadie, Suiter et al",
+    "journal": "Cell Genomics",
+    "year": 2026,
+    "category": "research",
+    "slug": "abadie-2026-a-multiplex-prime-editing-framework-f"
+  },
+  {
+    "title": "Rapid, low-input, low-bias construction of shotgun fragment libraries by high-density in vitro transposition",
+    "authors": "Adey, Morrison, Asan, Xun et al",
+    "journal": "Genome Biology",
+    "year": 2010,
+    "category": "research",
+    "slug": "adey-2010-rapid-low-input-low-bias-construction-of"
+  },
+  {
+    "title": "Ultra-low-input, tagmentation-based whole-genome bisulfite sequencing",
+    "authors": "Adey, Shendure",
+    "journal": "Genome Research",
+    "year": 2012,
+    "category": "research",
+    "slug": "adey-2012-ultra-low-input-tagmentation-based-whole"
+  },
+  {
+    "title": "The haplotype-resolved genome and epigenome of the aneuploid HeLa cancer cell line",
+    "authors": "Adey, Burton, Kitzman et al",
+    "journal": "Nature",
+    "year": 2013,
+    "category": "research",
+    "slug": "adey-2013-the-haplotype-resolved-genome-and-epigen"
+  },
+  {
+    "title": "In vitro, long-range sequence information for de novo genome assembly via transposase contiguity",
+    "authors": "Adey et al",
+    "journal": "Genome Research",
+    "year": 2014,
+    "category": "research",
+    "slug": "adey-2014-in-vitro-long-range-sequence-information"
+  },
+  {
+    "title": " Predicting mRNA abundance directly from genomic sequence using deep convolutional neural networks",
+    "authors": "Agarwal, Shendure",
+    "journal": "Cell Reports",
+    "year": 2020,
+    "category": "research",
+    "slug": "agarwal-2020-predicting-mrna-abundance-directly-fr"
+  },
+  {
+    "title": " The landscape of alternative polyadenylation in single cells of the developing mouse embryo",
+    "authors": "Agarwal, Darwin-Lopez et al",
+    "journal": "Nature Communications",
+    "year": 2021,
+    "category": "research",
+    "slug": "agarwal-2021-the-landscape-of-alternative-polyaden"
+  },
+  {
+    "title": "Massively parallel characterization of transcriptional regulatory elements",
+    "authors": "Agarwal, Inoue et al",
+    "journal": "Nature",
+    "year": 2025,
+    "category": "research",
+    "slug": "agarwal-2025-massively-parallel-characterization-o"
+  },
+  {
+    "title": "Concurrent genome and epigenome editing by CRISPR-mediated sequence replacement",
+    "authors": "Alexander et al",
+    "journal": "BMC Biology",
+    "year": 2019,
+    "category": "research",
+    "slug": "alexander-2019-concurrent-genome-and-epigenome-edi"
+  },
+  {
+    "title": "The lives of cells, recorded",
+    "authors": "Askary et al",
+    "journal": "Nature Review Genetics",
+    "year": 2024,
+    "category": "review",
+    "slug": "askary-2024-the-lives-of-cells-recorded-nature-rev"
+  },
+  {
+    "title": "Exome sequencing as a tool for Mendelian disease gene discovery",
+    "authors": "Bamshad et al",
+    "journal": "Nature Reviews Genetics",
+    "year": 2011,
+    "category": "review",
+    "slug": "bamshad-2011-exome-sequencing-as-a-tool-for-mendel"
+  },
+  {
+    "title": "Cryptic transmission of SARS-CoV-2 in Washington state",
+    "authors": "Bedford, Greninger,Roychoudhury, Starita, Famulare et al",
+    "journal": "Science",
+    "year": 2020,
+    "category": "research",
+    "slug": "bedford-2020-cryptic-transmission-of-sars-cov-2-in"
+  },
+  {
+    "title": "The Seattle Flu Study: when regulations hinder pandemic surveillance",
+    "authors": "Boeckh et al",
+    "journal": "Nature Medicine",
+    "year": 2022,
+    "category": "review",
+    "slug": "boeckh-2022-the-seattle-flu-study-when-regulations"
+  },
+  {
+    "title": "MIPgen: optimized modeling and design of molecular inversion probes for targeted resequencing",
+    "authors": "Boyle et al",
+    "journal": "Bioinformatics",
+    "year": 2014,
+    "category": "research",
+    "slug": "boyle-2014-mipgen-optimized-modeling-and-design-of"
+  },
+  {
+    "title": "Chromosome-scale scaffolding of de novo genome assemblies based on chromatin interactions",
+    "authors": "Burton et al",
+    "journal": "Nature Biotechnology",
+    "year": 2013,
+    "category": "research",
+    "slug": "burton-2013-chromosome-scale-scaffolding-of-de-nov"
+  },
+  {
+    "title": "Species-Level Deconvolution of Metagenome Assemblies with Hi-C–Based Contact Probability Maps",
+    "authors": "Burton, Liachko et al",
+    "journal": "G3",
+    "year": 2014,
+    "category": "research",
+    "slug": "burton-2014-species-level-deconvolution-of-metagen"
+  },
+  {
+    "title": "TransMPRA: A framework for assaying the role of many trans-acting factors at many enhancers",
+    "authors": "Calderon et al",
+    "journal": "bioRxiv 2020.09.30.321323",
+    "year": 2020,
+    "category": "preprint",
+    "slug": "calderon-2020-transmpra-a-framework-for-assaying-t"
+  },
+  {
+    "title": "The continuum of Drosophila embryonic development at single-cell resolution",
+    "authors": "Calderon, Huang et al",
+    "journal": "Science",
+    "year": 2022,
+    "category": "research",
+    "slug": "calderon-2022-the-continuum-of-drosophila-embryoni"
+  },
+  {
+    "title": "Comprehensive single cell transcriptional profiling of a multicelluar organism by combinatorial indexing",
+    "authors": "Cao, Packer et al",
+    "journal": "Science",
+    "year": 2017,
+    "category": "research",
+    "slug": "cao-2017-comprehensive-single-cell-transcriptional"
+  },
+  {
+    "title": "Joint profiling of chromatin accessibility and gene expression in thousands of single cells",
+    "authors": "Cao et al",
+    "journal": "Science",
+    "year": 2018,
+    "category": "research",
+    "slug": "cao-2018-joint-profiling-of-chromatin-accessibilit"
+  },
+  {
+    "title": "The single-cell transcriptional landscape of mammalian organogenesis",
+    "authors": "Cao, Spielmann et al",
+    "journal": "Nature",
+    "year": 2019,
+    "category": "research",
+    "slug": "cao-2019-the-single-cell-transcriptional-landscape"
+  },
+  {
+    "title": " A human cell atlas of fetal gene expression",
+    "authors": "Cao et al",
+    "journal": "Science",
+    "year": 2020,
+    "category": "research",
+    "slug": "cao-2020-a-human-cell-atlas-of-fetal-gene-expressi"
+  },
+  {
+    "title": "Sci-fate characterizes the dynamics of gene expression in single cells",
+    "authors": "Cao et al",
+    "journal": "Nature Biotechnology",
+    "year": 2020,
+    "category": "research",
+    "slug": "cao-2020-sci-fate-characterizes-the-dynamics-of-ge"
+  },
+  {
+    "title": "Multiplex, single-cell CRISPRa screening for cell type specific regulatory elements",
+    "authors": "Chardon, McDiarmid et al",
+    "journal": "Nature Communications",
+    "year": 2024,
+    "category": "research",
+    "slug": "chardon-2024-multiplex-single-cell-crispra-screeni"
+  },
+  {
+    "title": "Massively parallel profiling and predictive modeling of the outcomes of CRISPR/Cas9-mediated double-strand break repair",
+    "authors": "Chen, McKenna, Schrieber et al",
+    "journal": "Nucleic Acids Research",
+    "year": 2019,
+    "category": "research",
+    "slug": "chen-2019-massively-parallel-profiling-and-predict"
+  },
+  {
+    "title": "Symbolic recording of signalling and cis-regulatory element activity to DNA",
+    "authors": "Chen, Choi et al",
+    "journal": "Nature",
+    "year": 2024,
+    "category": "research",
+    "slug": "chen-2024-symbolic-recording-of-signalling-and-cis"
+  },
+  {
+    "title": " A single-cell multi-omic atlas spanning the adult rhesus macaque brain",
+    "authors": "Chiou, Huang et al",
+    "journal": "Science Advances",
+    "year": 2023,
+    "category": "research",
+    "slug": "chiou-2023-a-single-cell-multi-omic-atlas-spanning"
+  },
+  {
+    "title": " A time-resolved, multi-symbol molecular recorder via sequential genome editing",
+    "authors": "Choi et al",
+    "journal": "Nature",
+    "year": 2022,
+    "category": "research",
+    "slug": "choi-2022-a-time-resolved-multi-symbol-molecular-r"
+  },
+  {
+    "title": " Precise genomic deletions using paired prime editing",
+    "authors": "Choi, Chen et al",
+    "journal": "Nature Biotechnology",
+    "year": 2022,
+    "category": "research",
+    "slug": "choi-2022-precise-genomic-deletions-using-paired-p"
+  },
+  {
+    "title": "A molecular proximity sensor based on an engineered, dual-component guide RNA",
+    "authors": "Choi et al",
+    "journal": "eLife",
+    "year": 2025,
+    "category": "research",
+    "slug": "choi-2025-a-molecular-proximity-sensor-based-on-an"
+  },
+  {
+    "title": " Early Detection of Covid-19 through a Citywide Pandemic Surveillance Platform",
+    "authors": "Chu et al",
+    "journal": "New England Journal of Medicine",
+    "year": 2020,
+    "category": "research",
+    "slug": "chu-2020-early-detection-of-covid-19-through-a-cit"
+  },
+  {
+    "title": "Needles in stacks of needles: finding disease-causal variants in a wealth of genomic data",
+    "authors": "Cooper, Shendure",
+    "journal": "Nature Reviews Genetics",
+    "year": 2011,
+    "category": "review",
+    "slug": "cooper-2011-needles-in-stacks-of-needles-finding-d"
+  },
+  {
+    "title": "Multiplex single-cell profiling of chromatin accessibility by combinatorial cellular indexing",
+    "authors": "Cusanovich et al",
+    "journal": "Science",
+    "year": 2015,
+    "category": "research",
+    "slug": "cusanovich-2015-multiplex-single-cell-profiling-of"
+  },
+  {
+    "title": "A Single-Cell Atlas of In Vivo Mammalian Chromatin Accessibility",
+    "authors": "Cusanovich, Hill et al",
+    "journal": "Cell",
+    "year": 2018,
+    "category": "research",
+    "slug": "cusanovich-2018-a-single-cell-atlas-of-in-vivo-mam"
+  },
+  {
+    "title": "The cis-regulatory dynamics of embryonic development at single-cell resolution",
+    "authors": "Cusanovich, Reddington, Garfield et al",
+    "journal": "Nature",
+    "year": 2018,
+    "category": "research",
+    "slug": "cusanovich-2018-the-cis-regulatory-dynamics-of-emb"
+  },
+  {
+    "title": " A human cell atlas of fetal chromatin accessibility",
+    "authors": "Domcke, Hill, Daza et al",
+    "journal": "Science",
+    "year": 2020,
+    "category": "research",
+    "slug": "domcke-2020-a-human-cell-atlas-of-fetal-chromatin-"
+  },
+  {
+    "title": "A reference cell tree will serve science better than a reference cell atlas",
+    "authors": "Domcke, Shendure",
+    "journal": "Cell",
+    "year": 2023,
+    "category": "review",
+    "slug": "domcke-2023-a-reference-cell-tree-will-serve-scien"
+  },
+  {
+    "title": "Exome sequencing reveals pathogenic mutations in 91 strains of mice with Mendelian disorders",
+    "authors": "Fairfield et al",
+    "journal": "Genome Research",
+    "year": 2015,
+    "category": "research",
+    "slug": "fairfield-2015-exome-sequencing-reveals-pathogenic"
+  },
+  {
+    "title": "Massively Parallel Genetics",
+    "authors": "Fields, Shendure",
+    "journal": "Genetics",
+    "year": 2016,
+    "category": "review",
+    "slug": "fields-2016-massively-parallel-genetics-genetics"
+  },
+  {
+    "title": "Saturation editing of genomic regions by multiplex homology-directed repair",
+    "authors": "Findlay, Boyle et al",
+    "journal": "Nature",
+    "year": 2014,
+    "category": "research",
+    "slug": "findlay-2014-saturation-editing-of-genomic-regions"
+  },
+  {
+    "title": "Accurate classification of BRCA1 variants with saturation genome editing",
+    "authors": "Findlay et al",
+    "journal": "Nature",
+    "year": 2018,
+    "category": "research",
+    "slug": "findlay-2018-accurate-classification-of-brca1-vari"
+  },
+  {
+    "title": "The proteomic landscape and temporal dynamics of mammalian gastruloid development",
+    "authors": "Garge et al",
+    "journal": "bioRxiv 2024.09.05.609098",
+    "year": 2024,
+    "category": "preprint",
+    "slug": "garge-2024-the-proteomic-landscape-and-temporal-dy"
+  },
+  {
+    "title": "The power of multiplexed functional analysis of genetic variants",
+    "authors": "Gasperini et al",
+    "journal": "Nature Protocols",
+    "year": 2016,
+    "category": "review",
+    "slug": "gasperini-2016-the-power-of-multiplexed-functional"
+  },
+  {
+    "title": "CRISPR/Cas9-Mediated Scanning for Regulatory Elements Required for HPRT1 Expression via Thousands of Large, Programmed Genomic Deletions",
+    "authors": "Gasperini, Findlay et al",
+    "journal": "AJHG",
+    "year": 2017,
+    "category": "research",
+    "slug": "gasperini-2017-crispr-cas9-mediated-scanning-for-r"
+  },
+  {
+    "title": "A Genome-wide Framework for Mapping Gene Regulation via Cellular Genetic Screens",
+    "authors": "Gasperini et al",
+    "journal": "Cell",
+    "year": 2019,
+    "category": "research",
+    "slug": "gasperini-2019-a-genome-wide-framework-for-mapping"
+  },
+  {
+    "title": "Towards a comprehensive catalogue of validated and target-linked human enhancers",
+    "authors": "Gasperini, Tome,  Shendure",
+    "journal": "Nature Reviews Genetics",
+    "year": 2020,
+    "category": "review",
+    "slug": "gasperini-2020-towards-a-comprehensive-catalogue-o"
+  },
+  {
+    "title": "Trans genomic capture and sequencing of primate exomes reveals new targets of positive selection",
+    "authors": "George et al",
+    "journal": "Genome Research",
+    "year": 2011,
+    "category": "research",
+    "slug": "george-2011-trans-genomic-capture-and-sequencing-o"
+  },
+  {
+    "title": "lentiMPRA and MPRAflow for high-throughput functional characterization of gene regulatory elements",
+    "authors": "Gordon, Inoue, Martin, Schubach et al",
+    "journal": "Nature Protocols",
+    "year": 2020,
+    "category": "review",
+    "slug": "gordon-2020-nature-protocols"
+  },
+  {
+    "title": "Retinoic acid induces human gastruloids with posterior embryo-like structures",
+    "authors": "Hamazaki, Yang et al",
+    "journal": "Nature Cell Biology",
+    "year": 2024,
+    "category": "research",
+    "slug": "hamazaki-2024-retinoic-acid-induces-human-gastrulo"
+  },
+  {
+    "title": "Classification and characterization of microsatellite instability across 18 cancer types",
+    "authors": "Hause et al",
+    "journal": "Nature Medicine",
+    "year": 2016,
+    "category": "research",
+    "slug": "hause-2016-classification-and-characterization-of-"
+  },
+  {
+    "title": "Parallel, tag-directed assembly of locally derived short sequence reads",
+    "authors": "Hiatt, Patwardhan et al",
+    "journal": "Nature Methods",
+    "year": 2010,
+    "category": "research",
+    "slug": "hiatt-2010-parallel-tag-directed-assembly-of-local"
+  },
+  {
+    "title": "Single molecule molecular inversion probes for targeted, high-accuracy detection of low-frequency variation",
+    "authors": "Hiatt et al",
+    "journal": "Genome Research",
+    "year": 2013,
+    "category": "research",
+    "slug": "hiatt-2013-single-molecule-molecular-inversion-pro"
+  },
+  {
+    "title": "On the design of CRISPR-based single-cell molecular screens",
+    "authors": "Hill, McFaline-Figueroa et al",
+    "journal": "Nature Methods",
+    "year": 2018,
+    "category": "research",
+    "slug": "hill-2018-on-the-design-of-crispr-based-single-cel"
+  },
+  {
+    "title": "Single-cell, whole embryo phenotyping of mammalian developmental disorders",
+    "authors": "Huang, Henck, Qiu et al",
+    "journal": "Nature",
+    "year": 2023,
+    "category": "research",
+    "slug": "huang-2023-single-cell-whole-embryo-phenotyping-of"
+  },
+  {
+    "title": "A systematic comparison reveals substantial differences in chromosomal versus episomal encoding of enhancer activity",
+    "authors": "Inoue, Kircher et al",
+    "journal": "Genome Research",
+    "year": 2017,
+    "category": "research",
+    "slug": "inoue-2017-a-systematic-comparison-reveals-substan"
+  },
+  {
+    "title": "The contribution of de novo coding mutations to autism spectrum disorder",
+    "authors": "Iossifov, O'Roak, Sanders, Ronemus et al",
+    "journal": "Nature",
+    "year": 2014,
+    "category": "research",
+    "slug": "iossifov-2014-the-contribution-of-de-novo-coding-m"
+  },
+  {
+    "title": "The dynamic three-dimensional organization of the diploid yeast genome",
+    "authors": "Kim et al",
+    "journal": "eLIFE",
+    "year": 2017,
+    "category": "research",
+    "slug": "kim-2017-the-dynamic-three-dimensional-organizatio"
+  },
+  {
+    "title": "A combination of transcription factors mediates inducible interchromosomal contacts",
+    "authors": "Kim et al",
+    "journal": "eLife",
+    "year": 2019,
+    "category": "research",
+    "slug": "kim-2019-a-combination-of-transcription-factors-me"
+  },
+  {
+    "title": "Mechanisms of Interplay between Transcription Factors and the 3D Genome",
+    "authors": "Kim et al",
+    "journal": "Molecular Cell",
+    "year": 2019,
+    "category": "review",
+    "slug": "kim-2019-mechanisms-of-interplay-between-transcrip"
+  },
+  {
+    "title": "A general framework for estimating the relative pathogenicity of human genetic variants",
+    "authors": "Kircher, Witten et al",
+    "journal": "Nature Genetics",
+    "year": 2014,
+    "category": "research",
+    "slug": "kircher-2014-a-general-framework-for-estimating-th"
+  },
+  {
+    "title": "Running spell-check to identify regulatory variants",
+    "authors": "Kircher, Shendure",
+    "journal": "Nature Genetics",
+    "year": 2015,
+    "category": "review",
+    "slug": "kircher-2015-running-spell-check-to-identify-regul"
+  },
+  {
+    "title": "Saturation mutagenesis of twenty disease-associated regulatory elements at single base-pair resolution",
+    "authors": "Kircher, Xiong, Martin, Schubach et al",
+    "journal": "Nature Communications",
+    "year": 2019,
+    "category": "research",
+    "slug": "kircher-2019-saturation-mutagenesis-of-twenty-dise"
+  },
+  {
+    "title": "Haplotype-resolved genome sequencing of a Gujarati Indian individual",
+    "authors": "Kitzman et al",
+    "journal": "Nature Biotechnology",
+    "year": 2011,
+    "category": "research",
+    "slug": "kitzman-2011-haplotype-resolved-genome-sequencing-"
+  },
+  {
+    "title": "Noninvasive whole-genome sequencing of a human fetus",
+    "authors": "Kitzman et al",
+    "journal": "Science Translational Medicine",
+    "year": 2012,
+    "category": "research",
+    "slug": "kitzman-2012-noninvasive-whole-genome-sequencing-o"
+  },
+  {
+    "title": "Massively parallel single-amino-acid mutagenesis",
+    "authors": "Kitzman, Starita et al",
+    "journal": "Nature Methods",
+    "year": 2015,
+    "category": "research",
+    "slug": "kitzman-2015-massively-parallel-single-amino-acid-"
+  },
+  {
+    "title": "Multiplex pairwise assembly of array-derived DNA oligonucleotides",
+    "authors": "Klein et al",
+    "journal": "Nucleic Acids Research",
+    "year": 2015,
+    "category": "research",
+    "slug": "klein-2015-multiplex-pairwise-assembly-of-array-de"
+  },
+  {
+    "title": "Functional characterization of enhancer evolution in the primate lineage",
+    "authors": "Klein et al",
+    "journal": "Genome Biology",
+    "year": 2018,
+    "category": "research",
+    "slug": "klein-2018-functional-characterization-of-enhancer"
+  },
+  {
+    "title": "Identifying Novel Enhancer Elements with CRISPR-Based Screens",
+    "authors": "Klein et al",
+    "journal": "ACS Chemical Biology",
+    "year": 2018,
+    "category": "review",
+    "slug": "klein-2018-identifying-novel-enhancer-elements-wit"
+  },
+  {
+    "title": "Functional testing of thousands of osteoarthritis-associated variants for regulatory activity",
+    "authors": "Klein, Keith et al",
+    "journal": "Nature Communications",
+    "year": 2019,
+    "category": "research",
+    "slug": "klein-2019-functional-testing-of-thousands-of-oste"
+  },
+  {
+    "title": "A systematic evaluation of the design and context dependencies of massively parallel\nreporter assays",
+    "authors": "Klein, Agarwal, Inoue, Keith et al",
+    "journal": "Nature Methods",
+    "year": 2020,
+    "category": "research",
+    "slug": "klein-2020-a-systematic-evaluation-of-the-design-a"
+  },
+  {
+    "title": "What's a Genome Worth? Science Translational Medicine",
+    "authors": "Kohane, Shendure",
+    "journal": "What's a Genome Worth? Science Translational Medicine",
+    "year": 2012,
+    "category": "review",
+    "slug": "kohane-2012-what-s-a-genome-worth-science-translat"
+  },
+  {
+    "title": "Exome sequencing identifies a spectrum of mutation frequencies in advanced and lethal prostate cancers",
+    "authors": "Kumar et al",
+    "journal": "PNAS",
+    "year": 2011,
+    "category": "research",
+    "slug": "kumar-2011-exome-sequencing-identifies-a-spectrum-"
+  },
+  {
+    "title": "Deep sequencing of multiple regions of glial tumors reveals spatial heterogeneity for mutations in clinically relevant genes",
+    "authors": "Kumar et al",
+    "journal": "Genome Biology",
+    "year": 2014,
+    "category": "research",
+    "slug": "kumar-2014-deep-sequencing-of-multiple-regions-of-"
+  },
+  {
+    "title": "Genome sequencing of idiopathic pulmonary fibrosis in conjunction with a medical school human anatomy course",
+    "authors": "Kumar et al",
+    "journal": "PLoS One",
+    "year": 2014,
+    "category": "review",
+    "slug": "kumar-2014-genome-sequencing-of-idiopathic-pulmona"
+  },
+  {
+    "title": "Whole genome prediction for preimplantation genetic diagnosis",
+    "authors": "Kumar, Ryan et al",
+    "journal": "Genome Medicine",
+    "year": 2015,
+    "category": "research",
+    "slug": "kumar-2015-whole-genome-prediction-for-preimplanta"
+  },
+  {
+    "title": "Substantial interindividual and limited intraindividual genomic diversity among tumors from men with metastatic prostate cancer",
+    "authors": "Kumar, Coleman et al",
+    "journal": "Nature Medicine",
+    "year": 2016,
+    "category": "research",
+    "slug": "kumar-2016-substantial-interindividual-and-limited"
+  },
+  {
+    "title": "Multiplex profiling of developmental cis-regulatory elements with quantitative single-cell expression reporters",
+    "authors": "Lalanne, Regalado et al",
+    "journal": "Nature Methods",
+    "year": 2024,
+    "category": "research",
+    "slug": "lalanne-2024-multiplex-profiling-of-developmental-"
+  },
+  {
+    "title": "Extensive length and homology dependent chimerism in pool-packaged AAV libraries",
+    "authors": "Lalanne et al",
+    "journal": "bioRxiv 2025.01.14.632594",
+    "year": 2025,
+    "category": "preprint",
+    "slug": "lalanne-2025-extensive-length-and-homology-depende"
+  },
+  {
+    "title": "Chromatin context-dependent regulation and epigenetic manipulation of prime editing",
+    "authors": "Li et al",
+    "journal": "Cell",
+    "year": 2024,
+    "category": "research",
+    "slug": "li-2024-chromatin-context-dependent-regulation-and"
+  },
+  {
+    "title": "Molecular recording using DNA Typewriter",
+    "authors": "Liao, Choi, Shendure",
+    "journal": "Nature Protocols",
+    "year": 2024,
+    "category": "review",
+    "slug": "liao-2024-molecular-recording-using-dna-typewriter"
+  },
+  {
+    "title": "Optics-free reconstruction of 2D images via DNA barcode proximity graphs",
+    "authors": "Liao, Kottapalli et al",
+    "journal": "bioRxiv 2024.08.06.606834",
+    "year": 2024,
+    "category": "preprint",
+    "slug": "liao-2024-optics-free-reconstruction-of-2d-images-"
+  },
+  {
+    "title": "Dual-patterned pluripotent stem cells self-organize into a human embryo model with extended anterior-posterior patterning",
+    "authors": "Liu et al",
+    "journal": "bioRxiv 2025.09.25.678678",
+    "year": 2025,
+    "category": "preprint",
+    "slug": "liu-2025-dual-patterned-pluripotent-stem-cells-sel"
+  },
+  {
+    "title": "Target-enrichment strategies for next-generation sequencing",
+    "authors": "Mamanova et al",
+    "journal": "Nature Methods",
+    "year": 2010,
+    "category": "review",
+    "slug": "mamanova-2010-target-enrichment-strategies-for-nex"
+  },
+  {
+    "title": "Optimized single-nucleus transcriptional profiling by combinatorial indexing",
+    "authors": "Martin et al",
+    "journal": "Nature Protocols",
+    "year": 2022,
+    "category": "research",
+    "slug": "martin-2022-optimized-single-nucleus-transcription"
+  },
+  {
+    "title": "Multiplex assessment of protein variant abundance by massively parallel sequencing",
+    "authors": "Matreyek, Starita et al",
+    "journal": "Nature Genetics",
+    "year": 2018,
+    "category": "research",
+    "slug": "matreyek-2018-multiplex-assessment-of-protein-vari"
+  },
+  {
+    "title": "A parts list of promoters and gRNA scaffolds for mammalian genome engineering and molecular recording",
+    "authors": "McDiarmid, Taylor et al",
+    "journal": "Nature Biotechnology",
+    "year": 2025,
+    "category": "research",
+    "slug": "mcdiarmid-2025-a-parts-list-of-promoters-and-grna-"
+  },
+  {
+    "title": "bioRxiv",
+    "authors": "McDiarmid, Page, Chardon et al",
+    "journal": "Large-scale discovery of neural enhancers for cis-regulation therapies bioRxiv 2025.11.04.686611",
+    "year": 2025,
+    "category": "preprint",
+    "slug": "mcdiarmid-2025-large-scale-discovery-of-neural-enh"
+  },
+  {
+    "title": "Whole-organism lineage tracing by combinatorial and cumulative genome editing",
+    "authors": "McKenna, Findlay, Gagnon et al",
+    "journal": "Science",
+    "year": 2016,
+    "category": "research",
+    "slug": "mckenna-2016-whole-organism-lineage-tracing-by-com"
+  },
+  {
+    "title": "FlashFry: a fast and flexible tool for large-scale CRISPR target design",
+    "authors": "McKenna & Shendure",
+    "journal": "BMC Biology",
+    "year": 2018,
+    "category": "research",
+    "slug": "mckenna-2018-flashfry-a-fast-and-flexible-tool-for"
+  },
+  {
+    "title": "Tethering distinct molecular profiles of single cells by their lineage histories to investigate sources of cell state heterogeneity",
+    "authors": "Minkina et al",
+    "journal": "bioRxiv 2022.05.12.491602",
+    "year": 2022,
+    "category": "preprint",
+    "slug": "minkina-2022-tethering-distinct-molecular-profiles"
+  },
+  {
+    "title": "Genetic Tools for Cell Lineage Tracing and Profiling Developmental Trajectories in the Skin",
+    "authors": "Nathans et al",
+    "journal": "Methods and Techniques for Skin Research",
+    "year": 2024,
+    "category": "review",
+    "slug": "nathans-2024-genetic-tools-for-cell-lineage-tracin"
+  },
+  {
+    "title": "Multichannel genomic recording of biological information with ENGRAM",
+    "authors": "Nathans, McDiarmid et al",
+    "journal": "Nature Protocols",
+    "year": 2026,
+    "category": "review",
+    "slug": "nathans-2026-multichannel-genomic-recording-engram"
+  },
+  {
+    "title": "BRCA Testing by Single-Molecule Molecular Inversion Probes",
+    "authors": "Neveling, Mensenkamp et al",
+    "journal": "Clinical Chemistry",
+    "year": 2017,
+    "category": "research",
+    "slug": "neveling-2017-brca-testing-by-single-molecule-mole"
+  },
+  {
+    "title": "Targeted capture and massively parallel sequencing of 12 human exomes",
+    "authors": "Ng et al",
+    "journal": "Nature",
+    "year": 2009,
+    "category": "research",
+    "slug": "ng-2009-targeted-capture-and-massively-parallel-se"
+  },
+  {
+    "title": "Exome sequencing identifies MLL2 mutations as a cause of Kabuki syndrome",
+    "authors": "Ng, Bigham et al",
+    "journal": "Nature Genetics",
+    "year": 2010,
+    "category": "research",
+    "slug": "ng-2010-exome-sequencing-identifies-mll2-mutations"
+  },
+  {
+    "title": "Exome sequencing identifies the cause of a mendelian disorder",
+    "authors": "Ng, Buckingham et al",
+    "journal": "Nature Genetics",
+    "year": 2010,
+    "category": "research",
+    "slug": "ng-2010-exome-sequencing-identifies-the-cause-of-a"
+  },
+  {
+    "title": "Massively parallel sequencing and rare disease",
+    "authors": "Ng et al",
+    "journal": "Human Molecular Genetics",
+    "year": 2010,
+    "category": "review",
+    "slug": "ng-2010-massively-parallel-sequencing-and-rare-dis"
+  },
+  {
+    "title": "Exome sequencing in sporadic autism spectrum disorders identifies severe de novo mutations",
+    "authors": "O'Roak et al",
+    "journal": "Nature Genetics",
+    "year": 2011,
+    "category": "research",
+    "slug": "o-roak-2011-exome-sequencing-in-sporadic-autism-sp"
+  },
+  {
+    "title": "Multiplex Targeted Sequencing Identifies Recurrently Mutated Genes in Autism Spectrum Disorders",
+    "authors": "O'Roak et al",
+    "journal": "Science",
+    "year": 2012,
+    "category": "research",
+    "slug": "o-roak-2012-multiplex-targeted-sequencing-identifi"
+  },
+  {
+    "title": "Sporadic autism exomes reveal a highly interconnected protein network of de novo mutations",
+    "authors": "O'Roak et al",
+    "journal": "Nature",
+    "year": 2012,
+    "category": "research",
+    "slug": "o-roak-2012-sporadic-autism-exomes-reveal-a-highly"
+  },
+  {
+    "title": "Recurrent de novo mutations implicate novel genes underlying simplex autism risk",
+    "authors": "O'Roak, Stessman et al",
+    "journal": "Nature Communications",
+    "year": 2014,
+    "category": "research",
+    "slug": "o-roak-2014-recurrent-de-novo-mutations-implicate-"
+  },
+  {
+    "title": "High-resolution analysis of DNA regulatory elements by synthetic saturation mutagenesis",
+    "authors": "Patwardhan et al",
+    "journal": "Nature Biotechnology",
+    "year": 2009,
+    "category": "research",
+    "slug": "patwardhan-2009-high-resolution-analysis-of-dna-re"
+  },
+  {
+    "title": "Massively parallel functional dissection of mammalian enhancers in vivo",
+    "authors": "Patwardhan, Hiatt et al",
+    "journal": "Nature Biotechnology",
+    "year": 2012,
+    "category": "research",
+    "slug": "patwardhan-2012-massively-parallel-functional-diss"
+  },
+  {
+    "title": "Multiplex generation and single-cell analysis of structural variants in mammalian genomess",
+    "authors": "Pinglay et al",
+    "journal": "Science",
+    "year": 2025,
+    "category": "research",
+    "slug": "pinglay-2025-multiplex-generation-and-single-cell-"
+  },
+  {
+    "title": "Cicero Predicts cis-Regulatory DNA Interactions from Single-Cell Chromatin Accessibility Data",
+    "authors": "Pliner et al",
+    "journal": "Molecular Cell",
+    "year": 2018,
+    "category": "research",
+    "slug": "pliner-2018-cicero-predicts-cis-regulatory-dna-int"
+  },
+  {
+    "title": "Supervised classification enables rapid annotation of cell atlases",
+    "authors": "Pliner et al",
+    "journal": "Nature Methods",
+    "year": 2019,
+    "category": "research",
+    "slug": "pliner-2019-supervised-classification-enables-rapi"
+  },
+  {
+    "title": "Multiplex Amplification of Large Sets of Human Exons",
+    "authors": "Porreca, Zhang et al",
+    "journal": "Nature Methods",
+    "year": 2007,
+    "category": "pre2007",
+    "slug": "porreca-2007-multiplex-amplification-of-large-sets"
+  },
+  {
+    "title": "A continuous model of early mammalian development",
+    "authors": "Qiu, Shendure",
+    "journal": "Nature",
+    "year": 2021,
+    "category": "review",
+    "slug": "qiu-2021-a-continuous-model-of-early-mammalian-dev"
+  },
+  {
+    "title": " Systematic reconstruction of cellular trajectories across mouse embryogenesis",
+    "authors": "Qiu et al",
+    "journal": "Nature Genetics",
+    "year": 2022,
+    "category": "research",
+    "slug": "qiu-2022-systematic-reconstruction-of-cellular-tra"
+  },
+  {
+    "title": "A single-cell time-lapse of mouse prenatal development from gastrula to birth",
+    "authors": "Qiu, Martin, Welsh et al",
+    "journal": "Nature",
+    "year": 2024,
+    "category": "research",
+    "slug": "qiu-2024-a-single-cell-time-lapse-of-mouse-prenata"
+  },
+  {
+    "title": "Remembrance of inflammations past",
+    "authors": "Qiu, Shendure",
+    "journal": "Nature",
+    "year": 2026,
+    "category": "review",
+    "slug": "qiu-2026-remembrance-of-inflammations-past"
+  },
+  {
+    "title": "High-throughput determination of RNA structure by proximity ligation",
+    "authors": "Ramani et al",
+    "journal": "Nature Biotechnology",
+    "year": 2015,
+    "category": "research",
+    "slug": "ramani-2015-high-throughput-determination-of-rna-s"
+  },
+  {
+    "title": "Mapping 3D genome architecture through in situ DNase Hi-C",
+    "authors": "Ramani, Cusanovich et al",
+    "journal": "Nature Protocols",
+    "year": 2016,
+    "category": "research",
+    "slug": "ramani-2016-mapping-3d-genome-architecture-through"
+  },
+  {
+    "title": "Massively multiplex single-cell Hi-C",
+    "authors": "Ramani et al",
+    "journal": "Nature Methods",
+    "year": 2017,
+    "category": "research",
+    "slug": "ramani-2017-massively-multiplex-single-cell-hi-c-n"
+  },
+  {
+    "title": "High Sensitivity Profiling of Chromatin Structure by MNase-SSP",
+    "authors": "Ramani et al",
+    "journal": "Cell",
+    "year": 2019,
+    "category": "research",
+    "slug": "ramani-2019-high-sensitivity-profiling-of-chromati"
+  },
+  {
+    "title": "Barcoded monoclonal embryoids are a potential solution to confrounding bottlenecks in mosaic organoid screens",
+    "authors": "Regalado, Qiu et al",
+    "journal": "bioRxiv 2025.05.23.655669",
+    "year": 2025,
+    "category": "preprint",
+    "slug": "regalado-2025-barcoded-monoclonal-embryoids-are-a-"
+  },
+  {
+    "title": "Lineage recording in monoclonal gastruloids reveals heritable modes of early development",
+    "authors": "Regalado, Qiu et al",
+    "journal": "bioRxiv 2025.05.23.655664",
+    "year": 2025,
+    "category": "preprint",
+    "slug": "regalado-2025-lineage-recording-in-monoclonal-gast"
+  },
+  {
+    "title": "CADD: predicting the deleteriousness of variants throughout the human genome",
+    "authors": "Rentzsch et al",
+    "journal": "Nucleic Acids Research",
+    "year": 2019,
+    "category": "research",
+    "slug": "rentzsch-2019-cadd-predicting-the-deleteriousness-"
+  },
+  {
+    "title": "A Year of Infection in the Intensive Care Unit: Prospective Whole Genome Sequencing of Bacterial Clinical Isolates Reveals Cryptic Transmissions and Novel Microbiota",
+    "authors": "Roach et al",
+    "journal": "PLoS Genetics",
+    "year": 2015,
+    "category": "research",
+    "slug": "roach-2015-a-year-of-infection-in-the-intensive-ca"
+  },
+  {
+    "title": "Large-scale genomic sequencing of extraintestinal pathogenic Escherichia coli strains",
+    "authors": "Salipante, Roach et al",
+    "journal": "Genome Research",
+    "year": 2014,
+    "category": "research",
+    "slug": "salipante-2014-large-scale-genomic-sequencing-of-e"
+  },
+  {
+    "title": "Accurate gene synthesis with tag-directed retrieval of sequence-verified DNA molecules",
+    "authors": "Schwartz et al",
+    "journal": "Nature Methods",
+    "year": 2012,
+    "category": "research",
+    "slug": "schwartz-2012-accurate-gene-synthesis-with-tag-dir"
+  },
+  {
+    "title": "Capturing native long-range contiguity by in situ library construction and optical sequencing",
+    "authors": "Schwartz et al",
+    "journal": "PNAS",
+    "year": 2012,
+    "category": "research",
+    "slug": "schwartz-2012-capturing-native-long-range-contigui"
+  },
+  {
+    "title": "Primate evolution of the recombination regulator PRDM9",
+    "authors": "Schwartz, Roach et al",
+    "journal": "Nature Communications",
+    "year": 2014,
+    "category": "research",
+    "slug": "schwartz-2014-primate-evolution-of-the-recombinati"
+  },
+  {
+    "title": "Computational discovery of sense-antisense transcription in the human and mouse genomes",
+    "authors": "Shendure & Church",
+    "journal": "Genome Biology",
+    "year": 2002,
+    "category": "pre2007",
+    "slug": "shendure-2002-computational-discovery-of-sense-anti"
+  },
+  {
+    "title": "Advanced sequencing technologies: methods and goals",
+    "authors": "Shendure et al",
+    "journal": "Nature Reviews Genetics",
+    "year": 2004,
+    "category": "review",
+    "slug": "shendure-2004-advanced-sequencing-technologies-met"
+  },
+  {
+    "title": "Accurate Multiplex Polony Sequencing of an Evolved Bacterial Genome",
+    "authors": "Shendure, Porreca et al",
+    "journal": "Science",
+    "year": 2005,
+    "category": "pre2007",
+    "slug": "shendure-2005-accurate-multiplex-polony-sequencing"
+  },
+  {
+    "title": "Next generation DNA sequencing",
+    "authors": "Shendure, Ji",
+    "journal": "Nature Biotechnology",
+    "year": 2008,
+    "category": "review",
+    "slug": "shendure-2008-next-generation-dna-sequencing-natur"
+  },
+  {
+    "title": "The beginning of the end for microarrays? Nature Methods",
+    "authors": "Shendure",
+    "journal": "The beginning of the end for microarrays? Nature Methods",
+    "year": 2008,
+    "category": "review",
+    "slug": "shendure-2008-the-beginning-of-the-end-for-microar"
+  },
+  {
+    "title": "Next-generation human genetics",
+    "authors": "Shendure",
+    "journal": "Genome Biology",
+    "year": 2011,
+    "category": "review",
+    "slug": "shendure-2011-next-generation-human-genetics-genom"
+  },
+  {
+    "title": "The expanding scope of DNA sequencing",
+    "authors": "Shendure, Lieberman-Aiden",
+    "journal": "Nature Biotechnology",
+    "year": 2012,
+    "category": "review",
+    "slug": "shendure-2012-the-expanding-scope-of-dna-sequencin"
+  },
+  {
+    "title": "2012 Curt Stern Award address",
+    "authors": "Shendure",
+    "journal": "American Journal of Human Genetics",
+    "year": 2013,
+    "category": "review",
+    "slug": "shendure-2013-american-journal-of-human-genetics"
+  },
+  {
+    "title": "Life after genetics",
+    "authors": "Shendure",
+    "journal": "Genome Medicine",
+    "year": 2014,
+    "category": "review",
+    "slug": "shendure-2014-life-after-genetics-genome-medicine"
+  },
+  {
+    "title": "The origins, determinants, and consequences of human mutations",
+    "authors": "Shendure, Akey",
+    "journal": "Science",
+    "year": 2015,
+    "category": "review",
+    "slug": "shendure-2015-the-origins-determinants-and-consequ"
+  },
+  {
+    "title": "Human genomics: A deep dive into genetic variation",
+    "authors": "Shendure",
+    "journal": "Nature",
+    "year": 2016,
+    "category": "review",
+    "slug": "shendure-2016-human-genomics-a-deep-dive-into-gene"
+  },
+  {
+    "title": "DNA sequencing at 40: past, present and future",
+    "authors": "Shendure et al",
+    "journal": "Nature",
+    "year": 2017,
+    "category": "review",
+    "slug": "shendure-2017-dna-sequencing-at-40-past-present-an"
+  },
+  {
+    "title": "Genomic Medicine-Progress, Pitfalls, and Promise",
+    "authors": "Shendure et al",
+    "journal": "Cell",
+    "year": 2019,
+    "category": "review",
+    "slug": "shendure-2019-genomic-medicine-progress-pitfalls-a"
+  },
+  {
+    "title": " Single-cell lineage tracing of metastatic cancer reveals selection of hybrid EMT states",
+    "authors": "Simeonov et al",
+    "journal": "Cancer Cell",
+    "year": 2021,
+    "category": "research",
+    "slug": "simeonov-2021-single-cell-lineage-tracing-of-metas"
+  },
+  {
+    "title": "Massively parallel decoding of mammalian regulatory sequences supports a flexible organizational model",
+    "authors": "Smith, Taher L et al",
+    "journal": "Nature Genetics",
+    "year": 2013,
+    "category": "research",
+    "slug": "smith-2013-massively-parallel-decoding-of-mammalia"
+  },
+  {
+    "title": "Noninvasive fetal genome sequencing: a primer",
+    "authors": "Snyder et al",
+    "journal": "Prenatal Diagnosis",
+    "year": 2013,
+    "category": "review",
+    "slug": "snyder-2013-noninvasive-fetal-genome-sequencing-a-"
+  },
+  {
+    "title": "Copy-Number Variation and False Positive Prenatal Aneuploidy Screening Results",
+    "authors": "Snyder, Simmons et al",
+    "journal": "New England Journal of Medicine",
+    "year": 2015,
+    "category": "research",
+    "slug": "snyder-2015-copy-number-variation-and-false-positi"
+  },
+  {
+    "title": "Haplotype-resolved genome sequencing: experimental methods and applications",
+    "authors": "Snyder et al",
+    "journal": "Nature Reviews Genetics",
+    "year": 2015,
+    "category": "review",
+    "slug": "snyder-2015-haplotype-resolved-genome-sequencing-e"
+  },
+  {
+    "title": "Cell-free DNA Comprises an In Vivo Nucleosome Footprint that Informs Its Tissues-Of-Origin",
+    "authors": "Snyder, Kircher et al",
+    "journal": "Cell",
+    "year": 2016,
+    "category": "research",
+    "slug": "snyder-2016-cell-free-dna-comprises-an-in-vivo-nuc"
+  },
+  {
+    "title": "Massively multiplex chemical transcriptomics at single-cell resolution",
+    "authors": "Srivatsan, McFaline-Figueroa, Ramani et al",
+    "journal": "Science",
+    "year": 2020,
+    "category": "research",
+    "slug": "srivatsan-2020-massively-multiplex-chemical-transc"
+  },
+  {
+    "title": " Embryo-scale, single-cell spatial transcriptomics",
+    "authors": "Srivatsan, Regier et al",
+    "journal": "Science",
+    "year": 2021,
+    "category": "research",
+    "slug": "srivatsan-2021-embryo-scale-single-cell-spatial-tr"
+  },
+  {
+    "title": "SwabExpress: An end-to-end protocol for extraction-free COVID-19 testing",
+    "authors": "Srivatsan et al",
+    "journal": "Clinical Chemistry",
+    "year": 2021,
+    "category": "research",
+    "slug": "srivatsan-2021-swabexpress-an-end-to-end-protocol-"
+  },
+  {
+    "title": "Massively Parallel Functional Analysis of BRCA1 RING Domain Variants",
+    "authors": "Starita et al",
+    "journal": "Genetics",
+    "year": 2015,
+    "category": "research",
+    "slug": "starita-2015-massively-parallel-functional-analysi"
+  },
+  {
+    "title": "Variant Interpretation: Functional Assays to the Rescue",
+    "authors": "Starita et al",
+    "journal": "AJHG",
+    "year": 2017,
+    "category": "review",
+    "slug": "starita-2017-variant-interpretation-functional-ass"
+  },
+  {
+    "title": "A Multiplex Homology-Directed DNA Repair Assay Reveals the Impact of More Than 1,000 BRCA1 Missense Substitution Variants on Protein Function",
+    "authors": "Starita et al",
+    "journal": "AJHG",
+    "year": 2018,
+    "category": "research",
+    "slug": "starita-2018-a-multiplex-homology-directed-dna-rep"
+  },
+  {
+    "title": "Combinatorial mapping of E3 ubiquitin ligases to their target substrates",
+    "authors": "Suiter et al",
+    "journal": "Molecular Cell",
+    "year": 2025,
+    "category": "research",
+    "slug": "suiter-2025-combinatorial-mapping-of-e3-ubiquitin-"
+  },
+  {
+    "title": "Multiplex design and discovery of proximity handles for programmable proteome editing",
+    "authors": "Suiter, Green et al",
+    "journal": "bioRxiv 2025.10.13.681693",
+    "year": 2025,
+    "category": "preprint",
+    "slug": "suiter-2025-multiplex-design-and-discovery-of-prox"
+  },
+  {
+    "title": "Massively parallel exon capture and library-free resequencing across 16 genomes",
+    "authors": "Turner et al",
+    "journal": "Nature Methods",
+    "year": 2009,
+    "category": "research",
+    "slug": "turner-2009-massively-parallel-exon-capture-and-li"
+  },
+  {
+    "title": "Methods for genomic partitioning",
+    "authors": "Turner et al",
+    "journal": "Annual Reviews in Genomics and Human Genetics",
+    "year": 2009,
+    "category": "review",
+    "slug": "turner-2009-methods-for-genomic-partitioning-annua"
+  },
+  {
+    "title": "Fragment Length of Circulating Tumor DNA",
+    "authors": "Underhill et al",
+    "journal": "PLoS Genetics",
+    "year": 2016,
+    "category": "research",
+    "slug": "underhill-2016-fragment-length-of-circulating-tumo"
+  },
+  {
+    "title": "Next generation sequence analysis for mitochondrial disorders",
+    "authors": "Vasta V et al",
+    "journal": "Genome Medicine",
+    "year": 2009,
+    "category": "research",
+    "slug": "vasta-2009-next-generation-sequence-analysis-for-m"
+  },
+  {
+    "title": "Identification of foreign gene sequences by transcript filtering against the human genome",
+    "authors": "Weber, Shendure et al",
+    "journal": "Nature Genetics",
+    "year": 2002,
+    "category": "pre2007",
+    "slug": "weber-2002-identification-of-foreign-gene-sequences"
+  },
+  {
+    "title": "bioRxiv",
+    "authors": "Yang, Watkins et al",
+    "journal": "Single-cell, multi-region profiling of the macaque brain across the lifespan bioRxiv 2025.10.31.685880",
+    "year": 2025,
+    "category": "preprint",
+    "slug": "yang-2025-single-cell-multi-region-profiling-of-th"
+  },
+  {
+    "title": "High-Throughput Single-Cell Sequencing with Linear Amplification",
+    "authors": "Yin et al",
+    "journal": "Molecular  Cell",
+    "year": 2019,
+    "category": "research",
+    "slug": "yin-2019-high-throughput-single-cell-sequencing-wi"
+  },
+  {
+    "title": "Single molecule profiling of alternative pre-mRNA splicing",
+    "authors": "Zhu, Shendure et al",
+    "journal": "Science",
+    "year": 2003,
+    "category": "pre2007",
+    "slug": "zhu-2003-single-molecule-profiling-of-alternative"
+  }
+]

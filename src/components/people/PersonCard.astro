@@ -1,0 +1,107 @@
+---
+import ObfuscatedEmail from '../shared/ObfuscatedEmail.astro';
+
+interface Props {
+  name: string;
+  slug: string;
+  photo: string;
+  title: string;
+  role: string;
+  email?: string;
+  jointLab?: string;
+  jointLabUrl?: string;
+  affiliateLab?: string;
+  affiliateLabUrl?: string;
+  status: 'current' | 'alumni';
+  startYear?: number;
+  endYear?: number;
+  currentPosition?: string;
+  currentPositionUrl?: string;
+  featured?: boolean;
+}
+
+const {
+  name,
+  slug,
+  photo,
+  title,
+  email,
+  jointLab,
+  jointLabUrl,
+  affiliateLab,
+  affiliateLabUrl,
+  status,
+  startYear,
+  endYear,
+  currentPosition,
+  currentPositionUrl,
+  featured = false,
+} = Astro.props;
+---
+
+<div
+  id={slug}
+  class="person-card w-full max-w-[152px] flex flex-col p-2 rounded-lg transition-all break-words">
+  <img
+    src={photo}
+    alt={photo.includes('Foege') ? `${name} — photo coming soon` : name}
+    class="w-full aspect-square object-cover"
+    loading="lazy"
+  />
+  <p class="person-name font-bold mt-1 text-xs" style="text-align: left; margin-bottom: 0;">{name}</p>
+  <p class="person-title text-xs" style="text-align: left; margin: 0;">{title}</p>
+
+  {/* Current members: email, then joint/affiliate */}
+  {status === 'current' && email && (
+    <ObfuscatedEmail
+      email={email}
+      class="text-lab-blue hover:underline"
+      style="text-align: left; display: block; font-size: 12px; margin: 0; padding: 2px 0; line-height: 1.4;"
+    />
+  )}
+  {status === 'current' && jointLab && (
+    <p class="person-meta" style="text-align: left; font-size: 11px; margin: 0;">
+      (joint with {jointLabUrl ? (
+        <a href={jointLabUrl} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">{jointLab}<span class="sr-only"> (opens in new tab)</span></a>
+      ) : jointLab})
+    </p>
+  )}
+  {status === 'current' && affiliateLab && (
+    <p class="person-meta" style="text-align: left; font-size: 11px; margin: 0;">
+      ({affiliateLabUrl ? (
+        <a href={affiliateLabUrl} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">{affiliateLab}<span class="sr-only"> (opens in new tab)</span></a>
+      ) : affiliateLab})
+    </p>
+  )}
+
+  {/* Alumni: joint, dates, current position */}
+  {status === 'alumni' && jointLab && (
+    <p class="person-meta" style="text-align: left; font-size: 11px; margin: 0;">
+      (joint with {jointLabUrl ? (
+        <a href={jointLabUrl} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">{jointLab}<span class="sr-only"> (opens in new tab)</span></a>
+      ) : jointLab})
+    </p>
+  )}
+  {status === 'alumni' && startYear && endYear && (
+    <p class="person-meta text-xs" style="text-align: left; margin: 0;">{startYear} - {endYear}</p>
+  )}
+  {status === 'alumni' && currentPosition && (
+    <p class="person-meta text-xs" style="text-align: left; margin: 0;">
+      Current: {currentPositionUrl ? (
+        <a href={currentPositionUrl} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">{currentPosition}<span class="sr-only"> (opens in new tab)</span></a>
+      ) : currentPosition}
+    </p>
+  )}
+</div>
+
+<style>
+  .person-name {
+    color: var(--theme-text);
+  }
+  .person-title {
+    color: var(--theme-text-secondary);
+  }
+  .person-meta {
+    color: var(--theme-text-muted);
+  }
+</style>

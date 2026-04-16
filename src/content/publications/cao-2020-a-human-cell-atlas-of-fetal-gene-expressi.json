@@ -1,0 +1,13 @@
+{
+  "category": "research",
+  "articleUrl": "http://science.sciencemag.org/cgi/content/full/370/6518/eaba7721?ijkey=cZr9fd2UFgGFY&keytype=ref&siteid=sci",
+  "thumbnail": "/images/papers/cao_science_2020_thumb.png",
+  "pdfUrl": "/documents/cao_science_2020.pdf",
+  "citation": "Cao et al.  A human cell atlas of fetal gene expression. Science (2020)",
+  "year": 2020,
+  "journal": "A human cell atlas of fetal gene expression. Science",
+  "pmid": "33184181",
+  "collaboration": "with Trapnell Lab",
+  "slug": "cao-2020-a-human-cell-atlas-of-fetal-gene-expressi",
+  "sortOrder": 24
+}

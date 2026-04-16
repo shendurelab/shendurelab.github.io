@@ -1,0 +1,14 @@
+{
+  "name": "Flo Chardon",
+  "slug": "flo-chardon",
+  "photo": "/images/lab/chardon1.jpg",
+  "title": "Graduate Student (GS)",
+  "role": "graduate-student",
+  "status": "alumni",
+  "startYear": 2018,
+  "endYear": 2023,
+  "dissertation": "CRISPR-based functional genomics to study gene regulatory architecture and functional consequences of genetic variation",
+  "currentPosition": "Scientist II, Seattle Hub for Synthetic Biology",
+  "sortOrder": 17,
+  "currentPositionUrl": "https://alleninstitute.org/division/seattle-hub-for-synthetic-biology/"
+}

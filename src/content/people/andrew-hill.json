@@ -1,0 +1,16 @@
+{
+  "name": "Andrew Hill",
+  "slug": "andrew-hill",
+  "photo": "/images/lab/hill.jpg",
+  "title": "Graduate Student (GS)",
+  "role": "graduate-student",
+  "status": "alumni",
+  "startYear": 2015,
+  "endYear": 2019,
+  "jointLab": "Trapnell Lab",
+  "dissertation": "Expanding the scope and utility of single-cell genomic technologies",
+  "currentPosition": "Scientist, Infinimmune",
+  "sortOrder": 37,
+  "jointLabUrl": "https://cole-trapnell-lab.github.io/",
+  "currentPositionUrl": "https://www.infinimmune.com/team/"
+}

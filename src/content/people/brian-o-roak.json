@@ -1,0 +1,15 @@
+{
+  "name": "Brian O'Roak",
+  "slug": "brian-o-roak",
+  "photo": "/images/people/oroak.jpg",
+  "title": "Postdoctoral Fellow",
+  "role": "postdoc",
+  "status": "alumni",
+  "startYear": 2009,
+  "endYear": 2013,
+  "jointLab": "Eichler Lab",
+  "currentPosition": "Professor, Department of Molecular & Medical Genetics, Oregon Health & Science University",
+  "sortOrder": 70,
+  "jointLabUrl": "https://eichlerlab.gs.washington.edu/",
+  "currentPositionUrl": "https://www.ohsu.edu/school-of-medicine/oroak-lab"
+}

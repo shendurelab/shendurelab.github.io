@@ -1,0 +1,245 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const meetings = [
+  {
+    date: 'Mon 03/30',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: ['(5 min × 3 rotation student intros)', 'Kshitij', 'Chau', 'Tony'],
+  },
+  {
+    date: 'Mon 04/06',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: ['Zach', 'Qi', 'Hanna'],
+  },
+  {
+    date: 'Mon 04/13',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: null,
+    note: 'NO MEETING',
+  },
+  {
+    date: 'Mon 04/20',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: ['David', 'Lijia', 'Haedong'],
+  },
+  {
+    date: 'Mon 04/27',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: ['Yi', 'Connor', 'Ariana'],
+  },
+  {
+    date: 'Mon 05/04',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: ['Shruti', 'Aidan', 'Mohammed'],
+  },
+  {
+    date: 'Thu 05/14',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: ['Riddhiman', 'Sanjay', 'Beth'],
+  },
+  {
+    date: 'Mon 05/18',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: ['Zukai', 'Jongbeom', 'Jonas'],
+  },
+  {
+    date: 'Wed 05/27',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: ['Jessica (5 min intro)', 'Riza', 'Carina', 'Kshitij'],
+  },
+  {
+    date: 'Tue 06/02',
+    location: 'S110 and zoom',
+    time: '1:30p-3:30p',
+    presenters: ['Chase', 'Sophie', 'Olivia'],
+  },
+  {
+    date: 'Mon 06/08',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: ['Sud', 'Val', 'Saksham'],
+  },
+  {
+    date: 'Mon 06/15',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: ['Abby', 'SeaHub (James)', 'Shawn'],
+  },
+];
+---
+
+<BaseLayout title="Upcoming | Shendure Lab">
+  <div class="max-w-[900px] mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold text-lab-orange mb-8 text-center">Upcoming Lab Meetings</h1>
+
+    <!-- Desktop Table (hidden on mobile) -->
+    <div class="hidden md:block overflow-x-auto">
+      <table class="w-full border-collapse">
+        <caption class="sr-only">Upcoming lab meeting schedule</caption>
+        <thead>
+          <tr class="bg-gray-100 border-b-2 border-gray-300">
+            <th scope="col" class="text-left py-3 px-4 font-semibold text-gray-700">Date</th>
+            <th scope="col" class="text-left py-3 px-4 font-semibold text-gray-700">Time</th>
+            <th scope="col" class="text-left py-3 px-4 font-semibold text-gray-700">Location</th>
+            <th scope="col" class="text-left py-3 px-4 font-semibold text-gray-700">Presenters</th>
+          </tr>
+        </thead>
+        <tbody>
+          {meetings.map((meeting, index) => (
+            <tr class={`border-b border-gray-200 ${meeting.note === 'NO MEETING' ? 'no-meeting-row' : 'meeting-row'}`} aria-label={meeting.note === 'NO MEETING' ? `${meeting.date} - No meeting scheduled` : undefined}>
+              <td class="py-3 px-4 font-medium">{meeting.date}</td>
+              <td class="py-3 px-4">{meeting.time}</td>
+              <td class="py-3 px-4 text-sm">{meeting.location}</td>
+              <td class="py-3 px-4">
+                {meeting.presenters && meeting.note ? (
+                  <span>{meeting.presenters.join(', ')} <span class="italic text-sm">({meeting.note})</span></span>
+                ) : meeting.note ? (
+                  <span class="italic">{meeting.note}</span>
+                ) : meeting.presenters ? (
+                  <span>{meeting.presenters.join(', ')}</span>
+                ) : null}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Mobile Card Layout (hidden on desktop) -->
+    <div class="md:hidden space-y-3" role="list" aria-label="Upcoming lab meeting schedule">
+      {meetings.map((meeting) => (
+        <div class={`meeting-card rounded-lg border p-4 ${meeting.note === 'NO MEETING' ? 'no-meeting-card' : ''}`} role="listitem">
+          <div class="flex justify-between items-start mb-1">
+            <span class="font-semibold meeting-card-date">{meeting.date}</span>
+            <span class="text-sm meeting-card-time">{meeting.time}</span>
+          </div>
+          <div class="text-sm meeting-card-location mb-2">{meeting.location}</div>
+          <div class="meeting-card-presenters">
+            {meeting.presenters && meeting.note ? (
+              <span>{meeting.presenters.join(', ')} <span class="italic text-sm">({meeting.note})</span></span>
+            ) : meeting.note ? (
+              <span class="italic">{meeting.note}</span>
+            ) : meeting.presenters ? (
+              <span>{meeting.presenters.join(', ')}</span>
+            ) : null}
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <div class="meeting-info mt-10 p-6 rounded-lg border">
+      <h2 class="text-lg font-semibold mb-2">Meeting Info</h2>
+      <p class="text-sm">
+        Lab meetings are typically held on Mondays in S110 with Zoom access available.
+        Date, Time, Location may vary - please check the Lab Calendar for specific details.
+      </p>
+    </div>
+  </div>
+
+  <style>
+    /* Table header */
+    thead tr {
+      background-color: #f3f4f6;
+      border-color: #d1d5db;
+    }
+    thead th {
+      color: #374151;
+    }
+    :global(.dark) thead tr {
+      background-color: #374151;
+      border-color: #4b5563;
+    }
+    :global(.dark) thead th {
+      color: #f3f4f6;
+    }
+
+    /* Table rows */
+    tbody tr {
+      border-color: #e5e7eb;
+    }
+    tbody td {
+      color: #374151;
+    }
+    .no-meeting-row {
+      background-color: #f9fafb;
+    }
+    .no-meeting-row td {
+      color: #6b7280;
+    }
+    .meeting-row:hover {
+      background-color: #f9fafb;
+    }
+    :global(.dark) tbody tr {
+      border-color: #4b5563;
+    }
+    :global(.dark) tbody td {
+      color: #e5e7eb;
+    }
+    :global(.dark) .no-meeting-row {
+      background-color: #1f2937;
+    }
+    :global(.dark) .no-meeting-row td {
+      color: #9ca3af;
+    }
+    :global(.dark) .meeting-row:hover {
+      background-color: #374151;
+    }
+
+    /* Mobile card layout */
+    .meeting-card {
+      background-color: var(--theme-bg);
+      border-color: var(--theme-border);
+    }
+    .meeting-card-date {
+      color: var(--theme-text);
+    }
+    .meeting-card-time {
+      color: var(--theme-text-muted);
+    }
+    .meeting-card-location {
+      color: var(--theme-text-muted);
+    }
+    .meeting-card-presenters {
+      color: var(--theme-text-secondary);
+    }
+    .no-meeting-card {
+      background-color: var(--theme-bg-secondary);
+    }
+    .no-meeting-card .meeting-card-date,
+    .no-meeting-card .meeting-card-presenters {
+      color: var(--theme-text-muted);
+    }
+
+    /* Meeting info box */
+    .meeting-info {
+      background-color: #f9fafb;
+      border-color: #e5e7eb;
+    }
+    .meeting-info h2 {
+      color: #1f2937;
+    }
+    .meeting-info p {
+      color: #4b5563;
+    }
+    :global(.dark) .meeting-info {
+      background-color: #1f2937;
+      border-color: #4b5563;
+    }
+    :global(.dark) .meeting-info h2 {
+      color: #f3f4f6;
+    }
+    :global(.dark) .meeting-info p {
+      color: #d1d5db;
+    }
+  </style>
+</BaseLayout>

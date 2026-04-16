@@ -1,0 +1,13 @@
+{
+  "name": "Martin Kircher",
+  "slug": "martin-kircher",
+  "photo": "/images/people/kircher.jpg",
+  "title": "Postdoctoral Fellow",
+  "role": "postdoc",
+  "status": "alumni",
+  "startYear": 2012,
+  "endYear": 2017,
+  "currentPosition": "Professor of Regulatory Genomics, Universitätsklinikum Schleswig-Holstein",
+  "sortOrder": 52,
+  "currentPositionUrl": "https://kircherlab.github.io/"
+}

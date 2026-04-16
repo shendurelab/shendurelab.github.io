@@ -1,0 +1,14 @@
+{
+  "name": "Seungsoo Kim",
+  "slug": "seungsoo-kim",
+  "photo": "/images/lab/kim.jpg",
+  "title": "Graduate Student (GS)",
+  "role": "graduate-student",
+  "status": "alumni",
+  "startYear": 2014,
+  "endYear": 2019,
+  "dissertation": "Maps and mechanisms of three-dimensional genome organization",
+  "currentPosition": "Assistant Professor, UC Irvine",
+  "sortOrder": 36,
+  "currentPositionUrl": "https://sskimlab.org/"
+}

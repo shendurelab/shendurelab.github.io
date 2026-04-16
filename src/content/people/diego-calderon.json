@@ -1,0 +1,15 @@
+{
+  "name": "Diego Calderon",
+  "slug": "diego-calderon",
+  "photo": "/images/lab/calderon1.jpg",
+  "title": "Postdoctoral Fellow",
+  "role": "postdoc",
+  "status": "alumni",
+  "startYear": 2019,
+  "endYear": 2024,
+  "jointLab": "Trapnell Lab",
+  "currentPosition": "Assistant Professor, Department of Bioengineering and Therapeutic Sciences, UCSF",
+  "sortOrder": 12,
+  "jointLabUrl": "https://cole-trapnell-lab.github.io/",
+  "currentPositionUrl": "https://diego-calderon-lab.github.io/"
+}

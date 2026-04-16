@@ -1,0 +1,162 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const software = [
+  {
+    name: 'Shendure Lab GitHub',
+    url: 'https://github.com/shendurelab',
+    image: null,
+    description: 'Public GitHub repositories for assorted lab projects.',
+    citation: null,
+  },
+  {
+    name: 'Xpresso',
+    subtitle: 'Predicting gene expression levels from DNA sequences',
+    url: 'https://xpresso.gs.washington.edu',
+    github: 'https://github.com/vagarwal87/Xpresso',
+    image: '/images/software/xpresso_cropped.png',
+    description: 'Xpresso is a software suite whose goal is to predict gene expression levels and transcriptional activity from genomic sequences. It is trained using convolutional neural networks. Pre-trained models are available for the human, mouse, and several cell types for these species.',
+    citation: 'Agarwal V.*, Shendure J.* Predicting mRNA abundance directly from genomic sequence using deep convolutional neural networks. Cell Rep. 2020 May 19;31(7):107663.',
+    doi: 'https://www.cell.com/cell-reports/pdf/S2211-1247(20)30616-1.pdf',
+    pmid: '32433972',
+  },
+  {
+    name: 'GESTALT',
+    subtitle: 'Genome Editing of Synthetic Target Arrays for Lineage Tracing',
+    url: 'https://gestalt.gs.washington.edu',
+    image: '/images/software/gestalt.jpg',
+    description: 'GESTALT is a method that uses genome editing to progressively introduce and accumulate diverse mutations in a DNA barcode over multiple rounds of cell division, thereby recording cell lineage relationships in the patterns of mutations shared between cells.',
+    citation: 'McKenna A*, Findlay GM*, Gagnon JA*, Horwitz MS, Schier AF#, Shendure J#. Whole-organism lineage tracing by combinatorial and cumulative genome editing. Science 2016 Jul 29;353(6298):aaf7907.',
+    doi: 'http://dx.doi.org/10.1126/science.aaf7907',
+    pmid: '27229144',
+  },
+  {
+    name: 'CADD',
+    subtitle: 'Combined Annotation Dependent Depletion',
+    url: 'https://cadd.gs.washington.edu',
+    image: '/images/software/cadd.png',
+    description: 'CADD is method that objectively weights and integrates diverse genomic annotations to a single, phred-scaled metric. Pre-computed CADD-based scores (C-scores) for all 8.6 billion possible single nucleotide variants (SNVs) of the human reference genome, and a tool for scoring of short insertions/deletions are available.',
+    citation: 'Kircher M*, Witten DM*, Jain P, O\'Roak BJ, Cooper GM#, Shendure J#. A general framework for estimating the relative pathogenicity of human genetic variants. Nature Genetics 2014 Mar;46(3):310-5.',
+    doi: 'http://dx.doi.org/10.1038/ng.2892',
+    pmid: '24487276',
+  },
+  {
+    name: 'MIPgen',
+    subtitle: 'Optimized Modeling and Design of Molecular Inversion Probes for Targeted Resequencing',
+    url: 'https://shendurelab.github.io/MIPGEN/',
+    image: '/images/software/mipgen.png',
+    description: 'Molecular inversion probes (MIPs) enable cost-effective multiplex targeted gene resequencing in large cohorts. MIPgen is a user-friendly package that simplifies the process of designing custom MIP assays to arbitrary targets. New logistic and SVM-derived models enable in silico predictions of assay success.',
+    citation: 'Boyle EA#, O\'Roak BJ, Martin BK, Kumar A, Shendure J#. MIPgen: optimized modeling and design of molecular inversion probes for targeted resequencing. Bioinformatics. 2014 Sep 15;30(18):2670-2.',
+    doi: 'http://dx.doi.org/10.1093/bioinformatics/btu353',
+    pmid: '24867941',
+  },
+  {
+    name: 'LACHESIS',
+    subtitle: 'Genome Assembly with Hi-C-based Contact Probability Maps',
+    url: 'https://shendurelab.github.io/LACHESIS/',
+    image: '/images/software/lachesis.png',
+    description: 'LACHESIS is method that exploits contact probability map data (e.g. from Hi-C) for chromosome-scale de novo genome assembly.',
+    citation: 'Burton JN#, Adey A, Patwardhan RP, Qiu R, Kitzman JO, Shendure J#. Chromosome-scale scaffolding of de novo genome assemblies based on chromatin interactions. Nature Biotechnology 2013 Dec;31(12):1119-25.',
+    doi: 'http://dx.doi.org/10.1038/nbt.2727',
+    pmid: '24185095',
+  },
+  {
+    name: 'fragScaff',
+    subtitle: 'Genome Assembly with Contiguity Preserving Transposition',
+    url: 'https://sourceforge.net/projects/fragscaff/files/',
+    image: '/images/software/fragscaff.png',
+    description: 'Contiguity preserving transposition and sequencing (CPT-seq) is an entirely in vitro means of generating libraries comprised of 9216 indexed pools. FragScaff leverages coincidences between the content of different pools as a source of contiguity information for scaffolding de novo genome assemblies.',
+    citation: 'Adey A, Kitzman JO, Burton JN, Daza R, Kumar A, Christiansen L, Ronaghi M, Amini S, L Gunderson K, Steemers FJ, Shendure J#. In vitro, long-range sequence information for de novo genome assembly via transposase contiguity. Genome Research 2014 Dec;24(12):2041-9.',
+    doi: 'http://dx.doi.org/10.1101/gr.178319.114',
+    pmid: '25327137',
+  },
+  {
+    name: 'MetaPhase',
+    subtitle: 'Species-level Deconvolution of Metagenome Assemblies with Hi-C-based Contact Probability Maps',
+    url: 'https://github.com/shendurelab/MetaPhase',
+    image: '/images/software/metaphase.jpg',
+    description: 'MetaPhase is software that exploits chromatin-level contact probability maps, e.g., as generated by the Hi-C method, to reconstruct the individual genomes of microbial species present within a mixed sample.',
+    citation: 'Burton JN*, Liachko I*, Dunham MJ#, Shendure J#. Species-level deconvolution of metagenome assemblies with Hi-C-based contact probability maps. G3 (Bethesda). 2014 May 22;4(7):1339-46.',
+    doi: 'http://dx.doi.org/10.1534/g3.114.011825',
+    pmid: '24855317',
+  },
+];
+---
+
+<BaseLayout title="Software | Shendure Lab">
+  <div class="max-w-[900px] mx-auto px-4 py-12">
+    <h1 class="text-3xl font-bold text-lab-orange mb-8 text-center">Software</h1>
+
+    <div class="mb-8 text-center">
+      <a href="/resources" class="text-lab-blue hover:underline">&larr; Back to Resources</a>
+    </div>
+
+    <!-- GitHub Section -->
+    <div class="mb-12 p-6 bg-gray-50 rounded-lg border border-gray-200">
+      <h2 class="text-2xl font-semibold mb-2">
+        <a
+          href="https://github.com/shendurelab"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-lab-blue hover:underline"
+        >
+          Shendure Lab GitHub
+          <span class="sr-only">(opens in new tab)</span>
+          <svg class="inline-block w-4 h-4 ml-1 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+      </h2>
+      <p class="text-gray-600">Public GitHub repositories for assorted lab projects.</p>
+    </div>
+
+    <h2 class="text-2xl font-bold text-lab-orange mb-8 text-center">Other Software</h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      {software.slice(1).map(tool => (
+        <div class="border border-gray-200 rounded-lg p-5 hover:border-lab-blue hover:shadow-md transition-all flex flex-col">
+          {tool.image && (
+            <a href={tool.url} target="_blank" rel="noopener noreferrer" class="block mb-4">
+              <img
+                src={tool.image}
+                alt={tool.name}
+                class="w-full h-32 object-cover border border-gray-300 rounded"
+                loading="lazy"
+              />
+              <span class="sr-only">(opens in new tab)</span>
+            </a>
+          )}
+          <h3 class="text-lg font-semibold mb-1">
+            <a
+              href={tool.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-lab-blue hover:underline"
+            >
+              {tool.name}
+              <span class="sr-only">(opens in new tab)</span>
+              <svg class="inline-block w-3.5 h-3.5 ml-1 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
+            </a>
+          </h3>
+          {tool.subtitle && (
+            <p class="text-gray-500 text-xs mb-2">{tool.subtitle}</p>
+          )}
+          <p class="text-gray-700 text-sm mb-3 flex-grow">{tool.description}</p>
+          {tool.citation && (
+            <p class="text-xs text-gray-500 border-t border-gray-200 pt-3 mt-auto">
+              {tool.pmid && (
+                <a href={`https://pubmed.ncbi.nlm.nih.gov/${tool.pmid}/`} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">PubMed<span class="sr-only"> (opens in new tab)</span></a>
+              )}
+              {tool.pmid && tool.doi && ' | '}
+              {tool.doi && (
+                <a href={tool.doi} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">DOI<span class="sr-only"> (opens in new tab)</span></a>
+              )}
+            </p>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

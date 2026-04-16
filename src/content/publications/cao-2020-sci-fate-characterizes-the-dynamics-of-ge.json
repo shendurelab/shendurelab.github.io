@@ -1,0 +1,13 @@
+{
+  "category": "research",
+  "articleUrl": "https://www.nature.com/articles/s41587-020-0480-9",
+  "thumbnail": "/images/papers/cao_naturebio_2020_thumb.jpg",
+  "pdfUrl": "/documents/cao_naturebio_2020.pdf",
+  "citation": "Cao et al. Sci-fate characterizes the dynamics of gene expression in single cells. Nature Biotechnology (2020)",
+  "year": 2020,
+  "journal": "Sci-fate characterizes the dynamics of gene expression in single cells. Nature Biotechnology",
+  "pmid": "32284584",
+  "collaboration": "with Trapnell Lab",
+  "slug": "cao-2020-sci-fate-characterizes-the-dynamics-of-ge",
+  "sortOrder": 29
+}

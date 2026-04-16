@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+// ANIMATIONS COMMENTED OUT 3/23/26 per Jay's request — uncomment import + component to re-enable
+// import DNAAnimation from '../../components/special/DNAAnimation.astro';
+
+const resources = [
+  { name: 'Centers', url: '/resources/centers', description: 'Research centers and institutes' },
+  { name: 'Software', url: '/resources/software', description: 'Lab software and tools' },
+  { name: 'Cell Atlas', url: 'https://atlas.brotmanbaty.org/', description: 'Brotman Baty Cell Atlas', external: true },
+  { name: 'CADD Scores', url: 'https://cadd.gs.washington.edu/', description: 'Combined Annotation Dependent Depletion variant scores', external: true },
+  { name: 'BRCA1 Scores', url: 'https://sge.gs.washington.edu/BRCA1/', description: 'BRCA1 variant score database', external: true },
+  { name: 'Xpresso', url: 'https://xpresso.gs.washington.edu/', description: 'Predicting gene expression from DNA sequences', external: true },
+];
+---
+
+<BaseLayout title="Resources | Shendure Lab">
+  <section class="relative min-h-[calc(100vh-140px)] flex items-center justify-center overflow-hidden">
+    <!-- ANIMATION COMMENTED OUT 3/23/26 — uncomment to re-enable -->
+    <!-- <div class="hidden md:block">
+      <DNAAnimation height="100%" class="!absolute inset-0 w-full h-full" variant="hero" />
+    </div> -->
+
+    <div class="relative z-10 text-center px-4 pt-8 md:pt-0">
+      <h1 class="text-3xl md:text-5xl font-bold text-lab-orange mb-8 md:mb-12">Resources</h1>
+
+      <ul class="space-y-4 md:space-y-8 text-lg md:text-2xl">
+        {resources.map(resource => (
+          <li>
+            <a
+              href={resource.url}
+              target={resource.external ? '_blank' : undefined}
+              rel={resource.external ? 'noopener noreferrer' : undefined}
+              class="text-lab-blue hover:underline"
+            >
+              {resource.name}
+              {resource.external && (
+                <>
+                  <span class="sr-only">(opens in new tab)</span>
+                  <svg class="inline-block w-4 h-4 ml-1 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </>
+              )}
+            </a>
+            <p class="resource-desc text-sm mt-1">{resource.description}</p>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <style>
+    .resource-desc {
+      color: var(--theme-text-secondary);
+    }
+  </style>
+</BaseLayout>

@@ -1,0 +1,18 @@
+{
+  "name": "shendure-website--re-design-2026-project",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "categorize": "node scripts/auto-categorize-papers.js",
+    "dev": "node scripts/auto-categorize-papers.js && node scripts/update-search.cjs && astro dev",
+    "build": "node scripts/auto-categorize-papers.js && node scripts/update-search.cjs && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.1",
+    "@tailwindcss/vite": "^4.1.18",
+    "astro": "^5.16.9",
+    "tailwindcss": "^4.1.18"
+  }
+}
