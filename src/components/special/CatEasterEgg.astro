@@ -63,14 +63,14 @@
     animation: fly-bounce 0.5s ease-in-out infinite;
   }
 
-  .flying-cat img {
+  .flying-cat :global(img) {
     height: 40px;
     width: auto;
     border-radius: 6px;
     object-fit: cover;
   }
 
-  .flying-cat.nyan img {
+  .flying-cat.nyan :global(img) {
     height: 32px;
     border-radius: 0;
     image-rendering: pixelated;
@@ -104,7 +104,7 @@
       bottom: 1rem;
       right: 1rem;
     }
-    .flying-cat img {
+    .flying-cat :global(img) {
       height: 32px;
     }
   }
