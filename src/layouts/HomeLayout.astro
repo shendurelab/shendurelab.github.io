@@ -1,0 +1,321 @@
+---
+import '../styles/global.css';
+import SequenceRain from '../components/special/SequenceRain.astro';
+import CatEasterEgg from '../components/special/CatEasterEgg.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const {
+  title,
+  description = 'Shendure Lab - Developing new molecular and genomic technologies at the University of Washington Department of Genome Sciences.'
+} = Astro.props;
+
+const siteTitle = 'Shendure Lab';
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site || 'https://shendurelab.gs.washington.edu');
+const ogImage = new URL('/images/shendurelab.png', Astro.site || 'https://shendurelab.gs.washington.edu');
+
+const currentYear = new Date().getFullYear();
+
+// Flat nav items (same links as Header.astro, no dropdowns)
+const navItems = [
+  { label: 'People', href: '/people' },
+  { label: 'Research', href: '/research' },
+  { label: 'Publications', href: '/publications' },
+  { label: 'Press', href: '/press' },
+  { label: 'Wiki', href: 'https://wikisrv.gs.washington.edu/twiki/bin/view/ShendureLab/WebHome', external: true },
+  { label: 'Resources', href: '/resources' },
+  { label: 'Upcoming', href: '/upcoming' },
+  { label: 'Fun', href: '/fun' },
+  { label: 'Support', href: '/support' },
+  { label: 'Contact', href: '/contact' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href={canonicalUrl.href} />
+
+    <!-- Open Graph / Social Sharing -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl.href} />
+    <meta property="og:title" content={siteTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage.href} />
+    <meta property="og:site_name" content="Shendure Lab" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content={siteTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage.href} />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Fonts: DM Sans + JetBrains Mono + Inter (compatibility) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@300;400;500;600&family=Montserrat:wght@600;700&display=swap" rel="stylesheet" />
+
+    <meta name="generator" content={Astro.generator} />
+    <title>{siteTitle}</title>
+
+    <!-- Homepage forces dark mode -->
+    <script is:inline>
+      (function() {
+        document.documentElement.classList.add('dark');
+      })();
+    </script>
+  </head>
+  <body class="min-h-screen flex flex-col home-body">
+    <!-- Skip to content link for accessibility -->
+    <a href="#main-content" class="skip-link sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:shadow-lg focus:rounded">
+      Skip to content
+    </a>
+
+    <!-- DNA Rain Background -->
+    <SequenceRain />
+
+    <!-- Page content layer -->
+    <div class="home-page">
+      <!-- Glassmorphism Navigation -->
+      <nav class="home-nav" role="navigation" aria-label="Main navigation">
+        <div class="home-nav-inner">
+          {navItems.map((item) => (
+            <a
+              href={item.href}
+              target={item.external ? '_blank' : undefined}
+              rel={item.external ? 'noopener noreferrer' : undefined}
+              class="home-nav-link"
+            >
+              {item.label.toLowerCase()}
+              {item.external && <span class="sr-only">(opens in new tab)</span>}
+            </a>
+          ))}
+        </div>
+      </nav>
+
+      <!-- Main content -->
+      <main id="main-content" class="home-main">
+        <slot />
+      </main>
+
+      <!-- Minimal footer -->
+      <footer class="home-footer" role="contentinfo">
+        <div class="home-footer-inner">
+          <button
+            id="theme-toggle"
+            class="home-theme-toggle"
+            aria-label="Toggle dark mode"
+          >
+            <svg id="theme-icon-light" class="w-4 h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+            </svg>
+            <svg id="theme-icon-dark" class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+            </svg>
+            <span id="theme-label">Light</span>
+          </button>
+          <span class="home-footer-copyright">&copy; {currentYear} Shendure Lab</span>
+        </div>
+      </footer>
+    </div>
+
+    <!-- Cat Easter Egg -->
+    <CatEasterEgg />
+
+    <!-- Decode obfuscated emails after page load -->
+    <script is:inline>
+      (function() {
+        document.querySelectorAll('.obfuscated-email[data-e]').forEach(function(el) {
+          try {
+            var encoded = el.getAttribute('data-e');
+            var decoded = atob(encoded).split('').reverse().join('');
+            var link = document.createElement('a');
+            link.href = 'mailto:' + decoded;
+            link.textContent = decoded;
+            link.className = el.className.replace('obfuscated-email', '').trim();
+            if (el.style.cssText) link.style.cssText = el.style.cssText;
+            el.textContent = '';
+            el.appendChild(link);
+          } catch(e) {}
+        });
+      })();
+    </script>
+  </body>
+</html>
+
+<style>
+  .home-body {
+    background: #0a0e14;
+    color: #ffffff;
+    overflow-x: hidden;
+  }
+
+  .home-page {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Glassmorphism navigation */
+  .home-nav {
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem 2rem;
+  }
+
+  .home-nav-inner {
+    display: flex;
+    gap: 0.25rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: rgba(10, 14, 20, 0.4);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 10px;
+    padding: 0.4rem 0.6rem;
+  }
+
+  .home-nav-link {
+    color: rgba(255, 255, 255, 0.7);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    padding: 0.45rem 1rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .home-nav-link:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .home-nav-link:focus-visible {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 1px;
+  }
+
+  /* Main content area */
+  .home-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Minimal footer */
+  .home-footer {
+    padding: 1rem 2rem;
+    position: relative;
+    z-index: 10;
+  }
+
+  .home-footer-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .home-theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.8rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+  }
+
+  .home-theme-toggle:hover {
+    color: rgba(255, 255, 255, 0.7);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .home-footer-copyright {
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.75rem;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 600px) {
+    .home-nav {
+      padding: 1rem;
+    }
+
+    .home-nav-inner {
+      padding: 0.3rem 0.4rem;
+    }
+
+    .home-nav-link {
+      font-size: 0.8rem;
+      padding: 0.4rem 0.7rem;
+    }
+
+    .home-footer-inner {
+      gap: 1rem;
+    }
+  }
+</style>
+
+<script>
+  // Theme toggle for homepage
+  function initHomeTheme() {
+    const toggle = document.getElementById('theme-toggle');
+    const iconLight = document.getElementById('theme-icon-light');
+    const iconDark = document.getElementById('theme-icon-dark');
+    const label = document.getElementById('theme-label');
+
+    function updateIcons(isDark: boolean) {
+      if (isDark) {
+        iconLight?.classList.remove('hidden');
+        iconDark?.classList.add('hidden');
+        if (label) label.textContent = 'Light';
+      } else {
+        iconLight?.classList.add('hidden');
+        iconDark?.classList.remove('hidden');
+        if (label) label.textContent = 'Dark';
+      }
+    }
+
+    // Homepage always starts dark
+    const isDark = document.documentElement.classList.contains('dark');
+    updateIcons(isDark);
+
+    toggle?.addEventListener('click', () => {
+      const currentlyDark = document.documentElement.classList.contains('dark');
+      if (currentlyDark) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('theme', 'light');
+        updateIcons(false);
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+        updateIcons(true);
+      }
+    });
+  }
+
+  initHomeTheme();
+  document.addEventListener('astro:page-load', initHomeTheme);
+</script>

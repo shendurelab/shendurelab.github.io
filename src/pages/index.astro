@@ -1,76 +1,134 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-// ANIMATIONS COMMENTED OUT 3/23/26 per Jay's request — uncomment import + component to re-enable
-// import DNAAnimation from '../components/special/DNAAnimation.astro';
+import HomeLayout from '../layouts/HomeLayout.astro';
 ---
 
-<BaseLayout title="Home" description="Shendure Lab - Developing and applying new technologies for DNA sequencing, genome function, and human genetics.">
+<HomeLayout title="Home" description="Shendure Lab - Developing and applying new technologies for DNA sequencing, genome function, and human genetics.">
 
-  <!-- Hero Section with Animation Background -->
-  <section class="hero-section relative border-b overflow-hidden min-h-[calc(100vh-140px)]">
-    <!-- ANIMATION COMMENTED OUT 3/23/26 — uncomment to re-enable -->
-    <!-- <DNAAnimation height="100%" class="!absolute inset-0 w-full h-full" variant="hero" /> -->
+  <!-- Hero Section -->
+  <div class="hero-content">
+    <h1 class="hero-logo">
+      <span class="hero-shendure">shendure</span><span class="hero-lab">lab</span>
+    </h1>
+    <p class="hero-tagline">Department of Genome Sciences &middot; University of Washington</p>
 
-    <!-- Content overlay - pointer-events:none allows clicks to pass through to canvas -->
-    <div class="relative z-10 py-16 sm:py-24 lg:py-40 flex items-center min-h-[calc(100vh-140px)] pointer-events-none">
-      <div class="max-w-[1200px] mx-auto px-4 text-center">
-        <h1 class="sr-only">Shendure Lab — University of Washington Department of Genome Sciences</h1>
-        <img src="/images/shendurelab.png" alt="Shendure Lab" class="h-12 sm:h-16 lg:h-20 mx-auto mb-6 sm:mb-10 lg:mb-16 hero-logo" />
-
-        <p class="text-base sm:text-lg lg:text-xl hero-subtitle mb-4 sm:mb-6 lg:mb-10">
-          University of Washington | Department of Genome Sciences
-        </p>
-
-        <p class="text-lg sm:text-xl lg:text-2xl hero-text max-w-3xl mx-auto leading-relaxed px-2">
-          Developing new molecular and genomic technologies to understand
-          human development, disease, and the regulatory genome.
-        </p>
-        <div class="mt-4 sm:mt-8 lg:mt-12 flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center pointer-events-auto px-6 sm:px-4">
-          <a href="/research" class="hero-btn px-4 py-2 text-sm sm:px-7 sm:py-3.5 sm:text-base lg:px-8 lg:py-4 lg:text-lg bg-lab-orange-dark text-white font-semibold rounded-lg hover:bg-lab-orange transition-colors">
-            Our Research
-          </a>
-          <a href="/publications" class="hero-btn px-4 py-2 text-sm sm:px-7 sm:py-3.5 sm:text-base lg:px-8 lg:py-4 lg:text-lg border-2 border-lab-blue text-lab-blue font-semibold rounded-lg hover:bg-lab-blue hover:text-white transition-colors">
-            Publications
-          </a>
-        </div>
-      </div>
+    <div class="hero-ctas">
+      <a href="/research" class="hero-btn hero-btn-primary">
+        Our Research
+      </a>
+      <a href="/publications" class="hero-btn hero-btn-secondary">
+        Publications
+      </a>
     </div>
-  </section>
+  </div>
 
   <style>
-    .hero-section {
-      border-color: var(--theme-border);
+    .hero-content {
+      position: relative;
+      text-align: center;
+      padding: 3rem 4rem;
     }
-    .hero-subtitle {
-      color: var(--theme-text-secondary);
+
+    .hero-content::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 120%;
+      height: 200%;
+      background: radial-gradient(ellipse at center, rgba(10, 14, 20, 0.8) 0%, rgba(10, 14, 20, 0.4) 40%, transparent 70%);
+      pointer-events: none;
+      z-index: -1;
     }
-    .hero-text {
-      color: var(--theme-text);
-    }
+
     .hero-logo {
-      transition: background-color 0.3s, padding 0.3s, border-radius 0.3s;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(3rem, 10vw, 6rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      line-height: 1;
+      margin-bottom: 1rem;
+      text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
     }
-    :global(.dark) .hero-logo {
-      background-color: white;
-      padding: 0.5rem 0.75rem;
+
+    .hero-shendure {
+      color: #ffffff;
+    }
+
+    .hero-lab {
+      color: #3b82f6;
+      text-shadow: 0 4px 30px rgba(59, 130, 246, 0.3);
+    }
+
+    .hero-tagline {
+      color: rgba(255, 255, 255, 0.45);
+      font-size: 0.95rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.8);
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-ctas {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .hero-btn {
+      display: inline-block;
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      font-weight: 600;
       border-radius: 0.5rem;
+      text-decoration: none;
+      transition: all 0.2s ease;
     }
-    /* Compact buttons for very small screens - maintain 44px min touch target */
-    @media (max-width: 380px) {
-      .hero-btn {
-        padding: 10px 12px !important;
-        font-size: 12px !important;
-        min-height: 44px;
+
+    .hero-btn-primary {
+      background: rgba(59, 130, 246, 0.9);
+      color: #ffffff;
+      border: 1px solid rgba(59, 130, 246, 0.5);
+    }
+
+    .hero-btn-primary:hover {
+      background: rgba(59, 130, 246, 1);
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+    }
+
+    .hero-btn-secondary {
+      background: transparent;
+      color: rgba(255, 255, 255, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .hero-btn-secondary:hover {
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .hero-btn:focus-visible {
+      outline: 2px solid rgba(255, 255, 255, 0.6);
+      outline-offset: 2px;
+    }
+
+    @media (max-width: 600px) {
+      .hero-content {
+        padding: 2rem 1rem;
       }
-    }
-    /* Compact buttons for Surface Duo (540px) */
-    @media (min-width: 381px) and (max-width: 550px) {
+
+      .hero-tagline {
+        font-size: 0.75rem;
+        letter-spacing: 0.08em;
+      }
+
       .hero-btn {
-        padding: 10px 12px !important;
-        font-size: 12px !important;
-        min-height: 44px;
+        padding: 0.65rem 1.5rem;
+        font-size: 0.875rem;
       }
     }
   </style>
 
-</BaseLayout>
+</HomeLayout>

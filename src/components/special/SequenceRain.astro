@@ -1,0 +1,320 @@
+---
+// SequenceRain.astro — Falling DNA sequence rain animation (from mockup)
+// Canvas-based animation with ATGC characters falling in columns with depth-of-field effect.
+// Communicates with CatEasterEgg via window.__sequenceRain global reference.
+---
+
+<canvas id="sequenceCanvas" aria-hidden="true"></canvas>
+
+<style>
+  #sequenceCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+</style>
+
+<script is:inline>
+(function() {
+  const LENGTH_DIST = { min: 8, mode: 20, max: 50 };
+  const DNA_CHARS = ['A', 'T', 'G', 'C'];
+
+  function sampleLength() {
+    const u = Math.random(), v = Math.random();
+    const skew = Math.pow(u, 0.7) * Math.pow(v, 0.5);
+    const range = LENGTH_DIST.max - LENGTH_DIST.min;
+    return Math.round(Math.max(LENGTH_DIST.min, Math.min(LENGTH_DIST.max, LENGTH_DIST.min + range * (skew * 0.7 + Math.random() * 0.3))));
+  }
+
+  class SequenceColumn {
+    constructor(x, config) {
+      this.x = x;
+      this.config = config;
+      this.initialize();
+    }
+
+    initialize() {
+      this.depth = Math.pow(Math.random(), 0.6);
+      const depthRange = this.config.depthRange;
+      const minScale = 1 / depthRange;
+      this.scale = minScale + this.depth * (1 - minScale);
+
+      this.fontSize = Math.floor(10 + this.scale * 26 * Math.sqrt(depthRange));
+      this.baseSpeed = (0.5 + this.scale * 3 * depthRange) * this.config.speedMultiplier;
+      this.opacity = 0.08 + this.scale * 0.7;
+      this.glowIntensity = this.scale * 18;
+      this.rainbowOffset = Math.random() * 360;
+
+      this.generateSequence();
+      this.y = -Math.random() * this.config.canvasHeight * 0.8 - this.sequenceHeight;
+    }
+
+    generateSequence() {
+      this.length = sampleLength();
+      this.chars = [];
+      const chars = this.config.chars;
+      for (let i = 0; i < this.length; i++) {
+        this.chars.push(chars[Math.floor(Math.random() * chars.length)]);
+      }
+      this.sequenceHeight = this.length * this.fontSize;
+    }
+
+    smoothUpdate(newChars) {
+      for (let i = 0; i < this.chars.length; i++) {
+        this.chars[i] = newChars[Math.floor(Math.random() * newChars.length)];
+      }
+    }
+
+    reset() {
+      this.initialize();
+      this.y = -this.sequenceHeight - Math.random() * 200;
+    }
+
+    update(deltaTime) {
+      this.y += this.baseSpeed * deltaTime * 60;
+      if (this.y > this.config.canvasHeight + 100) this.reset();
+      this.rainbowOffset += deltaTime * 100;
+    }
+
+    draw(ctx) {
+      ctx.font = '500 ' + this.fontSize + "px 'JetBrains Mono', monospace";
+      ctx.textAlign = 'center';
+
+      var color = this.config.color;
+      var isRainbow = this.config.rainbow;
+
+      if (!isRainbow) {
+        ctx.shadowColor = color.glow;
+        ctx.shadowBlur = this.glowIntensity;
+        ctx.fillStyle = this.hexToRgba(color.primary, this.opacity);
+      }
+
+      for (var i = 0; i < this.chars.length; i++) {
+        var charY = this.y + i * this.fontSize;
+        if (charY < -this.fontSize || charY > this.config.canvasHeight + this.fontSize) continue;
+
+        if (isRainbow) {
+          var colorIndex = (Math.floor(this.rainbowOffset / 30) + i) % 7;
+          var rainbowColors = ['#ff6b6b', '#ffa94d', '#ffd43b', '#69db7c', '#4dabf7', '#9775fa', '#f783ac'];
+          ctx.shadowColor = rainbowColors[colorIndex] + '99';
+          ctx.shadowBlur = this.glowIntensity;
+          ctx.fillStyle = rainbowColors[colorIndex] + Math.round(this.opacity * 255).toString(16).padStart(2, '0');
+        }
+        ctx.fillText(this.chars[i], this.x, charY);
+      }
+      ctx.shadowBlur = 0;
+    }
+
+    hexToRgba(hex, alpha) {
+      var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+      if (result) {
+        return 'rgba(' + parseInt(result[1], 16) + ', ' + parseInt(result[2], 16) + ', ' + parseInt(result[3], 16) + ', ' + alpha + ')';
+      }
+      return 'rgba(255, 255, 255, ' + alpha + ')';
+    }
+  }
+
+  class SequenceRain {
+    constructor() {
+      this.canvas = document.getElementById('sequenceCanvas');
+      if (!this.canvas) return;
+      this.ctx = this.canvas.getContext('2d');
+      this.config = {
+        density: 63,
+        speedMultiplier: 0.4,
+        depthRange: 9,
+        canvasWidth: 0,
+        canvasHeight: 0,
+        chars: DNA_CHARS,
+        color: { primary: '#3b82f6', glow: 'rgba(59, 130, 246, 0.5)' },
+        rainbow: false
+      };
+      this.columns = [];
+      this.lastTime = 0;
+      this.animationId = null;
+
+      // Flying cat state (managed by CatEasterEgg)
+      this.flyingCat = document.getElementById('flyingCat');
+      this.flyingX = -200;
+      this.flyingY = 100;
+      this.catActive = false;
+
+      // Respect reduced motion
+      this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      this.setupCanvas();
+      this.initColumns();
+      if (!this.reducedMotion) {
+        this.animate(0);
+      } else {
+        // Draw one static frame
+        this.drawFrame(0);
+      }
+    }
+
+    setupCanvas() {
+      var self = this;
+      var resize = function() {
+        var dpr = window.devicePixelRatio || 1;
+        self.canvas.width = window.innerWidth * dpr;
+        self.canvas.height = window.innerHeight * dpr;
+        self.canvas.style.width = window.innerWidth + 'px';
+        self.canvas.style.height = window.innerHeight + 'px';
+        self.ctx.scale(dpr, dpr);
+        self.config.canvasWidth = window.innerWidth;
+        self.config.canvasHeight = window.innerHeight;
+        self.initColumns();
+      };
+      resize();
+      window.addEventListener('resize', resize);
+    }
+
+    initColumns() {
+      var columnWidth = Math.max(25, 130 - this.config.density);
+      var numColumns = Math.ceil(this.config.canvasWidth / columnWidth) + 5;
+      this.columns = [];
+      for (var i = 0; i < numColumns; i++) {
+        var x = (i + 0.5) * columnWidth + (Math.random() - 0.5) * columnWidth * 0.6;
+        this.columns.push(new SequenceColumn(x, this.config));
+      }
+      this.columns.sort(function(a, b) { return a.depth - b.depth; });
+    }
+
+    drawFrame(timestamp) {
+      this.ctx.fillStyle = '#0a0e14';
+      this.ctx.fillRect(0, 0, this.config.canvasWidth, this.config.canvasHeight);
+      var self = this;
+      this.columns.forEach(function(column) {
+        column.draw(self.ctx);
+      });
+    }
+
+    animate(timestamp) {
+      var deltaTime = Math.min((timestamp - this.lastTime) / 1000, 0.1);
+      this.lastTime = timestamp;
+
+      this.ctx.fillStyle = '#0a0e14';
+      this.ctx.fillRect(0, 0, this.config.canvasWidth, this.config.canvasHeight);
+
+      var self = this;
+      this.columns.forEach(function(column) {
+        column.update(deltaTime);
+        column.draw(self.ctx);
+      });
+
+      // Animate flying cat
+      if (this.catActive && this.flyingCat) {
+        this.flyingX += 100 * deltaTime;
+        this.flyingY += Math.sin(timestamp / 180) * 2;
+
+        if (this.flyingX > this.config.canvasWidth + 200) {
+          this.flyingX = -200;
+          this.flyingY = Math.random() * this.config.canvasHeight * 0.6 + 50;
+        }
+
+        this.flyingCat.style.left = this.flyingX + 'px';
+        this.flyingCat.style.top = this.flyingY + 'px';
+
+        // Draw rocket trail
+        if (window.__currentCatColor) {
+          this.drawGlowTrail(window.__currentCatColor);
+        }
+      }
+
+      this.animationId = requestAnimationFrame(function(t) { self.animate(t); });
+    }
+
+    drawGlowTrail(color) {
+      var ctx = this.ctx;
+      var centerY = this.flyingY + 75;
+      var flameX = this.flyingX - 10;
+
+      var flicker = Math.sin(Date.now() / 50) * 0.15 + 1;
+      var flicker2 = Math.cos(Date.now() / 70) * 0.1 + 1;
+
+      // Thruster nozzle
+      var nozzleX = flameX + 5;
+      var nozzleWidth = 20;
+      var nozzleHeight = 35;
+
+      ctx.beginPath();
+      ctx.moveTo(nozzleX + 8, centerY - 12);
+      ctx.lineTo(nozzleX - nozzleWidth + 5, centerY - nozzleHeight/2);
+      ctx.lineTo(nozzleX - nozzleWidth, centerY - nozzleHeight/2 - 3);
+      ctx.lineTo(nozzleX - nozzleWidth, centerY + nozzleHeight/2 + 3);
+      ctx.lineTo(nozzleX - nozzleWidth + 5, centerY + nozzleHeight/2);
+      ctx.lineTo(nozzleX + 8, centerY + 12);
+      ctx.closePath();
+
+      var nozzleGrad = ctx.createLinearGradient(nozzleX - nozzleWidth, centerY - nozzleHeight/2, nozzleX - nozzleWidth, centerY + nozzleHeight/2);
+      nozzleGrad.addColorStop(0, '#4a4a4a');
+      nozzleGrad.addColorStop(0.3, '#6a6a6a');
+      nozzleGrad.addColorStop(0.5, '#8a8a8a');
+      nozzleGrad.addColorStop(0.7, '#6a6a6a');
+      nozzleGrad.addColorStop(1, '#3a3a3a');
+      ctx.fillStyle = nozzleGrad;
+      ctx.fill();
+
+      ctx.strokeStyle = '#999';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.ellipse(nozzleX - nozzleWidth + 2, centerY, 4, nozzleHeight/2 - 5, 0, 0, Math.PI * 2);
+      ctx.fillStyle = '#1a1a1a';
+      ctx.fill();
+
+      // Outer flame
+      var outerLength = 180 * flicker;
+      var outerWidth = 45 * flicker2;
+      ctx.beginPath();
+      ctx.moveTo(flameX, centerY);
+      ctx.quadraticCurveTo(flameX - outerLength * 0.6, centerY - outerWidth, flameX - outerLength, centerY);
+      ctx.quadraticCurveTo(flameX - outerLength * 0.6, centerY + outerWidth, flameX, centerY);
+      ctx.closePath();
+      var outerGrad = ctx.createLinearGradient(flameX - outerLength, centerY, flameX, centerY);
+      outerGrad.addColorStop(0, 'transparent');
+      outerGrad.addColorStop(0.4, color + '40');
+      outerGrad.addColorStop(1, color + '90');
+      ctx.fillStyle = outerGrad;
+      ctx.fill();
+
+      // Middle flame
+      var midLength = 120 * flicker2;
+      var midWidth = 28 * flicker;
+      ctx.beginPath();
+      ctx.moveTo(flameX, centerY);
+      ctx.quadraticCurveTo(flameX - midLength * 0.5, centerY - midWidth, flameX - midLength, centerY);
+      ctx.quadraticCurveTo(flameX - midLength * 0.5, centerY + midWidth, flameX, centerY);
+      ctx.closePath();
+      var midGrad = ctx.createLinearGradient(flameX - midLength, centerY, flameX, centerY);
+      midGrad.addColorStop(0, 'transparent');
+      midGrad.addColorStop(0.3, '#ff990050');
+      midGrad.addColorStop(0.7, '#ffcc00aa');
+      midGrad.addColorStop(1, '#ffee88');
+      ctx.fillStyle = midGrad;
+      ctx.fill();
+
+      // Inner flame
+      var innerLength = 60 * flicker;
+      var innerWidth = 12 * flicker2;
+      ctx.beginPath();
+      ctx.moveTo(flameX, centerY);
+      ctx.quadraticCurveTo(flameX - innerLength * 0.4, centerY - innerWidth, flameX - innerLength, centerY);
+      ctx.quadraticCurveTo(flameX - innerLength * 0.4, centerY + innerWidth, flameX, centerY);
+      ctx.closePath();
+      var innerGrad = ctx.createLinearGradient(flameX - innerLength, centerY, flameX, centerY);
+      innerGrad.addColorStop(0, 'transparent');
+      innerGrad.addColorStop(0.5, '#ffffffaa');
+      innerGrad.addColorStop(1, '#ffffff');
+      ctx.fillStyle = innerGrad;
+      ctx.fill();
+    }
+  }
+
+  // Expose globally so CatEasterEgg can communicate
+  window.__sequenceRain = new SequenceRain();
+})();
+</script>

@@ -1,0 +1,285 @@
+---
+// CatEasterEgg.astro — Famous cats easter egg (homepage only)
+// Click the cat button to cycle through 10 famous internet cats.
+// Communicates with SequenceRain via window.__sequenceRain global reference.
+---
+
+<div class="secret-cat" id="secretCat" role="button" tabindex="0" aria-label="Secret cat easter egg">😻</div>
+<div class="cat-mode-label" id="catModeLabel" aria-live="polite"></div>
+<div class="flying-cat" id="flyingCat" aria-hidden="true"></div>
+
+<style>
+  .secret-cat {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 100;
+    font-size: 1.2rem;
+    cursor: pointer;
+    opacity: 0.3;
+    transition: all 0.3s ease;
+    animation: subtle-pulse 3s ease-in-out infinite;
+    user-select: none;
+    filter: grayscale(100%);
+    background: none;
+    border: none;
+    padding: 0;
+    line-height: 1;
+  }
+
+  .secret-cat:hover {
+    opacity: 0.7;
+    transform: scale(1.1);
+    filter: grayscale(0%);
+  }
+
+  .secret-cat.active {
+    opacity: 1;
+    filter: grayscale(0%);
+    animation: cat-bounce 0.5s ease-in-out infinite;
+  }
+
+  @keyframes subtle-pulse {
+    0%, 100% { opacity: 0.25; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.05); }
+  }
+
+  @keyframes cat-bounce {
+    0%, 100% { transform: translateY(0) rotate(-5deg); }
+    50% { transform: translateY(-5px) rotate(5deg); }
+  }
+
+  .flying-cat {
+    position: fixed;
+    z-index: 50;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    filter: drop-shadow(0 0 30px rgba(255, 255, 255, 0.6));
+  }
+
+  .flying-cat.active {
+    opacity: 1;
+    animation: fly-bounce 0.5s ease-in-out infinite;
+  }
+
+  .flying-cat img {
+    height: 150px;
+    width: auto;
+    border-radius: 16px;
+    object-fit: cover;
+  }
+
+  .flying-cat.nyan img {
+    height: 120px;
+    border-radius: 0;
+    image-rendering: pixelated;
+  }
+
+  @keyframes fly-bounce {
+    0%, 100% { transform: translateY(0) rotate(-3deg); }
+    50% { transform: translateY(-20px) rotate(3deg); }
+  }
+
+  .cat-mode-label {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 4rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0);
+    transition: all 0.3s ease;
+    pointer-events: none;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    z-index: 100;
+  }
+
+  .cat-mode-label.visible {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  @media (max-width: 600px) {
+    .secret-cat {
+      bottom: 1rem;
+      right: 1rem;
+    }
+    .flying-cat img {
+      height: 100px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .secret-cat {
+      animation: none;
+    }
+    .secret-cat.active {
+      animation: none;
+    }
+    .flying-cat.active {
+      animation: none;
+    }
+  }
+</style>
+
+<script is:inline>
+(function() {
+  var FAMOUS_CATS = [
+    {
+      name: 'Normal',
+      button: '\u{1F63B}',
+      image: null,
+      imageClass: '',
+      chars: ['A', 'T', 'G', 'C'],
+      color: { primary: '#3b82f6', glow: 'rgba(59, 130, 246, 0.5)' },
+      rainbow: false
+    },
+    {
+      name: 'Nyan Cat',
+      button: '\u{1F308}',
+      image: '/images/cats/nyan_cat.jpg',
+      imageClass: 'nyan',
+      chars: ['\u{1F431}', '\u{1F63A}', '\u{1F638}', '\u{1F308}', '\u2B50', '\u2728', '\u{1F496}', '\u{1F31F}'],
+      color: { primary: '#ff69b4', glow: 'rgba(255, 105, 180, 0.6)' },
+      rainbow: true
+    },
+    {
+      name: 'Grumpy Cat',
+      button: '\u{1F63E}',
+      image: '/images/cats/grumpy_cat.jpg',
+      imageClass: 'grumpy',
+      chars: ['\u{1F63E}', '\u{1F640}', '\u{1F63F}', '\u{1F431}', '\u{1F4A2}', '\u{1F624}', '\u{1F408}', '\u{1F63C}'],
+      color: { primary: '#8b7355', glow: 'rgba(139, 115, 85, 0.6)' },
+      rainbow: false
+    },
+    {
+      name: 'Lil Bub',
+      button: '\u{1F63A}',
+      image: '/images/cats/lil_bub.jpg',
+      imageClass: 'bub',
+      chars: ['\u{1F63A}', '\u{1F431}', '\u{1F495}', '\u{1F496}', '\u2728', '\u{1F31F}', '\u{1F63B}', '\u{1F408}'],
+      color: { primary: '#ffb6c1', glow: 'rgba(255, 182, 193, 0.6)' },
+      rainbow: false
+    },
+    {
+      name: 'Ceiling Cat',
+      button: '\u{1F640}',
+      image: '/images/cats/ceiling_cat.jpg',
+      imageClass: 'ceiling',
+      chars: ['\u{1F640}', '\u{1F639}', '\u{1F431}', '\u{1F440}', '\u2728', '\u{1F63A}', '\u{1F408}', '\u{1F638}'],
+      color: { primary: '#ffd700', glow: 'rgba(255, 215, 0, 0.6)' },
+      rainbow: false
+    },
+    {
+      name: 'Keyboard Cat',
+      button: '\u{1F3B9}',
+      image: '/images/cats/keyboard_cat.jpg',
+      imageClass: 'keyboard',
+      chars: ['\u{1F639}', '\u{1F431}', '\u{1F3B5}', '\u266A', '\u{1F408}', '\u{1F63A}', '\u{1F3B6}', '\u{1F638}'],
+      color: { primary: '#9370db', glow: 'rgba(147, 112, 219, 0.6)' },
+      rainbow: false
+    },
+    {
+      name: 'Maru',
+      button: '\u{1F4E6}',
+      image: '/images/cats/maru.jpg',
+      imageClass: 'maru',
+      chars: ['\u{1F63C}', '\u{1F431}', '\u{1F4E6}', '\u{1F63A}', '\u{1F408}', '\u{1F638}', '\u2728', '\u{1F4AB}'],
+      color: { primary: '#deb887', glow: 'rgba(222, 184, 135, 0.6)' },
+      rainbow: false
+    },
+    {
+      name: 'Kitten in Danger',
+      button: '\u{1F198}',
+      image: '/images/cats/kill_kitten.jpg',
+      imageClass: 'danger',
+      chars: ['\u{1F63F}', '\u{1F640}', '\u{1F63E}', '\u{1F431}', '\u26A0', '\u{1F198}', '\u{1F628}', '\u{1F408}'],
+      color: { primary: '#ff4444', glow: 'rgba(255, 68, 68, 0.6)' },
+      rainbow: false
+    },
+    {
+      name: 'Freckles',
+      button: '\u{1F92A}',
+      image: '/images/cats/freckles.jpg',
+      imageClass: 'freckles',
+      chars: ['\u{1F92A}', '\u{1F61C}', '\u{1F431}', '\u{1F495}', '\u{1F300}', '\u2764\uFE0F', '\u{1F638}', '\u{1F63B}'],
+      color: { primary: '#ff6b9d', glow: 'rgba(255, 107, 157, 0.6)' },
+      rainbow: false
+    },
+    {
+      name: 'Stella',
+      button: '\u{1F451}',
+      image: '/images/cats/stella.jpg',
+      imageClass: 'stella',
+      chars: ['\u{1F451}', '\u{1F3F4}\u200D\u2620\uFE0F', '\u{1F478}', '\u{1F63C}', '\u{1F48E}', '\u2694\uFE0F', '\u{1F431}', '\u{1F441}'],
+      color: { primary: '#9b59b6', glow: 'rgba(155, 89, 182, 0.6)' },
+      rainbow: false
+    }
+  ];
+
+  var currentCatIndex = 0;
+  var secretCat = document.getElementById('secretCat');
+  var catLabel = document.getElementById('catModeLabel');
+  var flyingCat = document.getElementById('flyingCat');
+
+  if (!secretCat) return;
+
+  function handleCatClick() {
+    var rain = window.__sequenceRain;
+    currentCatIndex = (currentCatIndex + 1) % FAMOUS_CATS.length;
+    var cat = FAMOUS_CATS[currentCatIndex];
+
+    // Update button
+    secretCat.textContent = cat.button;
+
+    if (currentCatIndex === 0) {
+      // Back to normal
+      secretCat.classList.remove('active');
+      catLabel.classList.remove('visible');
+      flyingCat.classList.remove('active');
+      flyingCat.className = 'flying-cat';
+      flyingCat.innerHTML = '';
+      if (rain) {
+        rain.catActive = false;
+      }
+      window.__currentCatColor = null;
+    } else {
+      // Activate cat mode
+      secretCat.classList.add('active');
+      catLabel.textContent = cat.name;
+      catLabel.classList.add('visible');
+
+      var wasActive = rain && rain.catActive;
+      flyingCat.className = 'flying-cat ' + cat.imageClass;
+      flyingCat.innerHTML = '<img src="' + cat.image + '" alt="' + cat.name + '" onerror="this.parentElement.innerHTML=\'🐱\'">';
+      flyingCat.classList.add('active');
+
+      if (rain) {
+        rain.catActive = true;
+        if (!wasActive) {
+          rain.flyingX = -200;
+          rain.flyingY = rain.config.canvasHeight * 0.3;
+        }
+      }
+
+      window.__currentCatColor = cat.color.primary;
+    }
+
+    // Update rain config
+    if (rain) {
+      rain.config.chars = cat.chars;
+      rain.config.color = cat.color;
+      rain.config.rainbow = cat.rainbow;
+      rain.columns.forEach(function(col) { col.smoothUpdate(rain.config.chars); });
+    }
+  }
+
+  secretCat.addEventListener('click', handleCatClick);
+  secretCat.addEventListener('keydown', function(e) {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      handleCatClick();
+    }
+  });
+})();
+</script>
