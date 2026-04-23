@@ -2,8 +2,10 @@
   "name": "Chase Suiter",
   "slug": "chase-suiter",
   "photo": "/images/lab/suiter1.jpg",
-  "title": "Graduate Student (MCB)",
-  "role": "graduate-student",
+  "title": "Postdoctoral Fellow",
+  "role": "postdoc",
   "email": "ccsuiter@uw.edu",
-  "status": "current"
+  "status": "current",
+  "jointLab": "Baker Lab",
+  "jointLabUrl": "https://www.bakerlab.org/"
 }

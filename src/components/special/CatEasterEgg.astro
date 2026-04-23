@@ -4,16 +4,21 @@
 // Communicates with SequenceRain via window.__sequenceRain global reference.
 ---
 
-<div class="secret-cat" id="secretCat" role="button" tabindex="0" aria-label="Secret cat easter egg">😻</div>
-<div class="cat-mode-label" id="catModeLabel" aria-live="polite"></div>
+<div class="cat-easter-egg-wrap">
+  <div class="secret-cat" id="secretCat" role="button" tabindex="0" aria-label="Secret cat easter egg">😻</div>
+  <div class="cat-mode-label" id="catModeLabel" aria-live="polite"></div>
+</div>
 <div class="flying-cat" id="flyingCat" aria-hidden="true"></div>
 
 <style>
+  .cat-easter-egg-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
   .secret-cat {
-    position: fixed;
-    bottom: 1.5rem;
-    right: 1.5rem;
-    z-index: 100;
     font-size: 1.2rem;
     cursor: pointer;
     opacity: 0.3;
@@ -25,6 +30,7 @@
     border: none;
     padding: 0;
     line-height: 1;
+    display: inline-block;
   }
 
   .secret-cat:hover {
@@ -82,17 +88,14 @@
   }
 
   .cat-mode-label {
-    position: fixed;
-    bottom: 1.5rem;
-    right: 4rem;
     font-family: 'JetBrains Mono', monospace;
     font-size: 0.7rem;
     color: rgba(255, 255, 255, 0);
-    transition: all 0.3s ease;
+    transition: color 0.3s ease;
     pointer-events: none;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    z-index: 100;
+    min-height: 1em;
   }
 
   .cat-mode-label.visible {
@@ -100,10 +103,6 @@
   }
 
   @media (max-width: 600px) {
-    .secret-cat {
-      bottom: 1rem;
-      right: 1rem;
-    }
     .flying-cat :global(img) {
       height: 32px;
     }

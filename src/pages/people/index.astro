@@ -41,38 +41,33 @@ const sortedRotation = rotationStudents.sort((a, b) => {
   <div class="w-full max-w-[1000px] mx-auto px-4 py-12">
     <h1 class="w-full text-2xl md:text-3xl font-bold text-lab-orange mb-8 text-center">Current Lab Members</h1>
 
-    <!-- Principal Investigator - Featured at Top -->
-    {pi && (
-      <div class="text-center mb-16 md:mb-20">
-        <img
-          src={pi.photo}
-          alt={pi.name}
-          class="w-32 h-32 md:w-[152px] md:h-[152px] object-cover mx-auto"
-        />
-        <p class="pi-name font-bold mt-3 text-lg md:text-xl">
-          {pi.profileUrl ? (
-            <a href={pi.profileUrl} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">{pi.name}<span class="sr-only"> (opens in new tab)</span></a>
-          ) : pi.name}
-        </p>
-        <p class="pi-title text-sm">{pi.title}</p>
-        {pi.admin && (
-          <p class="pi-meta text-xs">
-            Admin: <ObfuscatedEmail email={pi.admin.email} class="text-lab-blue hover:underline" /> ({pi.admin.name})
-          </p>
-        )}
-        {pi.links && (
-          <p class="mt-1 text-xs">
-            <a href={pi.links.hhmi} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">HHMI Page<span class="sr-only"> (opens in new tab)</span></a>,{" "}
-            <a href={pi.links.briefBio} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">Brief Bio<span class="sr-only"> (opens in new tab)</span></a>,{" "}
-            <a href={pi.links.nihBiosketch} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">NIH Biosketch<span class="sr-only"> (opens in new tab)</span></a>,{" "}
-            <a href={pi.links.cv} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">CV<span class="sr-only"> (opens in new tab)</span></a>
-          </p>
-        )}
-      </div>
-    )}
-
-    <!-- Lab Members - Responsive Grid -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6 justify-items-center">
+    <!-- Lab Members - Responsive Grid (PI first, then alphabetical) -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6 justify-items-center items-start">
+      {pi && (
+        <div class="w-full max-w-[152px] flex flex-col">
+          <PersonCard {...pi} />
+          <div class="px-2 mt-1 text-left">
+            {pi.profileUrl && (
+              <p style="font-size: 11px; margin: 0;">
+                <a href={pi.profileUrl} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">Faculty Page<span class="sr-only"> (opens in new tab)</span></a>
+              </p>
+            )}
+            {pi.admin && (
+              <p class="pi-meta" style="font-size: 11px; margin: 0;">
+                Admin: <ObfuscatedEmail email={pi.admin.email} class="text-lab-blue hover:underline" /> ({pi.admin.name})
+              </p>
+            )}
+            {pi.links && (
+              <p style="font-size: 11px; margin: 0;">
+                <a href={pi.links.hhmi} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">HHMI Page<span class="sr-only"> (opens in new tab)</span></a>,{" "}
+                <a href={pi.links.briefBio} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">Brief Bio<span class="sr-only"> (opens in new tab)</span></a>,{" "}
+                <a href={pi.links.nihBiosketch} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">NIH Biosketch<span class="sr-only"> (opens in new tab)</span></a>,{" "}
+                <a href={pi.links.cv} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">CV<span class="sr-only"> (opens in new tab)</span></a>
+              </p>
+            )}
+          </div>
+        </div>
+      )}
       {sortedLabMembers.map(person => (
         <PersonCard {...person} />
       ))}
