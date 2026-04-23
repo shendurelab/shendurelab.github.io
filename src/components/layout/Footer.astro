@@ -8,9 +8,9 @@ const currentYear = new Date().getFullYear();
 
   <div class="max-w-[1200px] mx-auto px-4 py-4 md:py-8">
     <!-- Footer content - single row with logo, toggle centered, and copyright -->
-    <div class="flex flex-col lg:flex-row justify-between items-center gap-2 lg:gap-4">
+    <div class="flex flex-col lg:grid lg:grid-cols-3 items-center gap-2 lg:gap-4">
       <!-- Left: Logo and links -->
-      <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+      <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 lg:justify-self-start">
         <a href="/" class="inline-block py-2">
           <img src="/images/shendurelab.png" alt="Shendure Lab" class="h-6 md:h-8 bg-white px-2 py-1 rounded" />
         </a>
@@ -22,7 +22,7 @@ const currentYear = new Date().getFullYear();
       <!-- Center: Theme Toggle -->
       <button
         id="theme-toggle"
-        class="flex items-center gap-3 text-base footer-text hover:text-uw-purple transition-colors order-first lg:order-none mb-2 lg:mb-0 px-6 py-3 rounded-lg"
+        class="flex items-center gap-3 text-base footer-text hover:text-uw-purple transition-colors order-first lg:order-none mb-2 lg:mb-0 px-6 py-3 rounded-lg lg:justify-self-center"
         aria-label="Toggle dark mode"
       >
         <svg id="theme-icon-light" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -35,7 +35,7 @@ const currentYear = new Date().getFullYear();
       </button>
 
       <!-- Right: Copyright -->
-      <div class="text-sm footer-text-muted text-center lg:text-right">
+      <div class="text-sm footer-text-muted text-center lg:text-right lg:justify-self-end">
         <p>&copy; {currentYear} Shendure Lab</p>
         <p class="text-xs footer-text-extra-muted">Designed by Olga Oseth with Charlie Lee, Andrew Hill, Jay Shendure; built with Claude</p>
       </div>
