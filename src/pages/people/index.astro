@@ -1,7 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PersonCard from '../../components/people/PersonCard.astro';
-import ObfuscatedEmail from '../../components/shared/ObfuscatedEmail.astro';
 import fs from 'node:fs';
 import path from 'node:path';
 
@@ -22,12 +21,15 @@ const pi = currentMembers.find(p => p.role === 'pi');
 const rotationStudents = currentMembers.filter(p => p.role === 'rotation');
 const labMembers = currentMembers.filter(p => p.role !== 'rotation' && p.role !== 'pi');
 
-// Sort lab members alphabetically by last name
-const sortedLabMembers = labMembers.sort((a, b) => {
-  const aLast = a.name.split(' ').pop() || '';
-  const bLast = b.name.split(' ').pop() || '';
-  return aLast.localeCompare(bLast);
-});
+// Sort lab members alphabetically by last name, with PI pinned to the top-left
+const sortedLabMembers = [
+  ...(pi ? [pi] : []),
+  ...labMembers.sort((a, b) => {
+    const aLast = a.name.split(' ').pop() || '';
+    const bLast = b.name.split(' ').pop() || '';
+    return aLast.localeCompare(bLast);
+  }),
+];
 
 // Sort rotation students alphabetically by last name
 const sortedRotation = rotationStudents.sort((a, b) => {
@@ -68,6 +70,8 @@ const sortedRotation = rotationStudents.sort((a, b) => {
           </div>
         </div>
       )}
+    <!-- Lab Members - Responsive Grid (PI pinned to top-left) -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-6 justify-items-center items-start">
       {sortedLabMembers.map(person => (
         <PersonCard {...person} />
       ))}
@@ -103,15 +107,6 @@ const sortedRotation = rotationStudents.sort((a, b) => {
     :global(.person-card.highlighted) {
       background-color: rgba(237, 148, 60, 0.15);
       box-shadow: 0 0 0 3px rgba(237, 148, 60, 0.4);
-    }
-    .pi-name {
-      color: var(--theme-text);
-    }
-    .pi-title {
-      color: var(--theme-text-secondary);
-    }
-    .pi-meta {
-      color: var(--theme-text-muted);
     }
   </style>
 

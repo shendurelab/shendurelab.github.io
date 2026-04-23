@@ -18,6 +18,9 @@ interface Props {
   currentPosition?: string;
   currentPositionUrl?: string;
   featured?: boolean;
+  profileUrl?: string;
+  admin?: { email: string; name: string };
+  links?: { hhmi?: string; briefBio?: string; nihBiosketch?: string; cv?: string };
 }
 
 const {
@@ -36,6 +39,9 @@ const {
   currentPosition,
   currentPositionUrl,
   featured = false,
+  profileUrl,
+  admin,
+  links,
 } = Astro.props;
 ---
 
@@ -48,7 +54,11 @@ const {
     class="w-full aspect-square object-cover"
     loading="lazy"
   />
-  <p class="person-name font-bold mt-1 text-xs" style="text-align: left; margin-bottom: 0;">{name}</p>
+  <p class="person-name font-bold mt-1 text-xs" style="text-align: left; margin-bottom: 0;">
+    {profileUrl ? (
+      <a href={profileUrl} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">{name}<span class="sr-only"> (opens in new tab)</span></a>
+    ) : name}
+  </p>
   <p class="person-title text-xs" style="text-align: left; margin: 0;">{title}</p>
 
   {/* Current members: email, then joint/affiliate */}
@@ -71,6 +81,27 @@ const {
       ({affiliateLabUrl ? (
         <a href={affiliateLabUrl} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">{affiliateLab}<span class="sr-only"> (opens in new tab)</span></a>
       ) : affiliateLab})
+    </p>
+  )}
+  {status === 'current' && admin && (
+    <p class="person-meta" style="text-align: left; font-size: 11px; margin: 0; line-height: 1.4;">
+      Admin: <ObfuscatedEmail email={admin.email} class="text-lab-blue hover:underline" /> ({admin.name})
+    </p>
+  )}
+  {status === 'current' && links && (
+    <p class="person-meta" style="text-align: left; font-size: 11px; margin: 2px 0 0; line-height: 1.4;">
+      {links.hhmi && (
+        <a href={links.hhmi} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">HHMI<span class="sr-only"> (opens in new tab)</span></a>
+      )}{links.hhmi && links.briefBio && ', '}
+      {links.briefBio && (
+        <a href={links.briefBio} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">Brief Bio<span class="sr-only"> (opens in new tab)</span></a>
+      )}{links.briefBio && links.nihBiosketch && ', '}
+      {links.nihBiosketch && (
+        <a href={links.nihBiosketch} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">NIH Biosketch<span class="sr-only"> (opens in new tab)</span></a>
+      )}{links.nihBiosketch && links.cv && ', '}
+      {links.cv && (
+        <a href={links.cv} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">CV<span class="sr-only"> (opens in new tab)</span></a>
+      )}
     </p>
   )}
 

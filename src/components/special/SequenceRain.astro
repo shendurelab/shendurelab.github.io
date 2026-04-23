@@ -228,24 +228,24 @@
 
     drawGlowTrail(color) {
       var ctx = this.ctx;
-      var centerY = this.flyingY + 20;
+      var centerY = this.flyingY + 75;
       var flameX = this.flyingX - 10;
 
       var flicker = Math.sin(Date.now() / 50) * 0.15 + 1;
       var flicker2 = Math.cos(Date.now() / 70) * 0.1 + 1;
 
-      // Thruster nozzle (scaled for small cat)
-      var nozzleX = flameX + 3;
-      var nozzleWidth = 10;
-      var nozzleHeight = 18;
+      // Thruster nozzle
+      var nozzleX = flameX + 5;
+      var nozzleWidth = 20;
+      var nozzleHeight = 35;
 
       ctx.beginPath();
-      ctx.moveTo(nozzleX + 4, centerY - 6);
-      ctx.lineTo(nozzleX - nozzleWidth + 3, centerY - nozzleHeight/2);
-      ctx.lineTo(nozzleX - nozzleWidth, centerY - nozzleHeight/2 - 2);
-      ctx.lineTo(nozzleX - nozzleWidth, centerY + nozzleHeight/2 + 2);
-      ctx.lineTo(nozzleX - nozzleWidth + 3, centerY + nozzleHeight/2);
-      ctx.lineTo(nozzleX + 4, centerY + 6);
+      ctx.moveTo(nozzleX + 8, centerY - 12);
+      ctx.lineTo(nozzleX - nozzleWidth + 5, centerY - nozzleHeight/2);
+      ctx.lineTo(nozzleX - nozzleWidth, centerY - nozzleHeight/2 - 3);
+      ctx.lineTo(nozzleX - nozzleWidth, centerY + nozzleHeight/2 + 3);
+      ctx.lineTo(nozzleX - nozzleWidth + 5, centerY + nozzleHeight/2);
+      ctx.lineTo(nozzleX + 8, centerY + 12);
       ctx.closePath();
 
       var nozzleGrad = ctx.createLinearGradient(nozzleX - nozzleWidth, centerY - nozzleHeight/2, nozzleX - nozzleWidth, centerY + nozzleHeight/2);
@@ -262,13 +262,13 @@
       ctx.stroke();
 
       ctx.beginPath();
-      ctx.ellipse(nozzleX - nozzleWidth + 1, centerY, 2, nozzleHeight/2 - 3, 0, 0, Math.PI * 2);
+      ctx.ellipse(nozzleX - nozzleWidth + 2, centerY, 4, nozzleHeight/2 - 5, 0, 0, Math.PI * 2);
       ctx.fillStyle = '#1a1a1a';
       ctx.fill();
 
-      // Outer flame (scaled down)
-      var outerLength = 90 * flicker;
-      var outerWidth = 22 * flicker2;
+      // Outer flame
+      var outerLength = 180 * flicker;
+      var outerWidth = 45 * flicker2;
       ctx.beginPath();
       ctx.moveTo(flameX, centerY);
       ctx.quadraticCurveTo(flameX - outerLength * 0.6, centerY - outerWidth, flameX - outerLength, centerY);
@@ -282,8 +282,8 @@
       ctx.fill();
 
       // Middle flame
-      var midLength = 60 * flicker2;
-      var midWidth = 14 * flicker;
+      var midLength = 120 * flicker2;
+      var midWidth = 28 * flicker;
       ctx.beginPath();
       ctx.moveTo(flameX, centerY);
       ctx.quadraticCurveTo(flameX - midLength * 0.5, centerY - midWidth, flameX - midLength, centerY);
@@ -298,8 +298,8 @@
       ctx.fill();
 
       // Inner flame
-      var innerLength = 30 * flicker;
-      var innerWidth = 6 * flicker2;
+      var innerLength = 60 * flicker;
+      var innerWidth = 12 * flicker2;
       ctx.beginPath();
       ctx.moveTo(flameX, centerY);
       ctx.quadraticCurveTo(flameX - innerLength * 0.4, centerY - innerWidth, flameX - innerLength, centerY);
