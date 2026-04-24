@@ -44,7 +44,7 @@ const rotationStudents = [
   { name: "James Anderson", title: "Rotation Student (MCB), Winter 2019" },
   { name: "Eliza Barkan", title: "Rotation Student (MCB), Fall 2018" },
   { name: "Michael Goldberg", title: "Rotation Student (GS), Spring 2018" },
-  { name: "Philip Dishuk", title: "Rotation Student (GS), Winter 2017" },
+  { name: "Phillip Dishuck", title: "Rotation Student (GS), Winter 2018" },
   { name: "William DeWitt", title: "Rotation Student (GS), Fall 2017" },
   { name: "Bingjie Wang", title: "Rotation Student (MSTP), Summer 2017" },
   { name: "Joseph Janizek", title: "Rotation Student (MSTP), Summer 2017" },
