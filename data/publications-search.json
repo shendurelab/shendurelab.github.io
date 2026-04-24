@@ -640,12 +640,28 @@
     "slug": "lalanne-2025-extensive-length-and-homology-depende"
   },
   {
+    "title": "Multi-scale dissection, compaction and derivatization of mammalian developmental enhancers",
+    "authors": "Lalanne et al",
+    "journal": "bioRxiv 2026.04.20.719625",
+    "year": 2026,
+    "category": "preprint",
+    "slug": "lalanne-2026-multi-scale-dissection-compaction-an"
+  },
+  {
     "title": "Chromatin context-dependent regulation and epigenetic manipulation of prime editing",
     "authors": "Li et al",
     "journal": "Cell",
     "year": 2024,
     "category": "research",
     "slug": "li-2024-chromatin-context-dependent-regulation-and"
+  },
+  {
+    "title": "Retracing and rewriting the evolutionary trajectories of mammalian developmental enhancers",
+    "authors": "Li et al",
+    "journal": "bioRxiv 2026.04.20.719714",
+    "year": 2026,
+    "category": "preprint",
+    "slug": "li-2026-retracing-and-rewriting-the-evolutionar"
   },
   {
     "title": "Molecular recording using DNA Typewriter",
@@ -894,6 +910,14 @@
     "year": 2024,
     "category": "research",
     "slug": "qiu-2024-a-single-cell-time-lapse-of-mouse-prenata"
+  },
+  {
+    "title": "Evolutionary transfer learning enables organism-wide inference of mammalian enhancer landscapes",
+    "authors": "Qiu, Daza, Welsh et al",
+    "journal": "bioRxiv 2026.04.07.717039",
+    "year": 2026,
+    "category": "preprint",
+    "slug": "qiu-2026-evolutionary-transfer-learning-enables-o"
   },
   {
     "title": "Remembrance of inflammations past",
