@@ -344,12 +344,12 @@
     "slug": "findlay-2018-accurate-classification-of-brca1-vari"
   },
   {
-    "title": "The proteomic landscape and temporal dynamics of mammalian gastruloid development",
+    "title": "The proteomic landscape and temporal dynamics of human and mouse gastruloid development",
     "authors": "Garge et al",
-    "journal": "bioRxiv 2024.09.05.609098",
-    "year": 2024,
-    "category": "preprint",
-    "slug": "garge-2024-the-proteomic-landscape-and-temporal-dy"
+    "journal": "Nature Cell Biology",
+    "year": 2026,
+    "category": "research",
+    "slug": "garge-2026-the-proteomic-landscape-and-temporal-dy"
   },
   {
     "title": "The power of multiplexed functional analysis of genetic variants",
@@ -632,20 +632,20 @@
     "slug": "lalanne-2024-multiplex-profiling-of-developmental-"
   },
   {
-    "title": "Extensive length and homology dependent chimerism in pool-packaged AAV libraries",
-    "authors": "Lalanne et al",
-    "journal": "bioRxiv 2025.01.14.632594",
-    "year": 2025,
-    "category": "preprint",
-    "slug": "lalanne-2025-extensive-length-and-homology-depende"
-  },
-  {
     "title": "Multi-scale dissection, compaction and derivatization of mammalian developmental enhancers",
     "authors": "Lalanne et al",
     "journal": "bioRxiv 2026.04.20.719625",
     "year": 2026,
     "category": "preprint",
     "slug": "lalanne-2026-multi-scale-dissection-compaction-an"
+  },
+  {
+    "title": "Pool-packaged AAV libraries exhibit extensive length-dependent and homology-dependent chimerism",
+    "authors": "Lalanne, Chau et al",
+    "journal": "Nature Biotechnology",
+    "year": 2026,
+    "category": "research",
+    "slug": "lalanne-2026-pool-packaged-aav-libraries-exhibit-e"
   },
   {
     "title": "Chromatin context-dependent regulation and epigenetic manipulation of prime editing",
