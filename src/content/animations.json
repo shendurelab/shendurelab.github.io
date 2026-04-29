@@ -886,6 +886,22 @@
       "paperSlug": "yin-2019-high-throughput-single-cell-sequencing-wi",
       "variation": 4,
       "sortOrder": 107
+    },
+    {
+      "name": "Garge, 2026, Developmental Atlases",
+      "category": "developmental-atlases",
+      "type": "cellClusters",
+      "paperSlug": "garge-2026-the-proteomic-landscape-and-temporal-dy",
+      "variation": 3,
+      "sortOrder": 108
+    },
+    {
+      "name": "Lalanne, 2026, Computational Tools",
+      "category": "computational-tools",
+      "type": "trajectoryTree",
+      "paperSlug": "lalanne-2026-pool-packaged-aav-libraries-exhibit-e",
+      "variation": 1,
+      "sortOrder": 109
     }
   ]
 }

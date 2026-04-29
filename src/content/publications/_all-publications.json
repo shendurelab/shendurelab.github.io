@@ -1800,26 +1800,28 @@
     "sortOrder": 146
   },
   {
-    "category": "preprint",
-    "articleUrl": "https://www.biorxiv.org/content/10.1101/2025.01.14.632594v1",
-    "year": 2025,
-    "citation": "Lalanne et al. Extensive length and homology dependent chimerism in pool-packaged AAV libraries. bioRxiv 2025.01.14.632594 (2025)",
-    "journal": "bioRxiv",
-    "doi": "2025.01.14.632594",
-    "postedDate": "January 15, 2025",
-    "slug": "lalanne-2025-extensive-length-and-homology-depende",
-    "sortOrder": 147
+    "category": "research",
+    "articleUrl": "https://www.nature.com/articles/s41587-026-03097-1",
+    "thumbnail": "/images/papers/Lalanne_NatureBio_2026_thumb.png",
+    "pdfUrl": "/documents/Lalanne_NatureBiotechnology_2026.pdf",
+    "citation": "Lalanne, Chau et al. Pool-packaged AAV libraries exhibit extensive length-dependent and homology-dependent chimerism. Nature Biotechnology (2026)",
+    "year": 2026,
+    "journal": "Pool-packaged AAV libraries exhibit extensive length-dependent and homology-dependent chimerism. Nature Biotechnology",
+    "pmid": "39868341",
+    "slug": "lalanne-2026-pool-packaged-aav-libraries-exhibit-e",
+    "sortOrder": 0
   },
   {
-    "category": "preprint",
-    "articleUrl": "https://www.biorxiv.org/content/10.1101/2024.09.05.609098v1",
-    "year": 2024,
-    "citation": "Garge et al. The proteomic landscape and temporal dynamics of mammalian gastruloid development. bioRxiv 2024.09.05.609098 (2024)",
-    "journal": "bioRxiv",
-    "doi": "2024.09.05.609098",
-    "postedDate": "September 18, 2024",
-    "slug": "garge-2024-the-proteomic-landscape-and-temporal-dy",
-    "sortOrder": 148
+    "category": "research",
+    "articleUrl": "https://www.nature.com/articles/s41556-026-01937-5",
+    "thumbnail": "/images/papers/Garge_NatureCellBio_2026_thumb.png",
+    "pdfUrl": "/documents/garge_naturecellbio_2026.pdf",
+    "citation": "Garge et al. The proteomic landscape and temporal dynamics of human and mouse gastruloid development. Nature Cell Biology (2026)",
+    "year": 2026,
+    "journal": "The proteomic landscape and temporal dynamics of human and mouse gastruloid development. Nature Cell Biology",
+    "pmid": "42032312",
+    "slug": "garge-2026-the-proteomic-landscape-and-temporal-dy",
+    "sortOrder": 1
   },
   {
     "category": "preprint",
