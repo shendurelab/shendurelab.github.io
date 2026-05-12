@@ -8,6 +8,7 @@ const photos = [
     image: '/images/fun/LasagnaFest2026.jpg',
     albumUrl: 'https://drive.google.com/drive/folders/1qAP-zfL7uGs-bWVl70oUA3KYvuLwBP1B?usp=drive_link',
     credit: 'Photos by Olga Oseth et al.',
+    maxHeight: 900,
   },
   {
     title: 'Lab Retreat (August 2025)',
@@ -254,7 +255,7 @@ const years = Object.keys(photosByYear).map(Number).sort((a, b) => b - a);
                         src={photo.image}
                         alt={photo.title}
                         class="max-w-full mx-auto rounded-lg shadow-md hover:shadow-xl transition-shadow"
-                        style="max-height: 600px; width: auto;"
+                        style={`max-height: ${photo.maxHeight ?? 600}px; width: auto;`}
                         loading="lazy"
                       />
                       <span class="sr-only">(opens in new tab)</span>
