@@ -3,18 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const meetings = [
   {
-    date: 'Thu 05/14',
-    location: 'S110 and zoom',
-    time: '2:30p-4:30p',
-    presenters: ['Riddhiman', 'Sanjay', 'Beth'],
-  },
-  {
-    date: 'Mon 05/18',
-    location: 'S110 and zoom',
-    time: '2:30p-4:30p',
-    presenters: ['Zukai', 'Jongbeom', 'Jonas'],
-  },
-  {
     date: 'Wed 05/27',
     location: 'S110 and zoom',
     time: '2:30p-4:30p',
@@ -24,7 +12,7 @@ const meetings = [
     date: 'Tue 06/02',
     location: 'S110 and zoom',
     time: '1:30p-3:30p',
-    presenters: ['Chase', 'Sophie', 'Olivia'],
+    presenters: ['Chase', 'Sophie', 'Liv'],
   },
   {
     date: 'Mon 06/08',
@@ -36,7 +24,91 @@ const meetings = [
     date: 'Mon 06/15',
     location: 'S110 and zoom',
     time: '2:30p-4:30p',
-    presenters: ['Abby', 'SeaHub (James)', 'Shawn'],
+    presenters: ['Brandon (5 min intro)', 'Abby', 'SeaHub (James)', 'Shawn'],
+  },
+  {
+    date: 'Mon 06/22',
+    location: 'S110 and zoom',
+    time: '1:30p-3:30p',
+    presenters: ['Jenny', 'Zach', 'Qi'],
+  },
+  {
+    date: 'Mon 06/29',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    note: 'NO MEETING',
+  },
+  {
+    date: 'Mon 07/06',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: ['Hanna', 'David', 'Lijia'],
+  },
+  {
+    date: 'Mon 07/13',
+    location: 'S110 and zoom',
+    time: '1:30p-3:30p',
+    presenters: ['Chau', 'Haedong', 'TBD'],
+  },
+  {
+    date: 'Thu 07/23',
+    location: 'S110 and zoom',
+    time: '10:00a-12:00p',
+    presenters: ['Mary group (BBI)', 'Yi', 'Connor'],
+  },
+  {
+    date: 'Mon 07/27',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: ['Ariana', 'Shruti', 'Aidan'],
+  },
+  {
+    date: 'Mon 08/03',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: ['Mohammed', 'Riddhiman', 'Brandon (HHMI Cech fellow)'],
+  },
+  {
+    date: 'Mon 08/10',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    note: 'NO MEETING - Lab retreat week',
+  },
+  {
+    date: 'Mon 08/17',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: ['Sanjay', 'Beth', 'Zukai'],
+  },
+  {
+    date: 'Mon 08/24',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: ['Jongbeom', 'Riza', 'Jessica'],
+  },
+  {
+    date: 'Mon 08/31',
+    location: 'S110 and zoom',
+    time: '1:30p-3:30p',
+    presenters: ['Kshitij', 'Carina', 'Chase'],
+  },
+  {
+    date: 'Tue 09/08',
+    location: 'S110 and zoom',
+    time: '1:30p-3:30p',
+    presenters: ['Sophie', 'Abby', 'Shawn'],
+  },
+  {
+    date: 'Mon 09/14',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: ['Sud', 'SeaHub (Hina)', 'Liv'],
+  },
+  {
+    date: 'Mon 09/21',
+    location: 'S110 and zoom',
+    time: '1:30p-3:30p',
+    presenters: ['Jonas', 'TBD reserved x2'],
   },
 ];
 ---
@@ -59,7 +131,7 @@ const meetings = [
         </thead>
         <tbody>
           {meetings.map((meeting, index) => (
-            <tr class={`border-b border-gray-200 ${meeting.note === 'NO MEETING' ? 'no-meeting-row' : 'meeting-row'}`} aria-label={meeting.note === 'NO MEETING' ? `${meeting.date} - No meeting scheduled` : undefined}>
+            <tr class={`border-b border-gray-200 ${meeting.note?.startsWith('NO MEETING') ? 'no-meeting-row' : 'meeting-row'}`} aria-label={meeting.note?.startsWith('NO MEETING') ? `${meeting.date} - No meeting scheduled` : undefined}>
               <td class="py-3 px-4 font-medium">{meeting.date}</td>
               <td class="py-3 px-4">{meeting.time}</td>
               <td class="py-3 px-4 text-sm">{meeting.location}</td>
@@ -81,7 +153,7 @@ const meetings = [
     <!-- Mobile Card Layout (hidden on desktop) -->
     <div class="md:hidden space-y-3" role="list" aria-label="Upcoming lab meeting schedule">
       {meetings.map((meeting) => (
-        <div class={`meeting-card rounded-lg border p-4 ${meeting.note === 'NO MEETING' ? 'no-meeting-card' : ''}`} role="listitem">
+        <div class={`meeting-card rounded-lg border p-4 ${meeting.note?.startsWith('NO MEETING') ? 'no-meeting-card' : ''}`} role="listitem">
           <div class="flex justify-between items-start mb-1">
             <span class="font-semibold meeting-card-date">{meeting.date}</span>
             <span class="text-sm meeting-card-time">{meeting.time}</span>
