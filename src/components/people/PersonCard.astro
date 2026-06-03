@@ -21,6 +21,8 @@ interface Props {
   profileUrl?: string;
   admin?: { email: string; name: string };
   links?: { hhmi?: string; briefBio?: string; nihBiosketch?: string; cv?: string };
+  compactName?: boolean;
+  compactEmail?: boolean;
 }
 
 const {
@@ -42,6 +44,8 @@ const {
   profileUrl,
   admin,
   links,
+  compactName = false,
+  compactEmail = false,
 } = Astro.props;
 ---
 
@@ -54,7 +58,7 @@ const {
     class="w-full aspect-square object-cover"
     loading="lazy"
   />
-  <p class="person-name font-bold mt-1 text-xs" style="text-align: left; margin-bottom: 0;">
+  <p class={`person-name font-bold mt-1 ${compactName ? 'text-[11.5px]' : 'text-xs'}`} style="text-align: left; margin-bottom: 0;">
     {profileUrl ? (
       <a href={profileUrl} target="_blank" rel="noopener noreferrer" class="text-lab-blue hover:underline">{name}<span class="sr-only"> (opens in new tab)</span></a>
     ) : name}
@@ -66,7 +70,7 @@ const {
     <ObfuscatedEmail
       email={email}
       class="text-lab-blue hover:underline"
-      style="text-align: left; display: block; font-size: 12px; margin: 0; padding: 2px 0; line-height: 1.4;"
+      style={`text-align: left; display: block; font-size: ${compactEmail ? '10.5px' : '12px'}; margin: 0; padding: 2px 0; line-height: 1.4;`}
     />
   )}
   {status === 'current' && jointLab && (
