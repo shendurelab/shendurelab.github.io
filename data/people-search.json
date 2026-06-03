@@ -78,6 +78,12 @@
     "status": "alumni"
   },
   {
+    "name": "Brandon Quach",
+    "slug": "brandon-quach",
+    "title": "HHMI Cech Fellow",
+    "status": "current"
+  },
+  {
     "name": "Brian O'Roak",
     "slug": "brian-o-roak",
     "title": "Postdoctoral Fellow",
@@ -300,6 +306,12 @@
     "status": "alumni"
   },
   {
+    "name": "Jessica Simon",
+    "slug": "jessica-simon",
+    "title": "Postdoctoral Fellow",
+    "status": "current"
+  },
+  {
     "name": "Jonas Koeppel",
     "slug": "jonas-koeppel",
     "title": "Postdoctoral Fellow",
@@ -480,7 +492,7 @@
     "status": "alumni"
   },
   {
-    "name": "Olivia Weissenfels",
+    "name": "Olivia (Liv) Weissenfels",
     "slug": "olivia-weissenfels",
     "title": "Graduate Student (GS)",
     "status": "current"
