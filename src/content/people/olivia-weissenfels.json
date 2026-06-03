@@ -1,9 +1,12 @@
 {
-  "name": "Olivia Weissenfels",
+  "name": "Olivia (Liv) Weissenfels",
   "slug": "olivia-weissenfels",
+  "compactName": true,
   "photo": "/images/lab/OliviaWeissenfels.jpg",
   "title": "Graduate Student (GS)",
-  "role": "rotation",
+  "role": "graduate-student",
   "email": "opodha@uw.edu",
-  "status": "current"
+  "status": "current",
+  "jointLab": "Sakaue Lab",
+  "jointLabUrl": "https://saorisakaue.github.io/"
 }
