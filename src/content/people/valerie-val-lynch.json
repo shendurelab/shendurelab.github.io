@@ -5,5 +5,7 @@
   "title": "Graduate Student (GS)",
   "role": "graduate-student",
   "email": "vnl283@uw.edu",
-  "status": "current"
+  "status": "current",
+  "jointLab": "Sakaue Lab",
+  "jointLabUrl": "https://saorisakaue.github.io/"
 }
