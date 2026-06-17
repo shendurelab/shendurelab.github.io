@@ -33,8 +33,10 @@
     "photo": "/images/lab/Chiu2.jpg",
     "title": "Undergraduate Researcher",
     "role": "undergraduate",
-    "email": "melchiu@uw.edu",
-    "status": "current"
+    "status": "alumni",
+    "startYear": 2024,
+    "endYear": 2026,
+    "sortOrder": 0
   },
   {
     "name": "Tiffany Do",
@@ -42,8 +44,10 @@
     "photo": "/images/lab/DoTiffany.jpg",
     "title": "Undergraduate Researcher",
     "role": "undergraduate",
-    "email": "tdo12@uw.edu",
-    "status": "current"
+    "status": "alumni",
+    "startYear": 2025,
+    "endYear": 2026,
+    "sortOrder": 0
   },
   {
     "name": "Riza Daza",
