@@ -4,6 +4,8 @@
   "photo": "/images/lab/Chiu2.jpg",
   "title": "Undergraduate Researcher",
   "role": "undergraduate",
-  "email": "melchiu@uw.edu",
-  "status": "current"
+  "status": "alumni",
+  "startYear": 2024,
+  "endYear": 2026,
+  "sortOrder": 0
 }
