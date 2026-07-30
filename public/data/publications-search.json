@@ -736,6 +736,14 @@
     "slug": "mcdiarmid-2025-large-scale-discovery-of-neural-enh"
   },
   {
+    "title": "Locus-scale massively parallel reporter assays",
+    "authors": "McGee et al",
+    "journal": "bioRxiv 2026.07.24.740649",
+    "year": 2026,
+    "category": "preprint",
+    "slug": "mcgee-2026-locus-scale-massively-parallel-reporter"
+  },
+  {
     "title": "Whole-organism lineage tracing by combinatorial and cumulative genome editing",
     "authors": "McKenna, Findlay, Gagnon et al",
     "journal": "Science",
@@ -1302,6 +1310,14 @@
     "year": 2019,
     "category": "research",
     "slug": "yin-2019-high-throughput-single-cell-sequencing-wi"
+  },
+  {
+    "title": "In vivo reconstruction of the cell lineage history of a developing mouse with DNA Typewriter, from zygote to late organogenesis",
+    "authors": "Yu et al",
+    "journal": "bioRxiv 2026.07.29.741625",
+    "year": 2026,
+    "category": "preprint",
+    "slug": "yu-2026-in-vivo-reconstruction-of-the-cell-lineage"
   },
   {
     "title": "Single molecule profiling of alternative pre-mRNA splicing",
