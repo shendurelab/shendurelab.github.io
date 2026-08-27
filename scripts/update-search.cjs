@@ -10,6 +10,7 @@ const peopleData = peopleFiles.map(f => {
 
 // Other Alumni (no individual JSON files — listed on alumni page)
 const otherAlumni = [
+  { name: "Brandon Quach", title: "HHMI Cech Fellow, Summer 2026" },
   { name: "Kaimana Moraes", title: "Undergraduate (Columbia University), Summer 2023" },
   { name: "Melissa Phung", title: "Undergraduate (CWRU), Summer 2021–2022" },
   { name: "Amira Ellison", title: "Undergraduate (Penn State University), Summer 2021" },
