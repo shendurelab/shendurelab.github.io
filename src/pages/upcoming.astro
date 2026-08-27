@@ -3,36 +3,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 const meetings = [
   {
-    date: 'Mon 08/03',
-    location: 'S110 and zoom',
-    time: '2:30p-4:30p',
-    presenters: ['Mohammed', 'Riddhiman', 'Brandon (HHMI Cech fellow)'],
-  },
-  {
-    date: 'Mon 08/10',
-    location: 'S110 and zoom',
-    time: '2:30p-4:30p',
-    note: 'NO MEETING - Lab retreat week',
-  },
-  {
-    date: 'Mon 08/17',
-    location: 'S110 and zoom',
-    time: '2:30p-4:30p',
-    presenters: ['Sanjay', 'Beth', 'Zukai'],
-  },
-  {
-    date: 'Fri 08/21',
-    location: 'S110 and zoom',
-    time: '10:00a-12:00p',
-    presenters: ['Jongbeom', 'Sophie', 'Jessica'],
-  },
-  {
-    date: 'Mon 08/24',
-    location: 'S110 and zoom',
-    time: '2:30p-4:30p',
-    note: 'NO MEETING',
-  },
-  {
     date: 'Fri 09/04',
     location: 'S110 and zoom',
     time: '2:00p-4:00p',
@@ -57,10 +27,88 @@ const meetings = [
     presenters: ['Jonas', 'Saksham', 'Val'],
   },
   {
+    divider: 'Fall Term',
+  },
+  {
     date: 'Mon 09/28',
     location: 'S110 and zoom',
     time: '2:30p-4:30p',
-    presenters: ['Riza', 'TBD', 'TBD'],
+    presenters: ['Riza', 'Zach', 'Jenny'],
+  },
+  {
+    date: 'Mon 10/05',
+    location: 'S110 and zoom',
+    time: '9:30a-11:30a',
+    presenters: ['Qi', 'David', 'Lijia'],
+  },
+  {
+    date: 'Fri 10/16',
+    location: 'S110 and zoom',
+    time: '10:00a-12:00p',
+    presenters: ['Chau', 'Haedong', 'Tony'],
+  },
+  {
+    date: 'Wed 10/21',
+    location: 'S110 and zoom',
+    time: '11:30a-1:30p',
+    presenters: ['Yi', 'Connor', 'Ariana'],
+  },
+  {
+    date: 'Mon 10/26',
+    location: 'S110 and zoom',
+    time: '1:30p-3:30p',
+    presenters: ['Shruti', 'Mohammed', 'Riddhiman'],
+  },
+  {
+    date: 'Mon 11/02',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: ['Zukai', 'Sanjay', 'Beth'],
+  },
+  {
+    date: 'Mon 11/09',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: ['Jongbeom', 'Aidan', 'Sophie'],
+  },
+  {
+    date: 'Mon 11/16',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: ['Jessica', 'Abby', 'Chase'],
+  },
+  {
+    date: 'Mon 11/23',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    note: 'NO MEETING',
+  },
+  {
+    date: 'Mon 11/30',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: ['Kshitij', 'Carina', 'Hanna'],
+  },
+  {
+    date: 'Mon 12/07',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: ['Shawn', 'Sud', 'Liv'],
+  },
+  {
+    date: 'Tue 12/15',
+    location: 'S110 and zoom',
+    time: '11:00a-1:00p',
+    presenters: ["Mary's group", 'Saksham', 'Val'],
+  },
+  {
+    divider: 'Winter Term',
+  },
+  {
+    date: 'Mon 01/04',
+    location: 'S110 and zoom',
+    time: '2:30p-4:30p',
+    presenters: ['SeaHub()', 'TBD', 'TBD'],
   },
 ];
 ---
@@ -83,20 +131,26 @@ const meetings = [
         </thead>
         <tbody>
           {meetings.map((meeting, index) => (
-            <tr class={`border-b border-gray-200 ${meeting.note?.startsWith('NO MEETING') ? 'no-meeting-row' : 'meeting-row'}`} aria-label={meeting.note?.startsWith('NO MEETING') ? `${meeting.date} - No meeting scheduled` : undefined}>
-              <td class="py-3 px-4 font-medium">{meeting.date}</td>
-              <td class="py-3 px-4">{meeting.time}</td>
-              <td class="py-3 px-4 text-sm">{meeting.location}</td>
-              <td class="py-3 px-4">
-                {meeting.presenters && meeting.note ? (
-                  <span>{meeting.presenters.join(', ')} <span class="italic text-sm">({meeting.note})</span></span>
-                ) : meeting.note ? (
-                  <span class="italic">{meeting.note}</span>
-                ) : meeting.presenters ? (
-                  <span>{meeting.presenters.join(', ')}</span>
-                ) : null}
-              </td>
-            </tr>
+            meeting.divider ? (
+              <tr class="divider-row">
+                <td colspan="4" class="py-2 px-4 font-semibold text-sm">{meeting.divider}</td>
+              </tr>
+            ) : (
+              <tr class={`border-b border-gray-200 ${meeting.note?.startsWith('NO MEETING') ? 'no-meeting-row' : 'meeting-row'}`} aria-label={meeting.note?.startsWith('NO MEETING') ? `${meeting.date} - No meeting scheduled` : undefined}>
+                <td class="py-3 px-4 font-medium">{meeting.date}</td>
+                <td class="py-3 px-4">{meeting.time}</td>
+                <td class="py-3 px-4 text-sm">{meeting.location}</td>
+                <td class="py-3 px-4">
+                  {meeting.presenters && meeting.note ? (
+                    <span>{meeting.presenters.join(', ')} <span class="italic text-sm">({meeting.note})</span></span>
+                  ) : meeting.note ? (
+                    <span class="italic">{meeting.note}</span>
+                  ) : meeting.presenters ? (
+                    <span>{meeting.presenters.join(', ')}</span>
+                  ) : null}
+                </td>
+              </tr>
+            )
           ))}
         </tbody>
       </table>
@@ -105,22 +159,26 @@ const meetings = [
     <!-- Mobile Card Layout (hidden on desktop) -->
     <div class="md:hidden space-y-3" role="list" aria-label="Upcoming lab meeting schedule">
       {meetings.map((meeting) => (
-        <div class={`meeting-card rounded-lg border p-4 ${meeting.note?.startsWith('NO MEETING') ? 'no-meeting-card' : ''}`} role="listitem">
-          <div class="flex justify-between items-start mb-1">
-            <span class="font-semibold meeting-card-date">{meeting.date}</span>
-            <span class="text-sm meeting-card-time">{meeting.time}</span>
+        meeting.divider ? (
+          <div class="mobile-divider font-semibold text-sm py-2" role="separator">{meeting.divider}</div>
+        ) : (
+          <div class={`meeting-card rounded-lg border p-4 ${meeting.note?.startsWith('NO MEETING') ? 'no-meeting-card' : ''}`} role="listitem">
+            <div class="flex justify-between items-start mb-1">
+              <span class="font-semibold meeting-card-date">{meeting.date}</span>
+              <span class="text-sm meeting-card-time">{meeting.time}</span>
+            </div>
+            <div class="text-sm meeting-card-location mb-2">{meeting.location}</div>
+            <div class="meeting-card-presenters">
+              {meeting.presenters && meeting.note ? (
+                <span>{meeting.presenters.join(', ')} <span class="italic text-sm">({meeting.note})</span></span>
+              ) : meeting.note ? (
+                <span class="italic">{meeting.note}</span>
+              ) : meeting.presenters ? (
+                <span>{meeting.presenters.join(', ')}</span>
+              ) : null}
+            </div>
           </div>
-          <div class="text-sm meeting-card-location mb-2">{meeting.location}</div>
-          <div class="meeting-card-presenters">
-            {meeting.presenters && meeting.note ? (
-              <span>{meeting.presenters.join(', ')} <span class="italic text-sm">({meeting.note})</span></span>
-            ) : meeting.note ? (
-              <span class="italic">{meeting.note}</span>
-            ) : meeting.presenters ? (
-              <span>{meeting.presenters.join(', ')}</span>
-            ) : null}
-          </div>
-        </div>
+        )
       ))}
     </div>
 
@@ -180,6 +238,17 @@ const meetings = [
     }
     :global(.dark) .meeting-row:hover {
       background-color: #374151;
+    }
+    .divider-row td {
+      color: var(--color-lab-orange);
+      border-top: 2px solid var(--color-lab-orange);
+      border-bottom: 2px solid var(--color-lab-orange);
+    }
+    .mobile-divider {
+      color: var(--color-lab-orange);
+      border-top: 2px solid var(--color-lab-orange);
+      border-bottom: 2px solid var(--color-lab-orange);
+      text-align: center;
     }
 
     /* Mobile card layout */

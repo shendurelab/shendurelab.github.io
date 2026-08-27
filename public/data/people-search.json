@@ -78,12 +78,6 @@
     "status": "alumni"
   },
   {
-    "name": "Brandon Quach",
-    "slug": "brandon-quach",
-    "title": "HHMI Cech Fellow",
-    "status": "current"
-  },
-  {
     "name": "Brian O'Roak",
     "slug": "brian-o-roak",
     "title": "Postdoctoral Fellow",
@@ -730,6 +724,12 @@
     "slug": "zukai-liu",
     "title": "Postdoctoral Fellow",
     "status": "current"
+  },
+  {
+    "name": "Brandon Quach",
+    "slug": "brandon-quach",
+    "title": "HHMI Cech Fellow, Summer 2026",
+    "status": "alumni"
   },
   {
     "name": "Kaimana Moraes",
