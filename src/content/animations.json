@@ -902,6 +902,14 @@
       "paperSlug": "lalanne-2026-pool-packaged-aav-libraries-exhibit-e",
       "variation": 1,
       "sortOrder": 109
+    },
+    {
+      "name": "Liao, 2026, Molecular Recording",
+      "category": "molecular-recording",
+      "type": "chevrons",
+      "paperSlug": "liao-2026-optics-free-reconstruction-of-shapes-ima",
+      "variation": 4,
+      "sortOrder": 110
     }
   ]
 }
