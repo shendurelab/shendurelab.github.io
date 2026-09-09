@@ -1,5 +1,19 @@
 [
   {
+    "date": "Sep-26",
+    "source": "GeekWire",
+    "headline": "AI learns nature's code: Allen Institute, UW and Fred Hutch launch $95M open science initiative",
+    "url": "https://www.geekwire.com/2026/allen-institute-uw-and-fred-hutch-launch-95m-open-science-initiative/",
+    "year": 2026
+  },
+  {
+    "date": "Sep-26",
+    "source": "UW Medicine Newsroom",
+    "headline": "AI BioDesign project aims to adapt nature's design rules",
+    "url": "https://newsroom.uw.edu/news-releases/ai-biodesign-project-aims-to-adapt-natures-design-rules/",
+    "year": 2026
+  },
+  {
     "date": "May-26",
     "source": "Cellular Intelligence",
     "headline": "Cellular Intelligence - Jay Shendure",
@@ -18,6 +32,13 @@
     "source": "CeMM",
     "headline": "19th Landsteiner Lecture with Jay Shendure",
     "url": "https://cemm.at/news/detail/19th-landsteiner-lecture-with-jay-shendure",
+    "year": 2026
+  },
+  {
+    "date": "Jan-26",
+    "source": "Nature",
+    "headline": "A 'time capsule for cells' stores the secret experiences of their past",
+    "url": "https://www.nature.com/articles/d41586-026-00116-8",
     "year": 2026
   },
   {
@@ -53,6 +74,13 @@
     "source": "Brotman Baty Institute",
     "headline": "SeaHub Celebrates First Anniversary",
     "url": "https://brotmanbaty.org/news/seahub-celebrates-first-anniversary",
+    "year": 2024
+  },
+  {
+    "date": "Nov-24",
+    "source": "The New York Times",
+    "headline": "DNA Typewriters' Can Record a Cell's History",
+    "url": "https://www.nytimes.com/2024/11/25/science/dna-typewriter-cell-development.html",
     "year": 2024
   },
   {
@@ -109,6 +137,20 @@
     "source": "Allen Institute",
     "headline": "Seattle Hub for Synthetic Biology launch event & fireside chat",
     "url": "https://www.youtube.com/watch?v=-sXGRhqwirw",
+    "year": 2024
+  },
+  {
+    "date": "Apr-24",
+    "source": "KOMO News",
+    "headline": "Seattle's Allen Institute launches new hub to track health down to your cells",
+    "url": "https://www.youtube.com/watch?v=MxCeK6fMLKg",
+    "year": 2024
+  },
+  {
+    "date": "Apr-24",
+    "source": "Geek Wire",
+    "headline": "Inside the new Seattle Hub for Synthetic Biology, which uses DNA to 'record biology over time'",
+    "url": "https://www.geekwire.com/2024/inside-the-new-seattle-hub-for-synthetic-biology-which-uses-dna-to-record-biology-over-time/",
     "year": 2024
   },
   {
@@ -196,6 +238,13 @@
     "year": 2023
   },
   {
+    "date": "Dec-23",
+    "source": "TechCrunch",
+    "headline": "Seattle biotech hub pursues 'DNA typewriter' tech with $75M from tech billionaires",
+    "url": "https://techcrunch.com/2023/12/07/seattle-biotech-hub-pursues-dna-typewriter-tech-with-75m-from-tech-billionaires/",
+    "year": 2023
+  },
+  {
     "date": "Jul-22",
     "source": "Lab & Life",
     "headline": "Lab retreats for stepping away and moving closer",
@@ -204,10 +253,24 @@
   },
   {
     "date": "Jul-22",
+    "source": "Allen Institute",
+    "headline": "DNA Typewriter keeps a record of cell's long histories",
+    "url": "https://alleninstitute.org/what-we-do/frontiers-group/news-press/articles/dna-typewriter-keeps-record-cells-long-histories",
+    "year": 2022
+  },
+  {
+    "date": "Jul-22",
     "source": "HHMI News",
     "headline": "DNA Typewriter Taps Out a Record Inside Cells",
     "url": "https://www.hhmi.org/news/dna-typewriter-taps-out-record-inside-cells",
     "year": 2022
+  },
+  {
+    "date": "May-21",
+    "source": "Nature Methods",
+    "headline": "Tick-tock, it's RNA o'clock",
+    "url": "https://www.nature.com/articles/s41592-021-01180-w",
+    "year": 2021
   },
   {
     "date": "Feb-21",
@@ -294,6 +357,13 @@
     "year": 2019
   },
   {
+    "date": "May-19",
+    "source": "Seattle Times",
+    "headline": "Jay Shendure's cool job using genome science to assess the risk of disease",
+    "url": "https://www.seattletimes.com/explore/careers/jay-shendures-cool-job-using-genome-science-to-assess-the-risk-of-disease/",
+    "year": 2019
+  },
+  {
     "date": "Feb-19",
     "source": "Allen Institute",
     "headline": "2 million-cell experiment traces how a mammal grows, cell by single cell",
@@ -358,6 +428,13 @@
   },
   {
     "date": "Sep-18",
+    "source": "NBC News",
+    "headline": "What's your breast cancer risk? This study aims to tell you precisely",
+    "url": "https://www.nbcnews.com/health/health-news/what-s-your-breast-cancer-risk-study-aims-tell-you-n909041",
+    "year": 2018
+  },
+  {
+    "date": "Sep-18",
     "source": "The Conversation",
     "headline": "Gene-editing technique CRISPR identifies dangerous breast cancer mutations",
     "url": "https://theconversation.com/gene-editing-technique-crispr-identifies-dangerous-breast-cancer-mutations-103087",
@@ -418,6 +495,13 @@
     "headline": "Sophisticated barcoding approaches are transforming cell lineaging",
     "url": "https://www.nature.com/articles/nmeth.4547",
     "year": 2018
+  },
+  {
+    "date": "Dec-17",
+    "source": "GeekWire",
+    "headline": "UW, Seattle Children's and Fred Hutch launch $50M Institute for Precision Medicine",
+    "url": "https://www.geekwire.com/2017/50m-brotman-baty-institute-precision-medicine-launches-using-dna-code-personalize-medicine/",
+    "year": 2017
   },
   {
     "date": "Dec-17",
@@ -582,6 +666,13 @@
   },
   {
     "date": "May-16",
+    "source": "BBC News",
+    "headline": "DNA 'tape recorder' to trace cell history",
+    "url": "http://www.bbc.com/news/science-environment-36397034",
+    "year": 2016
+  },
+  {
+    "date": "May-16",
     "source": "Science",
     "headline": "Genome editor CRISPR helps trace growth of embryos—and maybe cancer next",
     "url": "http://www.sciencemag.org/news/2016/05/genome-editor-crispr-helps-trace-growth-embryos-and-maybe-cancer-next",
@@ -592,6 +683,13 @@
     "source": "Fred Hutchinson Cancer Research Center",
     "headline": "Prostate cancer study provides impetus for precision medicine",
     "url": "http://www.fredhutch.org/en/news/spotlight/imports/prostate-cancer-study-provides-impetus-for-precision-medicine.html",
+    "year": 2016
+  },
+  {
+    "date": "Feb-16",
+    "source": "NIH Director's Blog",
+    "headline": "A New Tool in the Toolbox: New Method Traces Free-Floating DNA Back to Its Source",
+    "url": "https://directorsblog.nih.gov/2016/02/16/a-new-tool-in-the-toolbox-new-method-traces-free-floating-dna-back-to-its-source/",
     "year": 2016
   },
   {
@@ -637,10 +735,31 @@
     "year": 2015
   },
   {
+    "date": "May-15",
+    "source": "Howard Hughes Medical Research Institute",
+    "headline": "HHMI Selects 26 of the Nation's Top Biomedical Scientists",
+    "url": "https://www.hhmi.org/news/hhmi-selects-26-nations-top-biomedical-scientists",
+    "year": 2015
+  },
+  {
     "date": "Apr-15",
     "source": "Seattle Times",
     "headline": "UW experts shed light on false positives in prenatal tests",
     "url": "http://www.seattletimes.com/seattle-news/health/uw-experts-shed-light-on-false-positives-in-prenatal-tests",
+    "year": 2015
+  },
+  {
+    "date": "Mar-15",
+    "source": "NIH News",
+    "headline": "NIH forms team of experts to chart course for the President's Precision Medicine Initiative research network",
+    "url": "http://www.nih.gov/news/health/mar2015/od-30.htm",
+    "year": 2015
+  },
+  {
+    "date": "Jan-15",
+    "source": "Chemistry World",
+    "headline": "Protein mutant libraries to probe diseases' genetic link quickly and cheaply",
+    "url": "http://www.rsc.org/chemistryworld/2015/01/protein-mutant-libraries-probe-genetic-disease-cancer-quickly-and-cheaply",
     "year": 2015
   },
   {
@@ -686,6 +805,20 @@
     "year": 2014
   },
   {
+    "date": "Mar-14",
+    "source": "Medscape",
+    "headline": "What's Next in Prenatal Genetic Testing?",
+    "url": "http://www.medscape.com/viewarticle/822281",
+    "year": 2014
+  },
+  {
+    "date": "Feb-14",
+    "source": "NIH Director's Blog",
+    "headline": "Creative Minds: Interpreting Your Genome",
+    "url": "http://directorsblog.nih.gov/2014/02/11/creative-minds-interpreting-your-genome/",
+    "year": 2014
+  },
+  {
     "date": "Oct-13",
     "source": "Federa (Dutch)",
     "headline": "FederaPrijs to developer of groundbreaking DNA analysis",
@@ -711,6 +844,13 @@
     "source": "New York Times",
     "headline": "A Family Consents to a Medical Gift, 62 Years Later",
     "url": "http://www.nytimes.com/2013/08/08/science/after-decades-of-research-henrietta-lacks-family-is-asked-for-consent.html",
+    "year": 2013
+  },
+  {
+    "date": "Aug-13",
+    "source": "KUOW Weekday",
+    "headline": "What Caused Henrietta Lacks' Aggressive Cancer?",
+    "url": "http://kuow.org/post/cancer-mystery-solved-cartoonist-ellen-forney-sleep-diet-connection-and-wagners-ring",
     "year": 2013
   },
   {
@@ -791,6 +931,13 @@
     "year": 2012
   },
   {
+    "date": "Jun-12",
+    "source": "NPR",
+    "headline": "Are Fetal DNA Tests A Key To Pandora's Box?",
+    "url": "http://www.npr.org/2012/06/07/154533037/are-fetal-dna-tests-a-key-to-pandoras-box",
+    "year": 2012
+  },
+  {
     "date": "May-12",
     "source": "HHMI Bulletin",
     "headline": "Exome Sequencing: Opening the Flood Gates",
@@ -816,6 +963,13 @@
     "source": "Nature News",
     "headline": "Selective sequencing solves a genetic mystery",
     "url": "http://www.nature.com/news/2009/091113/full/news.2009.1085.html",
+    "year": 2009
+  },
+  {
+    "date": "Sep-09",
+    "source": "In Sequence",
+    "headline": "Exome Project Paper Shows Exon Sequencing's Potential for Rare Disease Research",
+    "url": "http://www.genomeweb.com/sequencing/first-exome-project-paper-shows-exon-sequencings-potential-rare-disease-research",
     "year": 2009
   },
   {
