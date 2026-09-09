@@ -111,13 +111,21 @@ console.log("Updated publications-search.json with", searchData.length, "entries
 // ========== News/Press ==========
 const pressContent = fs.readFileSync("src/pages/press/all.astro", "utf8");
 
-// Extract news items using regex
-const newsRegex = /\{\s*date:\s*'([^']+)',\s*source:\s*'([^']+)',\s*headline:\s*'([^']+)',\s*url:\s*'([^']+)'\s*\}/g;
+// Extract news items using regex (fields may be single- or double-quoted,
+// since headlines/sources containing an apostrophe are written with double quotes)
+const quoted = "(?:'([^']*)'|\"([^\"]*)\")";
+const newsRegex = new RegExp(
+  `\\{\\s*date:\\s*${quoted}\\s*,\\s*source:\\s*${quoted}\\s*,\\s*headline:\\s*${quoted}\\s*,\\s*url:\\s*${quoted}\\s*\\}`,
+  "g"
+);
 const newsItems = [];
 let match;
 
 while ((match = newsRegex.exec(pressContent)) !== null) {
-  const [, date, source, headline, url] = match;
+  const date = match[1] ?? match[2];
+  const source = match[3] ?? match[4];
+  const headline = match[5] ?? match[6];
+  const url = match[7] ?? match[8];
   // Parse year from date (format: "Mon-YY")
   const yearPart = date.split('-')[1];
   const year = yearPart ? parseInt('20' + yearPart) : null;
