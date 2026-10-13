@@ -129,9 +129,13 @@
     "photo": "/images/lab/KoeppelJonas3.jpg",
     "title": "Postdoctoral Fellow",
     "role": "postdoc",
-    "email": "koeppelj@uw.edu",
-    "status": "current",
-    "jointLab": "Pinglay Lab"
+    "status": "alumni",
+    "endYear": 2026,
+    "jointLab": "Pinglay Lab",
+    "jointLabUrl": "https://cole-trapnell-lab.github.io/",
+    "currentPosition": "Group Leader, EMBL Heidelberg",
+    "currentPositionUrl": "https://www.embl.org/people/person/jonas-koeppel/",
+    "sortOrder": -1
   },
   {
     "name": "Haedong Kim",

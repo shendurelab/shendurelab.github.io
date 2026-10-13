@@ -4,8 +4,11 @@
   "photo": "/images/lab/KoeppelJonas3.jpg",
   "title": "Postdoctoral Fellow",
   "role": "postdoc",
-  "email": "koeppelj@uw.edu",
-  "status": "current",
+  "status": "alumni",
+  "endYear": 2026,
   "jointLab": "Pinglay Lab",
-  "jointLabUrl": "https://cole-trapnell-lab.github.io/"
+  "jointLabUrl": "https://cole-trapnell-lab.github.io/",
+  "currentPosition": "Group Leader, EMBL Heidelberg",
+  "currentPositionUrl": "https://www.embl.org/people/person/jonas-koeppel/",
+  "sortOrder": -1
 }
