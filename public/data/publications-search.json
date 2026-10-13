@@ -464,6 +464,14 @@
     "slug": "iossifov-2014-the-contribution-of-de-novo-coding-m"
   },
   {
+    "title": "High-throughput identification of chromatin-opening transcription factors",
+    "authors": "Keith et al",
+    "journal": "bioRxiv 2026.10.07.757445",
+    "year": 2026,
+    "category": "preprint",
+    "slug": "keith-2026-high-throughput-identification-of-chrom"
+  },
+  {
     "title": "The dynamic three-dimensional organization of the diploid yeast genome",
     "authors": "Kim et al",
     "journal": "eLIFE",
@@ -984,12 +992,12 @@
     "slug": "regalado-2025-barcoded-monoclonal-embryoids-are-a-"
   },
   {
-    "title": "Lineage recording in monoclonal gastruloids reveals heritable modes of early development",
+    "title": "A fluctuation test for gastruloid heterogeneity",
     "authors": "Regalado, Qiu et al",
-    "journal": "bioRxiv 2025.05.23.655664",
-    "year": 2025,
-    "category": "preprint",
-    "slug": "regalado-2025-lineage-recording-in-monoclonal-gast"
+    "journal": "Cell",
+    "year": 2026,
+    "category": "research",
+    "slug": "regalado-2026-a-fluctuation-test-for-gastruloid-het"
   },
   {
     "title": "CADD: predicting the deleteriousness of variants throughout the human genome",
@@ -1312,12 +1320,12 @@
     "slug": "yin-2019-high-throughput-single-cell-sequencing-wi"
   },
   {
-    "title": "In vivo reconstruction of the cell lineage history of a developing mouse with DNA Typewriter, from zygote to late organogenesis",
+    "title": "A DNA Typewriter records the cell lineage history of a mouse, from zygote to late organogenesis",
     "authors": "Yu et al",
-    "journal": "bioRxiv 2026.07.29.741625",
+    "journal": "Science",
     "year": 2026,
-    "category": "preprint",
-    "slug": "yu-2026-in-vivo-reconstruction-of-the-cell-lineage"
+    "category": "research",
+    "slug": "yu-2026-a-dna-typewriter-records-the-cell-lineag"
   },
   {
     "title": "Single molecule profiling of alternative pre-mRNA splicing",
