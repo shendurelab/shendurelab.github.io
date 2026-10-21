@@ -472,6 +472,14 @@
     "slug": "keith-2026-high-throughput-identification-of-chrom"
   },
   {
+    "title": "Multiplex programming of mappable, molecularly tagged genomic deletions",
+    "authors": "Keith et al",
+    "journal": "bioRxiv 2026.10.13.758960",
+    "year": 2026,
+    "category": "preprint",
+    "slug": "keith-2026-multiplex-programming-of-mappable-molec"
+  },
+  {
     "title": "The dynamic three-dimensional organization of the diploid yeast genome",
     "authors": "Kim et al",
     "journal": "eLIFE",
@@ -1321,7 +1329,7 @@
   },
   {
     "title": "A DNA Typewriter records the cell lineage history of a mouse, from zygote to late organogenesis",
-    "authors": "Yu et al",
+    "authors": "Yu, Kim, Seidel et al",
     "journal": "Science",
     "year": 2026,
     "category": "research",

@@ -1,6 +1,13 @@
 [
   {
     "date": "Oct-26",
+    "source": "BBC Newsday",
+    "headline": "Re: Scientists create largest, most comprehensive cellular \"family tree\" of a mammal",
+    "url": "/audio/DrJayShendure9October2026.mp3",
+    "year": 2026
+  },
+  {
+    "date": "Oct-26",
     "source": "Science",
     "headline": "Two teams map development of mammal embryos, cell by cell",
     "url": "https://www.science.org/content/article/two-teams-map-development-mammal-embryos-cell-cell",
@@ -25,6 +32,62 @@
     "source": "IFLScience",
     "headline": "How Does One Cell Build A Body? We're Starting To Get Answers From Mouse Embryos",
     "url": "https://www.iflscience.com/how-does-one-cell-build-a-body-were-starting-to-get-answers-from-mouse-embryos-84912",
+    "year": 2026
+  },
+  {
+    "date": "Oct-26",
+    "source": "Bioengineer.org",
+    "headline": "DNA Typewriter Records the Family Tree of Every Cell in a Developing Mouse Embryo",
+    "url": "https://bioengineer.org/dna-typewriter-records-the-family-tree-of-every-cell-in-a-developing-mouse-embryo/",
+    "year": 2026
+  },
+  {
+    "date": "Oct-26",
+    "source": "BioQuick News",
+    "headline": "DNA Typewriter Records Cells' History in Early Mouse Embryo",
+    "url": "https://bioquicknews.com/dna-typewriter-records-cells-history-in-early-mouse-embryo/",
+    "year": 2026
+  },
+  {
+    "date": "Oct-26",
+    "source": "The Brighter Side of News",
+    "headline": "Scientists construct a 'family tree' containing 1.28 million cells from a single embryo",
+    "url": "https://www.thebrighterside.news/post/scientists-construct-a-family-tree-containing-1-28-million-cells-from-a-single-embryo/",
+    "year": 2026
+  },
+  {
+    "date": "Oct-26",
+    "source": "Phys.org",
+    "headline": "Mapping how a single cell becomes an entire mouse",
+    "url": "https://phys.org/news/2026-10-cell-entire-mouse.html",
+    "year": 2026
+  },
+  {
+    "date": "Oct-26",
+    "source": "ScienceDaily",
+    "headline": "DNA recording system reveals how a single cell becomes a body",
+    "url": "https://www.sciencedaily.com/releases/2026/10/261011211556.htm",
+    "year": 2026
+  },
+  {
+    "date": "Oct-26",
+    "source": "Genetic Engineering & Biotechnology News",
+    "headline": "DNA Typewriter, PEtracer Map Mouse Development Through Organogenesis",
+    "url": "https://www.genengnews.com/topics/omics/dna-typewriter-petracer-map-mouse-development-through-organogenesis/",
+    "year": 2026
+  },
+  {
+    "date": "Oct-26",
+    "source": "UW Medicine Newsroom",
+    "headline": "DNA Typewriter records cells' history in early mouse embryo",
+    "url": "https://newsroom.uw.edu/news-releases/dna-typewriter-records-cells-history-in-early-mouse-embryo/",
+    "year": 2026
+  },
+  {
+    "date": "Oct-26",
+    "source": "The Scientist",
+    "headline": "A Molecular Typewriter Maps Cell Lineages in Mice",
+    "url": "https://www.the-scientist.com/a-molecular-typewriter-maps-cell-lineages-in-mice-75133",
     "year": 2026
   },
   {
