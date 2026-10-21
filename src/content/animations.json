@@ -910,6 +910,22 @@
       "paperSlug": "liao-2026-optics-free-reconstruction-of-shapes-ima",
       "variation": 4,
       "sortOrder": 110
+    },
+    {
+      "name": "Regalado, 2026, Developmental Atlases",
+      "category": "developmental-atlases",
+      "type": "cellClusters",
+      "paperSlug": "regalado-2026-a-fluctuation-test-for-gastruloid-het",
+      "variation": 1,
+      "sortOrder": 111
+    },
+    {
+      "name": "Yu, 2026, Molecular Recording",
+      "category": "molecular-recording",
+      "type": "chevrons",
+      "paperSlug": "yu-2026-a-dna-typewriter-records-the-cell-lineag",
+      "variation": 2,
+      "sortOrder": 112
     }
   ]
 }
