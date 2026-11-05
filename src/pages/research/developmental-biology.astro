@@ -44,7 +44,7 @@ const publicationRows = [
   [
     { image: 'cusanovich_nature_2018.png', articleUrl: 'http://www.nature.com/articles/nature25981', authors: 'Cusanovich, Reddington, Garfield et al.', title: 'The cis-regulatory dynamics of embryonic development at single-cell resolution', journal: 'Nature', year: 2018, pmid: '29539636', pdfFile: 'cusanovich_nature_2018.pdf', collaboration: 'with Furlong Lab' },
     { image: 'cao_science_2017_thumb.jpg', articleUrl: 'http://science.sciencemag.org/content/357/6352/661', authors: 'Cao, Packer et al.', title: 'Comprehensive single cell transcriptional profiling of a multicellular organism by combinatorial indexing', journal: 'Science', year: 2017, pmid: '28818938', pdfFile: 'cao_science_2017.pdf', collaboration: 'with Trapnell and Waterston Labs' },
-    { image: 'mckenna_science_2016_thumb.png', articleUrl: 'http://science.sciencemag.org/content/353/6298/aaf7907', authors: 'McKenna, Findlay, Gagnon et al.', title: 'Whole-organism lineage tracing by combinatorial and cumulative genome editing', journal: 'Science', year: 2016, pmid: '27229144', pdfFile: 'mckenna_science_2016.pdf', collaboration: 'with Schier Lab' },
+    { image: 'mckenna_science_2016_thumb.png', articleUrl: 'http://science.sciencemag.org/content/353/6298/aaf7907', authors: 'McKenna, Findlay, Gagnon et al.', title: 'Whole-organism lineage tracing by combinatorial and cumulative genome editing', journal: 'Science', year: 2016, pmid: '27229144', collaboration: 'with Schier Lab' },
   ],
 ];
 
@@ -61,7 +61,7 @@ const pubsByYear = allPubs.reduce((acc, pub) => {
 const years = Object.keys(pubsByYear).sort((a, b) => Number(b) - Number(a));
 ---
 
-<BaseLayout title="Genomic Approaches to Developmental Biology | Shendure Lab">
+<BaseLayout title="Genomic Approaches to Developmental Biology">
   <!-- Mobile Year Scrollbar -->
   <nav class="lg:hidden sticky top-16 z-40 year-scrollbar border-b" aria-label="Jump to year">
     <div class="flex overflow-x-auto scrollbar-hide px-4 py-2 gap-2" role="list">

@@ -22,10 +22,10 @@ const publicationRows = [
   [
     { image: 'hause_nature_medicine_2017_thumb.jpg', articleUrl: 'http://www.nature.com/nm/journal/v22/n11/full/nm.4191.html', authors: 'Hause et al.', title: 'Classification and characterization of microsatellite instability across 18 cancer types', journal: 'Nature Medicine', year: 2016, pmid: '27694933', pdfFile: 'hause_nature_medicine_2016.pdf', collaboration: 'with Salipante Lab' },
     { image: 'kumar_nature_medicine_2016_thumb.png', articleUrl: 'http://www.nature.com/nm/journal/v22/n4/abs/nm.4053.html', authors: 'Kumar, Coleman et al.', title: 'Substantial interindividual and limited intraindividual genomic diversity among tumors from men with metastatic prostate cancer', journal: 'Nature Medicine', year: 2016, pmid: '26928463', pdfFile: 'kumar_nature_medicine_2016.pdf', collaboration: 'with Nelson Lab' },
-    { image: 'fairfield_genome_research_2015_thumb.jpg', articleUrl: 'http://genome.cshlp.org/content/25/7/948.long', authors: 'Fairfield, Srivatsava, Ananda, Liu et al.', title: 'Exome sequencing reveals pathogenic mutations in 91 strains of mice with Mendelian disorders', journal: 'Genome Research', year: 2015, pmid: '25917818', pdfFile: 'fairfield_genome_research_2015.pdf', collaboration: 'with Reinholdt Lab' },
+    { image: 'fairfield_genome_research_2015_thumb.jpg', articleUrl: 'http://genome.cshlp.org/content/25/7/948.long', authors: 'Fairfield, Srivastava, Ananda, Liu et al.', title: 'Exome sequencing reveals pathogenic mutations in 91 strains of mice with Mendelian disorders', journal: 'Genome Research', year: 2015, pmid: '25917818', pdfFile: 'fairfield_genome_research_2015.pdf', collaboration: 'with Reinholdt Lab' },
   ],
   [
-    { image: 'shendure_science_2015_thumb.jpg', articleUrl: 'http://science.sciencemag.org/content/349/6255/1478', authors: 'Shendure, Akey', title: 'The origins, determinants, and consequences of human mutations', journal: 'Science', year: 2015, pmid: '26404824', pdfFile: 'shendure_science_2015.pdf' },
+    { image: 'shendure_science_2015_thumb.jpg', articleUrl: 'http://science.sciencemag.org/content/349/6255/1478', authors: 'Shendure, Akey', title: 'The origins, determinants, and consequences of human mutations', journal: 'Science', year: 2015, pmid: '26404824' },
     { image: 'oroak_nature_communications_2014_thumb.png', articleUrl: 'http://www.nature.com/ncomms/2014/141124/ncomms6595/full/ncomms6595.html', authors: "O'Roak, Stessman et al.", title: 'Recurrent de novo mutations implicate novel genes underlying simplex autism risk', journal: 'Nature Communications', year: 2014, pmid: '25418537', pdfFile: 'oroak_nature_communications_2014.pdf', collaboration: 'with Eichler Lab' },
     { image: 'iossifov_nature_2014_thumb.png', articleUrl: 'http://www.nature.com/nature/journal/v515/n7526/full/nature13908.html', authors: "Iossifov, O'Roak, Sanders, Ronemus et al.", title: 'The contribution of de novo coding mutations to autism spectrum disorder', journal: 'Nature', year: 2014, pmid: '25363768', pdfFile: 'iossifov_nature_2014.pdf', collaboration: 'with Wigler, State and Eichler Labs' },
   ],
@@ -41,7 +41,7 @@ const publicationRows = [
   ],
   [
     { image: 'kumar_pnas_2011_thumb.jpg', articleUrl: 'http://www.pnas.org/content/early/2011/09/22/1108745108.full.pdf+html', authors: 'Kumar et al.', title: 'Exome sequencing identifies a spectrum of mutation frequencies in advanced and lethal prostate cancers', journal: 'PNAS', year: 2011, pmid: '21949389', pdfFile: 'kumar_pnas_2011.pdf', collaboration: 'with Nelson Lab' },
-    { image: 'shendure_genome_biology_2011_thumb.jpg', articleUrl: 'http://genomebiology.com/content/pdf/gb-2011-12-9-408.pdf', authors: 'Shendure', title: 'Next-generation human genetics', journal: 'Genome Biology', year: 2011, pmid: '21920048', pdfFile: 'shendure_genome_biology_2011.pdf' },
+    { image: 'shendure_genome_biology_2011_thumb.jpg', articleUrl: 'https://genomebiology.biomedcentral.com/articles/10.1186/gb-2011-12-9-408', authors: 'Shendure', title: 'Next-generation human genetics', journal: 'Genome Biology', year: 2011, pmid: '21920048' },
     { image: 'oroak_nature_genetics_2011_thumb.jpg', articleUrl: 'http://www.nature.com/ng/journal/v43/n6/full/ng.835.html', authors: "O'Roak et al.", title: 'Exome sequencing in sporadic autism spectrum disorders identifies severe de novo mutations', journal: 'Nature Genetics', year: 2011, pmid: '21572417', pdfFile: 'oroak_nature_genetics_2011.pdf', collaboration: 'with Eichler Lab' },
   ],
   [
@@ -64,7 +64,7 @@ const pubsByYear = allPubs.reduce((acc, pub) => {
 const years = Object.keys(pubsByYear).sort((a, b) => Number(b) - Number(a));
 ---
 
-<BaseLayout title="Genetic Basis of Human Disease | Shendure Lab">
+<BaseLayout title="Genetic Basis of Human Disease">
   <!-- Mobile Year Scrollbar -->
   <nav class="lg:hidden sticky top-16 z-40 year-scrollbar border-b" aria-label="Jump to year">
     <div class="flex overflow-x-auto scrollbar-hide px-4 py-2 gap-2" role="list">

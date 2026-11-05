@@ -153,6 +153,12 @@ button:focus-visible,
   background-color: var(--color-lab-blue-accessible) !important;
 }
 
+/* Dark mode: UW purple is ~1.4:1 on the dark background, use a lighter tint (~8:1) */
+.dark .text-uw-purple,
+.dark .hover\:text-uw-purple:hover {
+  color: var(--color-primary-300) !important;
+}
+
 /* Dark mode overrides for gray text colors - improve readability */
 .dark .text-gray-500 {
   color: #d1d5db !important; /* Lighter for dark mode */

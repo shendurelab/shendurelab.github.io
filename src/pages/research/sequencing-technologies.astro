@@ -25,14 +25,14 @@ const publicationRows = [
     { image: 'kitzman_science_translational_medicine_2012_thumb.jpg', articleUrl: 'http://stm.sciencemag.org/content/4/137/137ra76.full.pdf', authors: 'Kitzman et al.', title: 'Noninvasive whole-genome sequencing of a human fetus', journal: 'Science Translational Medicine', year: 2012, pmid: '22674554', pdfFile: 'kitzman_science_translational_medicine_2012.pdf' },
   ],
   [
-    { image: 'adey_genome_biology_2010_thumb.jpg', articleUrl: 'http://genomebiology.com/2010/11/12/R119', authors: 'Adey, Morrison, Asan, Xun et al.', title: 'Rapid, low-input, low-bias construction of shotgun fragment libraries by high-density in vitro transposition', journal: 'Genome Biology', year: 2010, pmid: '21143862', pdfFile: 'adey_genome_biology_2010.pdf', collaboration: 'with Zhang Lab' },
+    { image: 'adey_genome_biology_2010_thumb.jpg', articleUrl: 'https://genomebiology.biomedcentral.com/articles/10.1186/gb-2010-11-12-r119', authors: 'Adey, Morrison, Asan, Xun et al.', title: 'Rapid, low-input, low-bias construction of shotgun fragment libraries by high-density in vitro transposition', journal: 'Genome Biology', year: 2010, pmid: '21143862', pdfFile: 'adey_genome_biology_2010.pdf', collaboration: 'with Zhang Lab' },
     { image: 'ng_nature_2009_thumb.jpg', articleUrl: 'http://www.nature.com/nature/journal/v461/n7261/full/nature08250.html', authors: 'Ng et al.', title: 'Targeted capture and massively parallel sequencing of 12 human exomes', journal: 'Nature', year: 2009, pmid: '19684571', pdfFile: 'ng_nature_2009.pdf' },
     { image: 'hiatt_nature_methods_2010_thumb.jpg', articleUrl: 'http://www.nature.com/nmeth/journal/v7/n2/full/nmeth.1416.html', authors: 'Hiatt, Patwardhan et al.', title: 'Parallel, tag-directed assembly of locally derived short sequence reads', journal: 'Nature Methods', year: 2010, pmid: '20081835', pdfFile: 'hiatt_nature_methods_2010.pdf' },
   ],
   [
     { image: 'turner_nature_methods_2009_thumb.jpg', articleUrl: 'http://www.nature.com/nmeth/journal/v6/n5/full/nmeth.f.248.html', authors: 'Turner et al.', title: 'Massively parallel exon capture and library-free resequencing across 16 genomes', journal: 'Nature Methods', year: 2009, pmid: '19349981', pdfFile: 'turner_nature_methods_2009.pdf' },
     { image: 'shendure_science_2005_thumb.jpg', articleUrl: 'https://www.sciencemag.org/content/309/5741/1728.full.pdf', authors: 'Shendure, Porreca et al.', title: 'Accurate Multiplex Polony Sequencing of an Evolved Bacterial Genome', journal: 'Science', year: 2005, pmid: '16081699', pdfFile: 'shendure_science_2005.pdf', collaboration: 'in Church Lab' },
-    { image: 'shendure_nature_biotechnology_2008_thumb.jpg', articleUrl: 'http://www.nature.com/nbt/journal/v26/n10/pdf/nbt1486.pdf', authors: 'Shendure, Ji', title: 'Next generation DNA sequencing', journal: 'Nature Biotechnology', year: 2008, pmid: '18846087', pdfFile: 'shendure_nature_biotechnology_2008.pdf' },
+    { image: 'shendure_nature_biotechnology_2008_thumb.jpg', articleUrl: 'http://www.nature.com/nbt/journal/v26/n10/pdf/nbt1486.pdf', authors: 'Shendure, Ji', title: 'Next generation DNA sequencing', journal: 'Nature Biotechnology', year: 2008, pmid: '18846087' },
   ],
 ];
 
@@ -49,7 +49,7 @@ const pubsByYear = allPubs.reduce((acc, pub) => {
 const years = Object.keys(pubsByYear).sort((a, b) => Number(b) - Number(a));
 ---
 
-<BaseLayout title="Genome Sequencing Technologies | Shendure Lab">
+<BaseLayout title="Genome Sequencing Technologies">
   <!-- Mobile Year Scrollbar -->
   <nav class="lg:hidden sticky top-16 z-40 year-scrollbar border-b" aria-label="Jump to year">
     <div class="flex overflow-x-auto scrollbar-hide px-4 py-2 gap-2" role="list">

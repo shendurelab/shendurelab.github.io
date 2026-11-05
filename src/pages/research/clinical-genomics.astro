@@ -45,9 +45,9 @@ const publicationRows = [
     { image: 'kitzman_science_translational_medicine_2012_thumb.jpg', articleUrl: 'http://stm.sciencemag.org/content/4/137/137ra76.full.pdf', authors: 'Kitzman et al.', title: 'Noninvasive whole-genome sequencing of a human fetus', journal: 'Science Translational Medicine', year: 2012, pmid: '22674554', pdfFile: 'kitzman_science_translational_medicine_2012.pdf' },
   ],
   [
-    { image: 'kohane_stm_2012_thumb.jpg', articleUrl: 'http://stm.sciencemag.org/content/4/133/133fs13.full.pdf', authors: 'Kohane, Shendure', title: "What's a Genome Worth?", journal: 'Science Translational Medicine', year: 2012, pmid: '22572879', pdfFile: 'kohane_stm_2012.pdf' },
+    { image: 'kohane_stm_2012_thumb.jpg', articleUrl: 'http://stm.sciencemag.org/content/4/133/133fs13.full.pdf', authors: 'Kohane, Shendure', title: "What's a Genome Worth?", journal: 'Science Translational Medicine', year: 2012, pmid: '22572879' },
     { image: 'cooper_nrg_2011_thumb.jpg', articleUrl: 'http://www.nature.com/nrg/journal/v12/n9/full/nrg3046.html', authors: 'Cooper, Shendure', title: 'Needles in stacks of needles: finding disease-causal variants in a wealth of genomic data', journal: 'Nature Reviews Genetics', year: 2011, pmid: '21850043', pdfFile: 'cooper_nrg_2011.pdf' },
-    { image: 'vasta_genome_medicine_2009_thumb.jpg', articleUrl: 'http://genomemedicine.com/content/1/10/100', authors: 'Vasta V et al.', title: 'Next generation sequence analysis for mitochondrial disorders', journal: 'Genome Medicine', year: 2009, pmid: '19852779', pdfFile: 'vasta_genome_medicine_2009.pdf', collaboration: 'with Hahn Lab' },
+    { image: 'vasta_genome_medicine_2009_thumb.jpg', articleUrl: 'https://genomemedicine.biomedcentral.com/articles/10.1186/gm100', authors: 'Vasta V et al.', title: 'Next generation sequence analysis for mitochondrial disorders', journal: 'Genome Medicine', year: 2009, pmid: '19852779', pdfFile: 'vasta_genome_medicine_2009.pdf', collaboration: 'with Hahn Lab' },
   ],
 ];
 
@@ -64,7 +64,7 @@ const pubsByYear = allPubs.reduce((acc, pub) => {
 const years = Object.keys(pubsByYear).sort((a, b) => Number(b) - Number(a));
 ---
 
-<BaseLayout title="Translating Genomics to the Clinic | Shendure Lab">
+<BaseLayout title="Translating Genomics to the Clinic">
   <!-- Mobile Year Scrollbar -->
   <nav class="lg:hidden sticky top-16 z-40 year-scrollbar border-b" aria-label="Jump to year">
     <div class="flex overflow-x-auto scrollbar-hide px-4 py-2 gap-2" role="list">
