@@ -160,7 +160,7 @@
     "slug": "calderon-2022-the-continuum-of-drosophila-embryoni"
   },
   {
-    "title": "Comprehensive single cell transcriptional profiling of a multicelluar organism by combinatorial indexing",
+    "title": "Comprehensive single cell transcriptional profiling of a multicellular organism by combinatorial indexing",
     "authors": "Cao, Packer et al",
     "journal": "Science",
     "year": 2017,
@@ -209,7 +209,7 @@
   },
   {
     "title": "Massively parallel profiling and predictive modeling of the outcomes of CRISPR/Cas9-mediated double-strand break repair",
-    "authors": "Chen, McKenna, Schrieber et al",
+    "authors": "Chen, McKenna, Schreiber et al",
     "journal": "Nucleic Acids Research",
     "year": 2019,
     "category": "research",
@@ -470,6 +470,14 @@
     "year": 2026,
     "category": "preprint",
     "slug": "keith-2026-high-throughput-identification-of-chrom"
+  },
+  {
+    "title": "Multiplex programming of mappable, molecularly tagged genomic deletions",
+    "authors": "Keith et al",
+    "journal": "bioRxiv 2026.10.13.758960",
+    "year": 2026,
+    "category": "preprint",
+    "slug": "keith-2026-multiplex-programming-of-mappable-molec"
   },
   {
     "title": "The dynamic three-dimensional organization of the diploid yeast genome",
@@ -880,7 +888,7 @@
     "slug": "patwardhan-2012-massively-parallel-functional-diss"
   },
   {
-    "title": "Multiplex generation and single-cell analysis of structural variants in mammalian genomess",
+    "title": "Multiplex generation and single-cell analysis of structural variants in mammalian genomes",
     "authors": "Pinglay et al",
     "journal": "Science",
     "year": 2025,
@@ -984,7 +992,7 @@
     "slug": "ramani-2019-high-sensitivity-profiling-of-chromati"
   },
   {
-    "title": "Barcoded monoclonal embryoids are a potential solution to confrounding bottlenecks in mosaic organoid screens",
+    "title": "Barcoded monoclonal embryoids are a potential solution to confounding bottlenecks in mosaic organoid screens",
     "authors": "Regalado, Qiu et al",
     "journal": "bioRxiv 2025.05.23.655669",
     "year": 2025,
@@ -1321,7 +1329,7 @@
   },
   {
     "title": "A DNA Typewriter records the cell lineage history of a mouse, from zygote to late organogenesis",
-    "authors": "Yu et al",
+    "authors": "Yu, Kim, Seidel et al",
     "journal": "Science",
     "year": 2026,
     "category": "research",

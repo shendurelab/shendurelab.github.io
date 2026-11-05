@@ -4,6 +4,9 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 // All news items - comprehensive list
 const newsItems = [
   // 2026
+  { date: 'Oct-26', source: 'The Washington Post', headline: 'New tools enable genetic genealogy of developing embryos', url: 'https://www.washingtonpost.com/health/2026/10/29/new-tools-enable-genetic-genealogy-developing-embryos/' },
+  { date: 'Oct-26', source: 'The Daily UW', headline: 'Researchers use DNA Typewriter to record crucial developmental processes in mice', url: 'https://www.dailyuw.com/article/dna-typewriter-20261027' },
+  { date: 'Oct-26', source: 'The Naked Scientists', headline: 'Mars moon mission to Phobos, and a DNA typewriter', url: 'https://www.thenakedscientists.com/podcasts/naked-scientists-podcast/mars-moon-mission-phobos-and-dna-typewriter' },
   { date: 'Oct-26', source: 'BBC Newsday', headline: 'Re: Scientists create largest, most comprehensive cellular "family tree" of a mammal', url: '/audio/DrJayShendure9October2026.mp3' },
   { date: 'Oct-26', source: 'Science', headline: 'Two teams map development of mammal embryos, cell by cell', url: 'https://www.science.org/content/article/two-teams-map-development-mammal-embryos-cell-cell' },
   { date: 'Oct-26', source: 'HHMI News', headline: 'Cell Lineage Tracing Maps How a Single Cell Becomes a Mouse', url: 'https://www.hhmi.org/news/cell-lineage-tracing-mouse-development' },
@@ -57,7 +60,7 @@ const newsItems = [
   { date: 'Dec-23', source: 'TechCrunch', headline: "Seattle biotech hub pursues 'DNA typewriter' tech with $75M from tech billionaires", url: 'https://techcrunch.com/2023/12/07/seattle-biotech-hub-pursues-dna-typewriter-tech-with-75m-from-tech-billionaires/' },
   // 2022
   { date: 'Jul-22', source: 'Lab & Life', headline: 'Lab retreats for stepping away and moving closer', url: 'https://rdcu.be/cQX34' },
-  { date: 'Jul-22', source: 'Allen Institute', headline: "DNA Typewriter keeps a record of cell's long histories", url: 'https://alleninstitute.org/what-we-do/frontiers-group/news-press/articles/dna-typewriter-keeps-record-cells-long-histories' },
+  { date: 'Jul-22', source: 'Allen Institute', headline: "DNA Typewriter keeps a record of cell's long histories", url: 'https://alleninstitute.org/news/dna-typewriter-keeps-a-record-of-cells-long-histories' },
   { date: 'Jul-22', source: 'HHMI News', headline: 'DNA Typewriter Taps Out a Record Inside Cells', url: 'https://www.hhmi.org/news/dna-typewriter-taps-out-record-inside-cells' },
   // 2021
   { date: 'May-21', source: 'Nature Methods', headline: "Tick-tock, it's RNA o'clock", url: 'https://www.nature.com/articles/s41592-021-01180-w' },
@@ -66,20 +69,20 @@ const newsItems = [
   { date: 'Jan-21', source: 'Nature', headline: 'A molecular handbook for human development', url: 'https://www.nature.com/articles/d41586-021-00142-8' },
   // 2020
   { date: 'Nov-20', source: 'GeekWire', headline: 'New human cell atlases track how tissues develop, providing a road map for research', url: 'https://www.geekwire.com/2020/new-human-cell-atlases-track-tissues-develop-providing-road-map-research/' },
-  { date: 'Sep-20', source: 'Allen Institute - Lab Notes podcast', headline: 'Lab Notes - SCANning for coronavirus', url: 'https://alleninstitute.org/news-press/articles/sanning-coronavirus' },
+  { date: 'Sep-20', source: 'Allen Institute - Lab Notes podcast', headline: 'Lab Notes - SCANning for coronavirus', url: 'https://alleninstitute.org/podcast/lab-notes-scanning-for-coronavirus' },
   { date: 'Aug-20', source: 'Genome Web', headline: 'New Methods Boost Scale of Single-Cell Gene Expression Dynamics Studies', url: 'https://www.genomeweb.com/sequencing/new-methods-boost-scale-single-cell-gene-expression-dynamics-studies' },
   { date: 'Apr-20', source: 'MIT Technology Review', headline: 'The US already has the technology to test millions of people a day', url: 'https://www.technologyreview.com/2020/04/28/1000671/covid-tests-millions-per-day-crispr-biotechnology-advances/' },
-  { date: 'Mar-20', source: 'Seattle Business', headline: 'Dr. Jay Shendure: The 2020 Leaders in Health Care Gold Award Winner for Achievement in Medical Research', url: 'https://seattlebusinessmag.com/leaders-healthcare/dr-jay-shendure-2020-leaders-health-care-gold-award-winner-achievement-medical' },
+  { date: 'Mar-20', source: 'Brotman Baty Institute', headline: 'Dr. Jay Shendure: The 2020 Leaders in Health Care Gold Award Winner for Achievement in Medical Research', url: 'https://brotmanbaty.org/news/dr-jay-shendure-the-2020-leaders-in-health-care-gold-award-winner-for' },
   // 2019
   { date: 'Dec-19', source: 'Wall Street Journal', headline: 'A Genetic Test Led Seven Women in One Family to Have Major Surgery. Then the Odds Changed.', url: 'https://www.wsj.com/articles/seven-women-in-a-family-chose-surgery-after-a-genetic-test-then-the-results-changed-11576860210' },
   { date: 'Dec-19', source: 'UW Medicine | Newsroom', headline: 'Technique shows how individual cancer cells react to drugs', url: 'https://newsroom.uw.edu/news/technique-shows-how-individual-cancer-cells-react-drugs' },
   { date: 'Dec-19', source: 'Genome Web', headline: 'High-Throughput Single-Cell Transcriptomics Assay Facilitates Compound Screens', url: 'https://www.genomeweb.com/sequencing/high-throughput-single-cell-transcriptomics-assay-facilitates-compound-screens' },
-  { date: 'Oct-19', source: 'Allen Institute', headline: 'A computational challenge to help developmental biology', url: 'https://alleninstitute.org/what-we-do/frontiers-group/news-press/articles/computational-challenge-help-developmental-biology' },
+  { date: 'Oct-19', source: 'Allen Institute', headline: 'A computational challenge to help developmental biology', url: 'https://alleninstitute.org/news/a-computational-challenge-to-help-developmental-biology' },
   { date: 'May-19', source: 'Seattle Times', headline: "Jay Shendure's cool job using genome science to assess the risk of disease", url: 'https://www.seattletimes.com/explore/careers/jay-shendures-cool-job-using-genome-science-to-assess-the-risk-of-disease/' },
-  { date: 'Feb-19', source: 'Allen Institute', headline: '2 million-cell experiment traces how a mammal grows, cell by single cell', url: 'https://alleninstitute.org/what-we-do/frontiers-group/news-press/articles/2-million-cell-experiment-traces-how-mammal-grows' },
+  { date: 'Feb-19', source: 'Allen Institute', headline: '2 million-cell experiment traces how a mammal grows, cell by single cell', url: 'https://alleninstitute.org/news/2-million-cell-experiment-traces-how-a-mammal-grows-cell-by-single-cell' },
   { date: 'Feb-19', source: 'GeekWire', headline: 'University of Washington researchers create massive genetic map of organ development', url: 'https://www.geekwire.com/2019/university-washington-researchers-create-massive-genetic-map-organ-development/' },
   { date: 'Feb-19', source: 'Nature', headline: 'Podcast: Mouse cell atlases, and cataloguing viruses', url: 'https://www.nature.com/articles/d41586-019-00644-6' },
-  { date: 'Jan-19', source: 'National Academy of Sciences', headline: 'Jay Shendure, University of Washington, to receive the 2019 Richard Lounsbery Award.', url: 'http://www.nasonline.org/programs/awards/2019-nas-awards/Shendure.html' },
+  { date: 'Jan-19', source: 'National Academy of Sciences', headline: 'Jay Shendure, University of Washington, to receive the 2019 Richard Lounsbery Award.', url: 'http://web.archive.org/web/20240615235401/https://www.nasonline.org/programs/awards/2019-nas-awards/Shendure.html' },
   // 2018
   { date: 'Sep-18', source: 'Associated Press', headline: 'Lab test may identify dangerous gene mutations, study finds', url: 'https://apnews.com/bdfc44bd57a141c895f6758af4feefed' },
   { date: 'Sep-18', source: 'Nature', headline: 'Gene editing reveals the effect of thousands of variants in a key cancer gene', url: 'https://www.nature.com/articles/d41586-018-06022-y' },
@@ -106,9 +109,9 @@ const newsItems = [
   { date: 'Jul-17', source: 'Cell', headline: 'Principles of Systems Biology, No. 19', url: 'http://www.cell.com/cell-systems/fulltext/S2405-4712(17)30293-4' },
   { date: 'Jul-17', source: 'GeekWire', headline: 'Biomedical labs at UW and in Boston win $10M grants from Paul G. Allen Frontiers Group', url: 'https://www.geekwire.com/2017/labs-uw-boston-win-10-million-grants-paul-g-allen-frontiers-group/' },
   { date: 'Jul-17', source: 'Nature News', headline: 'The trickiest family tree in biology', url: 'https://www.nature.com/news/the-trickiest-family-tree-in-biology-1.22240' },
-  { date: 'Jul-17', source: 'Allen Institute', headline: 'The Paul G. Allen Frontiers Group Announces Allen Discovery Center at UW Medicine', url: 'http://www.alleninstitute.org/what-we-do/frontiers-group/news-press/press-resources/press-releases/paul-g-allen-frontiers-group-announces-allen-discovery-center-uw-medicine' },
+  { date: 'Jul-17', source: 'Allen Institute', headline: 'The Paul G. Allen Frontiers Group Announces Allen Discovery Center at UW Medicine', url: 'http://web.archive.org/web/20221224154554/https://alleninstitute.org/what-we-do/frontiers-group/news-press/press-resources/press-releases/paul-g-allen-frontiers-group-announces-allen-discovery-center-uw-medicine' },
   { date: 'Mar-17', source: 'The Atlantic', headline: 'The Game-Changing Technique That Cracked the Zika-Mosquito Genome', url: 'https://www.theatlantic.com/science/archive/2017/03/the-game-changing-technique-that-cracked-the-zika-mosquito-genome/521190/' },
-  { date: 'Mar-17', source: 'The Paul G. Allen Frontiers Group', headline: 'Cracking the code of developmental biology', url: 'https://www.alleninstitute.org/what-we-do/frontiers-group/news-press/articles/cracking-code-developmental-biology' },
+  { date: 'Mar-17', source: 'The Paul G. Allen Frontiers Group', headline: 'Cracking the code of developmental biology', url: 'https://alleninstitute.org/news/cracking-the-code-of-developmental-biology' },
   { date: 'Feb-17', source: 'Nature News', headline: 'Secrets of life in a spoonful of blood', url: 'http://www.nature.com/news/secrets-of-life-in-a-spoonful-of-blood-1.21430' },
   { date: 'Feb-17', source: 'NIH/NHGRI', headline: 'NIH to expand critical catalog for genomics research', url: 'https://www.genome.gov/27567592/2017-release-nih-to-expand-critical-catalog-for-genomics-research/' },
   { date: 'Jan-17', source: 'GenomeWeb', headline: 'Researchers Describe Methods for Sequencing Large Numbers of Single Cells', url: 'https://www.genomeweb.com/sequencing/researchers-describe-methods-sequencing-large-numbers-single-cells' },
@@ -135,11 +138,11 @@ const newsItems = [
   { date: 'Jun-15', source: 'Biotechniques', headline: 'Scientists Develop a Method to Define Chromatin States in Tens of Thousands of Cells', url: 'http://www.biotechniques.com/news/Scientists-Develop-a-Method-to-Define-Chromatin-States-in-Tens-of-Thousands-of-Cells/biotechniques-359046.html' },
   { date: 'May-15', source: 'Howard Hughes Medical Research Institute', headline: "HHMI Selects 26 of the Nation's Top Biomedical Scientists", url: 'https://www.hhmi.org/news/hhmi-selects-26-nations-top-biomedical-scientists' },
   { date: 'Apr-15', source: 'Seattle Times', headline: 'UW experts shed light on false positives in prenatal tests', url: 'http://www.seattletimes.com/seattle-news/health/uw-experts-shed-light-on-false-positives-in-prenatal-tests' },
-  { date: 'Mar-15', source: 'NIH News', headline: "NIH forms team of experts to chart course for the President's Precision Medicine Initiative research network", url: 'http://www.nih.gov/news/health/mar2015/od-30.htm' },
+  { date: 'Mar-15', source: 'NIH News', headline: "NIH forms team of experts to chart course for the President's Precision Medicine Initiative research network", url: 'http://web.archive.org/web/20151004192050/http://www.nih.gov/news/health/mar2015/od-30.htm' },
   { date: 'Jan-15', source: 'Chemistry World', headline: "Protein mutant libraries to probe diseases' genetic link quickly and cheaply", url: 'http://www.rsc.org/chemistryworld/2015/01/protein-mutant-libraries-probe-genetic-disease-cancer-quickly-and-cheaply' },
   // 2014
   { date: 'Aug-14', source: 'NIH News', headline: 'NIH awards $14.5 million to research groups studying newest DNA sequencing techniques', url: 'http://www.nih.gov/news/health/aug2014/nhgri-04a.htm' },
-  { date: 'Jul-14', source: 'Cell', headline: 'Guiding Philsophies for Running a Lab', url: 'http://www.sciencedirect.com/science/article/pii/S0092867414009283' },
+  { date: 'Jul-14', source: 'Cell', headline: 'Guiding Philosophies for Running a Lab', url: 'http://www.sciencedirect.com/science/article/pii/S0092867414009283' },
   { date: 'Jul-14', source: 'HudsonAlpha Institute for Biotechnology', headline: 'Pioneer in Next Generation Sequencing Receives 2014 HudsonAlpha Life Sciences Prize', url: 'http://hudsonalpha.org/press-releases/pioneer-in-next-generation-sequencing-receives-2014-hudsonalpha-life-sciences-prize' },
   { date: 'Jul-14', source: 'Cell', headline: 'Cell 40th Anniversary 40-under-40', url: 'http://www.cell.com/40/under40' },
   { date: 'Apr-14', source: 'The Paul G. Allen Family Foundation', headline: 'Allen Distinguished Investigators Lineage Barcode Focus 2014', url: 'http://www.pgafamilyfoundation.org/programs/investigators-fellows/key-initiative/2014-adi-lineage-barcode-focus' },
@@ -147,7 +150,7 @@ const newsItems = [
   { date: 'Mar-14', source: 'Medscape', headline: "What's Next in Prenatal Genetic Testing?", url: 'http://www.medscape.com/viewarticle/822281' },
   { date: 'Feb-14', source: "NIH Director's Blog", headline: 'Creative Minds: Interpreting Your Genome', url: 'http://directorsblog.nih.gov/2014/02/11/creative-minds-interpreting-your-genome/' },
   // 2013
-  { date: 'Oct-13', source: 'Federa (Dutch)', headline: 'FederaPrijs to developer of groundbreaking DNA analysis', url: 'http://www.federa.org/prijswinnaar-federa-2013' },
+  { date: 'Oct-13', source: 'Federa (Dutch)', headline: 'FederaPrijs to developer of groundbreaking DNA analysis', url: 'http://web.archive.org/web/20210616023452/https://federa.org/prijswinnaar-federa-2013' },
   { date: 'Sep-13', source: 'NIH News', headline: 'NIH Announces 2013 High-Risk, High-Reward Research Awards', url: 'http://www.nih.gov/news/health/sep2013/od-30.htm' },
   { date: 'Sep-13', source: 'Nature', headline: 'Next-generation sequencing: The genome jigsaw', url: 'http://www.nature.com/nature/journal/v501/n7466/full/501261a.html' },
   { date: 'Aug-13', source: 'New York Times', headline: 'A Family Consents to a Medical Gift, 62 Years Later', url: 'http://www.nytimes.com/2013/08/08/science/after-decades-of-research-henrietta-lacks-family-is-asked-for-consent.html' },
@@ -158,7 +161,7 @@ const newsItems = [
   { date: 'Dec-12', source: 'CNN', headline: 'Danger meets discovery: Top 10 science stories of 2012', url: 'http://www.cnn.com/2012/12/28/tech/innovation/top-science-stories-2012/' },
   { date: 'Dec-12', source: 'USA Today', headline: 'Top 10: Science studies cited in 2012', url: 'http://www.usatoday.com/media/cinematic/gallery/1785773/top-10-science-studies-cited-in-2012/' },
   { date: 'Dec-12', source: 'Nature Medicine', headline: 'Notable Advances 2012', url: 'http://www.nature.com/nm/journal/v18/n12/full/nm1212-1732.html' },
-  { date: 'Jul-12', source: 'American Society of Human Genetics', headline: 'ASHG Honors Dr. Jay Shendure with Curt Stern Award for 2012', url: 'http://www.ashg.org/pdf/PR_2012_CurtStern.pdf' },
+  { date: 'Jul-12', source: 'American Society of Human Genetics', headline: 'ASHG Honors Dr. Jay Shendure with Curt Stern Award for 2012', url: 'http://web.archive.org/web/20161109172119/http://www.ashg.org/pdf/PR_2012_CurtStern.pdf' },
   { date: 'Jun-12', source: 'Science Friday', headline: 'Unraveling the Genome Sequence of the Unborn', url: 'http://ec2-23-21-117-9.compute-1.amazonaws.com/blogs/06/19/2012/unraveling-the-genome-sequence-of-the-unborn.html' },
   { date: 'Jun-12', source: 'KUOW 94.9 (The Conversation)', headline: 'UW Prenatal Test Could Replace Amniotic Fluid Testing', url: 'http://www2.kuow.org/program.php?id=26986' },
   { date: 'Jun-12', source: 'Los Angeles Times', headline: 'Entire DNA of fetus revealed through risk-free testing', url: 'http://www.latimes.com/news/science/la-sci-fetal-genome-sequence-20120607,0,7625263.story' },
@@ -172,7 +175,7 @@ const newsItems = [
   { date: 'Nov-09', source: 'Nature News', headline: 'Selective sequencing solves a genetic mystery', url: 'http://www.nature.com/news/2009/091113/full/news.2009.1085.html' },
   { date: 'Sep-09', source: 'In Sequence', headline: "Exome Project Paper Shows Exon Sequencing's Potential for Rare Disease Research", url: 'http://www.genomeweb.com/sequencing/first-exome-project-paper-shows-exon-sequencings-potential-rare-disease-research' },
   { date: 'Sep-09', source: 'Forbes', headline: 'Cheap DNA Sequencing', url: 'http://www.forbes.com/2009/09/22/jay-shendure-dna-sequencing-technology-revolutionaries-shendure.html' },
-  { date: 'Aug-09', source: 'NIH (NHLBI)', headline: 'NIH-Funded Researchers Sequence Exomes of 12 People', url: 'https://www.nih.gov/news-events/news-releases/nih-funded-researchers-sequence-exomes-12-people' },
+  { date: 'Aug-09', source: 'NIH (NHLBI)', headline: 'NIH-Funded Researchers Sequence Exomes of 12 People', url: 'http://web.archive.org/web/20250221185015/https://www.nih.gov/news-events/news-releases/nih-funded-researchers-sequence-exomes-12-people' },
   { date: 'Oct-06', source: 'Technology Review', headline: 'TR35: The $1,000 genome', url: 'https://www.technologyreview.com/s/406237/2006-young-innovators-under-35/' },
   { date: 'Aug-05', source: 'New York Times', headline: '2 New Methods to Sequence DNA Promise Vastly Lower Costs', url: 'http://www.nytimes.com/2005/08/09/science/09dna.html' },
 ];

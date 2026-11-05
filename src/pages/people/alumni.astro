@@ -35,7 +35,7 @@ function slugify(name: string): string {
 }
 ---
 
-<BaseLayout title="Alumni" description="Former members of the Shendure Lab">
+<BaseLayout title="Alumni" description="Alumni of the Shendure Lab at the University of Washington, including former postdocs, graduate students, staff and visiting researchers.">
   <div class="w-full max-w-[1000px] mx-auto px-4 py-12">
     <h1 class="w-full text-2xl md:text-3xl font-bold text-lab-orange mb-4 text-center">Alumni</h1>
 
@@ -125,7 +125,7 @@ function slugify(name: string): string {
           { name: 'Matthew Maurano', program: 'GS', period: 'Fall 2008' },
           { name: 'Sayer Herrin', program: 'GS', period: 'Winter 2008' },
         ].map(person => (
-          <div id={slugify(person.name)} class="other-alumni-row flex justify-between py-1.5 border-b rounded transition-all scroll-mt-32">
+          <div id={`${slugify(person.name)}-rotation`} class="other-alumni-row flex justify-between py-1.5 border-b rounded transition-all scroll-mt-32">
             <span>
               <span class="font-medium other-alumni-name">{person.name}</span>
               <span class="other-alumni-role text-sm ml-1">— {person.program}</span>

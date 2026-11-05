@@ -14,7 +14,7 @@ const publicationRows = [
     { image: 'Lalanne_Nature_May2024_thumb.png', articleUrl: 'https://www.nature.com/articles/s41592-024-02260-3', authors: 'Lalanne, Regalado et al.', title: 'Multiplex profiling of developmental cis-regulatory elements with quantitative single-cell expression reporters', journal: 'Nature Methods', year: 2024, pmid: '38724692', pdfFile: 'Lalanne_Nature_May2024.pdf' },
   ],
   [
-    { image: 'klein_nature_2020_thumb.png', articleUrl: 'https://www.nature.com/articles/s41592-020-0965-y', authors: 'Klein, Agarwal, Inoue, Keith et al.', title: 'A systematic evaluation of the design and context dependencies of massively parallel reporter assays', journal: 'Nature Methods', year: 2020, pmid: '33046894', pdfFile: 'klein_nature_2020.pdf' },
+    { image: 'klein_nature_2020_thumb.png', articleUrl: 'https://www.nature.com/articles/s41592-020-0965-y', authors: 'Klein, Agarwal, Inoue, Keith et al.', title: 'A systematic evaluation of the design and context dependencies of massively parallel reporter assays', journal: 'Nature Methods', year: 2020, pmid: '33046894', pdfFile: 'klein_nature_methods_2020.pdf' },
     { image: 'gordon_nature_2020_thumb.jpg', articleUrl: 'https://www.nature.com/articles/s41596-020-0333-5', authors: 'Gordon, Inoue, Martin, Schubach et al.', title: 'lentiMPRA and MPRAflow for high-throughput functional characterization of gene regulatory elements', journal: 'Nature Protocols', year: 2020, pmid: '32641802', pdfFile: 'gordon_nature_2020.pdf', collaboration: 'with Ahituv and Kircher Labs' },
     { image: 'gasperini_nrg_2020_thumb.jpg', articleUrl: 'https://www.nature.com/articles/s41576-019-0209-0', authors: 'Gasperini, Tome, Shendure', title: 'Towards a comprehensive catalogue of validated and target-linked human enhancers', journal: 'Nature Reviews Genetics', year: 2020, pmid: '31988385', pdfFile: 'gasperini_nrg_2020.pdf' },
   ],
@@ -34,8 +34,8 @@ const publicationRows = [
     { image: 'starita_ajhg_2018_thumb.png', articleUrl: 'https://www.sciencedirect.com/science/article/pii/S000292971830243X', authors: 'Starita et al.', title: 'A Multiplex Homology-Directed DNA Repair Assay Reveals the Impact of More Than 1,000 BRCA1 Missense Substitution Variants on Protein Function', journal: 'AJHG', year: 2018, pmid: '30219179', pdfFile: 'starita_ajhg_2018.pdf', collaboration: 'with Parvin Lab' },
   ],
   [
-    { image: 'hill_nature_2019.png', articleUrl: 'http://www.nature.com/articles/nmeth.4604', authors: 'Hill, McFaline-Figueroa et al.', title: 'On the design of CRISPR-based single-cell molecular screens', journal: 'Nature Methods', year: 2018, pmid: '29457792', pdfFile: 'hill_nature_2019.pdf', collaboration: 'with Trapnell Lab' },
-    { image: 'matreyek_natgen_2018.png', articleUrl: 'https://www.nature.com/articles/s41588-018-0122-z', authors: 'Matreyek, Starita et al.', title: 'Multiplex assessment of protein variant abundance by massively parallel sequencing', journal: 'Nature Genetics', year: 2018, pmid: '29785012', pdfFile: 'matreyek_natgen_2018.pdf', collaboration: 'with Fowler Lab' },
+    { image: 'hill_nature_2019.png', articleUrl: 'http://www.nature.com/articles/nmeth.4604', authors: 'Hill, McFaline-Figueroa et al.', title: 'On the design of CRISPR-based single-cell molecular screens', journal: 'Nature Methods', year: 2018, pmid: '29457792', pdfFile: 'hill_nature_2018.pdf', collaboration: 'with Trapnell Lab' },
+    { image: 'matreyek_natgen_2018.png', articleUrl: 'https://www.nature.com/articles/s41588-018-0122-z', authors: 'Matreyek, Starita et al.', title: 'Multiplex assessment of protein variant abundance by massively parallel sequencing', journal: 'Nature Genetics', year: 2018, pmid: '29785012', pdfFile: 'matreyek_nature_genetics_2018.pdf', collaboration: 'with Fowler Lab' },
     { image: 'gasperini_AJHG_2017_thumb.jpg', articleUrl: 'http://www.sciencedirect.com/science/article/pii/S0002929717302458', authors: 'Gasperini, Findlay et al.', title: 'CRISPR/Cas9-Mediated Scanning for Regulatory Elements Required for HPRT1 Expression via Thousands of Large, Programmed Genomic Deletions', journal: 'AJHG', year: 2017, pmid: '28712454', pdfFile: 'gasperini_ajhd_2017.pdf' },
   ],
   [
@@ -68,7 +68,7 @@ const pubsByYear = allPubs.reduce((acc, pub) => {
 const years = Object.keys(pubsByYear).sort((a, b) => Number(b) - Number(a));
 ---
 
-<BaseLayout title="Massively Parallel Functional Genomics | Shendure Lab">
+<BaseLayout title="Massively Parallel Functional Genomics">
   <!-- Mobile Year Scrollbar -->
   <nav class="lg:hidden sticky top-16 z-40 year-scrollbar border-b" aria-label="Jump to year">
     <div class="flex overflow-x-auto scrollbar-hide px-4 py-2 gap-2" role="list">
