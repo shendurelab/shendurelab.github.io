@@ -1,6 +1,27 @@
 [
   {
     "date": "Oct-26",
+    "source": "The Washington Post",
+    "headline": "New tools enable genetic genealogy of developing embryos",
+    "url": "https://www.washingtonpost.com/health/2026/10/29/new-tools-enable-genetic-genealogy-developing-embryos/",
+    "year": 2026
+  },
+  {
+    "date": "Oct-26",
+    "source": "The Daily UW",
+    "headline": "Researchers use DNA Typewriter to record crucial developmental processes in mice",
+    "url": "https://www.dailyuw.com/article/dna-typewriter-20261027",
+    "year": 2026
+  },
+  {
+    "date": "Oct-26",
+    "source": "The Naked Scientists",
+    "headline": "Mars moon mission to Phobos, and a DNA typewriter",
+    "url": "https://www.thenakedscientists.com/podcasts/naked-scientists-podcast/mars-moon-mission-phobos-and-dna-typewriter",
+    "year": 2026
+  },
+  {
+    "date": "Oct-26",
     "source": "BBC Newsday",
     "headline": "Re: Scientists create largest, most comprehensive cellular \"family tree\" of a mammal",
     "url": "/audio/DrJayShendure9October2026.mp3",
@@ -346,7 +367,7 @@
     "date": "Jul-22",
     "source": "Allen Institute",
     "headline": "DNA Typewriter keeps a record of cell's long histories",
-    "url": "https://alleninstitute.org/what-we-do/frontiers-group/news-press/articles/dna-typewriter-keeps-record-cells-long-histories",
+    "url": "https://alleninstitute.org/news/dna-typewriter-keeps-a-record-of-cells-long-histories",
     "year": 2022
   },
   {
@@ -395,7 +416,7 @@
     "date": "Sep-20",
     "source": "Allen Institute - Lab Notes podcast",
     "headline": "Lab Notes - SCANning for coronavirus",
-    "url": "https://alleninstitute.org/news-press/articles/sanning-coronavirus",
+    "url": "https://alleninstitute.org/podcast/lab-notes-scanning-for-coronavirus",
     "year": 2020
   },
   {
@@ -414,9 +435,9 @@
   },
   {
     "date": "Mar-20",
-    "source": "Seattle Business",
+    "source": "Brotman Baty Institute",
     "headline": "Dr. Jay Shendure: The 2020 Leaders in Health Care Gold Award Winner for Achievement in Medical Research",
-    "url": "https://seattlebusinessmag.com/leaders-healthcare/dr-jay-shendure-2020-leaders-health-care-gold-award-winner-achievement-medical",
+    "url": "https://brotmanbaty.org/news/dr-jay-shendure-the-2020-leaders-in-health-care-gold-award-winner-for",
     "year": 2020
   },
   {
@@ -444,7 +465,7 @@
     "date": "Oct-19",
     "source": "Allen Institute",
     "headline": "A computational challenge to help developmental biology",
-    "url": "https://alleninstitute.org/what-we-do/frontiers-group/news-press/articles/computational-challenge-help-developmental-biology",
+    "url": "https://alleninstitute.org/news/a-computational-challenge-to-help-developmental-biology",
     "year": 2019
   },
   {
@@ -458,7 +479,7 @@
     "date": "Feb-19",
     "source": "Allen Institute",
     "headline": "2 million-cell experiment traces how a mammal grows, cell by single cell",
-    "url": "https://alleninstitute.org/what-we-do/frontiers-group/news-press/articles/2-million-cell-experiment-traces-how-mammal-grows",
+    "url": "https://alleninstitute.org/news/2-million-cell-experiment-traces-how-a-mammal-grows-cell-by-single-cell",
     "year": 2019
   },
   {
@@ -479,7 +500,7 @@
     "date": "Jan-19",
     "source": "National Academy of Sciences",
     "headline": "Jay Shendure, University of Washington, to receive the 2019 Richard Lounsbery Award.",
-    "url": "http://www.nasonline.org/programs/awards/2019-nas-awards/Shendure.html",
+    "url": "http://web.archive.org/web/20240615235401/https://www.nasonline.org/programs/awards/2019-nas-awards/Shendure.html",
     "year": 2019
   },
   {
@@ -654,7 +675,7 @@
     "date": "Jul-17",
     "source": "Allen Institute",
     "headline": "The Paul G. Allen Frontiers Group Announces Allen Discovery Center at UW Medicine",
-    "url": "http://www.alleninstitute.org/what-we-do/frontiers-group/news-press/press-resources/press-releases/paul-g-allen-frontiers-group-announces-allen-discovery-center-uw-medicine",
+    "url": "http://web.archive.org/web/20221224154554/https://alleninstitute.org/what-we-do/frontiers-group/news-press/press-resources/press-releases/paul-g-allen-frontiers-group-announces-allen-discovery-center-uw-medicine",
     "year": 2017
   },
   {
@@ -668,7 +689,7 @@
     "date": "Mar-17",
     "source": "The Paul G. Allen Frontiers Group",
     "headline": "Cracking the code of developmental biology",
-    "url": "https://www.alleninstitute.org/what-we-do/frontiers-group/news-press/articles/cracking-code-developmental-biology",
+    "url": "https://alleninstitute.org/news/cracking-the-code-of-developmental-biology",
     "year": 2017
   },
   {
@@ -843,7 +864,7 @@
     "date": "Mar-15",
     "source": "NIH News",
     "headline": "NIH forms team of experts to chart course for the President's Precision Medicine Initiative research network",
-    "url": "http://www.nih.gov/news/health/mar2015/od-30.htm",
+    "url": "http://web.archive.org/web/20151004192050/http://www.nih.gov/news/health/mar2015/od-30.htm",
     "year": 2015
   },
   {
@@ -863,7 +884,7 @@
   {
     "date": "Jul-14",
     "source": "Cell",
-    "headline": "Guiding Philsophies for Running a Lab",
+    "headline": "Guiding Philosophies for Running a Lab",
     "url": "http://www.sciencedirect.com/science/article/pii/S0092867414009283",
     "year": 2014
   },
@@ -913,7 +934,7 @@
     "date": "Oct-13",
     "source": "Federa (Dutch)",
     "headline": "FederaPrijs to developer of groundbreaking DNA analysis",
-    "url": "http://www.federa.org/prijswinnaar-federa-2013",
+    "url": "http://web.archive.org/web/20210616023452/https://federa.org/prijswinnaar-federa-2013",
     "year": 2013
   },
   {
@@ -983,7 +1004,7 @@
     "date": "Jul-12",
     "source": "American Society of Human Genetics",
     "headline": "ASHG Honors Dr. Jay Shendure with Curt Stern Award for 2012",
-    "url": "http://www.ashg.org/pdf/PR_2012_CurtStern.pdf",
+    "url": "http://web.archive.org/web/20161109172119/http://www.ashg.org/pdf/PR_2012_CurtStern.pdf",
     "year": 2012
   },
   {
@@ -1074,7 +1095,7 @@
     "date": "Aug-09",
     "source": "NIH (NHLBI)",
     "headline": "NIH-Funded Researchers Sequence Exomes of 12 People",
-    "url": "https://www.nih.gov/news-events/news-releases/nih-funded-researchers-sequence-exomes-12-people",
+    "url": "http://web.archive.org/web/20250221185015/https://www.nih.gov/news-events/news-releases/nih-funded-researchers-sequence-exomes-12-people",
     "year": 2009
   },
   {
