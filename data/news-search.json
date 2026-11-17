@@ -295,13 +295,6 @@
   },
   {
     "date": "Dec-23",
-    "source": "Sci-Tech today",
-    "headline": "Seattle Will Soon See An Increase In AI Research In Human Cells",
-    "url": "https://www.sci-tech-today.com/digital-life/seattle-increase-ai-research-in-human-cells/",
-    "year": 2023
-  },
-  {
-    "date": "Dec-23",
     "source": "Fast Company",
     "headline": "This new research hub wants to record your life history via your cells",
     "url": "https://www.fastcompany.com/90994686/allen-institute-seahub-research-life-history-cells",
@@ -365,13 +358,6 @@
   },
   {
     "date": "Jul-22",
-    "source": "Allen Institute",
-    "headline": "DNA Typewriter keeps a record of cell's long histories",
-    "url": "https://alleninstitute.org/news/dna-typewriter-keeps-a-record-of-cells-long-histories",
-    "year": 2022
-  },
-  {
-    "date": "Jul-22",
     "source": "HHMI News",
     "headline": "DNA Typewriter Taps Out a Record Inside Cells",
     "url": "https://www.hhmi.org/news/dna-typewriter-taps-out-record-inside-cells",
@@ -413,13 +399,6 @@
     "year": 2020
   },
   {
-    "date": "Sep-20",
-    "source": "Allen Institute - Lab Notes podcast",
-    "headline": "Lab Notes - SCANning for coronavirus",
-    "url": "https://alleninstitute.org/podcast/lab-notes-scanning-for-coronavirus",
-    "year": 2020
-  },
-  {
     "date": "Aug-20",
     "source": "Genome Web",
     "headline": "New Methods Boost Scale of Single-Cell Gene Expression Dynamics Studies",
@@ -442,13 +421,6 @@
   },
   {
     "date": "Dec-19",
-    "source": "Wall Street Journal",
-    "headline": "A Genetic Test Led Seven Women in One Family to Have Major Surgery. Then the Odds Changed.",
-    "url": "https://www.wsj.com/articles/seven-women-in-a-family-chose-surgery-after-a-genetic-test-then-the-results-changed-11576860210",
-    "year": 2019
-  },
-  {
-    "date": "Dec-19",
     "source": "UW Medicine | Newsroom",
     "headline": "Technique shows how individual cancer cells react to drugs",
     "url": "https://newsroom.uw.edu/news/technique-shows-how-individual-cancer-cells-react-drugs",
@@ -462,24 +434,10 @@
     "year": 2019
   },
   {
-    "date": "Oct-19",
-    "source": "Allen Institute",
-    "headline": "A computational challenge to help developmental biology",
-    "url": "https://alleninstitute.org/news/a-computational-challenge-to-help-developmental-biology",
-    "year": 2019
-  },
-  {
     "date": "May-19",
     "source": "Seattle Times",
     "headline": "Jay Shendure's cool job using genome science to assess the risk of disease",
     "url": "https://www.seattletimes.com/explore/careers/jay-shendures-cool-job-using-genome-science-to-assess-the-risk-of-disease/",
-    "year": 2019
-  },
-  {
-    "date": "Feb-19",
-    "source": "Allen Institute",
-    "headline": "2 million-cell experiment traces how a mammal grows, cell by single cell",
-    "url": "https://alleninstitute.org/news/2-million-cell-experiment-traces-how-a-mammal-grows-cell-by-single-cell",
     "year": 2019
   },
   {
@@ -494,13 +452,6 @@
     "source": "Nature",
     "headline": "Podcast: Mouse cell atlases, and cataloguing viruses",
     "url": "https://www.nature.com/articles/d41586-019-00644-6",
-    "year": 2019
-  },
-  {
-    "date": "Jan-19",
-    "source": "National Academy of Sciences",
-    "headline": "Jay Shendure, University of Washington, to receive the 2019 Richard Lounsbery Award.",
-    "url": "http://web.archive.org/web/20240615235401/https://www.nasonline.org/programs/awards/2019-nas-awards/Shendure.html",
     "year": 2019
   },
   {
@@ -631,13 +582,6 @@
   },
   {
     "date": "Sep-17",
-    "source": "Mendelspod",
-    "headline": "Exploring the Exome and the Future of Genomics with Jay Shendure",
-    "url": "https://mendelspod.com/podcasts/exploring-exome-and-future-genomics-jay-shendure/",
-    "year": 2017
-  },
-  {
-    "date": "Sep-17",
     "source": "Scientific American",
     "headline": "One Test May Spot Cancer, Infections, Diabetes and More",
     "url": "https://www.scientificamerican.com/article/one-test-may-spot-cancer-infections-diabetes-and-more/",
@@ -672,13 +616,6 @@
     "year": 2017
   },
   {
-    "date": "Jul-17",
-    "source": "Allen Institute",
-    "headline": "The Paul G. Allen Frontiers Group Announces Allen Discovery Center at UW Medicine",
-    "url": "http://web.archive.org/web/20221224154554/https://alleninstitute.org/what-we-do/frontiers-group/news-press/press-resources/press-releases/paul-g-allen-frontiers-group-announces-allen-discovery-center-uw-medicine",
-    "year": 2017
-  },
-  {
     "date": "Mar-17",
     "source": "The Atlantic",
     "headline": "The Game-Changing Technique That Cracked the Zika-Mosquito Genome",
@@ -686,24 +623,10 @@
     "year": 2017
   },
   {
-    "date": "Mar-17",
-    "source": "The Paul G. Allen Frontiers Group",
-    "headline": "Cracking the code of developmental biology",
-    "url": "https://alleninstitute.org/news/cracking-the-code-of-developmental-biology",
-    "year": 2017
-  },
-  {
     "date": "Feb-17",
     "source": "Nature News",
     "headline": "Secrets of life in a spoonful of blood",
     "url": "http://www.nature.com/news/secrets-of-life-in-a-spoonful-of-blood-1.21430",
-    "year": 2017
-  },
-  {
-    "date": "Feb-17",
-    "source": "NIH/NHGRI",
-    "headline": "NIH to expand critical catalog for genomics research",
-    "url": "https://www.genome.gov/27567592/2017-release-nih-to-expand-critical-catalog-for-genomics-research/",
     "year": 2017
   },
   {
@@ -735,24 +658,10 @@
     "year": 2016
   },
   {
-    "date": "Aug-16",
-    "source": "UW Medicine",
-    "headline": "Precision Medicine: Finding the Best Treatment for You",
-    "url": "http://www.uwmedicinepulse.com/precision-medicine-finding-the-best-treatment-for-you/",
-    "year": 2016
-  },
-  {
     "date": "Jul-16",
     "source": "ScienceDaily",
     "headline": "Size matters: Advance could increase sensitivity of liquid biopsies",
     "url": "https://www.sciencedaily.com/releases/2016/07/160718153352.htm",
-    "year": 2016
-  },
-  {
-    "date": "Jun-16",
-    "source": "BioTechniques",
-    "headline": "Tracing Cell Lineages with CRISPR/Cas",
-    "url": "http://www.biotechniques.com/news/Tracing-Cell-Lineages-with-CRISPRCas/biotechniques-364562.html",
     "year": 2016
   },
   {
@@ -788,13 +697,6 @@
     "source": "Science",
     "headline": "Genome editor CRISPR helps trace growth of embryos—and maybe cancer next",
     "url": "http://www.sciencemag.org/news/2016/05/genome-editor-crispr-helps-trace-growth-embryos-and-maybe-cancer-next",
-    "year": 2016
-  },
-  {
-    "date": "Mar-16",
-    "source": "Fred Hutchinson Cancer Research Center",
-    "headline": "Prostate cancer study provides impetus for precision medicine",
-    "url": "http://www.fredhutch.org/en/news/spotlight/imports/prostate-cancer-study-provides-impetus-for-precision-medicine.html",
     "year": 2016
   },
   {
@@ -840,13 +742,6 @@
     "year": 2015
   },
   {
-    "date": "Jun-15",
-    "source": "Biotechniques",
-    "headline": "Scientists Develop a Method to Define Chromatin States in Tens of Thousands of Cells",
-    "url": "http://www.biotechniques.com/news/Scientists-Develop-a-Method-to-Define-Chromatin-States-in-Tens-of-Thousands-of-Cells/biotechniques-359046.html",
-    "year": 2015
-  },
-  {
     "date": "May-15",
     "source": "Howard Hughes Medical Research Institute",
     "headline": "HHMI Selects 26 of the Nation's Top Biomedical Scientists",
@@ -861,25 +756,11 @@
     "year": 2015
   },
   {
-    "date": "Mar-15",
-    "source": "NIH News",
-    "headline": "NIH forms team of experts to chart course for the President's Precision Medicine Initiative research network",
-    "url": "http://web.archive.org/web/20151004192050/http://www.nih.gov/news/health/mar2015/od-30.htm",
-    "year": 2015
-  },
-  {
     "date": "Jan-15",
     "source": "Chemistry World",
     "headline": "Protein mutant libraries to probe diseases' genetic link quickly and cheaply",
     "url": "http://www.rsc.org/chemistryworld/2015/01/protein-mutant-libraries-probe-genetic-disease-cancer-quickly-and-cheaply",
     "year": 2015
-  },
-  {
-    "date": "Aug-14",
-    "source": "NIH News",
-    "headline": "NIH awards $14.5 million to research groups studying newest DNA sequencing techniques",
-    "url": "http://www.nih.gov/news/health/aug2014/nhgri-04a.htm",
-    "year": 2014
   },
   {
     "date": "Jul-14",
@@ -917,32 +798,11 @@
     "year": 2014
   },
   {
-    "date": "Mar-14",
-    "source": "Medscape",
-    "headline": "What's Next in Prenatal Genetic Testing?",
-    "url": "http://www.medscape.com/viewarticle/822281",
-    "year": 2014
-  },
-  {
     "date": "Feb-14",
     "source": "NIH Director's Blog",
     "headline": "Creative Minds: Interpreting Your Genome",
     "url": "http://directorsblog.nih.gov/2014/02/11/creative-minds-interpreting-your-genome/",
     "year": 2014
-  },
-  {
-    "date": "Oct-13",
-    "source": "Federa (Dutch)",
-    "headline": "FederaPrijs to developer of groundbreaking DNA analysis",
-    "url": "http://web.archive.org/web/20210616023452/https://federa.org/prijswinnaar-federa-2013",
-    "year": 2013
-  },
-  {
-    "date": "Sep-13",
-    "source": "NIH News",
-    "headline": "NIH Announces 2013 High-Risk, High-Reward Research Awards",
-    "url": "http://www.nih.gov/news/health/sep2013/od-30.htm",
-    "year": 2013
   },
   {
     "date": "Sep-13",
@@ -973,13 +833,6 @@
     "year": 2013
   },
   {
-    "date": "Apr-13",
-    "source": "Technology Review",
-    "headline": "10 Breakthrough Technologies of 2013: Prenatal DNA Sequencing",
-    "url": "http://www.technologyreview.com/featuredstory/513691/prenatal-dna-sequencing/",
-    "year": 2013
-  },
-  {
     "date": "Dec-12",
     "source": "CNN",
     "headline": "Danger meets discovery: Top 10 science stories of 2012",
@@ -998,13 +851,6 @@
     "source": "Nature Medicine",
     "headline": "Notable Advances 2012",
     "url": "http://www.nature.com/nm/journal/v18/n12/full/nm1212-1732.html",
-    "year": 2012
-  },
-  {
-    "date": "Jul-12",
-    "source": "American Society of Human Genetics",
-    "headline": "ASHG Honors Dr. Jay Shendure with Curt Stern Award for 2012",
-    "url": "http://web.archive.org/web/20161109172119/http://www.ashg.org/pdf/PR_2012_CurtStern.pdf",
     "year": 2012
   },
   {
@@ -1089,13 +935,6 @@
     "source": "Forbes",
     "headline": "Cheap DNA Sequencing",
     "url": "http://www.forbes.com/2009/09/22/jay-shendure-dna-sequencing-technology-revolutionaries-shendure.html",
-    "year": 2009
-  },
-  {
-    "date": "Aug-09",
-    "source": "NIH (NHLBI)",
-    "headline": "NIH-Funded Researchers Sequence Exomes of 12 People",
-    "url": "http://web.archive.org/web/20250221185015/https://www.nih.gov/news-events/news-releases/nih-funded-researchers-sequence-exomes-12-people",
     "year": 2009
   },
   {
