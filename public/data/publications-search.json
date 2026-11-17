@@ -1312,12 +1312,12 @@
     "slug": "weber-2002-identification-of-foreign-gene-sequences"
   },
   {
-    "title": "bioRxiv",
+    "title": "Single-cell, multi-region profiling of the macaque brain across the lifespan",
     "authors": "Yang, Watkins et al",
-    "journal": "Single-cell, multi-region profiling of the macaque brain across the lifespan bioRxiv 2025.10.31.685880",
-    "year": 2025,
-    "category": "preprint",
-    "slug": "yang-2025-single-cell-multi-region-profiling-of-th"
+    "journal": "Cell",
+    "year": 2026,
+    "category": "research",
+    "slug": "yang-2026-single-cell-multi-region-profiling-of-th"
   },
   {
     "title": "High-Throughput Single-Cell Sequencing with Linear Amplification",
@@ -1334,6 +1334,14 @@
     "year": 2026,
     "category": "research",
     "slug": "yu-2026-a-dna-typewriter-records-the-cell-lineag"
+  },
+  {
+    "title": "Saturation barcoding of ribosomal DNA resolves the nucleolar organizer regions of the human genome",
+    "authors": "Zhao, Wallentin, Potapova et al",
+    "journal": "bioRxiv 2026.11.10.765783",
+    "year": 2026,
+    "category": "preprint",
+    "slug": "zhao-2026-saturation-barcoding-of-ribosomal-dna-"
   },
   {
     "title": "Single molecule profiling of alternative pre-mRNA splicing",
