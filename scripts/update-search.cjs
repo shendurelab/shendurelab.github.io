@@ -115,7 +115,7 @@ const pressContent = fs.readFileSync("src/pages/press/all.astro", "utf8");
 // since headlines/sources containing an apostrophe are written with double quotes)
 const quoted = "(?:'([^']*)'|\"([^\"]*)\")";
 const newsRegex = new RegExp(
-  `\\{\\s*date:\\s*${quoted}\\s*,\\s*source:\\s*${quoted}\\s*,\\s*headline:\\s*${quoted}\\s*,\\s*url:\\s*${quoted}\\s*\\}`,
+  `\\{\\s*date:\\s*${quoted}\\s*,\\s*source:\\s*${quoted}\\s*,\\s*headline:\\s*${quoted}\\s*(?:,\\s*url:\\s*${quoted}\\s*)?\\}`,
   "g"
 );
 const newsItems = [];
@@ -126,6 +126,8 @@ while ((match = newsRegex.exec(pressContent)) !== null) {
   const source = match[3] ?? match[4];
   const headline = match[5] ?? match[6];
   const url = match[7] ?? match[8];
+  // Entries without a link are plain text on the news page, so leave them out of search
+  if (!url) continue;
   // Parse year from date (format: "Mon-YY")
   const yearPart = date.split('-')[1];
   const year = yearPart ? parseInt('20' + yearPart) : null;
