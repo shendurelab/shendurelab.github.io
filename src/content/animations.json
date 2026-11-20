@@ -926,6 +926,14 @@
       "paperSlug": "yu-2026-a-dna-typewriter-records-the-cell-lineag",
       "variation": 2,
       "sortOrder": 112
+    },
+    {
+      "name": "Yang, 2026, Computational Tools",
+      "category": "computational-tools",
+      "type": "trajectoryTree",
+      "paperSlug": "yang-2026-single-cell-multi-region-profiling-of-th",
+      "variation": 1,
+      "sortOrder": 113
     }
   ]
 }
